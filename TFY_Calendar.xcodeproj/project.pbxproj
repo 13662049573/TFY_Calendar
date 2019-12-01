@@ -41,6 +41,8 @@
 		3662925923936CEC00DCFAAF /* TFY_CalendarTransitionCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3662925823936CEC00DCFAAF /* TFY_CalendarTransitionCoordinator.m */; };
 		3662925C239370EB00DCFAAF /* TFY_CalendarDelegationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3662925B239370EB00DCFAAF /* TFY_CalendarDelegationFactory.m */; };
 		3662925F2393711B00DCFAAF /* TFY_CalendarDelegationProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3662925E2393711B00DCFAAF /* TFY_CalendarDelegationProxy.m */; };
+		3667B1B723939B2800BEC399 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3667B1B623939B2800BEC399 /* Foundation.framework */; };
+		3667B1B923939B2E00BEC399 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3667B1B823939B2E00BEC399 /* UIKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -131,6 +133,8 @@
 		3662925B239370EB00DCFAAF /* TFY_CalendarDelegationFactory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarDelegationFactory.m; sourceTree = "<group>"; };
 		3662925D2393711B00DCFAAF /* TFY_CalendarDelegationProxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarDelegationProxy.h; sourceTree = "<group>"; };
 		3662925E2393711B00DCFAAF /* TFY_CalendarDelegationProxy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarDelegationProxy.m; sourceTree = "<group>"; };
+		3667B1B623939B2800BEC399 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		3667B1B823939B2E00BEC399 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +142,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3667B1B723939B2800BEC399 /* Foundation.framework in Frameworks */,
+				3667B1B923939B2E00BEC399 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,6 +238,7 @@
 				36629209239347D900DCFAAF /* TFY_CalendarTests */,
 				36629214239347D900DCFAAF /* TFY_CalendarUITests */,
 				366291EC239347D800DCFAAF /* Products */,
+				3667B1B523939B2800BEC399 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -352,6 +359,15 @@
 				365ED16523938E4B00981A14 /* RangePicker */,
 			);
 			path = Class;
+			sourceTree = "<group>";
+		};
+		3667B1B523939B2800BEC399 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3667B1B823939B2E00BEC399 /* UIKit.framework */,
+				3667B1B623939B2800BEC399 /* Foundation.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
