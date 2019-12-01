@@ -1,0 +1,838 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		365ED1602393855600981A14 /* TFY_LunarFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 365ED15F2393855600981A14 /* TFY_LunarFormatter.m */; };
+		365ED16C23938ED400981A14 /* RangePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 365ED16923938ED400981A14 /* RangePickerViewController.m */; };
+		365ED16D23938ED400981A14 /* RangePickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 365ED16A23938ED400981A14 /* RangePickerCell.m */; };
+		365ED17223938FE700981A14 /* DIYExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 365ED16E23938FE700981A14 /* DIYExampleViewController.m */; };
+		365ED17323938FE700981A14 /* DIYCalendarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 365ED17023938FE700981A14 /* DIYCalendarCell.m */; };
+		365ED1762393919B00981A14 /* DelegateAppearanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 365ED1752393919B00981A14 /* DelegateAppearanceViewController.m */; };
+		365ED1792393925700981A14 /* FullScreenExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 365ED1782393925700981A14 /* FullScreenExampleViewController.m */; };
+		365ED17C239392FD00981A14 /* HidePlaceholderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 365ED17B239392FD00981A14 /* HidePlaceholderViewController.m */; };
+		365ED17F2393935B00981A14 /* LoadViewExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 365ED17E2393935B00981A14 /* LoadViewExampleViewController.m */; };
+		365ED182239393BC00981A14 /* ButtonsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 365ED180239393BC00981A14 /* ButtonsViewController.m */; };
+		366291F9239347D800DCFAAF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 366291F7239347D800DCFAAF /* Main.storyboard */; };
+		366291FB239347D900DCFAAF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 366291FA239347D900DCFAAF /* Assets.xcassets */; };
+		366291FE239347D900DCFAAF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 366291FC239347D900DCFAAF /* LaunchScreen.storyboard */; };
+		36629201239347D900DCFAAF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 36629200239347D900DCFAAF /* main.m */; };
+		3662920B239347D900DCFAAF /* TFY_CalendarTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3662920A239347D900DCFAAF /* TFY_CalendarTests.m */; };
+		36629216239347D900DCFAAF /* TFY_CalendarUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 36629215239347D900DCFAAF /* TFY_CalendarUITests.m */; };
+		3662922D2393490500DCFAAF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 366292252393490500DCFAAF /* ViewController.m */; };
+		3662922E2393490500DCFAAF /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 366292262393490500DCFAAF /* SceneDelegate.m */; };
+		3662922F2393490500DCFAAF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 366292272393490500DCFAAF /* AppDelegate.m */; };
+		36629233239349DE00DCFAAF /* TFY_CalendarExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 36629232239349DE00DCFAAF /* TFY_CalendarExtensions.m */; };
+		3662923723934D9200DCFAAF /* TFY_CalendarConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 3662923623934D9200DCFAAF /* TFY_CalendarConstants.m */; };
+		3662923B23934F5700DCFAAF /* TFY_Calendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3662923A23934F5700DCFAAF /* TFY_Calendar.m */; };
+		3662923E239351D500DCFAAF /* TFY_CalendarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3662923D239351D500DCFAAF /* TFY_CalendarCell.m */; };
+		366292412393524300DCFAAF /* TFY_CalendarAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 366292402393524300DCFAAF /* TFY_CalendarAppearance.m */; };
+		366292442393532900DCFAAF /* TFY_CalendarWeekdayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 366292432393532900DCFAAF /* TFY_CalendarWeekdayView.m */; };
+		3662924723935D7A00DCFAAF /* TFY_CalendarHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3662924623935D7A00DCFAAF /* TFY_CalendarHeaderView.m */; };
+		3662924A23935E2200DCFAAF /* TFY_CalendarCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3662924923935E2200DCFAAF /* TFY_CalendarCollectionView.m */; };
+		3662924D2393620300DCFAAF /* TFY_CalendarStickyHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3662924C2393620300DCFAAF /* TFY_CalendarStickyHeader.m */; };
+		36629250239363E400DCFAAF /* TFY_CalendarCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3662924F239363E400DCFAAF /* TFY_CalendarCollectionViewLayout.m */; };
+		36629253239364DA00DCFAAF /* TFY_CalendarSeparatorDecorationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36629252239364DA00DCFAAF /* TFY_CalendarSeparatorDecorationView.m */; };
+		36629256239368C400DCFAAF /* TFY_CalendarCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 36629255239368C400DCFAAF /* TFY_CalendarCalculator.m */; };
+		3662925923936CEC00DCFAAF /* TFY_CalendarTransitionCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3662925823936CEC00DCFAAF /* TFY_CalendarTransitionCoordinator.m */; };
+		3662925C239370EB00DCFAAF /* TFY_CalendarDelegationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3662925B239370EB00DCFAAF /* TFY_CalendarDelegationFactory.m */; };
+		3662925F2393711B00DCFAAF /* TFY_CalendarDelegationProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3662925E2393711B00DCFAAF /* TFY_CalendarDelegationProxy.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		36629207239347D900DCFAAF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 366291E3239347D800DCFAAF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 366291EA239347D800DCFAAF;
+			remoteInfo = TFY_Calendar;
+		};
+		36629212239347D900DCFAAF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 366291E3239347D800DCFAAF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 366291EA239347D800DCFAAF;
+			remoteInfo = TFY_Calendar;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		365ED15E2393855600981A14 /* TFY_LunarFormatter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_LunarFormatter.h; sourceTree = "<group>"; };
+		365ED15F2393855600981A14 /* TFY_LunarFormatter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_LunarFormatter.m; sourceTree = "<group>"; };
+		365ED16823938ED400981A14 /* RangePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangePickerViewController.h; sourceTree = "<group>"; };
+		365ED16923938ED400981A14 /* RangePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangePickerViewController.m; sourceTree = "<group>"; };
+		365ED16A23938ED400981A14 /* RangePickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangePickerCell.m; sourceTree = "<group>"; };
+		365ED16B23938ED400981A14 /* RangePickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangePickerCell.h; sourceTree = "<group>"; };
+		365ED16E23938FE700981A14 /* DIYExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIYExampleViewController.m; sourceTree = "<group>"; };
+		365ED16F23938FE700981A14 /* DIYExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIYExampleViewController.h; sourceTree = "<group>"; };
+		365ED17023938FE700981A14 /* DIYCalendarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIYCalendarCell.m; sourceTree = "<group>"; };
+		365ED17123938FE700981A14 /* DIYCalendarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIYCalendarCell.h; sourceTree = "<group>"; };
+		365ED1742393919B00981A14 /* DelegateAppearanceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelegateAppearanceViewController.h; sourceTree = "<group>"; };
+		365ED1752393919B00981A14 /* DelegateAppearanceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DelegateAppearanceViewController.m; sourceTree = "<group>"; };
+		365ED1772393925700981A14 /* FullScreenExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullScreenExampleViewController.h; sourceTree = "<group>"; };
+		365ED1782393925700981A14 /* FullScreenExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullScreenExampleViewController.m; sourceTree = "<group>"; };
+		365ED17A239392FD00981A14 /* HidePlaceholderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HidePlaceholderViewController.h; sourceTree = "<group>"; };
+		365ED17B239392FD00981A14 /* HidePlaceholderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HidePlaceholderViewController.m; sourceTree = "<group>"; };
+		365ED17D2393935B00981A14 /* LoadViewExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadViewExampleViewController.h; sourceTree = "<group>"; };
+		365ED17E2393935B00981A14 /* LoadViewExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadViewExampleViewController.m; sourceTree = "<group>"; };
+		365ED180239393BC00981A14 /* ButtonsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonsViewController.m; sourceTree = "<group>"; };
+		365ED181239393BC00981A14 /* ButtonsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonsViewController.h; sourceTree = "<group>"; };
+		366291EB239347D800DCFAAF /* TFY_Calendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TFY_Calendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		366291F8239347D800DCFAAF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		366291FA239347D900DCFAAF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		366291FD239347D900DCFAAF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		366291FF239347D900DCFAAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		36629200239347D900DCFAAF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		36629206239347D900DCFAAF /* TFY_CalendarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TFY_CalendarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3662920A239347D900DCFAAF /* TFY_CalendarTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarTests.m; sourceTree = "<group>"; };
+		3662920C239347D900DCFAAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		36629211239347D900DCFAAF /* TFY_CalendarUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TFY_CalendarUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		36629215239347D900DCFAAF /* TFY_CalendarUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarUITests.m; sourceTree = "<group>"; };
+		36629217239347D900DCFAAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		366292242393490500DCFAAF /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		366292252393490500DCFAAF /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		366292262393490500DCFAAF /* SceneDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
+		366292272393490500DCFAAF /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		366292282393490500DCFAAF /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		366292292393490500DCFAAF /* SceneDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
+		366292302393492000DCFAAF /* Calendar_PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Calendar_PrefixHeader.pch; sourceTree = "<group>"; };
+		36629231239349DE00DCFAAF /* TFY_CalendarExtensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarExtensions.h; sourceTree = "<group>"; };
+		36629232239349DE00DCFAAF /* TFY_CalendarExtensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarExtensions.m; sourceTree = "<group>"; };
+		3662923523934D9200DCFAAF /* TFY_CalendarConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarConstants.h; sourceTree = "<group>"; };
+		3662923623934D9200DCFAAF /* TFY_CalendarConstants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarConstants.m; sourceTree = "<group>"; };
+		3662923823934EBB00DCFAAF /* TFY_CalendarDynamicHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarDynamicHeader.h; sourceTree = "<group>"; };
+		3662923923934F5700DCFAAF /* TFY_Calendar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_Calendar.h; sourceTree = "<group>"; };
+		3662923A23934F5700DCFAAF /* TFY_Calendar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_Calendar.m; sourceTree = "<group>"; };
+		3662923C239351D500DCFAAF /* TFY_CalendarCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarCell.h; sourceTree = "<group>"; };
+		3662923D239351D500DCFAAF /* TFY_CalendarCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarCell.m; sourceTree = "<group>"; };
+		3662923F2393524300DCFAAF /* TFY_CalendarAppearance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarAppearance.h; sourceTree = "<group>"; };
+		366292402393524300DCFAAF /* TFY_CalendarAppearance.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarAppearance.m; sourceTree = "<group>"; };
+		366292422393532900DCFAAF /* TFY_CalendarWeekdayView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarWeekdayView.h; sourceTree = "<group>"; };
+		366292432393532900DCFAAF /* TFY_CalendarWeekdayView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarWeekdayView.m; sourceTree = "<group>"; };
+		3662924523935D7A00DCFAAF /* TFY_CalendarHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarHeaderView.h; sourceTree = "<group>"; };
+		3662924623935D7A00DCFAAF /* TFY_CalendarHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarHeaderView.m; sourceTree = "<group>"; };
+		3662924823935E2200DCFAAF /* TFY_CalendarCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarCollectionView.h; sourceTree = "<group>"; };
+		3662924923935E2200DCFAAF /* TFY_CalendarCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarCollectionView.m; sourceTree = "<group>"; };
+		3662924B2393620300DCFAAF /* TFY_CalendarStickyHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarStickyHeader.h; sourceTree = "<group>"; };
+		3662924C2393620300DCFAAF /* TFY_CalendarStickyHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarStickyHeader.m; sourceTree = "<group>"; };
+		3662924E239363E400DCFAAF /* TFY_CalendarCollectionViewLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarCollectionViewLayout.h; sourceTree = "<group>"; };
+		3662924F239363E400DCFAAF /* TFY_CalendarCollectionViewLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarCollectionViewLayout.m; sourceTree = "<group>"; };
+		36629251239364DA00DCFAAF /* TFY_CalendarSeparatorDecorationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarSeparatorDecorationView.h; sourceTree = "<group>"; };
+		36629252239364DA00DCFAAF /* TFY_CalendarSeparatorDecorationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarSeparatorDecorationView.m; sourceTree = "<group>"; };
+		36629254239368C400DCFAAF /* TFY_CalendarCalculator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarCalculator.h; sourceTree = "<group>"; };
+		36629255239368C400DCFAAF /* TFY_CalendarCalculator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarCalculator.m; sourceTree = "<group>"; };
+		3662925723936CEC00DCFAAF /* TFY_CalendarTransitionCoordinator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarTransitionCoordinator.h; sourceTree = "<group>"; };
+		3662925823936CEC00DCFAAF /* TFY_CalendarTransitionCoordinator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarTransitionCoordinator.m; sourceTree = "<group>"; };
+		3662925A239370EB00DCFAAF /* TFY_CalendarDelegationFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarDelegationFactory.h; sourceTree = "<group>"; };
+		3662925B239370EB00DCFAAF /* TFY_CalendarDelegationFactory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarDelegationFactory.m; sourceTree = "<group>"; };
+		3662925D2393711B00DCFAAF /* TFY_CalendarDelegationProxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarDelegationProxy.h; sourceTree = "<group>"; };
+		3662925E2393711B00DCFAAF /* TFY_CalendarDelegationProxy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarDelegationProxy.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		366291E8239347D800DCFAAF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		36629203239347D900DCFAAF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3662920E239347D900DCFAAF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		365ED16123938E4B00981A14 /* PrevNextButtons */ = {
+			isa = PBXGroup;
+			children = (
+				365ED181239393BC00981A14 /* ButtonsViewController.h */,
+				365ED180239393BC00981A14 /* ButtonsViewController.m */,
+			);
+			path = PrevNextButtons;
+			sourceTree = "<group>";
+		};
+		365ED16223938E4B00981A14 /* LoadViewExample */ = {
+			isa = PBXGroup;
+			children = (
+				365ED17D2393935B00981A14 /* LoadViewExampleViewController.h */,
+				365ED17E2393935B00981A14 /* LoadViewExampleViewController.m */,
+			);
+			path = LoadViewExample;
+			sourceTree = "<group>";
+		};
+		365ED16323938E4B00981A14 /* DIY */ = {
+			isa = PBXGroup;
+			children = (
+				365ED17123938FE700981A14 /* DIYCalendarCell.h */,
+				365ED17023938FE700981A14 /* DIYCalendarCell.m */,
+				365ED16F23938FE700981A14 /* DIYExampleViewController.h */,
+				365ED16E23938FE700981A14 /* DIYExampleViewController.m */,
+			);
+			path = DIY;
+			sourceTree = "<group>";
+		};
+		365ED16423938E4B00981A14 /* DelegateAppearance */ = {
+			isa = PBXGroup;
+			children = (
+				365ED1742393919B00981A14 /* DelegateAppearanceViewController.h */,
+				365ED1752393919B00981A14 /* DelegateAppearanceViewController.m */,
+			);
+			path = DelegateAppearance;
+			sourceTree = "<group>";
+		};
+		365ED16523938E4B00981A14 /* RangePicker */ = {
+			isa = PBXGroup;
+			children = (
+				365ED16B23938ED400981A14 /* RangePickerCell.h */,
+				365ED16A23938ED400981A14 /* RangePickerCell.m */,
+				365ED16823938ED400981A14 /* RangePickerViewController.h */,
+				365ED16923938ED400981A14 /* RangePickerViewController.m */,
+			);
+			path = RangePicker;
+			sourceTree = "<group>";
+		};
+		365ED16623938E4B00981A14 /* HidePlaceholders */ = {
+			isa = PBXGroup;
+			children = (
+				365ED17A239392FD00981A14 /* HidePlaceholderViewController.h */,
+				365ED17B239392FD00981A14 /* HidePlaceholderViewController.m */,
+			);
+			path = HidePlaceholders;
+			sourceTree = "<group>";
+		};
+		365ED16723938E4B00981A14 /* FullscreenExample */ = {
+			isa = PBXGroup;
+			children = (
+				365ED1772393925700981A14 /* FullScreenExampleViewController.h */,
+				365ED1782393925700981A14 /* FullScreenExampleViewController.m */,
+			);
+			path = FullscreenExample;
+			sourceTree = "<group>";
+		};
+		366291E2239347D800DCFAAF = {
+			isa = PBXGroup;
+			children = (
+				366291ED239347D800DCFAAF /* TFY_Calendar */,
+				36629209239347D900DCFAAF /* TFY_CalendarTests */,
+				36629214239347D900DCFAAF /* TFY_CalendarUITests */,
+				366291EC239347D800DCFAAF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		366291EC239347D800DCFAAF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				366291EB239347D800DCFAAF /* TFY_Calendar.app */,
+				36629206239347D900DCFAAF /* TFY_CalendarTests.xctest */,
+				36629211239347D900DCFAAF /* TFY_CalendarUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		366291ED239347D800DCFAAF /* TFY_Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				366292232393490500DCFAAF /* AppDelegate */,
+				3662922C2393490500DCFAAF /* Class */,
+				3662922A2393490500DCFAAF /* PCH */,
+				3662922B2393490500DCFAAF /* TFY_CalendarKiit */,
+				366291F7239347D800DCFAAF /* Main.storyboard */,
+				366291FA239347D900DCFAAF /* Assets.xcassets */,
+				366291FC239347D900DCFAAF /* LaunchScreen.storyboard */,
+				366291FF239347D900DCFAAF /* Info.plist */,
+				36629200239347D900DCFAAF /* main.m */,
+			);
+			path = TFY_Calendar;
+			sourceTree = "<group>";
+		};
+		36629209239347D900DCFAAF /* TFY_CalendarTests */ = {
+			isa = PBXGroup;
+			children = (
+				3662920A239347D900DCFAAF /* TFY_CalendarTests.m */,
+				3662920C239347D900DCFAAF /* Info.plist */,
+			);
+			path = TFY_CalendarTests;
+			sourceTree = "<group>";
+		};
+		36629214239347D900DCFAAF /* TFY_CalendarUITests */ = {
+			isa = PBXGroup;
+			children = (
+				36629215239347D900DCFAAF /* TFY_CalendarUITests.m */,
+				36629217239347D900DCFAAF /* Info.plist */,
+			);
+			path = TFY_CalendarUITests;
+			sourceTree = "<group>";
+		};
+		366292232393490500DCFAAF /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				366292242393490500DCFAAF /* AppDelegate.h */,
+				366292272393490500DCFAAF /* AppDelegate.m */,
+				366292292393490500DCFAAF /* SceneDelegate.h */,
+				366292262393490500DCFAAF /* SceneDelegate.m */,
+				366292282393490500DCFAAF /* ViewController.h */,
+				366292252393490500DCFAAF /* ViewController.m */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		3662922A2393490500DCFAAF /* PCH */ = {
+			isa = PBXGroup;
+			children = (
+				366292302393492000DCFAAF /* Calendar_PrefixHeader.pch */,
+			);
+			path = PCH;
+			sourceTree = "<group>";
+		};
+		3662922B2393490500DCFAAF /* TFY_CalendarKiit */ = {
+			isa = PBXGroup;
+			children = (
+				3662923823934EBB00DCFAAF /* TFY_CalendarDynamicHeader.h */,
+				3662923923934F5700DCFAAF /* TFY_Calendar.h */,
+				3662923A23934F5700DCFAAF /* TFY_Calendar.m */,
+				3662923C239351D500DCFAAF /* TFY_CalendarCell.h */,
+				3662923D239351D500DCFAAF /* TFY_CalendarCell.m */,
+				36629231239349DE00DCFAAF /* TFY_CalendarExtensions.h */,
+				36629232239349DE00DCFAAF /* TFY_CalendarExtensions.m */,
+				3662923523934D9200DCFAAF /* TFY_CalendarConstants.h */,
+				3662923623934D9200DCFAAF /* TFY_CalendarConstants.m */,
+				3662923F2393524300DCFAAF /* TFY_CalendarAppearance.h */,
+				366292402393524300DCFAAF /* TFY_CalendarAppearance.m */,
+				366292422393532900DCFAAF /* TFY_CalendarWeekdayView.h */,
+				366292432393532900DCFAAF /* TFY_CalendarWeekdayView.m */,
+				3662924523935D7A00DCFAAF /* TFY_CalendarHeaderView.h */,
+				3662924623935D7A00DCFAAF /* TFY_CalendarHeaderView.m */,
+				3662924823935E2200DCFAAF /* TFY_CalendarCollectionView.h */,
+				3662924923935E2200DCFAAF /* TFY_CalendarCollectionView.m */,
+				3662924B2393620300DCFAAF /* TFY_CalendarStickyHeader.h */,
+				3662924C2393620300DCFAAF /* TFY_CalendarStickyHeader.m */,
+				3662924E239363E400DCFAAF /* TFY_CalendarCollectionViewLayout.h */,
+				3662924F239363E400DCFAAF /* TFY_CalendarCollectionViewLayout.m */,
+				36629251239364DA00DCFAAF /* TFY_CalendarSeparatorDecorationView.h */,
+				36629252239364DA00DCFAAF /* TFY_CalendarSeparatorDecorationView.m */,
+				36629254239368C400DCFAAF /* TFY_CalendarCalculator.h */,
+				36629255239368C400DCFAAF /* TFY_CalendarCalculator.m */,
+				3662925723936CEC00DCFAAF /* TFY_CalendarTransitionCoordinator.h */,
+				3662925823936CEC00DCFAAF /* TFY_CalendarTransitionCoordinator.m */,
+				3662925A239370EB00DCFAAF /* TFY_CalendarDelegationFactory.h */,
+				3662925B239370EB00DCFAAF /* TFY_CalendarDelegationFactory.m */,
+				3662925D2393711B00DCFAAF /* TFY_CalendarDelegationProxy.h */,
+				3662925E2393711B00DCFAAF /* TFY_CalendarDelegationProxy.m */,
+				365ED15E2393855600981A14 /* TFY_LunarFormatter.h */,
+				365ED15F2393855600981A14 /* TFY_LunarFormatter.m */,
+			);
+			path = TFY_CalendarKiit;
+			sourceTree = "<group>";
+		};
+		3662922C2393490500DCFAAF /* Class */ = {
+			isa = PBXGroup;
+			children = (
+				365ED16423938E4B00981A14 /* DelegateAppearance */,
+				365ED16323938E4B00981A14 /* DIY */,
+				365ED16723938E4B00981A14 /* FullscreenExample */,
+				365ED16623938E4B00981A14 /* HidePlaceholders */,
+				365ED16223938E4B00981A14 /* LoadViewExample */,
+				365ED16123938E4B00981A14 /* PrevNextButtons */,
+				365ED16523938E4B00981A14 /* RangePicker */,
+			);
+			path = Class;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		366291EA239347D800DCFAAF /* TFY_Calendar */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3662921A239347D900DCFAAF /* Build configuration list for PBXNativeTarget "TFY_Calendar" */;
+			buildPhases = (
+				366291E7239347D800DCFAAF /* Sources */,
+				366291E8239347D800DCFAAF /* Frameworks */,
+				366291E9239347D800DCFAAF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TFY_Calendar;
+			productName = TFY_Calendar;
+			productReference = 366291EB239347D800DCFAAF /* TFY_Calendar.app */;
+			productType = "com.apple.product-type.application";
+		};
+		36629205239347D900DCFAAF /* TFY_CalendarTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3662921D239347D900DCFAAF /* Build configuration list for PBXNativeTarget "TFY_CalendarTests" */;
+			buildPhases = (
+				36629202239347D900DCFAAF /* Sources */,
+				36629203239347D900DCFAAF /* Frameworks */,
+				36629204239347D900DCFAAF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				36629208239347D900DCFAAF /* PBXTargetDependency */,
+			);
+			name = TFY_CalendarTests;
+			productName = TFY_CalendarTests;
+			productReference = 36629206239347D900DCFAAF /* TFY_CalendarTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		36629210239347D900DCFAAF /* TFY_CalendarUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 36629220239347D900DCFAAF /* Build configuration list for PBXNativeTarget "TFY_CalendarUITests" */;
+			buildPhases = (
+				3662920D239347D900DCFAAF /* Sources */,
+				3662920E239347D900DCFAAF /* Frameworks */,
+				3662920F239347D900DCFAAF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				36629213239347D900DCFAAF /* PBXTargetDependency */,
+			);
+			name = TFY_CalendarUITests;
+			productName = TFY_CalendarUITests;
+			productReference = 36629211239347D900DCFAAF /* TFY_CalendarUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		366291E3239347D800DCFAAF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1120;
+				ORGANIZATIONNAME = "田风有";
+				TargetAttributes = {
+					366291EA239347D800DCFAAF = {
+						CreatedOnToolsVersion = 11.2;
+					};
+					36629205239347D900DCFAAF = {
+						CreatedOnToolsVersion = 11.2;
+						TestTargetID = 366291EA239347D800DCFAAF;
+					};
+					36629210239347D900DCFAAF = {
+						CreatedOnToolsVersion = 11.2;
+						TestTargetID = 366291EA239347D800DCFAAF;
+					};
+				};
+			};
+			buildConfigurationList = 366291E6239347D800DCFAAF /* Build configuration list for PBXProject "TFY_Calendar" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 366291E2239347D800DCFAAF;
+			productRefGroup = 366291EC239347D800DCFAAF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				366291EA239347D800DCFAAF /* TFY_Calendar */,
+				36629205239347D900DCFAAF /* TFY_CalendarTests */,
+				36629210239347D900DCFAAF /* TFY_CalendarUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		366291E9239347D800DCFAAF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				366291FE239347D900DCFAAF /* LaunchScreen.storyboard in Resources */,
+				366291FB239347D900DCFAAF /* Assets.xcassets in Resources */,
+				366291F9239347D800DCFAAF /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		36629204239347D900DCFAAF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3662920F239347D900DCFAAF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		366291E7239347D800DCFAAF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				36629250239363E400DCFAAF /* TFY_CalendarCollectionViewLayout.m in Sources */,
+				365ED16D23938ED400981A14 /* RangePickerCell.m in Sources */,
+				365ED1792393925700981A14 /* FullScreenExampleViewController.m in Sources */,
+				36629253239364DA00DCFAAF /* TFY_CalendarSeparatorDecorationView.m in Sources */,
+				3662925F2393711B00DCFAAF /* TFY_CalendarDelegationProxy.m in Sources */,
+				3662922F2393490500DCFAAF /* AppDelegate.m in Sources */,
+				3662923E239351D500DCFAAF /* TFY_CalendarCell.m in Sources */,
+				3662923B23934F5700DCFAAF /* TFY_Calendar.m in Sources */,
+				365ED17F2393935B00981A14 /* LoadViewExampleViewController.m in Sources */,
+				36629233239349DE00DCFAAF /* TFY_CalendarExtensions.m in Sources */,
+				365ED16C23938ED400981A14 /* RangePickerViewController.m in Sources */,
+				3662925923936CEC00DCFAAF /* TFY_CalendarTransitionCoordinator.m in Sources */,
+				3662922D2393490500DCFAAF /* ViewController.m in Sources */,
+				366292412393524300DCFAAF /* TFY_CalendarAppearance.m in Sources */,
+				365ED182239393BC00981A14 /* ButtonsViewController.m in Sources */,
+				3662924A23935E2200DCFAAF /* TFY_CalendarCollectionView.m in Sources */,
+				365ED17C239392FD00981A14 /* HidePlaceholderViewController.m in Sources */,
+				36629256239368C400DCFAAF /* TFY_CalendarCalculator.m in Sources */,
+				3662923723934D9200DCFAAF /* TFY_CalendarConstants.m in Sources */,
+				3662924D2393620300DCFAAF /* TFY_CalendarStickyHeader.m in Sources */,
+				365ED1762393919B00981A14 /* DelegateAppearanceViewController.m in Sources */,
+				366292442393532900DCFAAF /* TFY_CalendarWeekdayView.m in Sources */,
+				365ED17223938FE700981A14 /* DIYExampleViewController.m in Sources */,
+				365ED1602393855600981A14 /* TFY_LunarFormatter.m in Sources */,
+				3662922E2393490500DCFAAF /* SceneDelegate.m in Sources */,
+				365ED17323938FE700981A14 /* DIYCalendarCell.m in Sources */,
+				3662924723935D7A00DCFAAF /* TFY_CalendarHeaderView.m in Sources */,
+				3662925C239370EB00DCFAAF /* TFY_CalendarDelegationFactory.m in Sources */,
+				36629201239347D900DCFAAF /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		36629202239347D900DCFAAF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3662920B239347D900DCFAAF /* TFY_CalendarTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3662920D239347D900DCFAAF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				36629216239347D900DCFAAF /* TFY_CalendarUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		36629208239347D900DCFAAF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 366291EA239347D800DCFAAF /* TFY_Calendar */;
+			targetProxy = 36629207239347D900DCFAAF /* PBXContainerItemProxy */;
+		};
+		36629213239347D900DCFAAF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 366291EA239347D800DCFAAF /* TFY_Calendar */;
+			targetProxy = 36629212239347D900DCFAAF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		366291F7239347D800DCFAAF /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				366291F8239347D800DCFAAF /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		366291FC239347D900DCFAAF /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				366291FD239347D900DCFAAF /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		36629218239347D900DCFAAF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		36629219239347D900DCFAAF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3662921B239347D900DCFAAF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = RP2K7V42S5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = TFY_Calendar/PCH/Calendar_PrefixHeader.pch;
+				INFOPLIST_FILE = TFY_Calendar/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.LMcompany.TFY-Calendar";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3662921C239347D900DCFAAF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = RP2K7V42S5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = TFY_Calendar/PCH/Calendar_PrefixHeader.pch;
+				INFOPLIST_FILE = TFY_Calendar/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.LMcompany.TFY-Calendar";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		3662921E239347D900DCFAAF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = RP2K7V42S5;
+				INFOPLIST_FILE = TFY_CalendarTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.LMcompany.TFY-CalendarTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TFY_Calendar.app/TFY_Calendar";
+			};
+			name = Debug;
+		};
+		3662921F239347D900DCFAAF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = RP2K7V42S5;
+				INFOPLIST_FILE = TFY_CalendarTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.LMcompany.TFY-CalendarTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TFY_Calendar.app/TFY_Calendar";
+			};
+			name = Release;
+		};
+		36629221239347D900DCFAAF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = RP2K7V42S5;
+				INFOPLIST_FILE = TFY_CalendarUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.LMcompany.TFY-CalendarUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TFY_Calendar;
+			};
+			name = Debug;
+		};
+		36629222239347D900DCFAAF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = RP2K7V42S5;
+				INFOPLIST_FILE = TFY_CalendarUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.LMcompany.TFY-CalendarUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TFY_Calendar;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		366291E6239347D800DCFAAF /* Build configuration list for PBXProject "TFY_Calendar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				36629218239347D900DCFAAF /* Debug */,
+				36629219239347D900DCFAAF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3662921A239347D900DCFAAF /* Build configuration list for PBXNativeTarget "TFY_Calendar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3662921B239347D900DCFAAF /* Debug */,
+				3662921C239347D900DCFAAF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3662921D239347D900DCFAAF /* Build configuration list for PBXNativeTarget "TFY_CalendarTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3662921E239347D900DCFAAF /* Debug */,
+				3662921F239347D900DCFAAF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		36629220239347D900DCFAAF /* Build configuration list for PBXNativeTarget "TFY_CalendarUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				36629221239347D900DCFAAF /* Debug */,
+				36629222239347D900DCFAAF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 366291E3239347D800DCFAAF /* Project object */;
+}

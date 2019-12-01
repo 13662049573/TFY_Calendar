@@ -1,0 +1,70 @@
+//
+//  ViewController.m
+//  TFY_Calendar
+//
+//  Created by 田风有 on 2019/12/1.
+//  Copyright © 2019 田风有. All rights reserved.
+//
+
+#import "ViewController.h"
+
+@interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
+@property(nonatomic , strong)UITableView *tableView;
+@property(nonatomic , strong)NSMutableArray *dataSouce;
+@end
+
+@implementation ViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.title = @"日历";
+    
+    [self.view addSubview:self.tableView];
+
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.dataSouce.count;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 50;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+    }
+    cell.textLabel.text = self.dataSouce[indexPath.row];
+    return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSString *controller = self.dataSouce[indexPath.row];
+    UIViewController *vc = [NSClassFromString(controller) new];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+-(UITableView *)tableView{
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height) style:UITableViewStyleGrouped];
+        _tableView.delegate= self;
+        _tableView.dataSource = self;
+        _tableView.separatorColor = [UIColor lightGrayColor];
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        _tableView.backgroundColor = [UIColor whiteColor];
+    }
+    return _tableView;
+}
+
+-(NSMutableArray *)dataSouce{
+    if (!_dataSouce) {
+        _dataSouce = [NSMutableArray arrayWithCapacity:7];
+        [_dataSouce addObjectsFromArray:@[@"RangePickerViewController",@"DIYExampleViewController",@"ButtonsViewController",@"HidePlaceholderViewController",@"DelegateAppearanceViewController",@"FullScreenExampleViewController",@"LoadViewExampleViewController"]];
+    }
+    return _dataSouce;
+}
+
+@end
