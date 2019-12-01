@@ -12,7 +12,7 @@ Pod::Spec.new do |spec|
                       日历完美处理，适合各种场景使用.
                     DESC
 
-  spec.homepage     = "http://EXAMPLE/TFY_CalendarKiit"
+  spec.homepage     = "https://github.com/13662049573/TFY_Calendar"
   
   spec.license      = "MIT"
   
@@ -20,7 +20,7 @@ Pod::Spec.new do |spec|
 
   spec.author       = { "tfyzxc13662049573" => "420144542@qq.com" }
   
-  spec.source       = { :git => "http://EXAMPLE/TFY_CalendarKiit.git", :tag => spec.version }
+  spec.source       = { :git => "https://github.com/13662049573/TFY_Calendar.git", :tag => spec.version }
 
   spec.source_files  = "TFY_Calendar/TFY_CalendarKiit/TFY_CalendarDynamicHeader.h", "TFY_Calendar/TFY_CalendarKiit/**/*.{h,m}"
 
