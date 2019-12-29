@@ -188,13 +188,13 @@ typedef NS_ENUM(NSUInteger, TFYCa_CalendarOrientation) {
     _delegateProxy = [TFY_CalendarDelegationFactory delegateProxy];
     
     self.didLayoutOperations = NSMutableArray.array;
-    
+    //整体容器View
     UIView *contentView = [[UIView alloc] initWithFrame:CGRectZero];
     contentView.backgroundColor = [UIColor clearColor];
     contentView.clipsToBounds = YES;
     [self addSubview:contentView];
     self.contentView = contentView;
-    
+    //日期整体容器View
     UIView *daysContainer = [[UIView alloc] initWithFrame:CGRectZero];
     daysContainer.backgroundColor = [UIColor clearColor];
     daysContainer.clipsToBounds = YES;

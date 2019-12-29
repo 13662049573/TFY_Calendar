@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TFY_CalendarHeaderCell : UICollectionViewCell
 
-@property (weak, nonatomic) UILabel *titleLabel;
+@property (weak, nonatomic) UIButton *titlebtn;
 @property (weak, nonatomic) TFY_CalendarHeaderView *header;
 
 @end

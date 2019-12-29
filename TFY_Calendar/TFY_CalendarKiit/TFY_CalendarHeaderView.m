@@ -151,8 +151,8 @@
 - (void)configureCell:(TFY_CalendarHeaderCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     TFY_CalendarAppearance *appearance = self.calendar.appearance;
-    cell.titleLabel.font = appearance.headerTitleFont;
-    cell.titleLabel.textColor = appearance.headerTitleColor;
+    cell.titlebtn.titleLabel.font = appearance.headerTitleFont;
+    [cell.titlebtn setTitleColor:appearance.headerTitleColor forState:UIControlStateNormal];
     _calendar.formatter.dateFormat = appearance.headerDateFormat;
     BOOL usesUpperCase = (appearance.caseOptions & 15) == TFYCa_CalendarCaseOptionsHeaderUsesUpperCase;
     NSString *text = nil;
@@ -187,7 +187,7 @@
         }
     }
     text = usesUpperCase ? text.uppercaseString : text;
-    cell.titleLabel.text = text;
+    [cell.titlebtn setTitle:text forState:UIControlStateNormal];
     [cell setNeedsLayout];
 }
 
@@ -209,12 +209,12 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        titleLabel.textAlignment = NSTextAlignmentCenter;
-        titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        titleLabel.numberOfLines = 0;
-        [self.contentView addSubview:titleLabel];
-        self.titleLabel = titleLabel;
+        UIButton *titlebtn = [[UIButton alloc] initWithFrame:CGRectZero];
+        titlebtn.contentHorizontalAlignment =UIControlContentHorizontalAlignmentCenter;;
+        titlebtn.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        titlebtn.titleLabel.numberOfLines = 0;
+        [self.contentView addSubview:titlebtn];
+        self.titlebtn = titlebtn;
     }
     return self;
 }
@@ -222,14 +222,14 @@
 - (void)setBounds:(CGRect)bounds
 {
     [super setBounds:bounds];
-    self.titleLabel.frame = bounds;
+    self.titlebtn.frame = bounds;
 }
 
 - (void)layoutSubviews
 {
     [super layoutSubviews];
     
-    self.titleLabel.frame = self.contentView.bounds;
+    self.titlebtn.frame = self.contentView.bounds;
     
     if (self.header.scrollDirection == UICollectionViewScrollDirectionHorizontal) {
         CGFloat position = [self.contentView convertPoint:CGPointMake(CGRectGetMidX(self.contentView.bounds), CGRectGetMidY(self.contentView.bounds)) toView:self.header].x;

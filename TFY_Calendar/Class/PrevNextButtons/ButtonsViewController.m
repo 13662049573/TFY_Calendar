@@ -40,7 +40,7 @@
     self.view = view;
     
     // 450 for iPad and 300 for iPhone
-    CGFloat height = [[UIDevice currentDevice].model hasPrefix:@"iPad"] ? 450 : 300;
+    CGFloat height = [[UIDevice currentDevice].model hasPrefix:@"iPad"] ? 450 : 340;
     TFY_Calendar *calendar = [[TFY_Calendar alloc] initWithFrame:CGRectMake(0, kNavBarHeight, view.frame.size.width, height)];
     calendar.dataSource = self;
     calendar.delegate = self;
