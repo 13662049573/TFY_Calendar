@@ -61,7 +61,7 @@ NS_ASSUME_NONNULL_END
     calendar.backgroundColor = [UIColor whiteColor];
     calendar.dataSource = self;
     calendar.delegate = self;
-    calendar.placeholderType = TFYCa_CalendarPlaceholderTypeNone;
+    calendar.placeholderType = TFYCa_CalendarPlaceholderTypeFillHeadTail;
     calendar.adjustsBoundingRectWhenChangingMonths = YES;
     calendar.currentPage = [self.dateFormatter dateFromString:@"2016-06-01"];
     calendar.firstWeekday = 2;

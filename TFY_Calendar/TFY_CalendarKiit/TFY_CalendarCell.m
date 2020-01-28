@@ -64,6 +64,7 @@
     shapeLayer = [CAShapeLayer layer];
     shapeLayer.backgroundColor = [UIColor clearColor].CGColor;
     shapeLayer.borderWidth = 1.0;
+    shapeLayer.lineWidth=2;
     shapeLayer.borderColor = [UIColor clearColor].CGColor;
     shapeLayer.opacity = 0;
     [self.contentView.layer insertSublayer:shapeLayer below:_titleLabel.layer];
