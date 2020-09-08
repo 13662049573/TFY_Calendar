@@ -1,0 +1,60 @@
+PODS:
+  - TFY_LayoutCategoryKit (1.5.8):
+    - TFY_LayoutCategoryKit/TFY_Categories (= 1.5.8)
+    - TFY_LayoutCategoryKit/TFY_Chain (= 1.5.8)
+    - TFY_LayoutCategoryKit/TFY_Tools (= 1.5.8)
+  - TFY_LayoutCategoryKit/TFY_Categories (1.5.8):
+    - TFY_LayoutCategoryKit/TFY_Categories/TFY_Foundation (= 1.5.8)
+    - TFY_LayoutCategoryKit/TFY_Categories/TFY_UI (= 1.5.8)
+    - TFY_LayoutCategoryKit/TFY_Tools
+  - TFY_LayoutCategoryKit/TFY_Categories/TFY_Foundation (1.5.8):
+    - TFY_LayoutCategoryKit/TFY_Tools
+  - TFY_LayoutCategoryKit/TFY_Categories/TFY_UI (1.5.8):
+    - TFY_LayoutCategoryKit/TFY_Tools
+  - TFY_LayoutCategoryKit/TFY_Chain (1.5.8):
+    - TFY_LayoutCategoryKit/TFY_Chain/TFY_CALayer (= 1.5.8)
+    - TFY_LayoutCategoryKit/TFY_Chain/TFY_ChainBase (= 1.5.8)
+    - TFY_LayoutCategoryKit/TFY_Chain/TFY_UIGesture (= 1.5.8)
+    - TFY_LayoutCategoryKit/TFY_Chain/TFY_UIView (= 1.5.8)
+  - TFY_LayoutCategoryKit/TFY_Chain/TFY_CALayer (1.5.8):
+    - TFY_LayoutCategoryKit/TFY_Chain/TFY_ChainBase
+  - TFY_LayoutCategoryKit/TFY_Chain/TFY_ChainBase (1.5.8)
+  - TFY_LayoutCategoryKit/TFY_Chain/TFY_UIGesture (1.5.8):
+    - TFY_LayoutCategoryKit/TFY_Categories/TFY_UI
+    - TFY_LayoutCategoryKit/TFY_Chain/TFY_ChainBase
+  - TFY_LayoutCategoryKit/TFY_Chain/TFY_UIView (1.5.8):
+    - TFY_LayoutCategoryKit/TFY_Categories/TFY_Foundation
+    - TFY_LayoutCategoryKit/TFY_Categories/TFY_UI
+    - TFY_LayoutCategoryKit/TFY_Chain/TFY_CALayer
+    - TFY_LayoutCategoryKit/TFY_Chain/TFY_ChainBase
+    - TFY_LayoutCategoryKit/TFY_Chain/TFY_UIGesture
+  - TFY_LayoutCategoryKit/TFY_Tools (1.5.8)
+  - TFY_Navigation (2.4.2):
+    - TFY_Navigation/TFY_NavControoler (= 2.4.2)
+    - TFY_Navigation/TFY_PageController (= 2.4.2)
+    - TFY_Navigation/TFY_PopController (= 2.4.2)
+  - TFY_Navigation/TFY_NavControoler (2.4.2):
+    - TFY_Navigation/TFY_PopController
+  - TFY_Navigation/TFY_PageController (2.4.2)
+  - TFY_Navigation/TFY_PopController (2.4.2)
+  - TFY_ProgressHUD (2.4.0)
+
+DEPENDENCIES:
+  - TFY_LayoutCategoryKit
+  - TFY_Navigation
+  - TFY_ProgressHUD
+
+SPEC REPOS:
+  trunk:
+    - TFY_LayoutCategoryKit
+    - TFY_Navigation
+    - TFY_ProgressHUD
+
+SPEC CHECKSUMS:
+  TFY_LayoutCategoryKit: 5157ddb142edf3a92b5401dd3e3c4c15dd29ae3f
+  TFY_Navigation: 2c65cf8eb138a48af7b615f7f3ee0f71d2b8c83f
+  TFY_ProgressHUD: c50d5c947d185b30038c746eaae5c34e10564eb1
+
+PODFILE CHECKSUM: 9ccf0d3416c50edda298c62e265e91c97c1c1a34
+
+COCOAPODS: 1.10.0.beta.2

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -43,6 +43,9 @@
 		3662925F2393711B00DCFAAF /* TFY_CalendarDelegationProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3662925E2393711B00DCFAAF /* TFY_CalendarDelegationProxy.m */; };
 		3667B1B723939B2800BEC399 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3667B1B623939B2800BEC399 /* Foundation.framework */; };
 		3667B1B923939B2E00BEC399 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3667B1B823939B2E00BEC399 /* UIKit.framework */; };
+		6CEDE5C395DA8881FAF3A63E /* Pods_TFY_Calendar_TFY_CalendarUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF990721DE13A8259CA14B6E /* Pods_TFY_Calendar_TFY_CalendarUITests.framework */; };
+		9F41C0613691CA057E5AF73B /* Pods_TFY_Calendar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9687A8AC13895AED764C78C5 /* Pods_TFY_Calendar.framework */; };
+		A55DF36F1E1FEA0EA973882B /* Pods_TFY_CalendarTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41368598A4E04B97FE08DF15 /* Pods_TFY_CalendarTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +66,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1BDDCEFAD8080C40D435F397 /* Pods-TFY_CalendarTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TFY_CalendarTests.release.xcconfig"; path = "Target Support Files/Pods-TFY_CalendarTests/Pods-TFY_CalendarTests.release.xcconfig"; sourceTree = "<group>"; };
+		279F2CB0F86EA9CAD5AAEAD0 /* Pods-TFY_CalendarTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TFY_CalendarTests.debug.xcconfig"; path = "Target Support Files/Pods-TFY_CalendarTests/Pods-TFY_CalendarTests.debug.xcconfig"; sourceTree = "<group>"; };
 		365ED15E2393855600981A14 /* TFY_LunarFormatter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_LunarFormatter.h; sourceTree = "<group>"; };
 		365ED15F2393855600981A14 /* TFY_LunarFormatter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_LunarFormatter.m; sourceTree = "<group>"; };
 		365ED16823938ED400981A14 /* RangePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangePickerViewController.h; sourceTree = "<group>"; };
@@ -135,6 +140,13 @@
 		3662925E2393711B00DCFAAF /* TFY_CalendarDelegationProxy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarDelegationProxy.m; sourceTree = "<group>"; };
 		3667B1B623939B2800BEC399 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3667B1B823939B2E00BEC399 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		41368598A4E04B97FE08DF15 /* Pods_TFY_CalendarTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TFY_CalendarTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8AFD79197C113FB1935BA2E0 /* Pods-TFY_Calendar-TFY_CalendarUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TFY_Calendar-TFY_CalendarUITests.debug.xcconfig"; path = "Target Support Files/Pods-TFY_Calendar-TFY_CalendarUITests/Pods-TFY_Calendar-TFY_CalendarUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		9687A8AC13895AED764C78C5 /* Pods_TFY_Calendar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TFY_Calendar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BDF412A9757D98F643976128 /* Pods-TFY_Calendar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TFY_Calendar.debug.xcconfig"; path = "Target Support Files/Pods-TFY_Calendar/Pods-TFY_Calendar.debug.xcconfig"; sourceTree = "<group>"; };
+		E539B16C342B3840185DD461 /* Pods-TFY_Calendar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TFY_Calendar.release.xcconfig"; path = "Target Support Files/Pods-TFY_Calendar/Pods-TFY_Calendar.release.xcconfig"; sourceTree = "<group>"; };
+		FC89AFF318F89BAD994ED9D9 /* Pods-TFY_Calendar-TFY_CalendarUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TFY_Calendar-TFY_CalendarUITests.release.xcconfig"; path = "Target Support Files/Pods-TFY_Calendar-TFY_CalendarUITests/Pods-TFY_Calendar-TFY_CalendarUITests.release.xcconfig"; sourceTree = "<group>"; };
+		FF990721DE13A8259CA14B6E /* Pods_TFY_Calendar_TFY_CalendarUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TFY_Calendar_TFY_CalendarUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +156,7 @@
 			files = (
 				3667B1B723939B2800BEC399 /* Foundation.framework in Frameworks */,
 				3667B1B923939B2E00BEC399 /* UIKit.framework in Frameworks */,
+				9F41C0613691CA057E5AF73B /* Pods_TFY_Calendar.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,6 +164,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A55DF36F1E1FEA0EA973882B /* Pods_TFY_CalendarTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,6 +172,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6CEDE5C395DA8881FAF3A63E /* Pods_TFY_Calendar_TFY_CalendarUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,6 +254,7 @@
 				36629214239347D900DCFAAF /* TFY_CalendarUITests */,
 				366291EC239347D800DCFAAF /* Products */,
 				3667B1B523939B2800BEC399 /* Frameworks */,
+				7CD387446909A49DEA7BF27C /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -366,8 +382,24 @@
 			children = (
 				3667B1B823939B2E00BEC399 /* UIKit.framework */,
 				3667B1B623939B2800BEC399 /* Foundation.framework */,
+				9687A8AC13895AED764C78C5 /* Pods_TFY_Calendar.framework */,
+				FF990721DE13A8259CA14B6E /* Pods_TFY_Calendar_TFY_CalendarUITests.framework */,
+				41368598A4E04B97FE08DF15 /* Pods_TFY_CalendarTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7CD387446909A49DEA7BF27C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BDF412A9757D98F643976128 /* Pods-TFY_Calendar.debug.xcconfig */,
+				E539B16C342B3840185DD461 /* Pods-TFY_Calendar.release.xcconfig */,
+				8AFD79197C113FB1935BA2E0 /* Pods-TFY_Calendar-TFY_CalendarUITests.debug.xcconfig */,
+				FC89AFF318F89BAD994ED9D9 /* Pods-TFY_Calendar-TFY_CalendarUITests.release.xcconfig */,
+				279F2CB0F86EA9CAD5AAEAD0 /* Pods-TFY_CalendarTests.debug.xcconfig */,
+				1BDDCEFAD8080C40D435F397 /* Pods-TFY_CalendarTests.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -377,9 +409,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3662921A239347D900DCFAAF /* Build configuration list for PBXNativeTarget "TFY_Calendar" */;
 			buildPhases = (
+				1EE6ABAA724657EC2585785E /* [CP] Check Pods Manifest.lock */,
 				366291E7239347D800DCFAAF /* Sources */,
 				366291E8239347D800DCFAAF /* Frameworks */,
 				366291E9239347D800DCFAAF /* Resources */,
+				D5FB10401E38BEE553D2FE77 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -394,6 +428,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3662921D239347D900DCFAAF /* Build configuration list for PBXNativeTarget "TFY_CalendarTests" */;
 			buildPhases = (
+				E95439ADA180805FF27E3799 /* [CP] Check Pods Manifest.lock */,
 				36629202239347D900DCFAAF /* Sources */,
 				36629203239347D900DCFAAF /* Frameworks */,
 				36629204239347D900DCFAAF /* Resources */,
@@ -412,9 +447,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 36629220239347D900DCFAAF /* Build configuration list for PBXNativeTarget "TFY_CalendarUITests" */;
 			buildPhases = (
+				6C1CFF6D6846E10D429FC946 /* [CP] Check Pods Manifest.lock */,
 				3662920D239347D900DCFAAF /* Sources */,
 				3662920E239347D900DCFAAF /* Frameworks */,
 				3662920F239347D900DCFAAF /* Resources */,
+				A045E0941EC6D716924C5654 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -494,6 +531,109 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1EE6ABAA724657EC2585785E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TFY_Calendar-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6C1CFF6D6846E10D429FC946 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TFY_Calendar-TFY_CalendarUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A045E0941EC6D716924C5654 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TFY_Calendar-TFY_CalendarUITests/Pods-TFY_Calendar-TFY_CalendarUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TFY_Calendar-TFY_CalendarUITests/Pods-TFY_Calendar-TFY_CalendarUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TFY_Calendar-TFY_CalendarUITests/Pods-TFY_Calendar-TFY_CalendarUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D5FB10401E38BEE553D2FE77 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TFY_Calendar/Pods-TFY_Calendar-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TFY_Calendar/Pods-TFY_Calendar-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TFY_Calendar/Pods-TFY_Calendar-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E95439ADA180805FF27E3799 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TFY_CalendarTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		366291E7239347D800DCFAAF /* Sources */ = {
@@ -633,7 +773,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -685,7 +825,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -695,10 +835,12 @@
 		};
 		3662921B239347D900DCFAAF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BDF412A9757D98F643976128 /* Pods-TFY_Calendar.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = RP2K7V42S5;
+				CURRENT_PROJECT_VERSION = 1.0.0;
+				DEVELOPMENT_TEAM = QH95759TSS;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TFY_Calendar/PCH/Calendar_PrefixHeader.pch;
 				INFOPLIST_FILE = TFY_Calendar/Info.plist;
@@ -707,6 +849,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.LMcompany.TFY-Calendar";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -715,10 +858,12 @@
 		};
 		3662921C239347D900DCFAAF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E539B16C342B3840185DD461 /* Pods-TFY_Calendar.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = RP2K7V42S5;
+				CURRENT_PROJECT_VERSION = 1.0.0;
+				DEVELOPMENT_TEAM = QH95759TSS;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TFY_Calendar/PCH/Calendar_PrefixHeader.pch;
 				INFOPLIST_FILE = TFY_Calendar/Info.plist;
@@ -727,6 +872,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.LMcompany.TFY-Calendar";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -735,6 +881,7 @@
 		};
 		3662921E239347D900DCFAAF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 279F2CB0F86EA9CAD5AAEAD0 /* Pods-TFY_CalendarTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -755,6 +902,7 @@
 		};
 		3662921F239347D900DCFAAF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1BDDCEFAD8080C40D435F397 /* Pods-TFY_CalendarTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -775,6 +923,7 @@
 		};
 		36629221239347D900DCFAAF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8AFD79197C113FB1935BA2E0 /* Pods-TFY_Calendar-TFY_CalendarUITests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RP2K7V42S5;
@@ -793,6 +942,7 @@
 		};
 		36629222239347D900DCFAAF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FC89AFF318F89BAD994ED9D9 /* Pods-TFY_Calendar-TFY_CalendarUITests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RP2K7V42S5;

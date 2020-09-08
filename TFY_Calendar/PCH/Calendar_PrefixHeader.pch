@@ -17,6 +17,9 @@
 #define kBottomBarHeight        (iPhoneX ? 34.0 : 0)
 #define kContentHeight          (Height_H - kNavBarHeight-kBottomBarHeight)
 
+#import <TFY_LayoutCategoryHeader.h>
+#import <TFY_Navigation.h>
+#import <TFY_PromptpopupHeader.h>
 
 #import "TFY_CalendarDynamicHeader.h"
 

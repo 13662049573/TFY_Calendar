@@ -1,0 +1,6 @@
+framework module TFY_Navigation {
+  umbrella header "TFY_Navigation-umbrella.h"
+
+  export *
+  module * { export * }
+}

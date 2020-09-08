@@ -4,7 +4,7 @@
 //
 //  Created by 田风有 on 2019/12/1.
 //  Copyright © 2019 田风有. All rights reserved.
-//  仅供框架内部使用。
+//  仅供框架内部使用。最新版本号:
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>

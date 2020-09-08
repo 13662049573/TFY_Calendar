@@ -28,10 +28,6 @@
     return self.dataSouce.count;
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 50;
-}
-
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (!cell) {
@@ -49,12 +45,19 @@
 
 -(UITableView *)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height) style:UITableViewStyleGrouped];
-        _tableView.delegate= self;
-        _tableView.dataSource = self;
-        _tableView.separatorColor = [UIColor lightGrayColor];
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-        _tableView.backgroundColor = [UIColor whiteColor];
+        _tableView = UITableViewCreateWithStyle(UITableViewStyleGrouped);
+        _tableView.makeChain
+        .showsVerticalScrollIndicator(NO)
+        .showsHorizontalScrollIndicator(NO)
+        .adJustedContentIOS11()
+        .delegate(self)
+        .dataSource(self)
+        .backgroundColor(UIColor.whiteColor)
+        .estimatedSectionFooterHeight(0.01)
+        .estimatedSectionHeaderHeight(0.01)
+        .rowHeight(60)
+        .tableHeaderView(UIView.new)
+        .tableFooterView(UIView.new);
     }
     return _tableView;
 }

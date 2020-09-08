@@ -1,0 +1,12 @@
+CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/TFY_LayoutCategoryKit" "${PODS_CONFIGURATION_BUILD_DIR}/TFY_Navigation" "${PODS_CONFIGURATION_BUILD_DIR}/TFY_ProgressHUD"
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/TFY_LayoutCategoryKit/TFY_LayoutCategoryKit.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/TFY_Navigation/TFY_Navigation.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/TFY_ProgressHUD/TFY_ProgressHUD.framework/Headers" $(SDKROOT)/usr/include/AvailabilityMacros $(SDKROOT)/usr/include
+LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
+OTHER_LDFLAGS = $(inherited) -framework "Foundation" -framework "TFY_LayoutCategoryKit" -framework "TFY_Navigation" -framework "TFY_ProgressHUD" -framework "UIKit"
+PODS_BUILD_DIR = ${BUILD_DIR}
+PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
+PODS_PODFILE_DIR_PATH = ${SRCROOT}/.
+PODS_ROOT = ${SRCROOT}/Pods
+PODS_XCFRAMEWORKS_BUILD_DIR = $(PODS_CONFIGURATION_BUILD_DIR)/XCFrameworkIntermediates
+USE_RECURSIVE_SCRIPT_INPUTS_IN_SCRIPT_PHASES = YES
