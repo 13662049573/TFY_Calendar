@@ -8,7 +8,7 @@
 
 #import "TFY_CalendarTransitionCoordinator.h"
 #import "TFY_CalendarExtensions.h"
-#import "TFY_CalendarDynamicHeader.h"
+#import "TFY_CalendarDynamic.h"
 
 @interface TFY_CalendarTransitionCoordinator ()
 

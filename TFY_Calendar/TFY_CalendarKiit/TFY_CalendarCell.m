@@ -9,7 +9,7 @@
 #import "TFY_CalendarCell.h"
 #import "TFY_Calendar.h"
 #import "TFY_CalendarExtensions.h"
-#import "TFY_CalendarDynamicHeader.h"
+#import "TFY_CalendarDynamic.h"
 #import "TFY_CalendarConstants.h"
 
 @interface TFY_CalendarCell ()

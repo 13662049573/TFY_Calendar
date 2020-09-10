@@ -11,7 +11,7 @@
 #import "TFY_CalendarWeekdayView.h"
 #import "TFY_CalendarExtensions.h"
 #import "TFY_CalendarConstants.h"
-#import "TFY_CalendarDynamicHeader.h"
+#import "TFY_CalendarDynamic.h"
 
 @interface TFY_CalendarStickyHeader ()
 @property (weak  , nonatomic) UIView  *contentView;

@@ -8,7 +8,7 @@
 
 #import "TFY_CalendarCollectionViewLayout.h"
 #import "TFY_Calendar.h"
-#import "TFY_CalendarDynamicHeader.h"
+#import "TFY_CalendarDynamic.h"
 #import "TFY_CalendarCollectionView.h"
 #import "TFY_CalendarExtensions.h"
 #import "TFY_CalendarConstants.h"

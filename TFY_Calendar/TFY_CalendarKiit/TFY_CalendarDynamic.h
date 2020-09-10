@@ -1,27 +1,12 @@
 //
-//  TFY_CalendarDynamicHeader.h
+//  TFY_CalendarDynamic.h
 //  TFY_Calendar
 //
-//  Created by 田风有 on 2019/12/1.
-//  Copyright © 2019 田风有. All rights reserved.
-//  仅供框架内部使用。最新版本号:2.0.2
+//  Created by 田风有 on 2020/9/10.
+//  Copyright © 2020 田风有. All rights reserved.
+//
 
-#import <UIKit/UIKit.h>
-#import <Foundation/Foundation.h>
-
-#import "TFY_Calendar.h"
-#import "TFY_CalendarCell.h"
-#import "TFY_CalendarHeaderView.h"
-#import "TFY_CalendarAppearance.h"
-#import "TFY_CalendarCollectionView.h"
-#import "TFY_CalendarCollectionViewLayout.h"
-#import "TFY_CalendarCalculator.h"
-#import "TFY_CalendarTransitionCoordinator.h"
-#import "TFY_CalendarDelegationProxy.h"
-#import "TFY_CalendarWeekdayView.h"
-#import "TFY_LunarFormatter.h"
-#import "TFY_CalendarExtensions.h"
-
+#import "TFY_CalendarKiit.h"
 
 @interface TFY_Calendar (Dynamic)
 
@@ -79,6 +64,3 @@
 
 @interface TFY_CalendarDelegationProxy()<TFYCa_CalendarDataSource,TFYCa_CalendarDelegate,TFYCa_CalendarDelegateAppearance>
 @end
-
-
-

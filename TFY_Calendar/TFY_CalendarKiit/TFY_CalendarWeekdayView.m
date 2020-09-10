@@ -9,7 +9,7 @@
 #import "TFY_CalendarWeekdayView.h"
 #import "TFY_Calendar.h"
 #import "TFY_CalendarExtensions.h"
-#import "TFY_CalendarDynamicHeader.h"
+#import "TFY_CalendarDynamic.h"
 
 @interface TFY_CalendarWeekdayView ()
 @property (strong, nonatomic) NSPointerArray *weekdayPointers;

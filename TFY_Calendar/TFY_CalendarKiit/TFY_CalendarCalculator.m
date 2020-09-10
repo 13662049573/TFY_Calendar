@@ -7,7 +7,7 @@
 //
 
 #import "TFY_CalendarCalculator.h"
-#import "TFY_CalendarDynamicHeader.h"
+#import "TFY_CalendarDynamic.h"
 #import "TFY_CalendarExtensions.h"
 
 @interface TFY_CalendarCalculator ()

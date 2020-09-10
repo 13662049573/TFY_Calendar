@@ -10,7 +10,7 @@
 #import "TFY_CalendarExtensions.h"
 #import "TFY_Calendar.h"
 #import "TFY_CalendarCollectionView.h"
-#import "TFY_CalendarDynamicHeader.h"
+#import "TFY_CalendarDynamic.h"
 
 @interface TFY_CalendarHeaderView ()<UICollectionViewDataSource,UICollectionViewDelegate,TFYCa_CalendarCollectionViewInternalDelegate>
 - (void)scrollToOffset:(CGFloat)scrollOffset animated:(BOOL)animated;
