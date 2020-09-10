@@ -4,7 +4,7 @@ Pod::Spec.new do |spec|
 
   spec.name         = "TFY_CalendarKiit"
 
-  spec.version      = "2.0.2"
+  spec.version      = "2.0.4"
 
   spec.summary      = "日历完美处理，适合各种场景使用."
 
@@ -22,7 +22,7 @@ Pod::Spec.new do |spec|
   
   spec.source       = { :git => "https://github.com/13662049573/TFY_Calendar.git", :tag => spec.version }
 
-  spec.source_files  = "TFY_Calendar/TFY_CalendarKiit/TFY_CalendarDynamicHeader.h", "TFY_Calendar/TFY_CalendarKiit/**/*.{h,m}"
+  spec.source_files  = "TFY_Calendar/TFY_CalendarKiit/**/*.{h,m}"
 
   spec.frameworks    = "Foundation","UIKit"
 
