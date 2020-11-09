@@ -140,7 +140,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**移除所有追加的边框*/
 - (void)tfy_removeAllBorders;
-
+/**暗黑设置*/
+- (void)tfy_setiOS13DarkModeColor:(UIColor *)color forProperty:(NSString *)property;
 #pragma mark-------------------------------------手势点击添加方法---------------------------------
 
 /**

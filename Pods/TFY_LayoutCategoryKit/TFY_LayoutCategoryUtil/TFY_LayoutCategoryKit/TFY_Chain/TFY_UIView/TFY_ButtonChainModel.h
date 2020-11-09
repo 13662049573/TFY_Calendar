@@ -51,7 +51,8 @@ TFY_PROPERTY_CHAIN_READONLY TFY_ButtonChainModel *(^ contentHorizontalAlignment)
 
 
 TFY_PROPERTY_CHAIN_READONLY TFY_ButtonChainModel * (^ imageDirection) (ButtonImageDirection, CGFloat);
-
+TFY_PROPERTY_CHAIN_READONLY TFY_ButtonChainModel * (^ buttonTapTime) (ButtonLimitTimesTapBlock);
+TFY_PROPERTY_CHAIN_READONLY TFY_ButtonChainModel * (^ tapSpaceTime) (NSTimeInterval);
 TFY_PROPERTY_CHAIN_READONLY TFY_ButtonChainModel *(^ imageAndTitle)(TFY_ButtonImageTitleBlock);
 @end
 

@@ -10,6 +10,7 @@
 #import "TFY_GestureChainHeader.h"
 #import "TFY_ChainBaseModel+TFY_Tools.h"
 #import <objc/runtime.h>
+#import "UIView+TFY_Tools.h"
 
 #define TFY_CATEGORY_CHAIN_VIEW_IMPLEMENTATION(TFY_Method,TFY_ParaType) TFY_CATEGORY_CHAIN_VIEWCLASS_IMPLEMENTATION(TFY_Method,TFY_ParaType, id,UIView)
 
@@ -118,6 +119,33 @@ TFY_CATEGORY_CHAIN_VIEW_IMPLEMENTATION(autoresizesSubviews, BOOL)
     return ^(CornerClipType clipType, CGFloat radius){
         [self enumerateObjectsUsingBlock:^(UIView * _Nonnull obj) {
             [obj tfy_clipWithType:clipType radius:radius];
+        }];
+        return self;
+    };
+}
+
+-(id  _Nonnull (^)(UIColor * _Nonnull))ios13BackgroundColor {
+    return ^(UIColor *color){
+        [self enumerateObjectsUsingBlock:^(UIView * _Nonnull obj) {
+            [obj tfy_setiOS13DarkModeColor:color forProperty:@"backgroundColor"];
+        }];
+        return self;
+    };
+}
+
+-(id  _Nonnull (^)(UIColor * _Nonnull))ios13BorderColor {
+    return ^(UIColor *color){
+        [self enumerateObjectsUsingBlock:^(UIView * _Nonnull obj) {
+            [obj tfy_setiOS13DarkModeColor:color forProperty:@"borderColor"];
+        }];
+        return self;
+    };
+}
+
+- (id  _Nonnull (^)(UIColor * _Nonnull))ios13ShadowColor {
+    return ^(UIColor *color){
+        [self enumerateObjectsUsingBlock:^(UIView * _Nonnull obj) {
+            [obj tfy_setiOS13DarkModeColor:color forProperty:@"shadowColor"];
         }];
         return self;
     };

@@ -299,21 +299,21 @@
     [UIView animateWithDuration:0.25 animations:^{
         self.layer.affineTransform = CGAffineTransformMakeScale(0.1, 0.1);
         self.alpha = 0;
-        self-> _menuBackView.alpha = 0;
+        self.menuBackView.alpha = 0;
     } completion:^(BOOL finished) {
         if (self.delegate && [self.delegate respondsToSelector:@selector(tfy_PopupMenuDidDismiss)]) {
             [self.delegate tfy_PopupMenuDidDismiss];
         }
         self.delegate = nil;
         [self removeFromSuperview];
-        [self->_menuBackView removeFromSuperview];
+        [self.menuBackView removeFromSuperview];
     }];
 }
 
 #pragma mark tableViewDelegate & dataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _titles.count;
+    return self.titles.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -332,21 +332,21 @@
         cell.textLabel.numberOfLines = 0;
     }
     cell.backgroundColor = [UIColor clearColor];
-    cell.textLabel.textColor = _textColor;
-    cell.textLabel.font = [UIFont systemFontOfSize:_fontSize];
-    if ([_titles[indexPath.row] isKindOfClass:[NSAttributedString class]]) {
-        cell.textLabel.attributedText = _titles[indexPath.row];
-    }else if ([_titles[indexPath.row] isKindOfClass:[NSString class]]) {
-        cell.textLabel.text = _titles[indexPath.row];
+    cell.textLabel.textColor = self.textColor;
+    cell.textLabel.font = [UIFont systemFontOfSize:self.fontSize];
+    if ([self.titles[indexPath.row] isKindOfClass:[NSAttributedString class]]) {
+        cell.textLabel.attributedText = self.titles[indexPath.row];
+    }else if ([self.titles[indexPath.row] isKindOfClass:[NSString class]]) {
+        cell.textLabel.text = self.titles[indexPath.row];
     }else {
         cell.textLabel.text = nil;
     }
-    cell.separatorColor = _separatorColor;
-    if (_images.count >= indexPath.row + 1) {
-        if ([_images[indexPath.row] isKindOfClass:[NSString class]]) {
-            cell.imageView.image = [UIImage imageNamed:_images[indexPath.row]];
-        }else if ([_images[indexPath.row] isKindOfClass:[UIImage class]]){
-            cell.imageView.image = _images[indexPath.row];
+    cell.separatorColor = self.separatorColor;
+    if (self.images.count >= indexPath.row + 1) {
+        if ([self.images[indexPath.row] isKindOfClass:[NSString class]]) {
+            cell.imageView.image = [UIImage imageNamed:self.images[indexPath.row]];
+        }else if ([self.images[indexPath.row] isKindOfClass:[UIImage class]]){
+            cell.imageView.image = self.images[indexPath.row];
         }else {
             cell.imageView.image = nil;
         }
@@ -358,13 +358,13 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return _itemHeight;
+    return self.itemHeight;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (_dismissOnSelected) [self dismiss];
+    if (self.dismissOnSelected) [self dismiss];
     
     if (self.delegate && [self.delegate respondsToSelector:@selector(tfy_PopupMenu:didSelectedAtIndex:)]) {
         [self.delegate tfy_PopupMenu:self didSelectedAtIndex:indexPath.row];
@@ -401,8 +401,8 @@
 #pragma mark - privates
 - (void)show
 {
-    [MainWindow addSubview:_menuBackView];
-    [MainWindow addSubview:self];
+    [[self lastWindow] addSubview:self.menuBackView];
+    [[self lastWindow] addSubview:self];
     if ([[self getLastVisibleCell] isKindOfClass:[PopupMenuCell class]]) {
         PopupMenuCell *cell = [self getLastVisibleCell];
         cell.isShowSeparator = NO;
@@ -414,7 +414,7 @@
     [UIView animateWithDuration: 0.25 animations:^{
         self.layer.affineTransform = CGAffineTransformMakeScale(1.0, 1.0);
         self.alpha = 1;
-        self->_menuBackView.alpha = 1;
+        self.menuBackView.alpha = 1;
     } completion:^(BOOL finished) {
         if (self.delegate && [self.delegate respondsToSelector:@selector(tfy_PopupMenuDidShow)]) {
             [self.delegate tfy_PopupMenuDidShow];
@@ -422,43 +422,60 @@
     }];
 }
 
-- (void)setDefaultSettings
-{
-    _cornerRadius = 5.0;
-    _rectCorner = UIRectCornerAllCorners;
+- (UIWindow*)lastWindow {
+    NSEnumerator  *frontToBackWindows = [UIApplication.sharedApplication.windows reverseObjectEnumerator];
+    for (UIWindow *window in frontToBackWindows) {
+        BOOL windowOnMainScreen = window.screen == UIScreen.mainScreen;
+
+        BOOL windowIsVisible = !window.hidden&& window.alpha>0;
+
+        BOOL windowLevelSupported = (window.windowLevel >= UIWindowLevelNormal && window.windowLevel <= UIWindowLevelNormal);
+
+        BOOL windowKeyWindow = window.isKeyWindow;
+        
+        if (windowOnMainScreen && windowIsVisible && windowLevelSupported && windowKeyWindow) {
+            return window;
+        }
+    }
+    return [UIApplication sharedApplication].keyWindow;
+}
+
+
+- (void)setDefaultSettings {
+    self.cornerRadius = 5.0;
+    self.rectCorner = UIRectCornerAllCorners;
     self.isShowShadow = YES;
-    _dismissOnSelected = YES;
-    _dismissOnTouchOutside = YES;
-    _fontSize = 15;
-    _textColor = [UIColor blackColor];
-    _offset = 0.0;
-    _relyRect = CGRectZero;
-    _point = CGPointZero;
-    _borderWidth = 0.0;
-    _borderColor = [UIColor lightGrayColor];
-    _arrowWidth = 15.0;
-    _arrowHeight = 10.0;
-    _backColor = [UIColor whiteColor];
-    _type = PopupMenuTypeDefault;
-    _arrowDirection = PopupMenuArrowDirectionTop;
-    _priorityDirection = PopupMenuPriorityDirectionTop;
-    _minSpace = 10.0;
-    _maxVisibleCount = 5;
-    _itemHeight = 44;
-    _isCornerChanged = NO;
-    _showMaskView = YES;
-    _menuBackView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
-    _menuBackView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.1];
-    _menuBackView.alpha = 0;
+    self.dismissOnSelected = YES;
+    self.dismissOnTouchOutside = YES;
+    self.fontSize = 15;
+    self.textColor = [UIColor blackColor];
+    self.offset = 0.0;
+    self.relyRect = CGRectZero;
+    self.point = CGPointZero;
+    self.borderWidth = 0.0;
+    self.borderColor = [UIColor lightGrayColor];
+    self.arrowWidth = 15.0;
+    self.arrowHeight = 10.0;
+    self.backColor = [UIColor whiteColor];
+    self.type = PopupMenuTypeDefault;
+    self.arrowDirection = PopupMenuArrowDirectionTop;
+    self.priorityDirection = PopupMenuPriorityDirectionTop;
+    self.minSpace = 10.0;
+    self.maxVisibleCount = 5;
+    self.itemHeight = 44;
+    self.isCornerChanged = NO;
+    self.showMaskView = YES;
+    self.menuBackView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
+    self.menuBackView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.1];
+    self.menuBackView.alpha = 0;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget: self action: @selector(touchOutSide)];
-    [_menuBackView addGestureRecognizer: tap];
+    [self.menuBackView addGestureRecognizer: tap];
     self.alpha = 0;
     self.backgroundColor = [UIColor clearColor];
     [self addSubview:self.tableView];
 }
 
-- (UITableView *)tableView
-{
+- (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.backgroundColor = [UIColor clearColor];
@@ -477,22 +494,19 @@
     }
 }
 
-- (void)setIsShowShadow:(BOOL)isShowShadow
-{
+- (void)setIsShowShadow:(BOOL)isShowShadow {
     _isShowShadow = isShowShadow;
     self.layer.shadowOpacity = isShowShadow ? 0.5 : 0;
     self.layer.shadowOffset = CGSizeMake(0, 0);
     self.layer.shadowRadius = isShowShadow ? 2.0 : 0;
 }
 
-- (void)setShowMaskView:(BOOL)showMaskView
-{
+- (void)setShowMaskView:(BOOL)showMaskView {
     _showMaskView = showMaskView;
     _menuBackView.backgroundColor = showMaskView ? [[UIColor blackColor] colorWithAlphaComponent:0.1] : [UIColor clearColor];
 }
 
-- (void)setType:(PopupMenuType)type
-{
+- (void)setType:(PopupMenuType)type {
     _type = type;
     switch (type) {
         case PopupMenuTypeDark:
@@ -514,122 +528,102 @@
     [self updateUI];
 }
 
-- (void)setFontSize:(CGFloat)fontSize
-{
+- (void)setFontSize:(CGFloat)fontSize {
     _fontSize = fontSize;
     [self.tableView reloadData];
 }
 
-- (void)setTextColor:(UIColor *)textColor
-{
+- (void)setTextColor:(UIColor *)textColor {
     _textColor = textColor;
     [self.tableView reloadData];
 }
 
-- (void)setPoint:(CGPoint)point
-{
+- (void)setPoint:(CGPoint)point {
     _point = point;
     [self updateUI];
 }
 
-- (void)setItemWidth:(CGFloat)itemWidth
-{
+- (void)setItemWidth:(CGFloat)itemWidth {
     _itemWidth = itemWidth;
     [self updateUI];
 }
 
-- (void)setItemHeight:(CGFloat)itemHeight
-{
+- (void)setItemHeight:(CGFloat)itemHeight {
     _itemHeight = itemHeight;
     [self updateUI];
 }
 
-- (void)setBorderWidth:(CGFloat)borderWidth
-{
+- (void)setBorderWidth:(CGFloat)borderWidth {
     _borderWidth = borderWidth;
     [self updateUI];
 }
 
-- (void)setBorderColor:(UIColor *)borderColor
-{
+- (void)setBorderColor:(UIColor *)borderColor {
     _borderColor = borderColor;
     [self updateUI];
 }
 
-- (void)setArrowPosition:(CGFloat)arrowPosition
-{
+- (void)setArrowPosition:(CGFloat)arrowPosition {
     _arrowPosition = arrowPosition;
     [self updateUI];
 }
 
-- (void)setArrowWidth:(CGFloat)arrowWidth
-{
+- (void)setArrowWidth:(CGFloat)arrowWidth {
     _arrowWidth = arrowWidth;
     [self updateUI];
 }
 
-- (void)setArrowHeight:(CGFloat)arrowHeight
-{
+- (void)setArrowHeight:(CGFloat)arrowHeight {
     _arrowHeight = arrowHeight;
     [self updateUI];
 }
 
-- (void)setArrowDirection:(PopupMenuArrowDirection)arrowDirection
-{
+- (void)setArrowDirection:(PopupMenuArrowDirection)arrowDirection {
     _arrowDirection = arrowDirection;
     [self updateUI];
 }
 
-- (void)setMaxVisibleCount:(NSInteger)maxVisibleCount
-{
+- (void)setMaxVisibleCount:(NSInteger)maxVisibleCount {
     _maxVisibleCount = maxVisibleCount;
     [self updateUI];
 }
 
-- (void)setBackColor:(UIColor *)backColor
-{
+- (void)setBackColor:(UIColor *)backColor {
     _backColor = backColor;
     [self updateUI];
 }
 
-- (void)setTitles:(NSArray *)titles
-{
+- (void)setTitles:(NSArray *)titles {
     _titles = titles;
     [self updateUI];
 }
 
-- (void)setImages:(NSArray *)images
-{
+- (void)setImages:(NSArray *)images {
     _images = images;
     [self updateUI];
 }
 
-- (void)setPriorityDirection:(PopupMenuPriorityDirection)priorityDirection
-{
+- (void)setPriorityDirection:(PopupMenuPriorityDirection)priorityDirection {
     _priorityDirection = priorityDirection;
     [self updateUI];
 }
 
-- (void)setRectCorner:(UIRectCorner)rectCorner
-{
+- (void)setRectCorner:(UIRectCorner)rectCorner {
     _rectCorner = rectCorner;
     [self updateUI];
 }
 
-- (void)setCornerRadius:(CGFloat)cornerRadius
-{
+- (void)setCornerRadius:(CGFloat)cornerRadius {
     _cornerRadius = cornerRadius;
     [self updateUI];
 }
 
-- (void)setOffset:(CGFloat)offset
-{
+- (void)setOffset:(CGFloat)offset {
     _offset = offset;
     [self updateUI];
 }
 
-- (void)updateUI
-{
+- (void)updateUI {
     CGFloat height;
     if (_titles.count > _maxVisibleCount) {
         height = _itemHeight * _maxVisibleCount + _borderWidth * 2;

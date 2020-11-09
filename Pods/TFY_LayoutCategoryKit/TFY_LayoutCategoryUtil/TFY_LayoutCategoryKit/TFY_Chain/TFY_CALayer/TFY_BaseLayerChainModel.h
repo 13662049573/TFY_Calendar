@@ -82,6 +82,11 @@ TFY_PROPERTY_CHAIN_READONLY ObjectType (^ removeAllAnimation) (void);
 TFY_PROPERTY_CHAIN_READONLY ObjectType (^ name) (NSString * name);
 TFY_PROPERTY_CHAIN_READONLY ObjectType (^ delegate) (id <CALayerDelegate> delegate);
 TFY_PROPERTY_CHAIN_READONLY ObjectType (^ style) (NSDictionary * style);
+/**暗黑设置*/
+TFY_PROPERTY_CHAIN_READONLY ObjectType (^ ios13BackgroundColor) (UIColor *);
+TFY_PROPERTY_CHAIN_READONLY ObjectType (^ ios13BorderColor) (UIColor *);
+TFY_PROPERTY_CHAIN_READONLY ObjectType (^ ios13ShadowColor) (UIColor *);
+
 
 TFY_PROPERTY_CHAIN_READONLY ObjectType (^ assignTo) (TFY_AssignLayerLoad assignTo);
 

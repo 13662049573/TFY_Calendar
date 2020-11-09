@@ -1,7 +1,7 @@
 CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO
 FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/TFY_LayoutCategoryKit" "${PODS_CONFIGURATION_BUILD_DIR}/TFY_Navigation" "${PODS_CONFIGURATION_BUILD_DIR}/TFY_ProgressHUD"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/TFY_LayoutCategoryKit/TFY_LayoutCategoryKit.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/TFY_Navigation/TFY_Navigation.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/TFY_ProgressHUD/TFY_ProgressHUD.framework/Headers" $(SDKROOT)/usr/include/AvailabilityMacros $(SDKROOT)/usr/include
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/TFY_LayoutCategoryKit/TFY_LayoutCategoryKit.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/TFY_Navigation/TFY_Navigation.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/TFY_ProgressHUD/TFY_ProgressHUD.framework/Headers" $(SDKROOT)/usr/include $(SDKROOT)/usr/include/AvailabilityMacros
 OTHER_LDFLAGS = $(inherited) -framework "Foundation" -framework "TFY_LayoutCategoryKit" -framework "TFY_Navigation" -framework "TFY_ProgressHUD" -framework "UIKit"
 PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)

@@ -95,58 +95,6 @@ const char* jailbreak_tool_pathes[] = {
     "/etc/apt"
 };
 
-#pragma mark------------------------------------------gcd定时器方法---------------------------------------
-
-- (instancetype)initWithInterval:(NSTimeInterval)interval repeats:(BOOL)repeats queue:(dispatch_queue_t)queue block:(void (^)(void))block {
-    self = [super init];
-    if (self) {
-        self.timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
-        dispatch_source_set_timer(self.timer, dispatch_time(DISPATCH_TIME_NOW, interval * NSEC_PER_SEC), interval * NSEC_PER_SEC, 0);
-        dispatch_source_set_event_handler(self.timer, ^{
-            if (!repeats) {
-                dispatch_source_cancel(self.timer);
-            }
-            block();
-        });
-        dispatch_resume(self.timer);
-    }
-    return self;
-}
-
-- (void)dealloc {
-    [self cancel];
-    
-    [self stopNotifier];
-    if (_reachabilityRef != NULL)
-    {
-        CFRelease(_reachabilityRef);
-    }
-}
-
-//暂停
-- (void)pause{
-    if (self.timer) {
-        dispatch_suspend(self.timer);
-    }
-}
-//继续
-- (void)resume{
-    if (self.timer) {
-        dispatch_resume(self.timer);
-    }
-}
-//启动
-- (void)start{
-    [self resume];
-}
-//销毁
-- (void)cancel {
-    if (self.timer) {
-        dispatch_source_cancel(self.timer);
-    }
-}
-
-
 #pragma mark------------------------------------------手机获取网络监听方法---------------------------------------
 
 + (instancetype)reachabilityWithHostName:(NSString *)hostName{
@@ -320,17 +268,6 @@ const char* jailbreak_tool_pathes[] = {
                     netconnType = @"未知";
                 }
             }];
-        } else {
-            NSString *accessString = teleInfo.currentRadioAccessTechnology;
-            if ([typeStrings4G containsObject:accessString]) {
-                netconnType = @"4G";
-            } else if ([typeStrings3G containsObject:accessString]) {
-                netconnType = @"3G";
-            } else if ([typeStrings2G containsObject:accessString]) {
-                netconnType = @"2G";
-            } else {
-                netconnType = @"未知";
-            }
         }
     }
     else {
@@ -350,11 +287,6 @@ const char* jailbreak_tool_pathes[] = {
                 result = YES;
             }
         }];
-    } else {
-        CTCarrier *obj = netIInfo.subscriberCellularProvider;
-        if (obj.isoCountryCode.length) {
-            result = YES;
-        }
     }
     return result;
 }
@@ -382,38 +314,6 @@ const char* jailbreak_tool_pathes[] = {
                 return SSOperatorsTypeUnknown;
             }
         }
-    }
-    CTCarrier *carrier = [telephonyInfo subscriberCellularProvider];
-    NSString *currentCountryCode = [carrier mobileCountryCode];
-    NSString *mobileNetWorkCode = [carrier mobileNetworkCode];
-    
-    if (![currentCountryCode isEqualToString:@"460"]) {
-        return SSOperatorsTypeUnknown;
-    }
-    if ([mobileNetWorkCode isEqualToString:@"00"] ||
-        [mobileNetWorkCode isEqualToString:@"02"] ||
-        [mobileNetWorkCode isEqualToString:@"07"]) {
-        // 中国移动
-        return SSOperatorsTypeChinaMobile;
-    }
-    
-    if ([mobileNetWorkCode isEqualToString:@"01"] ||
-        [mobileNetWorkCode isEqualToString:@"06"] ||
-        [mobileNetWorkCode isEqualToString:@"09"]) {
-        // 中国联通
-        return SSOperatorsTypeChinaUnicom;
-    }
-    
-    if ([mobileNetWorkCode isEqualToString:@"03"] ||
-        [mobileNetWorkCode isEqualToString:@"05"] ||
-        [mobileNetWorkCode isEqualToString:@"11"]) {
-        // 中国电信
-        return SSOperatorsTypeTelecom;
-    }
-    
-    if ([mobileNetWorkCode isEqualToString:@"20"]) {
-        // 中国铁通
-        return SSOperatorsTypeChinaTietong;
     }
     return SSOperatorsTypeUnknown;
 }
@@ -629,24 +529,6 @@ const char* jailbreak_tool_pathes[] = {
         languageCode = @"en";//英语
     }
     [self setLanguage:languageCode];
-}
-
-- (UIWindow*)lastWindow {
-    NSEnumerator  *frontToBackWindows = [UIApplication.sharedApplication.windows reverseObjectEnumerator];
-    for (UIWindow *window in frontToBackWindows) {
-        BOOL windowOnMainScreen = window.screen == UIScreen.mainScreen;
-
-        BOOL windowIsVisible = !window.hidden&& window.alpha>0;
-
-        BOOL windowLevelSupported = (window.windowLevel >= UIWindowLevelNormal && window.windowLevel <= UIWindowLevelNormal);
-
-        BOOL windowKeyWindow = window.isKeyWindow;
-        
-        if (windowOnMainScreen && windowIsVisible && windowLevelSupported && windowKeyWindow) {
-            return window;
-        }
-    }
-    return [UIApplication sharedApplication].keyWindow;
 }
 
 #pragma mark------------------------------------------国际化设置---------------------------------------

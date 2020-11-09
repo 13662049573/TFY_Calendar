@@ -8,6 +8,7 @@
 
 #import "TFY_BaseLayerChainModel.h"
 #import "TFY_ChainBaseModel+TFY_Tools.h"
+#import "CALayer+TFY_Tools.h"
 
 #define TFY_CATEGORY_CHAIN_BASELAYER_IMPLEMENTATION(TFY_Method,TFY_ParaType) TFY_CATEGORY_CHAIN_LAYERCLASS_IMPLEMENTATION(TFY_Method,TFY_ParaType, id, CALayer)
 
@@ -188,6 +189,34 @@ TFY_CATEGORY_CHAIN_BASELAYER_IMPLEMENTATION(style, NSDictionary *)
         return self;
     };
 }
+
+-(id  _Nonnull (^)(UIColor * _Nonnull))ios13BackgroundColor {
+    return ^(UIColor *color){
+        [self enumerateObjectsUsingBlock:^(CALayer * _Nonnull obj) {
+            obj.tfy_iOS13BackgroundColor(color);
+        }];
+        return self;
+    };
+}
+
+-(id  _Nonnull (^)(UIColor * _Nonnull))ios13BorderColor {
+    return ^(UIColor *color){
+        [self enumerateObjectsUsingBlock:^(CALayer * _Nonnull obj) {
+            obj.tfy_iOS13BorderColor(color);
+        }];
+        return self;
+    };
+}
+
+- (id  _Nonnull (^)(UIColor * _Nonnull))ios13ShadowColor {
+    return ^(UIColor *color){
+        [self enumerateObjectsUsingBlock:^(CALayer * _Nonnull obj) {
+            obj.tfy_iOS13ShadowColor(color);
+        }];
+        return self;
+    };
+}
+
 
 - (CALayer *)layer{
     return self.effectiveObjects.firstObject;

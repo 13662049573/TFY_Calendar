@@ -8,6 +8,8 @@
 
 #import "UIView+TFY_Tools.h"
 #import <objc/runtime.h>
+#import "TFY_iOS13DarkMode_MonitorView.h"
+#import "UIView+TFY_iOS13DarkMode_MonitorView.h"
 
 NSString const *BlockTapKey = @"BlockTapKey";
 NSString const *BlockKey = @"BlockKey";
@@ -914,6 +916,47 @@ NSString const *BlockKey = @"BlockKey";
     NSString *key = NSStringFromClass(gesture.class);
     void (^block)(id sender, UIGestureRecognizer *tap) = [self gestureBlocks][key];
     block ? block(self, gesture) : nil;
+}
+
+/**暗黑设置*/
+- (void)tfy_setiOS13DarkModeColor:(UIColor *)color forProperty:(NSString *)property {
+    if (property.length == 0) {
+        return;
+    }
+    
+    NSString *proSetStr = [NSString stringWithFormat:@"set%@:",[property stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:[[property substringToIndex:1] capitalizedString]]];
+    SEL proSetSel = NSSelectorFromString(proSetStr);
+    
+    __weak typeof(self) weakView = self;
+    if ([self.layer respondsToSelector:proSetSel]) {
+#if __IPHONE_13_0
+        if (@available(iOS 13.0, *)) {
+            
+            if (color) {
+                [self.tfy_iOS13DrakMove_MonitorView tfy_setTraitCollectionChange:^(UIView * _Nonnull view) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+                    [weakView.layer performSelector:proSetSel withObject:(id)[color resolvedColorWithTraitCollection:weakView.traitCollection].CGColor];
+#pragma clang diagnostic pop
+                } forKey:property forObject:self];
+            } else {
+                [self.tfy_iOS13DrakMove_MonitorView tfy_setTraitCollectionChange:nil forKey:property forObject:self];
+            }
+            
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+            [self.layer performSelector:proSetSel withObject:(id)[color resolvedColorWithTraitCollection:self.traitCollection].CGColor];
+#pragma clang diagnostic pop
+        } else {
+#endif
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+            [self.layer performSelector:proSetSel withObject:(id)color.CGColor];
+#pragma clang diagnostic pop
+#if __IPHONE_13_0
+        }
+#endif
+    }
 }
 
 @end

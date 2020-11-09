@@ -15,24 +15,27 @@
 #define   TFY_HUD_Height [UIScreen mainScreen].bounds.size.height
 //屏幕宽
 #define   TFY_HUD_Width  [UIScreen mainScreen].bounds.size.width
-
-#define Ipad ((double)TFY_HUD_Height/(double)TFY_HUD_Width) < 1.6 ? YES : NO
 /**
  * 是否是竖屏
  */
-#define isPortrait      ( [UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortrait ||  [UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortraitUpsideDown ) ?YES:NO
+#define TFY_HUD_isPortrait      ( [UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortrait ||  [UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortraitUpsideDown ) ?YES:NO
 
 //对应屏幕比例宽
-#define TFY_HUD_DEBI_width(width)    width *(isPortrait ?(375/TFY_HUD_Width):(TFY_HUD_Height/375))
+#define TFY_HUD_DEBI_width(width)    width *(TFY_HUD_isPortrait ?(375/TFY_HUD_Width):(TFY_HUD_Height/375))
 
-#define TFY_HUD_DEBI_height(height)  height *(isPortrait ?(667/TFY_HUD_Height):(TFY_HUD_Width/667))
+#define TFY_HUD_DEBI_height(height)  height *(TFY_HUD_isPortrait ?(667/TFY_HUD_Height):(TFY_HUD_Width/667))
+
+#define TFY_HUD_GET_MAIN_STARE  dispatch_async(dispatch_get_main_queue(), ^{
+
+#define TFY_HUD_GET_MAIN_END   });
 
 typedef NS_ENUM(NSUInteger, ProgressHUDType){
     ProgressHUD_ERROR = 0,  // 错误信息
     ProgressHUD_SUCCESS,    // 成功信息
     ProgressHUD_PROMPT,     // 提示信息
     ProgressHUD_LOADING,     //加载圈
-    ProgressHUD_DISMISS
+    ProgressHUD_DISMISS,
+    ProgressHUD_TEXT,        //只有文本显示
 };
 
 static const CGFloat kDefaultSpringDamping = 0.8;
@@ -65,7 +68,6 @@ const TFY_PopupLayout TFY_PopupLayout_Center = { TFY_PopupHorizontalLayout_Cente
 
 
 @interface TFY_ProgressHUD ()
-@property (nonatomic, strong) UIView *backgroundView;
 @property (nonatomic, strong) UIView *containerView;
 @property (nonatomic, assign) BOOL isShowing;
 @property (nonatomic, assign) BOOL isBeingShown;
@@ -74,7 +76,6 @@ const TFY_PopupLayout TFY_PopupLayout_Center = { TFY_PopupHorizontalLayout_Cente
 @property (nonatomic,  strong) UIImageView *imageView;
 @property (nonatomic,  strong) UIView *hudView;
 @property (nonatomic,  strong) UILabel *stringLabel;
-
 @end
 
 @implementation TFY_ProgressHUD
@@ -117,7 +118,6 @@ const TFY_PopupLayout TFY_PopupLayout_Center = { TFY_PopupHorizontalLayout_Cente
         _isBeingDismissed = NO;
         self.backcolor = [UIColor colorWithWhite:0 alpha:0.8];
         
-        [self addSubview:self.backgroundView];
         [self addSubview:self.containerView];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeStatusbarOrientation:) name:UIApplicationDidChangeStatusBarFrameNotification object:nil];
@@ -128,12 +128,12 @@ const TFY_PopupLayout TFY_PopupLayout_Center = { TFY_PopupHorizontalLayout_Cente
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
     UIView *hitView = [super hitTest:point withEvent:event];
     if (hitView == self) {
-        if (_shouldDismissOnBackgroundTouch) {
+        if (self.shouldDismissOnBackgroundTouch) {
             [self dismissAnimated:YES];
         }
-        return _maskType == TFY_PopupMaskType_None ? nil : hitView;
+        return self.maskType == TFY_PopupMaskType_None ? nil : hitView;
     } else {
-        if ([hitView isDescendantOfView:_containerView] && _shouldDismissOnContentTouch) {//subview是否是superView的子视图
+        if ([hitView isDescendantOfView:self.containerView] && self.shouldDismissOnContentTouch) {//subview是否是superView的子视图
             [self dismissAnimated:YES];
         }
         return hitView;
@@ -163,7 +163,6 @@ const TFY_PopupLayout TFY_PopupLayout_Center = { TFY_PopupHorizontalLayout_Cente
 + (void)showWithAttributedContent:(NSAttributedString *)attributedString MaskType:(TFY_PopupMaskType)maskType{
      [[TFY_ProgressHUD sharedView] showToastViewWithAttributedContent:attributedString showType:TFY_PopupShowType_GrowIn dismissType:TFY_PopupDismissType_None maskType:maskType Status:ProgressHUD_LOADING stopTime:2];
 }
-
 /**
  *  展示成功的状态  string 传字符串
  */
@@ -196,6 +195,16 @@ const TFY_PopupLayout TFY_PopupLayout_Center = { TFY_PopupHorizontalLayout_Cente
     [[TFY_ProgressHUD sharedView] showToastVieWiththContent:string showType:TFY_PopupShowType_FadeIn dismissType:TFY_PopupDismissType_ShrinkOut maskType:TFY_PopupMaskType_None Status:ProgressHUD_PROMPT stopTime:duration];
 }
 
+/**
+ *  只显示文本，没有任何多余的显示
+ */
++ (void)showTextWithStatus:(NSString *)string {
+    [[TFY_ProgressHUD sharedView] showToastVieWiththContent:string showType:TFY_PopupShowType_FadeIn dismissType:TFY_PopupDismissType_ShrinkOut maskType:TFY_PopupMaskType_None Status:ProgressHUD_TEXT stopTime:2];
+}
++ (void)showTextWithStatus:(NSString *)string duration:(NSTimeInterval)duration {
+    [[TFY_ProgressHUD sharedView] showToastVieWiththContent:string showType:TFY_PopupShowType_FadeIn dismissType:TFY_PopupDismissType_ShrinkOut maskType:TFY_PopupMaskType_None Status:ProgressHUD_TEXT stopTime:duration];
+}
+
 -(void)showToastViewWithAttributedContent:(NSAttributedString *)attributedString showType:(TFY_PopupShowType)showType dismissType:(TFY_PopupDismissType)dismissType maskType:(TFY_PopupMaskType)maskType Status:(ProgressHUDType)status stopTime:(NSInteger)time {
     UIView *contentView = [self toastViewWithContentString:@"" AttributedString:attributedString Status:status];
     self.contentView = contentView;
@@ -204,8 +213,7 @@ const TFY_PopupLayout TFY_PopupLayout_Center = { TFY_PopupHorizontalLayout_Cente
     self.maskType = maskType;
     if (status == ProgressHUD_LOADING) {
         [self show];
-    }
-    else{
+    } else {
        [self showWithDuration:time];
     }
 }
@@ -221,8 +229,7 @@ const TFY_PopupLayout TFY_PopupLayout_Center = { TFY_PopupHorizontalLayout_Cente
     }
     if (status == ProgressHUD_DISMISS) {
         [self dismiss];
-    }
-    else{
+    } else {
        [self showWithDuration:time];
     }
 }
@@ -237,12 +244,9 @@ const TFY_PopupLayout TFY_PopupLayout_Center = { TFY_PopupHorizontalLayout_Cente
 }
 
 + (void)dismissAllPopups {
-    NSArray *windows = [[UIApplication sharedApplication] windows];
-    for (UIWindow *window in windows) {
-        [window containsPopupBlock:^(TFY_ProgressHUD * _Nonnull popup) {
-            [popup dismissAnimated:NO];
-        }];
-    }
+    [[[TFY_ProgressHUD sharedView] lastWindow] containsPopupBlock:^(TFY_ProgressHUD *popup) {
+        [popup dismissAnimated:NO];
+    }];
 }
 
 + (void)dismissStatus:(NSString *)string{
@@ -311,66 +315,67 @@ const TFY_PopupLayout TFY_PopupLayout_Center = { TFY_PopupHorizontalLayout_Cente
 }
 
 - (void)StatusContentString:(NSString *)content AttributedString:(NSAttributedString *)attributedString Status:(ProgressHUDType)status{
-    dispatch_async(dispatch_get_main_queue(), ^{
+    TFY_HUD_GET_MAIN_STARE
         UIImage *image;
-        if(status == ProgressHUD_ERROR){
-            image = [self tfy_fileImage:@"my_error" fileName:nil];
-        }
-        if(status == ProgressHUD_SUCCESS) {
-            image = [self tfy_fileImage:@"my_success" fileName:nil];
-        }
-        if(status == ProgressHUD_PROMPT) {
-            image = [self tfy_fileImage:@"my_prompt" fileName:nil];
-        }
+        if(status == ProgressHUD_ERROR){image = [self tfy_fileImage:@"my_error" fileName:nil];}
+        if(status == ProgressHUD_SUCCESS) {image = [self tfy_fileImage:@"my_success" fileName:nil];}
+        if(status == ProgressHUD_PROMPT) {image = [self tfy_fileImage:@"my_prompt" fileName:nil];}
         if (status == ProgressHUD_LOADING){
             self.imageView.hidden = YES;
             [self.spinnerView startAnimating];
         }
-        if (status!=ProgressHUD_LOADING) {
+        if (status == ProgressHUD_TEXT) {
+            self.imageView.hidden = YES;
+            [self.spinnerView stopAnimating];
+        }
+        if (status!=ProgressHUD_LOADING && status!= ProgressHUD_TEXT) {
             self.imageView.hidden = NO;
             [self.spinnerView stopAnimating];
-            if ([image isKindOfClass:[UIImage class]]) {
+            if ([image isKindOfClass:UIImage.class]) {
                 self.imageView.image = image;
-            }
-            else{
+            } else {
                 self.imageView.hidden = YES;
                 [self.spinnerView startAnimating];
             }
         }
-       [self setStatusContentString:content AttributedString:attributedString];
-    });
+       [self setStatusContentString:content AttributedString:attributedString Status:status];
+    TFY_HUD_GET_MAIN_END
 }
 
 -(UIImage *)tfy_fileImage:(NSString *)fileImage fileName:(NSString *)fileName {
     return [UIImage imageWithContentsOfFile:[[[[NSBundle mainBundle] pathForResource:@"TFY_ProgressHUD" ofType:@"bundle"] stringByAppendingPathComponent:fileName] stringByAppendingPathComponent:fileImage]];
 }
 
-- (void)setStatusContentString:(NSString *)content AttributedString:(NSAttributedString *)attributedString{
+- (void)setStatusContentString:(NSString *)content AttributedString:(NSAttributedString *)attributedString Status:(ProgressHUDType)status{
     CGFloat hudWidth = TFY_HUD_DEBI_width(100);
     CGFloat hudHeight = TFY_HUD_DEBI_width(100);
+    CGFloat labelH = TFY_HUD_DEBI_width(66);
     CGFloat stringWidth = 0;
     CGFloat stringHeight = 0;
     CGRect labelRect = CGRectZero;
     
     if(content!=nil || ![content isEqualToString:@""]) {
         
-        CGSize stringSize = [self sizeWithText:content maxSize:CGSizeMake(TFY_HUD_DEBI_width(200), TFY_HUD_DEBI_width(300)) fontSize:self.stringLabel.font];
+        CGSize stringSize = [self sizeWithText:content maxSize:CGSizeMake(TFY_HUD_Width-hudWidth, TFY_HUD_DEBI_width(150)) fontSize:self.stringLabel.font];
         stringWidth = stringSize.width;
         stringHeight = stringSize.height;
-        hudHeight = TFY_HUD_DEBI_width(80) + stringHeight;
         
+        hudHeight = TFY_HUD_DEBI_width(80) + stringHeight;
+        if (status == ProgressHUD_TEXT) {
+            labelH = 24;
+            hudHeight = stringHeight+48;
+        }
         if (stringWidth > hudWidth)
             hudWidth = ceil(stringWidth / 2) * 2;
         
         if (hudHeight > TFY_HUD_DEBI_width(100)) {
-            labelRect = CGRectMake(12, TFY_HUD_DEBI_width(66), hudWidth, stringHeight);
+            labelRect = CGRectMake(12, labelH, hudWidth, stringHeight);
             hudWidth += 24;
         } else {
             hudWidth += 24;
-            labelRect = CGRectMake(0, TFY_HUD_DEBI_width(66), hudWidth, stringHeight);
+            labelRect = CGRectMake(0, labelH, hudWidth, stringHeight);
         }
     }
-    
     self.hudView.bounds = CGRectMake(0, 0, hudWidth, hudHeight);
     
     if(content!=nil || ![content isEqualToString:@""])
@@ -382,8 +387,7 @@ const TFY_PopupLayout TFY_PopupLayout_Center = { TFY_PopupHorizontalLayout_Cente
     
     if (content.length>0) {
         self.stringLabel.text = content;
-    }
-    else{
+    } else {
         self.stringLabel.attributedText = attributedString;
     }
     
@@ -395,306 +399,296 @@ const TFY_PopupLayout TFY_PopupLayout_Center = { TFY_PopupHorizontalLayout_Cente
         self.spinnerView.center = CGPointMake(ceil(CGRectGetWidth(self.hudView.bounds)/2)+0.5, ceil(self.hudView.bounds.size.height/2)+0.5);
 }
 
+
 - (void)showWithParameters:(NSDictionary *)parameters {
     if (!_isBeingShown && !_isShowing && !_isBeingDismissed) {
         _isBeingShown = YES;
         _isShowing = NO;
         _isBeingDismissed = NO;
-        
         if (self.willStartShowingBlock != nil) {
             self.willStartShowingBlock();
         }
         __weak typeof(self) weakSelf = self;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            __strong typeof(weakSelf) strongSelf = weakSelf;
-            //准备弹出
-            if (!strongSelf.superview) {
-                [[self lastWindow] addSubview:self];
-            }
-            
-            [strongSelf updateInterfaceOrientation];
-            
-            strongSelf.hidden = NO;
+        TFY_HUD_GET_MAIN_STARE
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        //准备弹出
+        if (!strongSelf.superview) {
+            [[self lastWindow] addSubview:self];
+        }
+        [strongSelf updateInterfaceOrientation];
+        strongSelf.hidden = NO;
+        strongSelf.alpha = 1.0;
+        //设置背景视图
+        if (strongSelf.maskType == TFY_PopupMaskType_Dimmed) {
+            strongSelf.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:strongSelf.dimmedMaskAlpha];
+            strongSelf.shouldDismissOnBackgroundTouch = NO;
+            strongSelf.shouldDismissOnContentTouch = NO;
+        }
+        if (strongSelf.maskType == TFY_PopupMaskType_Clear) {
+            strongSelf.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.7];
+            strongSelf.shouldDismissOnBackgroundTouch = YES;
+            strongSelf.shouldDismissOnContentTouch = NO;
+        }
+        if (strongSelf.maskType == TFY_PopupMaskType_None) {
+            strongSelf.backgroundColor = UIColor.clearColor;
+        }
+        //判断是否需要动画
+        void (^backgroundAnimationBlock)(void) = ^(void) {
             strongSelf.alpha = 1.0;
-            
-            //设置背景视图
-            strongSelf.backgroundView.alpha = 0.0;
-            if (strongSelf.maskType == TFY_PopupMaskType_Dimmed) {
-                strongSelf.backgroundView.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:strongSelf.dimmedMaskAlpha];
-                strongSelf.shouldDismissOnBackgroundTouch = NO;
-                strongSelf.shouldDismissOnContentTouch = NO;
-            }
-            if (strongSelf.maskType == TFY_PopupMaskType_Clear) {
-                strongSelf.backgroundView.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.7];
-                strongSelf.shouldDismissOnBackgroundTouch = YES;
-                strongSelf.shouldDismissOnContentTouch = NO;
-            }
-            if (strongSelf.maskType == TFY_PopupMaskType_None) {
-                strongSelf.backgroundView.backgroundColor = UIColor.clearColor;
-            }
-            
-            //判断是否需要动画
-            void (^backgroundAnimationBlock)(void) = ^(void) {
-                strongSelf.backgroundView.alpha = 1.0;
-            };
-            
-            //展示动画
-            if (strongSelf.showType != TFY_PopupShowType_None) {
-                CGFloat showInDuration = strongSelf.showInDuration ?: kDefaultAnimateDuration;
-                [UIView animateWithDuration:showInDuration
-                                      delay:0.0
-                                    options:UIViewAnimationOptionCurveLinear
-                                 animations:backgroundAnimationBlock
-                                 completion:NULL];
-            } else {
-                backgroundAnimationBlock();
+        };
+        //展示动画
+        if (strongSelf.showType != TFY_PopupShowType_None) {
+            CGFloat showInDuration = strongSelf.showInDuration ?: kDefaultAnimateDuration;
+            [UIView animateWithDuration:showInDuration
+                                  delay:0.0
+                                options:UIViewAnimationOptionCurveLinear
+                             animations:backgroundAnimationBlock
+                             completion:NULL];
+        } else {
+            backgroundAnimationBlock();
+        }
+        //设置自动消失事件
+        NSNumber *durationNumber = parameters[kParametersDurationName];
+        NSTimeInterval duration = durationNumber != nil ? durationNumber.doubleValue : 0.0;
+        
+        void (^completionBlock)(BOOL) = ^(BOOL finished) {
+            strongSelf.isBeingShown = NO;
+            strongSelf.isShowing = YES;
+            strongSelf.isBeingDismissed = NO;
+            if (strongSelf.didFinishShowingBlock) {
+                strongSelf.didFinishShowingBlock();
             }
             
-            //设置自动消失事件
-            NSNumber *durationNumber = parameters[kParametersDurationName];
-            NSTimeInterval duration = durationNumber != nil ? durationNumber.doubleValue : 0.0;
-            
-            void (^completionBlock)(BOOL) = ^(BOOL finished) {
-                strongSelf.isBeingShown = NO;
-                strongSelf.isShowing = YES;
-                strongSelf.isBeingDismissed = NO;
-                if (strongSelf.didFinishShowingBlock) {
-                    strongSelf.didFinishShowingBlock();
-                }
-                
-                if (duration > 0.0) {
-                    [strongSelf performSelector:@selector(dismiss) withObject:nil afterDelay:duration];
-                }
-            };
-            
-            if (strongSelf.contentView.superview != strongSelf.containerView) {
-                [strongSelf.containerView addSubview:strongSelf.contentView];
+            if (duration > 0.0) {
+                [strongSelf performSelector:@selector(dismiss) withObject:nil afterDelay:duration];
             }
+        };
+        
+        if (strongSelf.contentView.superview != strongSelf.containerView) {
+            [strongSelf.containerView addSubview:strongSelf.contentView];
+        }
+        [strongSelf.contentView layoutIfNeeded];
+        
+        CGRect containerFrame = strongSelf.containerView.frame;
+        containerFrame.size = strongSelf.contentView.frame.size;
+        strongSelf.containerView.frame = containerFrame;
+        
+        CGRect contentFrame = strongSelf.contentView.frame;
+        contentFrame.origin = CGPointZero;
+        strongSelf.contentView.frame = contentFrame;
+        
+        UIView *contentView = strongSelf.contentView;
+        NSDictionary *viewsDict = NSDictionaryOfVariableBindings(contentView);
+        [strongSelf.containerView removeConstraints:strongSelf.containerView.constraints];
+        [strongSelf.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[contentView]|" options:0 metrics:nil views:viewsDict]];
+        [strongSelf.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[contentView]|" options:0 metrics:nil views:viewsDict]];
+        
+        CGRect finalContainerFrame = containerFrame;
+        UIViewAutoresizing containerAutoresizingMask = UIViewAutoresizingNone;
             
-            [strongSelf.contentView layoutIfNeeded];
+        NSValue *centerValue = parameters[kParametersCenterName];
+        if (centerValue) {
+            CGPoint centerInView = centerValue.CGPointValue;
+            CGPoint centerInSelf;
+            // 将坐标从提供的视图转换为self。
+            UIView *fromView = parameters[kParametersViewName];
+            centerInSelf = fromView != nil ? [self convertPoint:centerInView toView:fromView] : centerInView;
+            finalContainerFrame.origin.x = centerInSelf.x - CGRectGetWidth(finalContainerFrame)*0.5;
+            finalContainerFrame.origin.y = centerInSelf.y - CGRectGetHeight(finalContainerFrame)*0.5;
+            containerAutoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin;
+        } else {
             
-            CGRect containerFrame = strongSelf.containerView.frame;
-            containerFrame.size = strongSelf.contentView.frame.size;
-            strongSelf.containerView.frame = containerFrame;
-            
-            CGRect contentFrame = strongSelf.contentView.frame;
-            contentFrame.origin = CGPointZero;
-            strongSelf.contentView.frame = contentFrame;
-            
-            UIView *contentView = strongSelf.contentView;
-            NSDictionary *viewsDict = NSDictionaryOfVariableBindings(contentView);
-            [strongSelf.containerView removeConstraints:strongSelf.containerView.constraints];
-            [strongSelf.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[contentView]|" options:0 metrics:nil views:viewsDict]];
-            [strongSelf.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[contentView]|" options:0 metrics:nil views:viewsDict]];
-            
-            CGRect finalContainerFrame = containerFrame;
-            UIViewAutoresizing containerAutoresizingMask = UIViewAutoresizingNone;
-            
-            NSValue *centerValue = parameters[kParametersCenterName];
-            if (centerValue) {
-                CGPoint centerInView = centerValue.CGPointValue;
-                CGPoint centerInSelf;
-                /// 将坐标从提供的视图转换为self。
-                UIView *fromView = parameters[kParametersViewName];
-                centerInSelf = fromView != nil ? [self convertPoint:centerInView toView:fromView] : centerInView;
-                finalContainerFrame.origin.x = centerInSelf.x - CGRectGetWidth(finalContainerFrame)*0.5;
-                finalContainerFrame.origin.y = centerInSelf.y - CGRectGetHeight(finalContainerFrame)*0.5;
-                containerAutoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin;
-            } else {
-                
-                NSValue *layoutValue = parameters[kParametersLayoutName];
-                TFY_PopupLayout layout = layoutValue ? [layoutValue TFY_PopupLayoutValue] : TFY_PopupLayout_Center;
-                switch (layout.horizontal) {
-                    case TFY_PopupHorizontalLayout_Left:
-                        finalContainerFrame.origin.x = 0.0;
-                        containerAutoresizingMask = containerAutoresizingMask | UIViewAutoresizingFlexibleRightMargin;
-                        break;
-                    case TFY_PopupHoricontalLayout_Right:
-                        finalContainerFrame.origin.x = CGRectGetWidth(strongSelf.bounds) - CGRectGetWidth(containerFrame);
-                        containerAutoresizingMask = containerAutoresizingMask | UIViewAutoresizingFlexibleLeftMargin;
-                        break;
-                    case TFY_PopupHorizontalLayout_LeftOfCenter:
-                        finalContainerFrame.origin.x = floorf(CGRectGetWidth(strongSelf.bounds) / 3.0 - CGRectGetWidth(containerFrame) * 0.5);
-                        containerAutoresizingMask = containerAutoresizingMask | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-                        break;
-                    case TFY_PopupHorizontalLayout_RightOfCenter:
-                        finalContainerFrame.origin.x = floorf(CGRectGetWidth(strongSelf.bounds) * 2.0 / 3.0 - CGRectGetWidth(containerFrame) * 0.5);
-                        containerAutoresizingMask = containerAutoresizingMask | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-                        break;
-                    case TFY_PopupHorizontalLayout_Center:
-                        finalContainerFrame.origin.x = floorf((CGRectGetWidth(strongSelf.bounds) - CGRectGetWidth(containerFrame)) * 0.5);
-                        containerAutoresizingMask = containerAutoresizingMask | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-                        break;
-                    default:
-                        break;
-                }
-                
-                switch (layout.vertical) {
-                    case TFY_PopupVerticalLayout_Top:
-                        finalContainerFrame.origin.y = 0.0;
-                        containerAutoresizingMask = containerAutoresizingMask | UIViewAutoresizingFlexibleBottomMargin;
-                        break;
-                    case TFY_PopupVerticalLayout_AboveCenter:
-                        finalContainerFrame.origin.y = floorf(CGRectGetHeight(self.bounds) / 3.0 - CGRectGetHeight(containerFrame) * 0.5);
-                        containerAutoresizingMask = containerAutoresizingMask | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
-                        break;
-                    case TFY_PopupVerticalLayout_Center:
-                        finalContainerFrame.origin.y = floorf((CGRectGetHeight(self.bounds) - CGRectGetHeight(containerFrame)) * 0.5);
-                        containerAutoresizingMask = containerAutoresizingMask | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
-                        break;
-                    case TFY_PopupVerticalLayout_BelowCenter:
-                        finalContainerFrame.origin.y = floorf(CGRectGetHeight(self.bounds) * 2.0 / 3.0 - CGRectGetHeight(containerFrame) * 0.5);
-                        containerAutoresizingMask = containerAutoresizingMask | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
-                        break;
-                    case TFY_PopupVerticalLayout_Bottom:
-                        finalContainerFrame.origin.y = CGRectGetHeight(self.bounds) - CGRectGetHeight(containerFrame);
-                        containerAutoresizingMask = containerAutoresizingMask | UIViewAutoresizingFlexibleTopMargin;
-                        break;
-                    default:
-                        break;
-                }
+            NSValue *layoutValue = parameters[kParametersLayoutName];
+            TFY_PopupLayout layout = layoutValue ? [layoutValue TFY_PopupLayoutValue] : TFY_PopupLayout_Center;
+            switch (layout.horizontal) {
+                case TFY_PopupHorizontalLayout_Left:
+                    finalContainerFrame.origin.x = 0.0;
+                    containerAutoresizingMask = containerAutoresizingMask | UIViewAutoresizingFlexibleRightMargin;
+                    break;
+                case TFY_PopupHoricontalLayout_Right:
+                    finalContainerFrame.origin.x = CGRectGetWidth(strongSelf.bounds) - CGRectGetWidth(containerFrame);
+                    containerAutoresizingMask = containerAutoresizingMask | UIViewAutoresizingFlexibleLeftMargin;
+                    break;
+                case TFY_PopupHorizontalLayout_LeftOfCenter:
+                    finalContainerFrame.origin.x = floorf(CGRectGetWidth(strongSelf.bounds) / 3.0 - CGRectGetWidth(containerFrame) * 0.5);
+                    containerAutoresizingMask = containerAutoresizingMask | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+                    break;
+                case TFY_PopupHorizontalLayout_RightOfCenter:
+                    finalContainerFrame.origin.x = floorf(CGRectGetWidth(strongSelf.bounds) * 2.0 / 3.0 - CGRectGetWidth(containerFrame) * 0.5);
+                    containerAutoresizingMask = containerAutoresizingMask | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+                    break;
+                case TFY_PopupHorizontalLayout_Center:
+                    finalContainerFrame.origin.x = floorf((CGRectGetWidth(strongSelf.bounds) - CGRectGetWidth(containerFrame)) * 0.5);
+                    containerAutoresizingMask = containerAutoresizingMask | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+                    break;
+                default:
+                    break;
             }
-            
-            strongSelf.containerView.autoresizingMask = containerAutoresizingMask;
-            
-            switch (strongSelf.showType) {
-                case TFY_PopupShowType_FadeIn: {
-                    strongSelf.containerView.alpha = 0.0;
+            switch (layout.vertical) {
+                case TFY_PopupVerticalLayout_Top:
+                    finalContainerFrame.origin.y = 0.0;
+                    containerAutoresizingMask = containerAutoresizingMask | UIViewAutoresizingFlexibleBottomMargin;
+                    break;
+                case TFY_PopupVerticalLayout_AboveCenter:
+                    finalContainerFrame.origin.y = floorf(CGRectGetHeight(self.bounds) / 3.0 - CGRectGetHeight(containerFrame) * 0.5);
+                    containerAutoresizingMask = containerAutoresizingMask | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+                    break;
+                case TFY_PopupVerticalLayout_Center:
+                    finalContainerFrame.origin.y = floorf((CGRectGetHeight(self.bounds) - CGRectGetHeight(containerFrame)) * 0.5);
+                    containerAutoresizingMask = containerAutoresizingMask | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+                    break;
+                case TFY_PopupVerticalLayout_BelowCenter:
+                    finalContainerFrame.origin.y = floorf(CGRectGetHeight(self.bounds) * 2.0 / 3.0 - CGRectGetHeight(containerFrame) * 0.5);
+                    containerAutoresizingMask = containerAutoresizingMask | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+                    break;
+                case TFY_PopupVerticalLayout_Bottom:
+                    finalContainerFrame.origin.y = CGRectGetHeight(self.bounds) - CGRectGetHeight(containerFrame);
+                    containerAutoresizingMask = containerAutoresizingMask | UIViewAutoresizingFlexibleTopMargin;
+                    break;
+                default:
+                    break;
+            }
+        }
+        strongSelf.containerView.autoresizingMask = containerAutoresizingMask;
+        
+        switch (strongSelf.showType) {
+            case TFY_PopupShowType_FadeIn: {
+                strongSelf.containerView.alpha = 0.0;
+                strongSelf.containerView.transform = CGAffineTransformIdentity;
+                strongSelf.containerView.frame = finalContainerFrame;
+                CGFloat duration = strongSelf.showInDuration ?: kDefaultAnimateDuration;
+                [UIView animateWithDuration:duration delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
+                    strongSelf.containerView.alpha = 1.0;
+                } completion:completionBlock];
+            }   break;
+            case TFY_PopupShowType_GrowIn: {
+                strongSelf.containerView.alpha = 0.0;
+                strongSelf.containerView.frame = finalContainerFrame;
+                strongSelf.containerView.transform = CGAffineTransformMakeScale(0.85, 0.85);
+                CGFloat duration = strongSelf.showInDuration ?: kDefaultAnimateDuration;
+                [UIView animateWithDuration:duration delay:0.0 options:kAnimationOptionCurve animations:^{
+                    strongSelf.containerView.alpha = 1.0;
                     strongSelf.containerView.transform = CGAffineTransformIdentity;
                     strongSelf.containerView.frame = finalContainerFrame;
-                    CGFloat duration = strongSelf.showInDuration ?: kDefaultAnimateDuration;
-                    [UIView animateWithDuration:duration delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
-                        strongSelf.containerView.alpha = 1.0;
-                    } completion:completionBlock];
-                }   break;
-                case TFY_PopupShowType_GrowIn: {
-                    strongSelf.containerView.alpha = 0.0;
-                    strongSelf.containerView.frame = finalContainerFrame;
-                    strongSelf.containerView.transform = CGAffineTransformMakeScale(0.85, 0.85);
-                    CGFloat duration = strongSelf.showInDuration ?: kDefaultAnimateDuration;
-                    [UIView animateWithDuration:duration delay:0.0 options:kAnimationOptionCurve animations:^{
-                        strongSelf.containerView.alpha = 1.0;
-                        strongSelf.containerView.transform = CGAffineTransformIdentity;
-                        strongSelf.containerView.frame = finalContainerFrame;
-                    } completion:completionBlock];
-                }   break;
-                case TFY_PopupShowType_ShrinkIn: {
-                    strongSelf.containerView.alpha = 0.0;
-                    strongSelf.containerView.frame = finalContainerFrame;
-                    strongSelf.containerView.transform = CGAffineTransformMakeScale(1.1, 1.1);
-                    CGFloat duration = strongSelf.showInDuration ?: kDefaultAnimateDuration;
-                    [UIView animateWithDuration:duration delay:0.0 options:kAnimationOptionCurve animations:^{
-                        strongSelf.containerView.alpha = 1.0;
-                        strongSelf.containerView.frame = finalContainerFrame;
-                        strongSelf.containerView.transform = CGAffineTransformIdentity;
-                    } completion:completionBlock];
-                }   break;
-                case TFY_PopupShowType_SlideInFromTop: {
-                    strongSelf.containerView.alpha = 1.0;
-                    strongSelf.transform = CGAffineTransformIdentity;
-                    CGRect startFrame = finalContainerFrame;
-                    startFrame.origin.y = - CGRectGetHeight(finalContainerFrame);
-                    strongSelf.containerView.frame = startFrame;
-                    CGFloat duration = strongSelf.showInDuration ?: kDefaultAnimateDuration;
-                    [UIView animateWithDuration:duration delay:0.0 options:kAnimationOptionCurve animations:^{
-                        strongSelf.containerView.frame = finalContainerFrame;
-                    } completion:completionBlock];
-                }   break;
-                case TFY_PopupShowType_SlideInFromBottom: {
-                    strongSelf.containerView.alpha = 1.0;
-                    strongSelf.containerView.transform = CGAffineTransformIdentity;
-                    CGRect startFrame = finalContainerFrame;
-                    startFrame.origin.y = CGRectGetHeight(self.bounds);
-                    strongSelf.containerView.frame = startFrame;
-                    CGFloat duration = strongSelf.showInDuration ?: kDefaultAnimateDuration;
-                    [UIView animateWithDuration:duration delay:0.0 options:kAnimationOptionCurve animations:^{
-                        strongSelf.containerView.frame = finalContainerFrame;
-                    } completion:completionBlock];
-                }   break;
-                case TFY_PopupShowType_SlideInFromLeft: {
-                    strongSelf.containerView.alpha = 1.0;
-                    strongSelf.containerView.transform = CGAffineTransformIdentity;
-                    CGRect startFrame = finalContainerFrame;
-                    startFrame.origin.x = - CGRectGetWidth(finalContainerFrame);
-                    strongSelf.containerView.frame = startFrame;
-                    CGFloat duration = strongSelf.showInDuration ?: kDefaultAnimateDuration;
-                    [UIView animateWithDuration:duration delay:0.0 options:kAnimationOptionCurve animations:^{
-                        strongSelf.containerView.frame = finalContainerFrame;
-                    } completion:completionBlock];
-                }   break;
-                case TFY_PopupShowType_SlideInFromRight: {
-                    strongSelf.containerView.alpha = 1.0;
-                    strongSelf.containerView.transform = CGAffineTransformIdentity;
-                    CGRect startFrame = finalContainerFrame;
-                    startFrame.origin.x = CGRectGetWidth(self.bounds);
-                    strongSelf.containerView.frame = startFrame;
-                    CGFloat duration = strongSelf.showInDuration ?: kDefaultAnimateDuration;
-                    [UIView animateWithDuration:duration delay:0.0 options:kDefaultAnimateDuration animations:^{
-                        strongSelf.containerView.frame = finalContainerFrame;
-                    } completion:completionBlock];
-                }   break;
-                case TFY_PopupShowType_BounceIn: {
-                    strongSelf.containerView.alpha = 0.0;
-                    strongSelf.containerView.frame = finalContainerFrame;
-                    strongSelf.containerView.transform = CGAffineTransformMakeScale(0.1, 0.1);
-                    CGFloat duration = strongSelf.showInDuration ?: kDefaultAnimateDuration;
-                    [UIView animateWithDuration:duration delay:0.0 usingSpringWithDamping:kDefaultSpringDamping initialSpringVelocity:kDefaultSpringVelocity options:0 animations:^{
-                        strongSelf.containerView.alpha = 1.0;
-                        strongSelf.containerView.transform = CGAffineTransformIdentity;
-                    } completion:completionBlock];
-                }   break;
-                case TFY_PopupShowType_BounceInFromTop: {
-                    strongSelf.containerView.alpha = 1.0;
-                    strongSelf.containerView.transform = CGAffineTransformIdentity;
-                    CGRect startFrame = finalContainerFrame;
-                    startFrame.origin.y = - CGRectGetHeight(finalContainerFrame);
-                    strongSelf.containerView.frame = startFrame;
-                    CGFloat duration = strongSelf.showInDuration ?: kDefaultAnimateDuration;
-                    [UIView animateWithDuration:duration delay:0.0 usingSpringWithDamping:kDefaultSpringDamping initialSpringVelocity:kDefaultSpringVelocity options:0 animations:^{
-                        strongSelf.containerView.frame = finalContainerFrame;
-                    } completion:completionBlock];
-                }   break;
-                case TFY_PopupShowType_BounceInFromBottom: {
-                    strongSelf.containerView.alpha = 1.0;
-                    strongSelf.containerView.transform = CGAffineTransformIdentity;
-                    CGRect startFrame = finalContainerFrame;
-                    startFrame.origin.y = CGRectGetHeight(self.bounds);
-                    strongSelf.containerView.frame = startFrame;
-                    CGFloat duration = strongSelf.showInDuration ?: kDefaultAnimateDuration;
-                    [UIView animateWithDuration:duration delay:0.0 usingSpringWithDamping:kDefaultSpringDamping initialSpringVelocity:kDefaultSpringVelocity options:0 animations:^{
-                        strongSelf.containerView.frame = finalContainerFrame;
-                    } completion:completionBlock];
-                }   break;
-                case TFY_PopupShowType_BounceInFromLeft: {
-                    strongSelf.containerView.alpha = 1.0;
-                    strongSelf.containerView.transform = CGAffineTransformIdentity;
-                    CGRect startFrame = finalContainerFrame;
-                    startFrame.origin.x = - CGRectGetWidth(finalContainerFrame);
-                    strongSelf.containerView.frame = startFrame;
-                    CGFloat duration = strongSelf.showInDuration ?: kDefaultAnimateDuration;
-                    [UIView animateWithDuration:duration delay:0.0 usingSpringWithDamping:kDefaultSpringDamping initialSpringVelocity:kDefaultSpringVelocity options:0 animations:^{
-                        strongSelf.containerView.frame = finalContainerFrame;
-                    } completion:completionBlock];
-                }   break;
-                case TFY_PopupShowType_BounceInFromRight: {
-                    strongSelf.containerView.alpha = 1.0;
-                    strongSelf.containerView.transform = CGAffineTransformIdentity;
-                    CGRect startFrame = finalContainerFrame;
-                    startFrame.origin.x = CGRectGetWidth(self.bounds);
-                    strongSelf.containerView.frame = startFrame;
-                    CGFloat duration = strongSelf.showInDuration ?: kDefaultAnimateDuration;
-                    [UIView animateWithDuration:duration delay:0.0 usingSpringWithDamping:kDefaultSpringDamping initialSpringVelocity:kDefaultSpringVelocity options:0 animations:^{
-                        strongSelf.containerView.frame = finalContainerFrame;
-                    } completion:completionBlock];
-                }   break;
-                default: {
+                } completion:completionBlock];
+            }   break;
+            case TFY_PopupShowType_ShrinkIn: {
+                strongSelf.containerView.alpha = 0.0;
+                strongSelf.containerView.frame = finalContainerFrame;
+                strongSelf.containerView.transform = CGAffineTransformMakeScale(1.1, 1.1);
+                CGFloat duration = strongSelf.showInDuration ?: kDefaultAnimateDuration;
+                [UIView animateWithDuration:duration delay:0.0 options:kAnimationOptionCurve animations:^{
                     strongSelf.containerView.alpha = 1.0;
                     strongSelf.containerView.frame = finalContainerFrame;
                     strongSelf.containerView.transform = CGAffineTransformIdentity;
-                    completionBlock(YES);
-                }   break;
-            }
-        });
+                } completion:completionBlock];
+            }   break;
+            case TFY_PopupShowType_SlideInFromTop: {
+                strongSelf.containerView.alpha = 1.0;
+                strongSelf.transform = CGAffineTransformIdentity;
+                CGRect startFrame = finalContainerFrame;
+                startFrame.origin.y = - CGRectGetHeight(finalContainerFrame);
+                strongSelf.containerView.frame = startFrame;
+                CGFloat duration = strongSelf.showInDuration ?: kDefaultAnimateDuration;
+                [UIView animateWithDuration:duration delay:0.0 options:kAnimationOptionCurve animations:^{
+                    strongSelf.containerView.frame = finalContainerFrame;
+                } completion:completionBlock];
+            }   break;
+            case TFY_PopupShowType_SlideInFromBottom: {
+                strongSelf.containerView.alpha = 1.0;
+                strongSelf.containerView.transform = CGAffineTransformIdentity;
+                CGRect startFrame = finalContainerFrame;
+                startFrame.origin.y = CGRectGetHeight(self.bounds);
+                strongSelf.containerView.frame = startFrame;
+                CGFloat duration = strongSelf.showInDuration ?: kDefaultAnimateDuration;
+                [UIView animateWithDuration:duration delay:0.0 options:kAnimationOptionCurve animations:^{
+                    strongSelf.containerView.frame = finalContainerFrame;
+                } completion:completionBlock];
+            }   break;
+            case TFY_PopupShowType_SlideInFromLeft: {
+                strongSelf.containerView.alpha = 1.0;
+                strongSelf.containerView.transform = CGAffineTransformIdentity;
+                CGRect startFrame = finalContainerFrame;
+                startFrame.origin.x = - CGRectGetWidth(finalContainerFrame);
+                strongSelf.containerView.frame = startFrame;
+                CGFloat duration = strongSelf.showInDuration ?: kDefaultAnimateDuration;
+                [UIView animateWithDuration:duration delay:0.0 options:kAnimationOptionCurve animations:^{
+                    strongSelf.containerView.frame = finalContainerFrame;
+                } completion:completionBlock];
+            }   break;
+            case TFY_PopupShowType_SlideInFromRight: {
+                strongSelf.containerView.alpha = 1.0;
+                strongSelf.containerView.transform = CGAffineTransformIdentity;
+                CGRect startFrame = finalContainerFrame;
+                startFrame.origin.x = CGRectGetWidth(self.bounds);
+                strongSelf.containerView.frame = startFrame;
+                CGFloat duration = strongSelf.showInDuration ?: kDefaultAnimateDuration;
+                [UIView animateWithDuration:duration delay:0.0 options:kDefaultAnimateDuration animations:^{
+                    strongSelf.containerView.frame = finalContainerFrame;
+                } completion:completionBlock];
+            }   break;
+            case TFY_PopupShowType_BounceIn: {
+                strongSelf.containerView.alpha = 0.0;
+                strongSelf.containerView.frame = finalContainerFrame;
+                strongSelf.containerView.transform = CGAffineTransformMakeScale(0.1, 0.1);
+                CGFloat duration = strongSelf.showInDuration ?: kDefaultAnimateDuration;
+                [UIView animateWithDuration:duration delay:0.0 usingSpringWithDamping:kDefaultSpringDamping initialSpringVelocity:kDefaultSpringVelocity options:0 animations:^{
+                    strongSelf.containerView.alpha = 1.0;
+                    strongSelf.containerView.transform = CGAffineTransformIdentity;
+                } completion:completionBlock];
+            }   break;
+            case TFY_PopupShowType_BounceInFromTop: {
+                strongSelf.containerView.alpha = 1.0;
+                strongSelf.containerView.transform = CGAffineTransformIdentity;
+                CGRect startFrame = finalContainerFrame;
+                startFrame.origin.y = - CGRectGetHeight(finalContainerFrame);
+                strongSelf.containerView.frame = startFrame;
+                CGFloat duration = strongSelf.showInDuration ?: kDefaultAnimateDuration;
+                [UIView animateWithDuration:duration delay:0.0 usingSpringWithDamping:kDefaultSpringDamping initialSpringVelocity:kDefaultSpringVelocity options:0 animations:^{
+                    strongSelf.containerView.frame = finalContainerFrame;
+                } completion:completionBlock];
+            }   break;
+            case TFY_PopupShowType_BounceInFromBottom: {
+                strongSelf.containerView.alpha = 1.0;
+                strongSelf.containerView.transform = CGAffineTransformIdentity;
+                CGRect startFrame = finalContainerFrame;
+                startFrame.origin.y = CGRectGetHeight(self.bounds);
+                strongSelf.containerView.frame = startFrame;
+                CGFloat duration = strongSelf.showInDuration ?: kDefaultAnimateDuration;
+                [UIView animateWithDuration:duration delay:0.0 usingSpringWithDamping:kDefaultSpringDamping initialSpringVelocity:kDefaultSpringVelocity options:0 animations:^{
+                    strongSelf.containerView.frame = finalContainerFrame;
+                } completion:completionBlock];
+            }   break;
+            case TFY_PopupShowType_BounceInFromLeft: {
+                strongSelf.containerView.alpha = 1.0;
+                strongSelf.containerView.transform = CGAffineTransformIdentity;
+                CGRect startFrame = finalContainerFrame;
+                startFrame.origin.x = - CGRectGetWidth(finalContainerFrame);
+                strongSelf.containerView.frame = startFrame;
+                CGFloat duration = strongSelf.showInDuration ?: kDefaultAnimateDuration;
+                [UIView animateWithDuration:duration delay:0.0 usingSpringWithDamping:kDefaultSpringDamping initialSpringVelocity:kDefaultSpringVelocity options:0 animations:^{
+                    strongSelf.containerView.frame = finalContainerFrame;
+                } completion:completionBlock];
+            }   break;
+            case TFY_PopupShowType_BounceInFromRight: {
+                strongSelf.containerView.alpha = 1.0;
+                strongSelf.containerView.transform = CGAffineTransformIdentity;
+                CGRect startFrame = finalContainerFrame;
+                startFrame.origin.x = CGRectGetWidth(self.bounds);
+                strongSelf.containerView.frame = startFrame;
+                CGFloat duration = strongSelf.showInDuration ?: kDefaultAnimateDuration;
+                [UIView animateWithDuration:duration delay:0.0 usingSpringWithDamping:kDefaultSpringDamping initialSpringVelocity:kDefaultSpringVelocity options:0 animations:^{
+                    strongSelf.containerView.frame = finalContainerFrame;
+                } completion:completionBlock];
+            }   break;
+            default: {
+                strongSelf.containerView.alpha = 1.0;
+                strongSelf.containerView.frame = finalContainerFrame;
+                strongSelf.containerView.transform = CGAffineTransformIdentity;
+                completionBlock(YES);
+            }   break;
+        }
+        TFY_HUD_GET_MAIN_END
     }
 }
 
@@ -729,10 +723,10 @@ const TFY_PopupLayout TFY_PopupLayout_Center = { TFY_PopupHorizontalLayout_Cente
         }
         
         __weak typeof(self) weakSelf = self;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            __strong typeof(weakSelf) strongSelf = self;
+        TFY_HUD_GET_MAIN_STARE
+        __strong typeof(weakSelf) strongSelf = self;
             void (^backgroundAnimationBlock)(void) = ^(void) {
-                strongSelf.backgroundView.alpha = 0.0;
+                strongSelf.alpha = 0.0;
             };
             
             if (animated && strongSelf.showType != TFY_PopupShowType_None) {
@@ -745,14 +739,11 @@ const TFY_PopupLayout TFY_PopupLayout_Center = { TFY_PopupHorizontalLayout_Cente
             void (^completionBlock)(BOOL) = ^(BOOL finished) {
                 [strongSelf.spinnerView stopAnimating];
                 [strongSelf.hudView removeFromSuperview];
-                strongSelf.hudView = nil;
                 [strongSelf.stringLabel removeFromSuperview];
-                strongSelf.stringLabel = nil;
                 [strongSelf.imageView removeFromSuperview];
-                strongSelf.imageView = nil;
                 [strongSelf.spinnerView removeFromSuperview];
-                strongSelf.spinnerView = nil;
                 [strongSelf removeFromSuperview];
+            
                 strongSelf.isBeingShown = NO;
                 strongSelf.isShowing = NO;
                 strongSelf.isBeingDismissed = NO;
@@ -885,7 +876,7 @@ const TFY_PopupLayout TFY_PopupLayout_Center = { TFY_PopupHorizontalLayout_Cente
                 strongSelf.containerView.alpha = 0.0;
                 completionBlock(YES);
             }
-        });
+       TFY_HUD_GET_MAIN_END
     }
 }
 
@@ -894,7 +885,7 @@ const TFY_PopupLayout TFY_PopupLayout_Center = { TFY_PopupHorizontalLayout_Cente
 }
 
 - (void)updateInterfaceOrientation {
-    self.frame = self.window.bounds;
+    self.frame = [[TFY_ProgressHUD sharedView] lastWindow].bounds;
 }
 
 - (void)dismiss {
@@ -902,15 +893,6 @@ const TFY_PopupLayout TFY_PopupLayout_Center = { TFY_PopupHorizontalLayout_Cente
 }
 
 #pragma mark - Properties
-- (UIView *)backgroundView {
-    if (!_backgroundView) {
-        _backgroundView = [[UIView alloc] initWithFrame:self.bounds];
-        _backgroundView.backgroundColor = UIColor.clearColor;
-        _backgroundView.userInteractionEnabled = NO;
-        _backgroundView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    }
-    return _backgroundView;
-}
 
 - (UIView *)containerView {
     if (!_containerView) {
@@ -965,6 +947,7 @@ const TFY_PopupLayout TFY_PopupLayout_Center = { TFY_PopupHorizontalLayout_Cente
 @end
 
 @implementation NSValue (TFY_PopupLayout)
+
 + (NSValue *)valueWithTFY_PopupLayout:(TFY_PopupLayout)layout {
     return [NSValue valueWithBytes:&layout objCType:@encode(TFY_PopupLayout)];
 }

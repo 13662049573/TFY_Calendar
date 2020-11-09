@@ -132,6 +132,27 @@ TFY_CATEGORY_CHAIN_BUTTONLABEL_IMPLEMENTATION(baselineAdjustment, UIBaselineAdju
         return self;
     };
 }
+
+- (TFY_ButtonChainModel * _Nonnull (^)(ButtonLimitTimesTapBlock _Nonnull))buttonTapTime{
+    return ^ (ButtonLimitTimesTapBlock block){
+        if (block) {
+            [self enumerateObjectsUsingBlock:^(UIButton * _Nonnull obj) {
+                obj.tfy_buttonTapTime(block);
+            }];
+        }
+        return self;
+    };
+}
+
+- (TFY_ButtonChainModel * _Nonnull (^)(NSTimeInterval))tapSpaceTime{
+    return ^ (NSTimeInterval spaceTime){
+        [self enumerateObjectsUsingBlock:^(UIButton * _Nonnull obj) {
+            obj.tfy_tapSpaceTime(spaceTime);
+        }];
+        return self;
+    };
+}
+
 @end
 TFY_CATEGORY_VIEW_IMPLEMENTATION(UIButton, TFY_ButtonChainModel)
 #undef TFY_CATEGORY_CHAIN_BUTTON_IMPLEMENTATION

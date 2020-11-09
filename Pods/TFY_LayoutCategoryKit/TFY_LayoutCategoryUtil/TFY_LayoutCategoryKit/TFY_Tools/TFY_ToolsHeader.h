@@ -10,7 +10,8 @@
 #define TFY_ToolsHeader_h
 
 #import "TFY_Utils.h"
-#import "TFY_HandlerVideo.h"
+#import "TFY_Video.h"
 #import "UIWindow+TFY_Tools.h"
+#import "TFY_Timer.h"
 
 #endif /* TFY_ToolsHeader_h */

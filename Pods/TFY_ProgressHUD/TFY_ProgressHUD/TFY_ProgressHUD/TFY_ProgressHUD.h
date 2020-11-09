@@ -4,11 +4,13 @@
 //
 //  Created by 田风有 on 2019/5/11.
 //  Copyright © 2019 恋机科技. All rights reserved.
-//  version      = "2.3.4"
+//  
 
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
+#pragma mark ----------###############----------以下只使用于自定义View动画----------###############----------
 
 typedef NS_ENUM(NSUInteger, TFY_PopupShowType) {
     TFY_PopupShowType_None,              //没有
@@ -60,6 +62,8 @@ typedef NS_ENUM(NSUInteger, TFY_PopupVerticalLayout) {
     TFY_PopupVerticalLayout_BelowCenter,
     TFY_PopupVerticalLayout_Bottom
 };
+
+#pragma mark ----------###############----------以下只使用于弹出框交互----------###############----------
 
 typedef NS_ENUM(NSUInteger, TFY_PopupMaskType) {
     //允许与底层视图交互
@@ -113,40 +117,22 @@ extern const TFY_PopupLayout TFY_PopupLayout_Center;
 @property (nonatomic, copy, nullable) void(^willStartDismissingBlock)(void);
 //显示动画已经消失时回调。
 @property (nonatomic, copy, nullable) void(^didFinishDismissingBlock)(void);
-//背景视图
-@property (nonatomic, strong, readonly) UIView *backgroundView;
-//展现内容视图
-@property (nonatomic, strong, readonly) UIView *containerView;
-//是否开始展现
-@property (nonatomic, assign, readonly) BOOL isBeingShown;
-//正在展现
-@property (nonatomic, assign, readonly) BOOL isShowing;
-//开始消失
-@property (nonatomic, assign, readonly) BOOL isBeingDismissed;
+
 
 /**
  * 展示有加载圈的文字提示
  */
 + (void)showWithStatus:(NSString*)content;
-/**
- * 展示有加载圈 maskType 交互枚举类型
- */
-+ (void)showWithStatus:(NSString*)content maskType:(TFY_PopupMaskType)maskType;
-/**
- * 展示有加载圈的文字提示 attributedString
- */
 + (void)showWithAttributedContent:(NSAttributedString *)attributedString;
 /**
  * 展示有加载圈 maskType 交互枚举类型
  */
++ (void)showWithStatus:(NSString*)content maskType:(TFY_PopupMaskType)maskType;
 + (void)showWithAttributedContent:(NSAttributedString *)attributedString MaskType:(TFY_PopupMaskType)maskType;
 /**
  *  展示成功的状态  string 传字符串
  */
 + (void)showSuccessWithStatus:(NSString*)string;
-/**
- *  展示成功的状态 string   传字符串  duration 设定显示时间
- */
 + (void)showSuccessWithStatus:(NSString *)string duration:(NSTimeInterval)duration;
 /**
  *  展示失败的状态 string 字符串
@@ -158,7 +144,11 @@ extern const TFY_PopupLayout TFY_PopupLayout_Center;
  */
 + (void)showPromptWithStatus:(NSString *)string;
 + (void)showPromptWithStatus:(NSString *)string duration:(NSTimeInterval)duration;
-
+/**
+ *  只显示文本，没有任何多余的显示
+ */
++ (void)showTextWithStatus:(NSString *)string;
++ (void)showTextWithStatus:(NSString *)string duration:(NSTimeInterval)duration;
 /**
  * 弹出一个自定义视图
  */
