@@ -21,7 +21,6 @@
     self.title = @"日历";
     
     [self.view addSubview:self.tableView];
-
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -45,8 +44,9 @@
 
 -(UITableView *)tableView{
     if (!_tableView) {
-        _tableView = UITableViewCreateWithStyle(UITableViewStyleGrouped);
+        _tableView = UITableViewCreateWithStyle(UITableViewStylePlain);
         _tableView.makeChain
+        .frame(self.view.bounds)
         .showsVerticalScrollIndicator(NO)
         .showsHorizontalScrollIndicator(NO)
         .adJustedContentIOS11()
