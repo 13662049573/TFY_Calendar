@@ -18,6 +18,16 @@
 #import "TFY_CalendarCalculator.h"
 #import "TFY_CalendarDelegationFactory.h"
 
+#define TFYCa_CalendarInvalidateCellAppearance(SEL1,SEL2) \
+    cell.SEL1 = [self.delegateProxy calendar:self appearance:self.appearance SEL2:date];
+    
+#define TFYCa_CalendarInvalidateCellAppearanceWithDefault(SEL1,SEL2,DEFAULT) \
+    if ([self.delegateProxy respondsToSelector:@selector(calendar:appearance:SEL2:)]) { \
+        cell.SEL1 = [self.delegateProxy calendar:self appearance:self.appearance SEL2:date]; \
+    } else { \
+        cell.SEL1 = DEFAULT; \
+    }
+
 NS_ASSUME_NONNULL_BEGIN
 
 static inline void TFYCa_CalendarAssertDateInBounds(NSDate *date, NSCalendar *calendar, NSDate *minimumDate, NSDate *maximumDate) {
@@ -1335,16 +1345,6 @@ typedef NS_ENUM(NSUInteger, TFYCa_CalendarOrientation) {
 
 - (void)invalidateAppearanceForCell:(TFY_CalendarCell *)cell forDate:(NSDate *)date
 {
-#define TFYCa_CalendarInvalidateCellAppearance(SEL1,SEL2) \
-    cell.SEL1 = [self.delegateProxy calendar:self appearance:self.appearance SEL2:date];
-    
-#define TFYCa_CalendarInvalidateCellAppearanceWithDefault(SEL1,SEL2,DEFAULT) \
-    if ([self.delegateProxy respondsToSelector:@selector(calendar:appearance:SEL2:)]) { \
-        cell.SEL1 = [self.delegateProxy calendar:self appearance:self.appearance SEL2:date]; \
-    } else { \
-        cell.SEL1 = DEFAULT; \
-    }
-    
     TFYCa_CalendarInvalidateCellAppearance(preferredFillDefaultColor,fillDefaultColorForDate);
     TFYCa_CalendarInvalidateCellAppearance(preferredFillSelectionColor,fillSelectionColorForDate);
     TFYCa_CalendarInvalidateCellAppearance(preferredTitleDefaultColor,titleDefaultColorForDate);
