@@ -130,22 +130,6 @@ static NSTimeInterval _CGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef sou
     return image;
 }
 
-+ (UIImage *)tfy_imageWithColor:(UIColor *)color{
-    return [self tfy_imageWithColor:color size:CGSizeMake(1, 1)];
-}
-
-+ (UIImage *)tfy_imageWithColor:(UIColor *)color size:(CGSize)size{
-    if (!color || size.width <= 0 || size.height <= 0) return nil;
-    CGRect rect = CGRectMake(0, 0, size.width, size.height);
-    UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetFillColorWithColor(context, color.CGColor);
-    CGContextFillRect(context, rect);
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return image;
-}
-
 + (UIImage *)tfy_imageSize:(CGSize)size withDrawContext:(void (^)(CGContextRef _Nonnull))drawContext{
     if (size.width == 0 || size.height == 0) return nil;
     UIGraphicsBeginImageContextWithOptions(size, NO, 0);
@@ -727,7 +711,7 @@ static NSTimeInterval _CGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef sou
         CGFloat inputRadius = blurRadius * scale;
         if (inputRadius - 2.0 < __FLT_EPSILON__) inputRadius = 2.0;
         uint32_t radius = floor((inputRadius * 3.0 * sqrt(2 * M_PI) / 4 + 0.5) / 2);
-        radius |= 1; // force radius to be odd so that the three box-blur methodology works.
+        radius |= 1; 
         int iterations;
         if (blurRadius * scale < 0.5) iterations = 1;
         else if (blurRadius * scale < 1.5) iterations = 2;
@@ -742,11 +726,7 @@ static NSTimeInterval _CGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef sou
         }
         free(temp);
     }
-    
-    
     if (hasSaturation) {
-        // These values appear in the W3C Filter Effects spec:
-        // https://dvcs.w3.org/hg/FXTF/raw-file/default/filters/Publish.html#grayscaleEquivalent
         CGFloat s = saturation;
         CGFloat matrixFloat[] = {
             0.0722 + 0.9278 * s,  0.0722 - 0.0722 * s,  0.0722 - 0.0722 * s,  0,

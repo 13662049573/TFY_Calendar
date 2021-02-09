@@ -48,7 +48,7 @@
     self.view = view;
     
     CGFloat height = [[UIDevice currentDevice].model hasPrefix:@"iPad"] ? 450 : 300;
-    TFY_Calendar *calendar = [[TFY_Calendar alloc] initWithFrame:CGRectMake(0,  CGRectGetMaxY(self.navigationController.navigationBar.frame), view.frame.size.width, height)];
+    TFY_Calendar *calendar = [[TFY_Calendar alloc] initWithFrame:CGRectMake(0,  0, view.frame.size.width, height)];
     calendar.dataSource = self;
     calendar.delegate = self;
 //    calendar.swipeToChooseGesture.enabled = YES;
@@ -68,7 +68,7 @@
 //    [calendar addGestureRecognizer:scopeGesture];
     
     
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(calendar.frame)+10, self.view.frame.size.width, 50)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
     label.textAlignment = NSTextAlignmentCenter;
     label.backgroundColor = [UIColor yellowColor];
     label.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];

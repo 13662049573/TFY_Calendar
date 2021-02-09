@@ -34,7 +34,18 @@ typedef void(^ButtonLimitTimesTapBlock)(NSUInteger time, BOOL *stop, UIButton *b
  * 时间间隔
  */
 @property (nonatomic, copy, readonly) UIButton* (^tfy_tapSpaceTime) (NSTimeInterval spaceTime);
-
+/**
+ 是否开始随意移动模式
+ */
+@property(nonatomic , assign) BOOL tfy_dragEnable;
+/**
+ 是否允许边际显示
+ */
+@property(nonatomic , assign) BOOL tfy_adsorbEnable;
+/**
+   边际两边的显示的距离
+ */
+@property(nonatomic , assign) CGFloat tfy_padding;
 /**
  * 清除限制
  */

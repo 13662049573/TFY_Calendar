@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**返回按钮图片，默认nil，优先级高于backStyle*/
 @property (nonatomic, strong) UIImage *backImage;
-/** 设置导航栏分割线颜色 默认@"eeeeee" */
+/** 设置导航栏分割线颜色 默认 透明色 */
 @property (nonatomic, strong) UIColor *navShadowColor;
 
 /**返回按钮样式，默认TFYNavigationBarBackStyleBlack*/
@@ -39,12 +39,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**导航栏左右按钮距屏幕右边间距，默认是15，可自行调整*/
 @property (nonatomic, assign) CGFloat   tfy_navItemRightSpace;
-
-/**是否隐藏状态栏，默认NO*/
-@property (nonatomic, assign) BOOL statusBarHidden;
-
-/**状态栏类型，默认UIStatusBarStyleDefault*/
-@property (nonatomic, assign) UIStatusBarStyle statusBarStyle;
 
 /**左滑push过渡临界值，默认0.3，大于此值完成push操作*/
 @property (nonatomic, assign) CGFloat   tfy_pushTransitionCriticalValue;

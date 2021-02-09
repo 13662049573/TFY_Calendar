@@ -1,8 +1,8 @@
 
-platform :ios, '10.0'
+platform :ios, '12.0'
 
 target 'TFY_Calendar' do
-  # Comment the next line if you don't want to use dynamic frameworks
+ 
   use_frameworks!
   pod 'TFY_LayoutCategoryKit'
   pod 'TFY_ProgressHUD'

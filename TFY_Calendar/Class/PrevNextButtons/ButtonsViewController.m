@@ -41,7 +41,7 @@
     
     // 450 for iPad and 300 for iPhone
     CGFloat height = [[UIDevice currentDevice].model hasPrefix:@"iPad"] ? 450 : 340;
-    TFY_Calendar *calendar = [[TFY_Calendar alloc] initWithFrame:CGRectMake(0, kNavBarHeight, view.frame.size.width, height)];
+    TFY_Calendar *calendar = [[TFY_Calendar alloc] initWithFrame:CGRectMake(0, 0, view.frame.size.width, height)];
     calendar.dataSource = self;
     calendar.delegate = self;
     calendar.backgroundColor = [UIColor whiteColor];
@@ -51,7 +51,7 @@
     self.calendar = calendar;
     
     UIButton *previousButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    previousButton.frame = CGRectMake(0, kNavBarHeight+5, 95, 34);
+    previousButton.frame = CGRectMake(0, 5, 95, 34);
     previousButton.backgroundColor = [UIColor whiteColor];
     previousButton.titleLabel.font = [UIFont systemFontOfSize:15];
     [previousButton setImage:[UIImage imageNamed:@"icon_prev"] forState:UIControlStateNormal];
@@ -60,7 +60,7 @@
     self.previousButton = previousButton;
     
     UIButton *nextButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    nextButton.frame = CGRectMake(CGRectGetWidth(self.view.frame)-95, kNavBarHeight+5, 95, 34);
+    nextButton.frame = CGRectMake(CGRectGetWidth(self.view.frame)-95, 5, 95, 34);
     nextButton.backgroundColor = [UIColor whiteColor];
     nextButton.titleLabel.font = [UIFont systemFontOfSize:15];
     [nextButton setImage:[UIImage imageNamed:@"icon_next"] forState:UIControlStateNormal];

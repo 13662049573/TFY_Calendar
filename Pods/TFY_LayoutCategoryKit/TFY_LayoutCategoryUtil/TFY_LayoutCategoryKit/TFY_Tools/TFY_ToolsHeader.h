@@ -13,5 +13,6 @@
 #import "TFY_Video.h"
 #import "UIWindow+TFY_Tools.h"
 #import "TFY_Timer.h"
+#import "TFY_ShadowView.h" //阴影添加
 
 #endif /* TFY_ToolsHeader_h */

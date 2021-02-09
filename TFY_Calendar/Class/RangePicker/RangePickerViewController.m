@@ -43,7 +43,7 @@
     view.backgroundColor = [UIColor whiteColor];
     self.view = view;
     
-    TFY_Calendar *calendar = [[TFY_Calendar alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.navigationController.navigationBar.frame), view.frame.size.width, view.frame.size.height - CGRectGetMaxY(self.navigationController.navigationBar.frame))];
+    TFY_Calendar *calendar = [[TFY_Calendar alloc] initWithFrame:CGRectMake(0, 0, view.frame.size.width, view.frame.size.height)];
     calendar.dataSource = self;
     calendar.delegate = self;
     calendar.pagingEnabled = NO;

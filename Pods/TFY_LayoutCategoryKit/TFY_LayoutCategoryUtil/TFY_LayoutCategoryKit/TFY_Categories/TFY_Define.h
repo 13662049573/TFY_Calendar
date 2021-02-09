@@ -16,6 +16,29 @@
 
 #pragma mark-------------------------------------------线程---------------------------------------------
 /***线程****/
+
+NS_INLINE void TFY_GCD_QUEUE_ASYNC(dispatch_block_t _Nonnull block) {
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    if (strcmp(dispatch_queue_get_label(DISPATCH_CURRENT_QUEUE_LABEL), dispatch_queue_get_label(queue)) == 0) {
+        block();
+    }else{
+        dispatch_async(queue, block);
+    }
+}
+
+NS_INLINE void TFY_GCD_QUEUE_MAIN(dispatch_block_t _Nonnull block) {
+    dispatch_queue_t queue = dispatch_get_main_queue();
+    if (strcmp(dispatch_queue_get_label(DISPATCH_CURRENT_QUEUE_LABEL), dispatch_queue_get_label(queue)) == 0) {
+        block();
+    }else{
+        if ([[NSThread currentThread] isMainThread]) {
+            dispatch_async(queue, block);
+        }else{
+            dispatch_sync(queue, block);
+        }
+    }
+}
+
 #define TFY_queueGlobalStart dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 // 当所有队列执行完成之后
 #define TFY_group_notify dispatch_group_notify(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -46,13 +69,16 @@
 #define TFY_semaphoreEnd  });
 
 
+/**
+*  完美解决Xcode NSLog打印不全的宏
+*/
 #ifdef DEBUG
 
-#define NSLog(FORMAT, ...) fprintf(stderr, "\n\n******(class)%s(begin)******\n(SEL)%s\n(line)%d\n(data)%s\n******(class)%s(end)******\n\n", [[[NSString stringWithUTF8String: __FILE__] lastPathComponent] UTF8String], __FUNCTION__, __LINE__, [[NSString stringWithFormat: FORMAT, ## __VA_ARGS__] UTF8String], [[[NSString stringWithUTF8String: __FILE__] lastPathComponent] UTF8String])
+#define NSLog(format, ...) printf("class: <%p %s:(%d) > method: %s \n%s\n", self, [[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, __PRETTY_FUNCTION__, [[NSString stringWithFormat:(format), ##__VA_ARGS__] UTF8String] )
 
 #else
 
-#define NSLog(FORMAT, ...) nil
+#define NSLog(format, ...)
 
 #endif
 
@@ -164,22 +190,25 @@ static class *sharedInstance_; \
 
 #define TFY_STRONG  __strong typeof(weakSelf)self = weakSelf;
 
+/** weak对象 */
+#define TFY_Weak(o) __weak typeof(o) weak_##o = o;
+
 #pragma mark-------------------------------------------内联函数---------------------------------------------
 
 /** 发送通知 */
-CG_INLINE void TFY_PostNotification(NSNotificationName name,id obj,NSDictionary *info) {
+CG_INLINE void TFY_PostNotification(NSNotificationName _Nonnull name,id _Nonnull obj,NSDictionary * _Nonnull info) {
     return [[NSNotificationCenter defaultCenter] postNotificationName:name object:obj userInfo:info];
 }
 /** 监听通知 */
-CG_INLINE void TFY_ObserveNotification(id observer,SEL aSelector,NSNotificationName aName,id obj) {
+CG_INLINE void TFY_ObserveNotification(id _Nonnull observer,SEL _Nonnull aSelector,NSNotificationName _Nonnull aName,id _Nonnull obj) {
     return [[NSNotificationCenter defaultCenter] addObserver:observer selector:aSelector name:aName object:obj];
 }
 /** 移除所有通知 */
-CG_INLINE void TFY_RemoveNotification(id observer) API_AVAILABLE(ios(11.0)) {
+CG_INLINE void TFY_RemoveNotification(id _Nonnull observer) API_AVAILABLE(ios(11.0)) {
     return [[NSNotificationCenter defaultCenter] removeObserver:observer];
 }
 /** 移除一个已知通知 */
-CG_INLINE void TFY_RemoveOneNotification(id observer,NSNotificationName aName,id obj) {
+CG_INLINE void TFY_RemoveOneNotification(id _Nonnull observer,NSNotificationName _Nonnull aName,id _Nonnull obj) {
     return [[NSNotificationCenter defaultCenter] removeObserver:observer name:aName object:obj];
 }
 
@@ -208,12 +237,12 @@ CG_INLINE CGFloat kNavigationBarHeight() {
 }
 
 //获取最适合的控制器
-CG_INLINE UIViewController *TFY_getTheLatestViewController(UIViewController *vc) {
+CG_INLINE UIViewController * _Nonnull TFY_getTheLatestViewController(UIViewController * _Nonnull vc) {
     if (vc.presentedViewController == nil) {return vc;}
     return TFY_getTheLatestViewController(vc.presentedViewController);
 }
 
-CG_INLINE UIWindow *TFY_LastWindow() {
+CG_INLINE UIWindow * _Nonnull TFY_LastWindow() {
     NSEnumerator  *frontToBackWindows = [[TFY_Scene defaultPackage].windows reverseObjectEnumerator];
     for (UIWindow *window in frontToBackWindows) {
         BOOL windowOnMainScreen = window.screen == UIScreen.mainScreen;
@@ -226,13 +255,13 @@ CG_INLINE UIWindow *TFY_LastWindow() {
 }
 
 //最上层容器
-CG_INLINE UIViewController *TFY_RootpresentMenuView() {
+CG_INLINE UIViewController * _Nonnull TFY_RootpresentMenuView() {
     UIViewController *rootVC = TFY_getTheLatestViewController(TFY_LastWindow().rootViewController);
     return rootVC;
 }
 
 //跳转指定控制器
-CG_INLINE void TFY_PopToViewController(UIViewController *vc) {
+CG_INLINE void TFY_PopToViewController(UIViewController * _Nonnull vc) {
     for(UIViewController * tempvc in [UIApplication currentTopViewController].navigationController.childViewControllers){
        if([tempvc isKindOfClass:vc.class]){
           [[UIApplication currentTopViewController].navigationController popToViewController:tempvc animated:true];
@@ -241,7 +270,7 @@ CG_INLINE void TFY_PopToViewController(UIViewController *vc) {
 }
 
 //返回更控制器
-CG_INLINE void TFY_DismissViewController(UIViewController *vc){
+CG_INLINE void TFY_DismissViewController(UIViewController * _Nonnull vc){
     UIViewController * tempvc = vc.presentingViewController;
     while (tempvc.presentingViewController) {
         tempvc = tempvc.presentingViewController;
@@ -251,7 +280,7 @@ CG_INLINE void TFY_DismissViewController(UIViewController *vc){
 }
 
 //方法和类交互
-CG_INLINE void TFY_Method_exchangeImp(Class _class, SEL _originSelector, SEL _newSelector) {
+CG_INLINE void TFY_Method_exchangeImp(Class _Nonnull _class, SEL _Nonnull _originSelector, SEL _Nonnull _newSelector) {
     Method oriMethod = class_getInstanceMethod(_class, _originSelector);
     Method newMethod = class_getInstanceMethod(_class, _newSelector);
     BOOL isAddedMethod = class_addMethod(_class, _originSelector, method_getImplementation(newMethod), method_getTypeEncoding(newMethod));

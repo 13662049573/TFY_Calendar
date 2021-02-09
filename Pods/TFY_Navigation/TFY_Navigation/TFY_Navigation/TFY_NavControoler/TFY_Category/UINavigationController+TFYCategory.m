@@ -9,6 +9,8 @@
 #import "UINavigationController+TFYCategory.h"
 #include <objc/runtime.h>
 
+static const void* TFYNavBarAlphaKey         = @"TFYNavBarAlphaKey";
+
 @implementation UINavigationController (TFYCategory)
 
 // 方法交换
@@ -16,7 +18,10 @@
     // 保证其只执行一次
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        tfy_swizzled_method(@"tfyNav", self, @"viewDidLoad", self);
+        NSArray <NSString *>*oriSels = @[@"viewDidLoad"];
+        [oriSels enumerateObjectsUsingBlock:^(NSString * _Nonnull oriSel, NSUInteger idx, BOOL * _Nonnull stop) {
+            tfy_swizzled_method(@"tfyNav", self, oriSel, self);
+        }];
     });
 }
 
@@ -71,10 +76,8 @@
     
     // 禁止手势处理
     if (self.tfy_disabledGestureHandle) {
-        self.interactivePopGestureRecognizer.delegate = nil;
-        self.interactivePopGestureRecognizer.enabled = NO;
-        [self.interactivePopGestureRecognizer.view removeGestureRecognizer:self.screenPanGesture];
-        [self.interactivePopGestureRecognizer.view removeGestureRecognizer:self.panGesture];
+        [self interactivePopGesturedelegate];
+        [self removeGestureRecognizerGesture];
         return;
     }
     
@@ -82,16 +85,14 @@
     
     // 重新根据属性添加手势方法
     if (vc.tfy_interactivePopDisabled) { // 禁止滑动
-        self.interactivePopGestureRecognizer.delegate = nil;
-        self.interactivePopGestureRecognizer.enabled = NO;
-        [self.interactivePopGestureRecognizer.view removeGestureRecognizer:self.screenPanGesture];
-        [self.interactivePopGestureRecognizer.view removeGestureRecognizer:self.panGesture];
-    }else if (vc.tfy_fullScreenPopDisabled) { // 禁止全屏滑动
+        [self interactivePopGesturedelegate];
+        [self removeGestureRecognizerGesture];
+        
+    } else if (vc.tfy_fullScreenPopDisabled) { // 禁止全屏滑动
         [self.interactivePopGestureRecognizer.view removeGestureRecognizer:self.panGesture];
         
         if (self.tfy_translationScale) {
-            self.interactivePopGestureRecognizer.delegate = nil;
-            self.interactivePopGestureRecognizer.enabled = NO;
+            [self interactivePopGesturedelegate];
             
             if (![self.interactivePopGestureRecognizer.view.gestureRecognizers containsObject:self.screenPanGesture]) {
                 [self.interactivePopGestureRecognizer.view addGestureRecognizer:self.screenPanGesture];
@@ -103,8 +104,7 @@
             self.interactivePopGestureRecognizer.enabled = !isRootVC;
         }
     }else {
-        self.interactivePopGestureRecognizer.delegate = nil;
-        self.interactivePopGestureRecognizer.enabled = NO;
+        [self interactivePopGesturedelegate];
         [self.interactivePopGestureRecognizer.view removeGestureRecognizer:self.screenPanGesture];
         
         // 给self.interactivePopGestureRecognizer.view 添加全屏滑动手势
@@ -121,6 +121,16 @@
             [self.panGesture addTarget:[self systemTarget] action:internalAction];
         }
     }
+}
+
+- (void)interactivePopGesturedelegate {
+    self.interactivePopGestureRecognizer.delegate = nil;
+    self.interactivePopGestureRecognizer.enabled = NO;
+}
+
+- (void)removeGestureRecognizerGesture {
+    [self.interactivePopGestureRecognizer.view removeGestureRecognizer:self.screenPanGesture];
+    [self.interactivePopGestureRecognizer.view removeGestureRecognizer:self.panGesture];
 }
 
 - (void)tfy_navigationBarTransparent {
@@ -145,18 +155,17 @@
     self.hidesBarsOnTap = YES;
 }
 
-
 #pragma mark - getter
 - (BOOL)tfy_translationScale {
-    return [objc_getAssociatedObject(self, _cmd) boolValue];
+    return [objc_getAssociatedObject(self, &@selector(tfy_translationScale)) boolValue];
 }
 
 - (BOOL)tfy_openScrollLeftPush {
-    return [objc_getAssociatedObject(self, _cmd) boolValue];
+    return [objc_getAssociatedObject(self, &@selector(tfy_openScrollLeftPush)) boolValue];
 }
 
 - (BOOL)tfy_disabledGestureHandle {
-    return [objc_getAssociatedObject(self, _cmd) boolValue];
+    return [objc_getAssociatedObject(self, &@selector(tfy_disabledGestureHandle)) boolValue];
 }
 
 - (UIColor *)tfy_titleColor {
@@ -199,45 +208,49 @@
     return obj;
 }
 
+- (BOOL)tfy_navLineHidden {
+    return [objc_getAssociatedObject(self, &@selector(tfy_navLineHidden)) boolValue];
+}
+
 - (TFYPopGestureRecognizerDelegate *)popGestureDelegate {
-    TFYPopGestureRecognizerDelegate *delegate = objc_getAssociatedObject(self, _cmd);
+    TFYPopGestureRecognizerDelegate *delegate = objc_getAssociatedObject(self, &@selector(popGestureDelegate));
     if (!delegate) {
         delegate = [TFYPopGestureRecognizerDelegate new];
         delegate.navigationController = self;
         delegate.systemTarget         = [self systemTarget];
         delegate.customTarget         = self.navDelegate;
-        objc_setAssociatedObject(self, _cmd, delegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        objc_setAssociatedObject(self, &@selector(popGestureDelegate), delegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     return delegate;
 }
 
 - (TFYNavigationControllerDelegate *)navDelegate {
-    TFYNavigationControllerDelegate *delegate = objc_getAssociatedObject(self, _cmd);
+    TFYNavigationControllerDelegate *delegate = objc_getAssociatedObject(self, &@selector(navDelegate));
     if (!delegate) {
         delegate = [TFYNavigationControllerDelegate new];
         delegate.navigationController = self;
-        objc_setAssociatedObject(self, _cmd, delegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        objc_setAssociatedObject(self, &@selector(navDelegate), delegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     return delegate;
 }
 
 - (UIScreenEdgePanGestureRecognizer *)screenPanGesture {
-    UIScreenEdgePanGestureRecognizer *panGesture = objc_getAssociatedObject(self, _cmd);
+    UIScreenEdgePanGestureRecognizer *panGesture = objc_getAssociatedObject(self, &@selector(screenPanGesture));
     if (!panGesture) {
         panGesture = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self.navDelegate action:@selector(panGestureRecognizerAction:)];
         panGesture.edges = UIRectEdgeLeft;
         
-        objc_setAssociatedObject(self, _cmd, panGesture, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        objc_setAssociatedObject(self, &@selector(screenPanGesture), panGesture, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     return panGesture;
 }
 
 - (UIPanGestureRecognizer *)panGesture {
-    UIPanGestureRecognizer *panGesture = objc_getAssociatedObject(self, _cmd);
+    UIPanGestureRecognizer *panGesture = objc_getAssociatedObject(self, &@selector(panGesture));
     if (!panGesture) {
         panGesture = [[UIPanGestureRecognizer alloc] init];
         panGesture.maximumNumberOfTouches = 1;
-        objc_setAssociatedObject(self, _cmd, panGesture, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        objc_setAssociatedObject(self, &@selector(panGesture), panGesture, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     return panGesture;
 }
@@ -250,15 +263,15 @@
 
 #pragma mark - setter
 - (void)setTfy_translationScale:(BOOL)tfy_translationScale {
-    objc_setAssociatedObject(self, @selector(tfy_translationScale), @(tfy_translationScale), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, &@selector(tfy_translationScale), @(tfy_translationScale), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (void)setTfy_openScrollLeftPush:(BOOL)tfy_openScrollLeftPush {
-    objc_setAssociatedObject(self, @selector(tfy_openScrollLeftPush), @(tfy_openScrollLeftPush), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, &@selector(tfy_openScrollLeftPush), @(tfy_openScrollLeftPush), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (void)setTfy_disabledGestureHandle:(BOOL)tfy_disabledGestureHandle {
-    objc_setAssociatedObject(self, @selector(tfy_disabledGestureHandle), @(tfy_disabledGestureHandle), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, &@selector(tfy_disabledGestureHandle), @(tfy_disabledGestureHandle), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (void)setTfy_titleColor:(UIColor *)tfy_titleColor {
@@ -300,6 +313,55 @@
 - (void)setTfy_navShadowImage:(UIImage *)tfy_navShadowImage {
     objc_setAssociatedObject(self, &@selector(tfy_navShadowImage), tfy_navShadowImage, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     self.navigationBar.shadowImage = tfy_navShadowImage;
+}
+
+- (CGFloat)tfy_navBarAlpha {
+    id obj = objc_getAssociatedObject(self, TFYNavBarAlphaKey);
+    return obj ? [obj floatValue] : 1.0f;
+}
+
+- (void)setTfy_navBarAlpha:(CGFloat)tfy_navBarAlpha {
+    objc_setAssociatedObject(self, TFYNavBarAlphaKey, @(tfy_navBarAlpha), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    [self setNavBarAlpha:tfy_navBarAlpha];
+}
+
+- (void)setNavBarAlpha:(CGFloat)alpha {
+    UINavigationBar *navBar = self.navigationBar;
+    NSArray *navBarArrs = navBar.subviews;
+    if (navBarArrs.count > 0) {
+        UIView *barBackgroundView = [navBarArrs objectAtIndex:0]; // _UIBarBackground
+        UIImageView *backgroundImageView = [barBackgroundView.subviews objectAtIndex:0]; // UIImageView
+        if (navBar.isTranslucent) {
+            if (backgroundImageView != nil && backgroundImageView.image != nil) {
+                barBackgroundView.alpha = alpha;
+            }else {
+                UIView *backgroundEffectView = [barBackgroundView.subviews objectAtIndex:1]; // UIVisualEffectView
+                if (backgroundEffectView != nil) {
+                    backgroundEffectView.alpha = alpha;
+                }
+            }
+        }else {
+            barBackgroundView.alpha = alpha;
+        }
+        // 底部分割线
+        navBar.clipsToBounds = alpha == 0.0;
+    }
+}
+
+- (void)setTfy_navLineHidden:(BOOL)tfy_navLineHidden {
+    objc_setAssociatedObject(self, @selector(tfy_navLineHidden), @(tfy_navLineHidden), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    if (@available(iOS 11.0, *)) {
+        UIImage *shadowImage = nil;
+        if (tfy_navLineHidden) {
+            shadowImage = [UIImage new];
+        }else if (self.tfy_navShadowImage) {
+            shadowImage = self.tfy_navShadowImage;
+        }else if (self.tfy_navShadowColor) {
+            shadowImage = [UIImage tfy_changeImage:[UIImage tfy_imageNamed:@"nav_line"] color:self.tfy_navShadowColor];
+        }
+        self.navigationBar.shadowImage = shadowImage;
+    }
+    [self.navigationBar layoutSubviews];
 }
 
 - (UIImage *)tfy_createImage:(UIColor *)imageColor {

@@ -51,6 +51,12 @@ NS_ASSUME_NONNULL_BEGIN
 /** 设置导航栏分割线颜色或图片 */
 @property (nonatomic, strong) UIColor *tfy_navShadowColor;
 @property (nonatomic, strong) UIImage *tfy_navShadowImage;
+
+// 是否隐藏导航栏分割线，默认为NO
+@property (nonatomic, assign) BOOL  tfy_navLineHidden;
+
+/** 设置导航栏的透明度 */
+@property (nonatomic, assign) CGFloat tfy_navBarAlpha;
 /**
  * 设置导航栏完全透明  会设置translucent = YES
  */

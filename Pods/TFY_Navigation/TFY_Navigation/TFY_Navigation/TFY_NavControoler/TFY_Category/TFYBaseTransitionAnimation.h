@@ -28,8 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, nullable) UIView  *contentView;
 
-/// 初始化
-/// @param scale 是否需要缩放
+// 初始化  是否需要缩放
 - (instancetype)initWithScale:(BOOL)scale;
 
 // 动画时间

@@ -30,14 +30,6 @@ CG_INLINE CGFloat TFY_DegreesToRadians(CGFloat degrees) {
 
 + (nullable UIImage *)tfy_imageWithSmallGIFData:(NSData *)data scale:(CGFloat)scale;
 
-+ (UIImage *)tfy_imageWithColor:(UIColor *)color;
-
-/**
- 根据颜色创建一个size大小的图片
- */
-+ (UIImage *)tfy_imageWithColor:(UIColor *)color size:(CGSize)size;
-
-
 /**
  根据当前上下文画一个图片
  */

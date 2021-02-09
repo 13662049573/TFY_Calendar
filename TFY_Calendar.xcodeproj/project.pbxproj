@@ -7,7 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		365ED1602393855600981A14 /* TFY_LunarFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 365ED15F2393855600981A14 /* TFY_LunarFormatter.m */; };
+		3656F16925D284360030D8CF /* TFY_CalendarDelegationProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3656F14725D284360030D8CF /* TFY_CalendarDelegationProxy.m */; };
+		3656F16A25D284360030D8CF /* TFY_CalendarStickyHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3656F14825D284360030D8CF /* TFY_CalendarStickyHeader.m */; };
+		3656F16B25D284360030D8CF /* TFY_CalendarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3656F14C25D284360030D8CF /* TFY_CalendarCell.m */; };
+		3656F16C25D284360030D8CF /* TFY_CalendarTransitionCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3656F14D25D284360030D8CF /* TFY_CalendarTransitionCoordinator.m */; };
+		3656F16D25D284360030D8CF /* TFY_CalendarAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 3656F14E25D284360030D8CF /* TFY_CalendarAppearance.m */; };
+		3656F16E25D284360030D8CF /* TFY_CalendarCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3656F14F25D284360030D8CF /* TFY_CalendarCollectionView.m */; };
+		3656F16F25D284360030D8CF /* TFY_CalendarWeekdayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3656F15025D284360030D8CF /* TFY_CalendarWeekdayView.m */; };
+		3656F17025D284360030D8CF /* TFY_Calendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3656F15125D284360030D8CF /* TFY_Calendar.m */; };
+		3656F17125D284360030D8CF /* TFY_CalendarHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3656F15225D284360030D8CF /* TFY_CalendarHeaderView.m */; };
+		3656F17225D284360030D8CF /* TFY_CalendarCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3656F15325D284360030D8CF /* TFY_CalendarCalculator.m */; };
+		3656F17325D284360030D8CF /* TFY_CalendarDelegationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3656F15525D284360030D8CF /* TFY_CalendarDelegationFactory.m */; };
+		3656F17425D284360030D8CF /* TFY_CalendarCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3656F15625D284360030D8CF /* TFY_CalendarCollectionViewLayout.m */; };
+		3656F17525D284360030D8CF /* TFY_CalendarExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3656F16225D284360030D8CF /* TFY_CalendarExtensions.m */; };
+		3656F17625D284360030D8CF /* TFY_CalendarSeparatorDecorationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3656F16325D284360030D8CF /* TFY_CalendarSeparatorDecorationView.m */; };
+		3656F17725D284360030D8CF /* TFY_LunarFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3656F16625D284360030D8CF /* TFY_LunarFormatter.m */; };
+		3656F17825D284360030D8CF /* TFY_CalendarConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 3656F16825D284360030D8CF /* TFY_CalendarConstants.m */; };
 		365ED16C23938ED400981A14 /* RangePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 365ED16923938ED400981A14 /* RangePickerViewController.m */; };
 		365ED16D23938ED400981A14 /* RangePickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 365ED16A23938ED400981A14 /* RangePickerCell.m */; };
 		365ED17223938FE700981A14 /* DIYExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 365ED16E23938FE700981A14 /* DIYExampleViewController.m */; };
@@ -26,21 +41,6 @@
 		3662922D2393490500DCFAAF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 366292252393490500DCFAAF /* ViewController.m */; };
 		3662922E2393490500DCFAAF /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 366292262393490500DCFAAF /* SceneDelegate.m */; };
 		3662922F2393490500DCFAAF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 366292272393490500DCFAAF /* AppDelegate.m */; };
-		36629233239349DE00DCFAAF /* TFY_CalendarExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 36629232239349DE00DCFAAF /* TFY_CalendarExtensions.m */; };
-		3662923723934D9200DCFAAF /* TFY_CalendarConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 3662923623934D9200DCFAAF /* TFY_CalendarConstants.m */; };
-		3662923B23934F5700DCFAAF /* TFY_Calendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3662923A23934F5700DCFAAF /* TFY_Calendar.m */; };
-		3662923E239351D500DCFAAF /* TFY_CalendarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3662923D239351D500DCFAAF /* TFY_CalendarCell.m */; };
-		366292412393524300DCFAAF /* TFY_CalendarAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 366292402393524300DCFAAF /* TFY_CalendarAppearance.m */; };
-		366292442393532900DCFAAF /* TFY_CalendarWeekdayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 366292432393532900DCFAAF /* TFY_CalendarWeekdayView.m */; };
-		3662924723935D7A00DCFAAF /* TFY_CalendarHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3662924623935D7A00DCFAAF /* TFY_CalendarHeaderView.m */; };
-		3662924A23935E2200DCFAAF /* TFY_CalendarCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3662924923935E2200DCFAAF /* TFY_CalendarCollectionView.m */; };
-		3662924D2393620300DCFAAF /* TFY_CalendarStickyHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3662924C2393620300DCFAAF /* TFY_CalendarStickyHeader.m */; };
-		36629250239363E400DCFAAF /* TFY_CalendarCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3662924F239363E400DCFAAF /* TFY_CalendarCollectionViewLayout.m */; };
-		36629253239364DA00DCFAAF /* TFY_CalendarSeparatorDecorationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36629252239364DA00DCFAAF /* TFY_CalendarSeparatorDecorationView.m */; };
-		36629256239368C400DCFAAF /* TFY_CalendarCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 36629255239368C400DCFAAF /* TFY_CalendarCalculator.m */; };
-		3662925923936CEC00DCFAAF /* TFY_CalendarTransitionCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3662925823936CEC00DCFAAF /* TFY_CalendarTransitionCoordinator.m */; };
-		3662925C239370EB00DCFAAF /* TFY_CalendarDelegationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3662925B239370EB00DCFAAF /* TFY_CalendarDelegationFactory.m */; };
-		3662925F2393711B00DCFAAF /* TFY_CalendarDelegationProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3662925E2393711B00DCFAAF /* TFY_CalendarDelegationProxy.m */; };
 		3667B1B723939B2800BEC399 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3667B1B623939B2800BEC399 /* Foundation.framework */; };
 		3667B1B923939B2E00BEC399 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3667B1B823939B2E00BEC399 /* UIKit.framework */; };
 		6CEDE5C395DA8881FAF3A63E /* Pods_TFY_Calendar_TFY_CalendarUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF990721DE13A8259CA14B6E /* Pods_TFY_Calendar_TFY_CalendarUITests.framework */; };
@@ -68,8 +68,39 @@
 /* Begin PBXFileReference section */
 		1BDDCEFAD8080C40D435F397 /* Pods-TFY_CalendarTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TFY_CalendarTests.release.xcconfig"; path = "Target Support Files/Pods-TFY_CalendarTests/Pods-TFY_CalendarTests.release.xcconfig"; sourceTree = "<group>"; };
 		279F2CB0F86EA9CAD5AAEAD0 /* Pods-TFY_CalendarTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TFY_CalendarTests.debug.xcconfig"; path = "Target Support Files/Pods-TFY_CalendarTests/Pods-TFY_CalendarTests.debug.xcconfig"; sourceTree = "<group>"; };
-		365ED15E2393855600981A14 /* TFY_LunarFormatter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_LunarFormatter.h; sourceTree = "<group>"; };
-		365ED15F2393855600981A14 /* TFY_LunarFormatter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_LunarFormatter.m; sourceTree = "<group>"; };
+		3656F14725D284360030D8CF /* TFY_CalendarDelegationProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarDelegationProxy.m; sourceTree = "<group>"; };
+		3656F14825D284360030D8CF /* TFY_CalendarStickyHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarStickyHeader.m; sourceTree = "<group>"; };
+		3656F14925D284360030D8CF /* TFY_CalendarDynamic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarDynamic.h; sourceTree = "<group>"; };
+		3656F14A25D284360030D8CF /* TFY_CalendarCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarCollectionViewLayout.h; sourceTree = "<group>"; };
+		3656F14B25D284360030D8CF /* TFY_CalendarDelegationFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarDelegationFactory.h; sourceTree = "<group>"; };
+		3656F14C25D284360030D8CF /* TFY_CalendarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarCell.m; sourceTree = "<group>"; };
+		3656F14D25D284360030D8CF /* TFY_CalendarTransitionCoordinator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarTransitionCoordinator.m; sourceTree = "<group>"; };
+		3656F14E25D284360030D8CF /* TFY_CalendarAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarAppearance.m; sourceTree = "<group>"; };
+		3656F14F25D284360030D8CF /* TFY_CalendarCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarCollectionView.m; sourceTree = "<group>"; };
+		3656F15025D284360030D8CF /* TFY_CalendarWeekdayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarWeekdayView.m; sourceTree = "<group>"; };
+		3656F15125D284360030D8CF /* TFY_Calendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFY_Calendar.m; sourceTree = "<group>"; };
+		3656F15225D284360030D8CF /* TFY_CalendarHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarHeaderView.m; sourceTree = "<group>"; };
+		3656F15325D284360030D8CF /* TFY_CalendarCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarCalculator.m; sourceTree = "<group>"; };
+		3656F15425D284360030D8CF /* TFY_CalendarDelegationProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarDelegationProxy.h; sourceTree = "<group>"; };
+		3656F15525D284360030D8CF /* TFY_CalendarDelegationFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarDelegationFactory.m; sourceTree = "<group>"; };
+		3656F15625D284360030D8CF /* TFY_CalendarCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarCollectionViewLayout.m; sourceTree = "<group>"; };
+		3656F15725D284360030D8CF /* TFY_CalendarStickyHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarStickyHeader.h; sourceTree = "<group>"; };
+		3656F15825D284360030D8CF /* TFY_CalendarWeekdayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarWeekdayView.h; sourceTree = "<group>"; };
+		3656F15925D284360030D8CF /* TFY_CalendarAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarAppearance.h; sourceTree = "<group>"; };
+		3656F15A25D284360030D8CF /* TFY_CalendarTransitionCoordinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarTransitionCoordinator.h; sourceTree = "<group>"; };
+		3656F15B25D284360030D8CF /* TFY_CalendarCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarCollectionView.h; sourceTree = "<group>"; };
+		3656F15C25D284360030D8CF /* TFY_CalendarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarCell.h; sourceTree = "<group>"; };
+		3656F15D25D284360030D8CF /* TFY_CalendarHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarHeaderView.h; sourceTree = "<group>"; };
+		3656F15E25D284360030D8CF /* TFY_CalendarCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarCalculator.h; sourceTree = "<group>"; };
+		3656F15F25D284360030D8CF /* TFY_Calendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFY_Calendar.h; sourceTree = "<group>"; };
+		3656F16125D284360030D8CF /* TFY_LunarFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFY_LunarFormatter.h; sourceTree = "<group>"; };
+		3656F16225D284360030D8CF /* TFY_CalendarExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarExtensions.m; sourceTree = "<group>"; };
+		3656F16325D284360030D8CF /* TFY_CalendarSeparatorDecorationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarSeparatorDecorationView.m; sourceTree = "<group>"; };
+		3656F16425D284360030D8CF /* TFY_CalendarConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarConstants.h; sourceTree = "<group>"; };
+		3656F16525D284360030D8CF /* TFY_CalendarExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarExtensions.h; sourceTree = "<group>"; };
+		3656F16625D284360030D8CF /* TFY_LunarFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFY_LunarFormatter.m; sourceTree = "<group>"; };
+		3656F16725D284360030D8CF /* TFY_CalendarSeparatorDecorationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarSeparatorDecorationView.h; sourceTree = "<group>"; };
+		3656F16825D284360030D8CF /* TFY_CalendarConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarConstants.m; sourceTree = "<group>"; };
 		365ED16823938ED400981A14 /* RangePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangePickerViewController.h; sourceTree = "<group>"; };
 		365ED16923938ED400981A14 /* RangePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangePickerViewController.m; sourceTree = "<group>"; };
 		365ED16A23938ED400981A14 /* RangePickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangePickerCell.m; sourceTree = "<group>"; };
@@ -107,40 +138,9 @@
 		366292282393490500DCFAAF /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		366292292393490500DCFAAF /* SceneDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
 		366292302393492000DCFAAF /* Calendar_PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Calendar_PrefixHeader.pch; sourceTree = "<group>"; };
-		36629231239349DE00DCFAAF /* TFY_CalendarExtensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarExtensions.h; sourceTree = "<group>"; };
-		36629232239349DE00DCFAAF /* TFY_CalendarExtensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarExtensions.m; sourceTree = "<group>"; };
-		3662923523934D9200DCFAAF /* TFY_CalendarConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarConstants.h; sourceTree = "<group>"; };
-		3662923623934D9200DCFAAF /* TFY_CalendarConstants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarConstants.m; sourceTree = "<group>"; };
-		3662923923934F5700DCFAAF /* TFY_Calendar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_Calendar.h; sourceTree = "<group>"; };
-		3662923A23934F5700DCFAAF /* TFY_Calendar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_Calendar.m; sourceTree = "<group>"; };
-		3662923C239351D500DCFAAF /* TFY_CalendarCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarCell.h; sourceTree = "<group>"; };
-		3662923D239351D500DCFAAF /* TFY_CalendarCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarCell.m; sourceTree = "<group>"; };
-		3662923F2393524300DCFAAF /* TFY_CalendarAppearance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarAppearance.h; sourceTree = "<group>"; };
-		366292402393524300DCFAAF /* TFY_CalendarAppearance.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarAppearance.m; sourceTree = "<group>"; };
-		366292422393532900DCFAAF /* TFY_CalendarWeekdayView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarWeekdayView.h; sourceTree = "<group>"; };
-		366292432393532900DCFAAF /* TFY_CalendarWeekdayView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarWeekdayView.m; sourceTree = "<group>"; };
-		3662924523935D7A00DCFAAF /* TFY_CalendarHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarHeaderView.h; sourceTree = "<group>"; };
-		3662924623935D7A00DCFAAF /* TFY_CalendarHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarHeaderView.m; sourceTree = "<group>"; };
-		3662924823935E2200DCFAAF /* TFY_CalendarCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarCollectionView.h; sourceTree = "<group>"; };
-		3662924923935E2200DCFAAF /* TFY_CalendarCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarCollectionView.m; sourceTree = "<group>"; };
-		3662924B2393620300DCFAAF /* TFY_CalendarStickyHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarStickyHeader.h; sourceTree = "<group>"; };
-		3662924C2393620300DCFAAF /* TFY_CalendarStickyHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarStickyHeader.m; sourceTree = "<group>"; };
-		3662924E239363E400DCFAAF /* TFY_CalendarCollectionViewLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarCollectionViewLayout.h; sourceTree = "<group>"; };
-		3662924F239363E400DCFAAF /* TFY_CalendarCollectionViewLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarCollectionViewLayout.m; sourceTree = "<group>"; };
-		36629251239364DA00DCFAAF /* TFY_CalendarSeparatorDecorationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarSeparatorDecorationView.h; sourceTree = "<group>"; };
-		36629252239364DA00DCFAAF /* TFY_CalendarSeparatorDecorationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarSeparatorDecorationView.m; sourceTree = "<group>"; };
-		36629254239368C400DCFAAF /* TFY_CalendarCalculator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarCalculator.h; sourceTree = "<group>"; };
-		36629255239368C400DCFAAF /* TFY_CalendarCalculator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarCalculator.m; sourceTree = "<group>"; };
-		3662925723936CEC00DCFAAF /* TFY_CalendarTransitionCoordinator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarTransitionCoordinator.h; sourceTree = "<group>"; };
-		3662925823936CEC00DCFAAF /* TFY_CalendarTransitionCoordinator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarTransitionCoordinator.m; sourceTree = "<group>"; };
-		3662925A239370EB00DCFAAF /* TFY_CalendarDelegationFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarDelegationFactory.h; sourceTree = "<group>"; };
-		3662925B239370EB00DCFAAF /* TFY_CalendarDelegationFactory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarDelegationFactory.m; sourceTree = "<group>"; };
-		3662925D2393711B00DCFAAF /* TFY_CalendarDelegationProxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarDelegationProxy.h; sourceTree = "<group>"; };
-		3662925E2393711B00DCFAAF /* TFY_CalendarDelegationProxy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_CalendarDelegationProxy.m; sourceTree = "<group>"; };
 		3667B1B623939B2800BEC399 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3667B1B823939B2E00BEC399 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		36EE10FA250A0F5C00D24B3C /* TFY_CalendarKiit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarKiit.h; sourceTree = "<group>"; };
-		36EE10FB250A105200D24B3C /* TFY_CalendarDynamic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarDynamic.h; sourceTree = "<group>"; };
 		41368598A4E04B97FE08DF15 /* Pods_TFY_CalendarTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TFY_CalendarTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8AFD79197C113FB1935BA2E0 /* Pods-TFY_Calendar-TFY_CalendarUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TFY_Calendar-TFY_CalendarUITests.debug.xcconfig"; path = "Target Support Files/Pods-TFY_Calendar-TFY_CalendarUITests/Pods-TFY_Calendar-TFY_CalendarUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		9687A8AC13895AED764C78C5 /* Pods_TFY_Calendar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TFY_Calendar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -180,6 +180,53 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3656F14625D284360030D8CF /* CalendarView */ = {
+			isa = PBXGroup;
+			children = (
+				3656F15F25D284360030D8CF /* TFY_Calendar.h */,
+				3656F15125D284360030D8CF /* TFY_Calendar.m */,
+				3656F15C25D284360030D8CF /* TFY_CalendarCell.h */,
+				3656F14C25D284360030D8CF /* TFY_CalendarCell.m */,
+				3656F14925D284360030D8CF /* TFY_CalendarDynamic.h */,
+				3656F15E25D284360030D8CF /* TFY_CalendarCalculator.h */,
+				3656F15325D284360030D8CF /* TFY_CalendarCalculator.m */,
+				3656F15925D284360030D8CF /* TFY_CalendarAppearance.h */,
+				3656F14E25D284360030D8CF /* TFY_CalendarAppearance.m */,
+				3656F15D25D284360030D8CF /* TFY_CalendarHeaderView.h */,
+				3656F15225D284360030D8CF /* TFY_CalendarHeaderView.m */,
+				3656F15725D284360030D8CF /* TFY_CalendarStickyHeader.h */,
+				3656F14825D284360030D8CF /* TFY_CalendarStickyHeader.m */,
+				3656F15825D284360030D8CF /* TFY_CalendarWeekdayView.h */,
+				3656F15025D284360030D8CF /* TFY_CalendarWeekdayView.m */,
+				3656F15B25D284360030D8CF /* TFY_CalendarCollectionView.h */,
+				3656F14F25D284360030D8CF /* TFY_CalendarCollectionView.m */,
+				3656F15425D284360030D8CF /* TFY_CalendarDelegationProxy.h */,
+				3656F14725D284360030D8CF /* TFY_CalendarDelegationProxy.m */,
+				3656F14B25D284360030D8CF /* TFY_CalendarDelegationFactory.h */,
+				3656F15525D284360030D8CF /* TFY_CalendarDelegationFactory.m */,
+				3656F15A25D284360030D8CF /* TFY_CalendarTransitionCoordinator.h */,
+				3656F14D25D284360030D8CF /* TFY_CalendarTransitionCoordinator.m */,
+				3656F14A25D284360030D8CF /* TFY_CalendarCollectionViewLayout.h */,
+				3656F15625D284360030D8CF /* TFY_CalendarCollectionViewLayout.m */,
+			);
+			path = CalendarView;
+			sourceTree = "<group>";
+		};
+		3656F16025D284360030D8CF /* ITools */ = {
+			isa = PBXGroup;
+			children = (
+				3656F16125D284360030D8CF /* TFY_LunarFormatter.h */,
+				3656F16625D284360030D8CF /* TFY_LunarFormatter.m */,
+				3656F16525D284360030D8CF /* TFY_CalendarExtensions.h */,
+				3656F16225D284360030D8CF /* TFY_CalendarExtensions.m */,
+				3656F16425D284360030D8CF /* TFY_CalendarConstants.h */,
+				3656F16825D284360030D8CF /* TFY_CalendarConstants.m */,
+				3656F16725D284360030D8CF /* TFY_CalendarSeparatorDecorationView.h */,
+				3656F16325D284360030D8CF /* TFY_CalendarSeparatorDecorationView.m */,
+			);
+			path = ITools;
+			sourceTree = "<group>";
+		};
 		365ED16123938E4B00981A14 /* PrevNextButtons */ = {
 			isa = PBXGroup;
 			children = (
@@ -328,39 +375,8 @@
 			isa = PBXGroup;
 			children = (
 				36EE10FA250A0F5C00D24B3C /* TFY_CalendarKiit.h */,
-				36EE10FB250A105200D24B3C /* TFY_CalendarDynamic.h */,
-				3662923923934F5700DCFAAF /* TFY_Calendar.h */,
-				3662923A23934F5700DCFAAF /* TFY_Calendar.m */,
-				3662923C239351D500DCFAAF /* TFY_CalendarCell.h */,
-				3662923D239351D500DCFAAF /* TFY_CalendarCell.m */,
-				36629231239349DE00DCFAAF /* TFY_CalendarExtensions.h */,
-				36629232239349DE00DCFAAF /* TFY_CalendarExtensions.m */,
-				3662923523934D9200DCFAAF /* TFY_CalendarConstants.h */,
-				3662923623934D9200DCFAAF /* TFY_CalendarConstants.m */,
-				3662923F2393524300DCFAAF /* TFY_CalendarAppearance.h */,
-				366292402393524300DCFAAF /* TFY_CalendarAppearance.m */,
-				366292422393532900DCFAAF /* TFY_CalendarWeekdayView.h */,
-				366292432393532900DCFAAF /* TFY_CalendarWeekdayView.m */,
-				3662924523935D7A00DCFAAF /* TFY_CalendarHeaderView.h */,
-				3662924623935D7A00DCFAAF /* TFY_CalendarHeaderView.m */,
-				3662924823935E2200DCFAAF /* TFY_CalendarCollectionView.h */,
-				3662924923935E2200DCFAAF /* TFY_CalendarCollectionView.m */,
-				3662924B2393620300DCFAAF /* TFY_CalendarStickyHeader.h */,
-				3662924C2393620300DCFAAF /* TFY_CalendarStickyHeader.m */,
-				3662924E239363E400DCFAAF /* TFY_CalendarCollectionViewLayout.h */,
-				3662924F239363E400DCFAAF /* TFY_CalendarCollectionViewLayout.m */,
-				36629251239364DA00DCFAAF /* TFY_CalendarSeparatorDecorationView.h */,
-				36629252239364DA00DCFAAF /* TFY_CalendarSeparatorDecorationView.m */,
-				36629254239368C400DCFAAF /* TFY_CalendarCalculator.h */,
-				36629255239368C400DCFAAF /* TFY_CalendarCalculator.m */,
-				3662925723936CEC00DCFAAF /* TFY_CalendarTransitionCoordinator.h */,
-				3662925823936CEC00DCFAAF /* TFY_CalendarTransitionCoordinator.m */,
-				3662925A239370EB00DCFAAF /* TFY_CalendarDelegationFactory.h */,
-				3662925B239370EB00DCFAAF /* TFY_CalendarDelegationFactory.m */,
-				3662925D2393711B00DCFAAF /* TFY_CalendarDelegationProxy.h */,
-				3662925E2393711B00DCFAAF /* TFY_CalendarDelegationProxy.m */,
-				365ED15E2393855600981A14 /* TFY_LunarFormatter.h */,
-				365ED15F2393855600981A14 /* TFY_LunarFormatter.m */,
+				3656F14625D284360030D8CF /* CalendarView */,
+				3656F16025D284360030D8CF /* ITools */,
 			);
 			path = TFY_CalendarKiit;
 			sourceTree = "<group>";
@@ -642,34 +658,34 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				36629250239363E400DCFAAF /* TFY_CalendarCollectionViewLayout.m in Sources */,
 				365ED16D23938ED400981A14 /* RangePickerCell.m in Sources */,
 				365ED1792393925700981A14 /* FullScreenExampleViewController.m in Sources */,
-				36629253239364DA00DCFAAF /* TFY_CalendarSeparatorDecorationView.m in Sources */,
-				3662925F2393711B00DCFAAF /* TFY_CalendarDelegationProxy.m in Sources */,
 				3662922F2393490500DCFAAF /* AppDelegate.m in Sources */,
-				3662923E239351D500DCFAAF /* TFY_CalendarCell.m in Sources */,
-				3662923B23934F5700DCFAAF /* TFY_Calendar.m in Sources */,
+				3656F17725D284360030D8CF /* TFY_LunarFormatter.m in Sources */,
+				3656F17225D284360030D8CF /* TFY_CalendarCalculator.m in Sources */,
+				3656F16A25D284360030D8CF /* TFY_CalendarStickyHeader.m in Sources */,
 				365ED17F2393935B00981A14 /* LoadViewExampleViewController.m in Sources */,
-				36629233239349DE00DCFAAF /* TFY_CalendarExtensions.m in Sources */,
+				3656F16D25D284360030D8CF /* TFY_CalendarAppearance.m in Sources */,
 				365ED16C23938ED400981A14 /* RangePickerViewController.m in Sources */,
-				3662925923936CEC00DCFAAF /* TFY_CalendarTransitionCoordinator.m in Sources */,
+				3656F16C25D284360030D8CF /* TFY_CalendarTransitionCoordinator.m in Sources */,
 				3662922D2393490500DCFAAF /* ViewController.m in Sources */,
-				366292412393524300DCFAAF /* TFY_CalendarAppearance.m in Sources */,
+				3656F17325D284360030D8CF /* TFY_CalendarDelegationFactory.m in Sources */,
+				3656F17125D284360030D8CF /* TFY_CalendarHeaderView.m in Sources */,
+				3656F17425D284360030D8CF /* TFY_CalendarCollectionViewLayout.m in Sources */,
+				3656F17525D284360030D8CF /* TFY_CalendarExtensions.m in Sources */,
 				365ED182239393BC00981A14 /* ButtonsViewController.m in Sources */,
-				3662924A23935E2200DCFAAF /* TFY_CalendarCollectionView.m in Sources */,
 				365ED17C239392FD00981A14 /* HidePlaceholderViewController.m in Sources */,
-				36629256239368C400DCFAAF /* TFY_CalendarCalculator.m in Sources */,
-				3662923723934D9200DCFAAF /* TFY_CalendarConstants.m in Sources */,
-				3662924D2393620300DCFAAF /* TFY_CalendarStickyHeader.m in Sources */,
+				3656F16B25D284360030D8CF /* TFY_CalendarCell.m in Sources */,
 				365ED1762393919B00981A14 /* DelegateAppearanceViewController.m in Sources */,
-				366292442393532900DCFAAF /* TFY_CalendarWeekdayView.m in Sources */,
 				365ED17223938FE700981A14 /* DIYExampleViewController.m in Sources */,
-				365ED1602393855600981A14 /* TFY_LunarFormatter.m in Sources */,
+				3656F17825D284360030D8CF /* TFY_CalendarConstants.m in Sources */,
+				3656F16925D284360030D8CF /* TFY_CalendarDelegationProxy.m in Sources */,
+				3656F17025D284360030D8CF /* TFY_Calendar.m in Sources */,
 				3662922E2393490500DCFAAF /* SceneDelegate.m in Sources */,
+				3656F16E25D284360030D8CF /* TFY_CalendarCollectionView.m in Sources */,
+				3656F16F25D284360030D8CF /* TFY_CalendarWeekdayView.m in Sources */,
 				365ED17323938FE700981A14 /* DIYCalendarCell.m in Sources */,
-				3662924723935D7A00DCFAAF /* TFY_CalendarHeaderView.m in Sources */,
-				3662925C239370EB00DCFAAF /* TFY_CalendarDelegationFactory.m in Sources */,
+				3656F17625D284360030D8CF /* TFY_CalendarSeparatorDecorationView.m in Sources */,
 				36629201239347D900DCFAAF /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

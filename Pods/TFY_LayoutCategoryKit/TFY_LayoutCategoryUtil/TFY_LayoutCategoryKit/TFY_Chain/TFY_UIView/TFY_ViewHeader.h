@@ -29,5 +29,6 @@
 #import "TFY_VisualEffectViewChainModel.h"
 #import "TFY_WebViewChainModel.h"
 #import "TFY_SwitchChainModel.h"
+#import "TFY_ImageView.h"
 
 #endif /* TFY_ViewHeader_h */

@@ -140,6 +140,7 @@ NS_ASSUME_NONNULL_BEGIN
  * 初始一个容器
  */
 + (UITableView *)tfy_tableViewStyle:(UITableViewStyle)style;
+
 @end
 
 @interface UITableView (TemplateLayoutHeaderFooterView)

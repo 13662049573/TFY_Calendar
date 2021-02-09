@@ -64,7 +64,7 @@ NS_ASSUME_NONNULL_END
     
 #if FULL_SCREEN
     
-    TFY_Calendar *calendar = [[TFY_Calendar alloc] initWithFrame:CGRectMake(0, self.navigationController.navigationBar.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height-self.navigationController.navigationBar.frame.size.height)];
+    TFY_Calendar *calendar = [[TFY_Calendar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
     calendar.backgroundColor = [UIColor whiteColor];
     calendar.dataSource = self;
     calendar.delegate = self;
@@ -79,7 +79,7 @@ NS_ASSUME_NONNULL_END
     
 #else
 
-    TFY_Calendar *calendar = [[TFY_Calendar alloc] initWithFrame:CGRectMake(0, self.navigationController.navigationBar.frame.size.height, self.view.bounds.size.width, 300)];
+    TFY_Calendar *calendar = [[TFY_Calendar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 300)];
     calendar.backgroundColor = [UIColor whiteColor];
     calendar.dataSource = self;
     calendar.delegate = self;
@@ -139,9 +139,9 @@ NS_ASSUME_NONNULL_END
     [super viewWillLayoutSubviews];
     
 #if FULL_SCREEN
-    self.calendar.frame = CGRectMake(0, CGRectGetMaxY(self.navigationController.navigationBar.frame), self.view.bounds.size.width, self.view.bounds.size.height-CGRectGetMaxY(self.navigationController.navigationBar.frame));
+    self.calendar.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height);
 #else
-    self.calendar.frame = CGRectMake(0, CGRectGetMaxY(self.navigationController.navigationBar.frame), self.view.bounds.size.width, 300);
+    self.calendar.frame = CGRectMake(0, 0, self.view.bounds.size.width, 300);
 #endif
 }
 

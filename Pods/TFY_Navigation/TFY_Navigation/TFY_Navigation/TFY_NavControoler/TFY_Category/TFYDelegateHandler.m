@@ -17,7 +17,7 @@
     if (self.navigationController.tfy_openScrollLeftPush) {
         // 开启了左滑push功能
     }else if (visibleVC.tfy_popDelegate) {
-        // 设置了gk_popDelegate
+        // 设置了tfy_popDelegate
     }else {
         // 忽略根控制器
         if (self.navigationController.viewControllers.count <= 1) return NO;
@@ -32,6 +32,7 @@
     
     if (transition.x < 0) { // 左滑处理
         // 开启了左滑push并设置了代理
+        NSLog(@"tfy_openScrollLeftPush------%u-----tfy_pushDelegate-----%@",self.navigationController.tfy_openScrollLeftPush,visibleVC.tfy_pushDelegate);
         if (self.navigationController.tfy_openScrollLeftPush && visibleVC.tfy_pushDelegate) {
             [gestureRecognizer removeTarget:self.systemTarget action:action];
             [gestureRecognizer addTarget:self.customTarget action:@selector(panGestureRecognizerAction:)];
@@ -41,7 +42,7 @@
     }else { // 右滑处理
         // 解决根控制器右滑时出现的卡死情况
         if (visibleVC.tfy_popDelegate) {
-            // 实现了gk_popDelegate，不作处理
+            // 实现了tfy_popDelegate，不作处理
         }else {
             if (self.navigationController.viewControllers.count <= 1) return NO;
         }

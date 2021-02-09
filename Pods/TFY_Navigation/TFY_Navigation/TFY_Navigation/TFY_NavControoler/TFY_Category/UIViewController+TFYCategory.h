@@ -42,21 +42,6 @@ extern NSString *const TFYViewControllerPropertyChangedNotification;
 /** 全屏滑动时，滑动区域距离屏幕左边的最大位置，默认是0：表示全屏都可滑动 */
 @property (nonatomic, assign) CGFloat tfy_popMaxAllowedDistanceToLeftEdge;
 
-/** 设置导航栏的透明度 */
-@property (nonatomic, assign) CGFloat tfy_navBarAlpha;
-
-/** 设置状态栏类型 */
-@property (nonatomic, assign) UIStatusBarStyle tfy_statusBarStyle;
-
-/** 设置状态栏是否隐藏(default is NO 即不隐藏) */
-@property (nonatomic, assign) BOOL tfy_statusBarHidden;
-
-/** 自定义返回按钮图片 */
-@property (nonatomic, strong) UIImage *tfy_backImage;
-
-/** 设置返回按钮的类型 */
-@property (nonatomic, assign) TFYNavigationBarBackStyle tfy_backStyle;
-
 /** push代理 */
 @property (nonatomic, weak) id<TFYViewControllerPushDelegate> tfy_pushDelegate;
 

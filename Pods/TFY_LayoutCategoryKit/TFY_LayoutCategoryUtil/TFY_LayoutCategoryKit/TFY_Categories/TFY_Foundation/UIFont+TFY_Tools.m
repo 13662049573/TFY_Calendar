@@ -22,8 +22,7 @@
     return width;
 }
 
-+ (UIFont *)tfy_fontScaleWithName:(NSString *)fontName fontSize:(CGFloat)fontSize{
-    
++ (UIFont *)tfy_fontScaleWithName:(NSString *)fontName fontSize:(CGFloat)fontSize {
     return [self tfy_fontWithName:fontName fontSize:fontSize * FontScale];
 }
 

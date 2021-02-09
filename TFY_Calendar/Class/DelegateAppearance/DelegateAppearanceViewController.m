@@ -124,7 +124,7 @@ NS_ASSUME_NONNULL_END
     self.view = view;
     
     CGFloat height = [[UIDevice currentDevice].model hasPrefix:@"iPad"] ? 450 : 300;
-    TFY_Calendar *calendar = [[TFY_Calendar alloc] initWithFrame:CGRectMake(0, kNavBarHeight, self.view.bounds.size.width, height)];
+    TFY_Calendar *calendar = [[TFY_Calendar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, height)];
     calendar.dataSource = self;
     calendar.delegate = self;
     calendar.allowsMultipleSelection = YES;

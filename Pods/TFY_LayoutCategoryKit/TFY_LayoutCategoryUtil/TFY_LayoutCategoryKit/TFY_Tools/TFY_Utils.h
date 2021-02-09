@@ -430,13 +430,17 @@ typedef NS_ENUM(NSUInteger, Temperature) {
 +(NSData *)getdataValueInUDWithKey:(NSString *)key;
 
 /***   归档*/
-+ (void)keyedArchiverObject:(id)object ForKey:(NSString *)key ToFile:(NSString *)path;
++ (void)keyedArchiverObject:(id)object ToFile:(NSString *)path;
 
 /***  反归档*/
-+(NSArray *)keyedUnArchiverForKey:(NSString *)key FromFile:(NSString *)path;
++(id)keyedUnArchiverForKey:(id)object FromFile:(NSString *)path;
 
 /***  将数组拆分成固定长度的子数组*/
 +(NSArray *)splitArray:(NSArray *)array withSubSize:(int)subSize;
+/**
+    根据文本大小，宽度，返回换行的个数 和 换行数据
+ */
++ (NSArray *)getLinesArrayOfStringInrowsOfString:(NSString *)text withFont:(UIFont *)font withWidth:(CGFloat)width;
 
 /***  获取保存的BOOL*/
 +(BOOL)getBoolValueInUDWithKey:(NSString *)key;

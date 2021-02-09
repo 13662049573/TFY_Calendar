@@ -43,6 +43,11 @@ static void CategoryRGBtoHSV( float r, float g, float b, float *h, float *s, flo
     return [UIImage imageNamed:bundleName] ? : [UIImage imageNamed:frameWorkName];
 }
 
++ (UIImage *)tfy_fileImage:(NSString *)fileImage {
+    return [UIImage imageWithContentsOfFile:[[[NSBundle mainBundle] pathForResource:@"TFY_NavigationImage" ofType:@"bundle"] stringByAppendingPathComponent:fileImage]];
+}
+
+
 + (UIImage *)tfy_imageWithColor:(UIColor *)color {
     return [self tfy_imageWithColor:color size:CGSizeMake(1, 1)];
 }

@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)tfy_showProgressWithColor:(UIColor *)color;
 
 - (void )tfy_screenSnapshot:(void(^)(UIImage *snapShotImage))finishBlock;
+
 @end
 
 

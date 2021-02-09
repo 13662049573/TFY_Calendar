@@ -47,7 +47,7 @@ NS_ASSUME_NONNULL_END
     
     // 450 for iPad and 300 for iPhone
     CGFloat height = [[UIDevice currentDevice].model hasPrefix:@"iPad"] ? 450 : 300;
-    TFY_Calendar *calendar = [[TFY_Calendar alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.navigationController.navigationBar.frame), view.frame.size.width, height)];
+    TFY_Calendar *calendar = [[TFY_Calendar alloc] initWithFrame:CGRectMake(0, 0, view.frame.size.width, height)];
     calendar.dataSource = self;
     calendar.delegate = self;
     calendar.scrollDirection = TFYCa_CalendarScrollDirectionVertical;

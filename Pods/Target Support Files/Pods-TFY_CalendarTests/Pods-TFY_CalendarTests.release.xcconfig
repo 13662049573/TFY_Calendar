@@ -1,6 +1,7 @@
 CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO
+ENABLE_STRICT_OBJC_MSGSEND = NO
 FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/TFY_LayoutCategoryKit" "${PODS_CONFIGURATION_BUILD_DIR}/TFY_Navigation" "${PODS_CONFIGURATION_BUILD_DIR}/TFY_ProgressHUD"
-GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1 NDEBUG=1 _DEBUG_TAG_
 HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/TFY_LayoutCategoryKit/TFY_LayoutCategoryKit.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/TFY_Navigation/TFY_Navigation.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/TFY_ProgressHUD/TFY_ProgressHUD.framework/Headers" $(SDKROOT)/usr/include $(SDKROOT)/usr/include/AvailabilityMacros
 OTHER_LDFLAGS = $(inherited) -framework "Foundation" -framework "TFY_LayoutCategoryKit" -framework "TFY_Navigation" -framework "TFY_ProgressHUD" -framework "UIKit"
 PODS_BUILD_DIR = ${BUILD_DIR}

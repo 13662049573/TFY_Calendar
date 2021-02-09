@@ -52,6 +52,7 @@ typedef NS_ENUM(NSInteger, fontType) {
 + (UIFont *)tfy_STHeitiSCMedium:(CGFloat)size;
 
 + (UIFont *)tfy_LatoBoldAndSize:(CGFloat)size;
+
 @end
 
 NS_ASSUME_NONNULL_END
