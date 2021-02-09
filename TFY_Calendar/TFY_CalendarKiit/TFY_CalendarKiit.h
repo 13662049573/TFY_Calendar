@@ -29,7 +29,6 @@ FOUNDATION_EXPORT const unsigned char TFY_CalendarKiitVersionString[];
 #import <TFY_CalendarKiit/TFY_CalendarWeekdayView.h>
 #import <TFY_CalendarKiit/TFY_LunarFormatter.h>
 #import <TFY_CalendarKiit/TFY_CalendarExtensions.h>
-#import <TFY_CalendarKiit/TFY_CalendarDynamic.h>
 
 #else
 
@@ -45,6 +44,5 @@ FOUNDATION_EXPORT const unsigned char TFY_CalendarKiitVersionString[];
 #import "TFY_CalendarWeekdayView.h"
 #import "TFY_LunarFormatter.h"
 #import "TFY_CalendarExtensions.h"
-#import "TFY_CalendarDynamic.h"
 
 #endif

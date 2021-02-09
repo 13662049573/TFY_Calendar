@@ -187,7 +187,6 @@
 				3656F15125D284360030D8CF /* TFY_Calendar.m */,
 				3656F15C25D284360030D8CF /* TFY_CalendarCell.h */,
 				3656F14C25D284360030D8CF /* TFY_CalendarCell.m */,
-				3656F14925D284360030D8CF /* TFY_CalendarDynamic.h */,
 				3656F15E25D284360030D8CF /* TFY_CalendarCalculator.h */,
 				3656F15325D284360030D8CF /* TFY_CalendarCalculator.m */,
 				3656F15925D284360030D8CF /* TFY_CalendarAppearance.h */,
@@ -375,6 +374,7 @@
 			isa = PBXGroup;
 			children = (
 				36EE10FA250A0F5C00D24B3C /* TFY_CalendarKiit.h */,
+				3656F14925D284360030D8CF /* TFY_CalendarDynamic.h */,
 				3656F14625D284360030D8CF /* CalendarView */,
 				3656F16025D284360030D8CF /* ITools */,
 			);
