@@ -15,8 +15,6 @@
 @property (strong, nonatomic) NSPointerArray *weekdayPointers;
 @property (weak  , nonatomic) UIView *contentView;
 @property (weak  , nonatomic) TFY_Calendar *calendar;
-
-- (void)commonInit;
 @end
 
 @implementation TFY_CalendarWeekdayView
@@ -104,9 +102,9 @@
         NSInteger index = (i + self.calendar.firstWeekday-1) % 7;
         UILabel *label = [self.weekdayPointers pointerAtIndex:i];
         label.font = self.calendar.appearance.weekdayFont;
-        if ((i==0 || i==6) && self.calendar.gregorian.firstWeekday == 1 && self.calendar.appearance.subtitleWeekendColor!=nil) {
+        if ((i==0 || i==6) && self.calendar.gregorian.firstWeekday == 1 && self.calendar.appearance.subtitleWeekendColor != nil) {
             label.textColor = self.calendar.appearance.subtitleWeekendColor;
-        } else if ((i == 5 || i == 6) && self.calendar.gregorian.firstWeekday == 2 && self.calendar.appearance.subtitleWeekendColor!=nil) {
+        } else if ((i == 5 || i == 6) && self.calendar.gregorian.firstWeekday == 2 && self.calendar.appearance.subtitleWeekendColor != nil) {
             label.textColor = self.calendar.appearance.subtitleWeekendColor;
         } else {
             label.textColor = self.calendar.appearance.weekdayTextColor;

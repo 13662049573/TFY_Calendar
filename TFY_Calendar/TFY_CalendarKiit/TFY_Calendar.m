@@ -91,41 +91,6 @@ typedef NS_ENUM(NSUInteger, TFYCa_CalendarOrientation) {
 @property (strong, nonatomic) NSIndexPath *lastPressedIndexPath;
 @property (strong, nonatomic) NSMapTable *visibleSectionHeaders;
 
-- (void)orientationDidChange:(NSNotification *)notification;
-
-- (CGSize)sizeThatFits:(CGSize)size scope:(TFYCa_CalendarScope)scope;
-
-- (void)scrollToDate:(NSDate *)date;
-- (void)scrollToDate:(NSDate *)date animated:(BOOL)animated;
-- (void)scrollToPageForDate:(NSDate *)date animated:(BOOL)animated;
-
-- (BOOL)isPageInRange:(NSDate *)page;
-- (BOOL)isDateInRange:(NSDate *)date;
-- (BOOL)isDateSelected:(NSDate *)date;
-- (BOOL)isDateInDifferentPage:(NSDate *)date;
-
-- (void)selectDate:(NSDate *)date scrollToDate:(BOOL)scrollToDate atMonthPosition:(TFYCa_CalendarMonthPosition)monthPosition;
-- (void)enqueueSelectedDate:(NSDate *)date;
-
-- (void)invalidateDateTools;
-- (void)invalidateLayout;
-- (void)invalidateHeaders;
-- (void)invalidateAppearanceForCell:(TFY_CalendarCell *)cell forDate:(NSDate *)date;
-
-- (void)invalidateViewFrames;
-
-- (void)handleSwipeToChoose:(UILongPressGestureRecognizer *)pressGesture;
-
-- (void)selectCounterpartDate:(NSDate *)date;
-- (void)deselectCounterpartDate:(NSDate *)date;
-
-- (void)reloadDataForCell:(TFY_CalendarCell *)cell atIndexPath:(NSIndexPath *)indexPath;
-
-- (void)adjustMonthPosition;
-- (BOOL)requestBoundingDatesIfNecessary;
-- (void)executePendingOperationsIfNeeded;
-- (void)configureAppearance;
-
 @end
 
 @implementation TFY_Calendar
@@ -1574,8 +1539,6 @@ typedef NS_ENUM(NSUInteger, TFYCa_CalendarOrientation) {
     [self performEnsuringValidLayout:^{
         if (@available(iOS 13.0, *)) {
             [self.transitionCoordinator performBoundingRectTransitionFromMonth:[NSDate now] toMonth:self.currentPage duration:0];
-        } else {
-            // Fallback on earlier versions
         }
     }];
 }

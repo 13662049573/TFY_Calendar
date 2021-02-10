@@ -42,8 +42,6 @@
 @property (strong, nonatomic) NSMutableDictionary<NSIndexPath *, UICollectionViewLayoutAttributes *> *headerAttributes;
 @property (strong, nonatomic) NSMutableDictionary<NSIndexPath *, UICollectionViewLayoutAttributes *> *rowSeparatorAttributes;
 
-- (void)didReceiveNotifications:(NSNotification *)notification;
-- (CGFloat)calculateRowOffset:(NSInteger)row totalRows:(NSInteger)totalRows;
 @end
 
 @implementation TFY_CalendarCollectionViewLayout

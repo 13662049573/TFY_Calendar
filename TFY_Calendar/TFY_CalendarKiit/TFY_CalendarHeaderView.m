@@ -13,8 +13,6 @@
 #import "TFY_CalendarDynamic.h"
 
 @interface TFY_CalendarHeaderView ()<UICollectionViewDataSource,UICollectionViewDelegate,TFYCa_CalendarCollectionViewInternalDelegate>
-- (void)scrollToOffset:(CGFloat)scrollOffset animated:(BOOL)animated;
-- (void)configureCell:(TFY_CalendarHeaderCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 @end
 
 @implementation TFY_CalendarHeaderView

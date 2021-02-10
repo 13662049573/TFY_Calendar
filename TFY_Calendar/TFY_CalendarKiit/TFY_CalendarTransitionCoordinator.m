@@ -15,21 +15,7 @@
 @property (weak, nonatomic) TFY_CalendarCollectionView *collectionView;
 @property (weak, nonatomic) TFY_CalendarCollectionViewLayout *collectionViewLayout;
 @property (weak, nonatomic) TFY_Calendar *calendar;
-
 @property (strong, nonatomic) TFY_CalendarTransitionAttributes *transitionAttributes;
-
-- (TFY_CalendarTransitionAttributes *)createTransitionAttributesTargetingScope:(TFYCa_CalendarScope)targetScope;
-
-- (void)performTransitionCompletionAnimated:(BOOL)animated;
-
-- (void)performAlphaAnimationWithProgress:(CGFloat)progress;
-- (void)performPathAnimationWithProgress:(CGFloat)progress;
-
-- (void)scopeTransitionDidBegin:(UIPanGestureRecognizer *)panGesture;
-- (void)scopeTransitionDidUpdate:(UIPanGestureRecognizer *)panGesture;
-- (void)scopeTransitionDidEnd:(UIPanGestureRecognizer *)panGesture;
-
-- (void)boundingRectWillChange:(CGRect)targetBounds animated:(BOOL)animated;
 
 @end
 
@@ -203,7 +189,6 @@
             });
         };
         if (TFYCa_CalendarInAppExtension) {
-            // Detect today extension: http://stackoverflow.com/questions/25048026/ios-8-extension-how-to-detect-running
             [self boundingRectWillChange:bounds animated:YES];
             completion(YES);
         } else {

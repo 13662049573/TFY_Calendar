@@ -23,7 +23,6 @@
 @property (readonly, nonatomic) NSDate *minimumDate;
 @property (readonly, nonatomic) NSDate *maximumDate;
 
-- (void)didReceiveNotifications:(NSNotification *)notification;
 @end
 
 @implementation TFY_CalendarCalculator

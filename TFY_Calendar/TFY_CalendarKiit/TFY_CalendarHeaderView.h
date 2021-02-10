@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setScrollOffset:(CGFloat)scrollOffset animated:(BOOL)animated;
 - (void)reloadData;
 - (void)configureAppearance;
+
 @end
 
 @interface TFY_CalendarHeaderCell : UICollectionViewCell

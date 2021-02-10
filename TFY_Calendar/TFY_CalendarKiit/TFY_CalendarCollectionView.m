@@ -11,7 +11,6 @@
 #import "TFY_CalendarConstants.h"
 
 @interface TFY_CalendarCollectionView ()
-- (void)commonInit;
 @end
 
 @implementation TFY_CalendarCollectionView
