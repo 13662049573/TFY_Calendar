@@ -39,7 +39,7 @@
         
         _backgroundColors = [NSMutableDictionary dictionaryWithCapacity:5];
         _backgroundColors[@(TFYCa_CalendarCellStateNormal)]      = [UIColor clearColor];
-        _backgroundColors[@(TFYCa_CalendarCellStateSelected)]    = TFYCa_CalendarStandardSelectionColor;
+        _backgroundColors[@(TFYCa_CalendarCellStateSelected)]    = TFYCa_CalendarStandardSelectionColor;//选择填充颜色
         _backgroundColors[@(TFYCa_CalendarCellStateDisabled)]    = [UIColor clearColor];
         _backgroundColors[@(TFYCa_CalendarCellStatePlaceholder)] = [UIColor clearColor];
         _backgroundColors[@(TFYCa_CalendarCellStateToday)]       = TFYCa_CalendarStandardTodayColor;
@@ -66,6 +66,8 @@
         _eventSelectionColor = TFYCa_CalendarStandardEventDotColor;
         
         _borderColors = [NSMutableDictionary dictionaryWithCapacity:2];
+        
+        _swapplaces = TFYCa_CalendarSwapplacesYearTop;
         
 #if TARGET_INTERFACE_BUILDER
         _fakeEventDots = YES;

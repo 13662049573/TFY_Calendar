@@ -230,8 +230,13 @@
 {
     [super layoutSubviews];
     
-    self.titlebtn.frame = self.contentView.bounds;
-    
+    if (self.header.calendar.appearance.liftrightSpacing > 0) {
+        CGFloat spacing = self.header.calendar.appearance.liftrightSpacing;
+        self.titlebtn.frame = CGRectMake(spacing, 0, CGRectGetWidth(self.contentView.bounds)-2*spacing, CGRectGetHeight(self.contentView.bounds));
+    } else {
+        self.titlebtn.frame = self.contentView.bounds;
+    }
+
     if (self.header.scrollDirection == UICollectionViewScrollDirectionHorizontal) {
         CGFloat position = [self.contentView convertPoint:CGPointMake(CGRectGetMidX(self.contentView.bounds), CGRectGetMidY(self.contentView.bounds)) toView:self.header].x;
         CGFloat center = CGRectGetMidX(self.header.bounds);

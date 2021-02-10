@@ -44,7 +44,7 @@ CG_EXTERN CGSize const CGSizeAutomatic;
 #define TFYCa_CalendarDeviceIsIPad [[UIDevice currentDevice].model hasPrefix:@"iPad"]
 #endif
 
-#define TFYCa_CalendarStandardSelectionColor   TFYCa_ColorRGBA(31,119,219,1.0)
+#define TFYCa_CalendarStandardSelectionColor   TFYCa_ColorRGBA(31,119,219,1.0)//选择填充颜色
 #define TFYCa_CalendarStandardTodayColor       TFYCa_ColorRGBA(198,51,42 ,1.0)
 #define TFYCa_CalendarStandardTitleTextColor   TFYCa_ColorRGBA(14,69,221 ,1.0)
 #define TFYCa_CalendarStandardEventDotColor    TFYCa_ColorRGBA(31,119,219,0.75)

@@ -104,7 +104,13 @@
         NSInteger index = (i + self.calendar.firstWeekday-1) % 7;
         UILabel *label = [self.weekdayPointers pointerAtIndex:i];
         label.font = self.calendar.appearance.weekdayFont;
-        label.textColor = self.calendar.appearance.weekdayTextColor;
+        if ((i==0 || i==6) && self.calendar.gregorian.firstWeekday == 1 && self.calendar.appearance.subtitleWeekendColor!=nil) {
+            label.textColor = self.calendar.appearance.subtitleWeekendColor;
+        } else if ((i == 5 || i == 6) && self.calendar.gregorian.firstWeekday == 2 && self.calendar.appearance.subtitleWeekendColor!=nil) {
+            label.textColor = self.calendar.appearance.subtitleWeekendColor;
+        } else {
+            label.textColor = self.calendar.appearance.weekdayTextColor;
+        }
         label.text = useDefaultWeekdayCase ? weekdaySymbols[index] : [weekdaySymbols[index] uppercaseString];
     }
 

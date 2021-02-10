@@ -306,12 +306,20 @@ typedef NS_ENUM(NSUInteger, TFYCa_CalendarOrientation) {
         CGFloat rowHeight = self.preferredRowHeight;
         CGFloat padding = 5;
         if (self.scrollDirection == UICollectionViewScrollDirectionHorizontal) {
-            rowHeight = TFYCa_CalendarFloor(rowHeight*2)*0.5; // Round to nearest multiple of 0.5. e.g. (16.8->16.5),(16.2->16.0)
+            rowHeight = TFYCa_CalendarFloor(rowHeight*2)*0.5; // 四舍五入到0.5的整数倍。例如(16.8 - > 16.5),(16.2 - > 16.0)
         }
         
-        self.calendarHeaderView.frame = CGRectMake(0, 0, self.tfyCa_width, headerHeight);
-        self.calendarWeekdayView.frame = CGRectMake(0, self.calendarHeaderView.tfyCa_bottom, self.contentView.tfyCa_width, weekdayHeight);
-
+        switch (self.appearance.swapplaces) {
+            case TFYCa_CalendarSwapplacesYearTop:
+                self.calendarHeaderView.frame = CGRectMake(0, 0, self.tfyCa_width, headerHeight);
+                self.calendarWeekdayView.frame = CGRectMake(0, self.calendarHeaderView.tfyCa_bottom, self.contentView.tfyCa_width, weekdayHeight);
+                break;
+            case TFYCa_CalendarSwapplacesWeekTop:
+                self.calendarWeekdayView.frame = CGRectMake(0, 0, self.contentView.tfyCa_width, weekdayHeight);
+                self.calendarHeaderView.frame = CGRectMake(0, self.calendarWeekdayView.tfyCa_bottom, self.tfyCa_width, headerHeight);
+                break;
+        }
+       
         _deliver.frame = CGRectMake(self.calendarHeaderView.tfyCa_left, self.calendarHeaderView.tfyCa_top, self.calendarHeaderView.tfyCa_width, headerHeight+weekdayHeight);
         _deliver.hidden = self.calendarHeaderView.hidden;
         if (!self.floatingMode) {

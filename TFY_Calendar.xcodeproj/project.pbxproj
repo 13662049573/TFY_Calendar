@@ -138,6 +138,7 @@
 		366292282393490500DCFAAF /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		366292292393490500DCFAAF /* SceneDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
 		366292302393492000DCFAAF /* Calendar_PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Calendar_PrefixHeader.pch; sourceTree = "<group>"; };
+		3663940A25D38BE300FA603F /* TFY_CalendarProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarProtocol.h; sourceTree = "<group>"; };
 		3667B1B623939B2800BEC399 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3667B1B823939B2E00BEC399 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		36EE10FA250A0F5C00D24B3C /* TFY_CalendarKiit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_CalendarKiit.h; sourceTree = "<group>"; };
@@ -329,6 +330,7 @@
 			children = (
 				3656F19325D293E80030D8CF /* TFY_Calendar.h */,
 				3656F18925D293E80030D8CF /* TFY_Calendar.m */,
+				3663940A25D38BE300FA603F /* TFY_CalendarProtocol.h */,
 				3656F19025D293E80030D8CF /* TFY_CalendarAppearance.h */,
 				3656F18E25D293E80030D8CF /* TFY_CalendarAppearance.m */,
 				3656F19825D293E90030D8CF /* TFY_CalendarCalculator.h */,
