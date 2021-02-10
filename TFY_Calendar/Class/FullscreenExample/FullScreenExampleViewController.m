@@ -17,24 +17,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (assign, nonatomic) BOOL showsLunar;
 @property (assign, nonatomic) BOOL showsEvents;
-
 @property (strong, nonatomic) NSCache *cache;
-
-- (void)todayItemClicked:(id)sender;
-- (void)lunarItemClicked:(id)sender;
-- (void)eventItemClicked:(id)sender;
-
 @property (strong, nonatomic) NSCalendar *gregorian;
 @property (strong, nonatomic) NSDateFormatter *dateFormatter;
-
 @property (strong, nonatomic) NSDate *minimumDate;
 @property (strong, nonatomic) NSDate *maximumDate;
-
 @property (strong, nonatomic) TFY_LunarFormatter *lunarFormatter;
 @property (strong, nonatomic) NSArray<EKEvent *> *events;
-
-- (void)loadCalendarEvents;
-- (nullable NSArray<EKEvent *> *)eventsForDate:(NSDate *)date;
 
 @end
 

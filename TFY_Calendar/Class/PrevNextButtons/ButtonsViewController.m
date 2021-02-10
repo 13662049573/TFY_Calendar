@@ -15,10 +15,6 @@
 @property (weak, nonatomic) UIButton *nextButton;
 
 @property (strong, nonatomic) NSCalendar *gregorian;
-
-- (void)previousClicked:(id)sender;
-- (void)nextClicked:(id)sender;
-
 @end
 
 @implementation ButtonsViewController

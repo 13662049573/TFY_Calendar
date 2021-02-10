@@ -24,9 +24,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSCalendar *gregorian;
 @property (strong, nonatomic) NSDateFormatter *dateFormatter;
 
-- (void)nextClicked:(id)sender;
-- (void)prevClicked:(id)sender;
-
 @end
 
 NS_ASSUME_NONNULL_END

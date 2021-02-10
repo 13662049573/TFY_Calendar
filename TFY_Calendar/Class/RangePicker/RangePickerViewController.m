@@ -22,8 +22,6 @@
 // The end date of the range
 @property (strong, nonatomic) NSDate *date2;
 
-- (void)configureCell:(__kindof TFY_CalendarCell *)cell forDate:(NSDate *)date atMonthPosition:(TFYCa_CalendarMonthPosition)position;
-
 @end
 
 @implementation RangePickerViewController

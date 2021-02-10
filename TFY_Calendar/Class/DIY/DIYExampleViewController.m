@@ -24,9 +24,6 @@
 @property (strong, nonatomic) NSDate *maximumDate;
 @property (strong, nonatomic) TFY_LunarFormatter *lunarFormatter;
 @property (strong, nonatomic) NSArray<EKEvent *> *events;
-
-- (void)configureCell:(TFY_CalendarCell *)cell forDate:(NSDate *)date atMonthPosition:(TFYCa_CalendarMonthPosition)position;
-
 @end
 
 @implementation DIYExampleViewController
