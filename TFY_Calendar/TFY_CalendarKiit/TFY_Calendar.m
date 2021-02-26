@@ -285,7 +285,7 @@ typedef NS_ENUM(NSUInteger, TFYCa_CalendarOrientation) {
                 break;
         }
        
-        _deliver.frame = CGRectMake(self.calendarHeaderView.tfyCa_left, self.calendarHeaderView.tfyCa_top, self.calendarHeaderView.tfyCa_width, headerHeight+weekdayHeight);
+        _deliver.frame = CGRectMake(self.calendarHeaderView.tfyCa_left, self.appearance.swapplaces == TFYCa_CalendarSwapplacesWeekTop?self.calendarWeekdayView.tfyCa_top:self.calendarHeaderView.tfyCa_top, self.calendarHeaderView.tfyCa_width, headerHeight+weekdayHeight);
         _deliver.hidden = self.calendarHeaderView.hidden;
         if (!self.floatingMode) {
             switch (self.transitionCoordinator.representingScope) {
