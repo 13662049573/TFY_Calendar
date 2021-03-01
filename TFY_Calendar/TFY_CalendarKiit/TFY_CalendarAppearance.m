@@ -29,10 +29,9 @@
         _subtitleFont = [UIFont systemFontOfSize:TFYCa_CalendarStandardSubtitleTextSize];
         _weekdayFont = [UIFont systemFontOfSize:TFYCa_CalendarStandardWeekdayTextSize];
         _headerTitleFont = [UIFont systemFontOfSize:TFYCa_CalendarStandardHeaderTextSize];
-        _contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
         
         _headerTitleColor = TFYCa_CalendarStandardTitleTextColor;
-        _headerDateFormat = @"yyyy年MM月";
+        _headerDateFormat = @"yyyy/MM";
         _headerMinimumDissolvedAlpha = 0.2;
         _weekdayTextColor = TFYCa_CalendarStandardTitleTextColor;
         _caseOptions = TFYCa_CalendarCaseOptionsHeaderUsesDefaultCase|TFYCa_CalendarCaseOptionsWeekdayUsesDefaultCase;

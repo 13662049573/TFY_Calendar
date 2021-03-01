@@ -132,6 +132,11 @@ typedef NS_ENUM(NSUInteger, TFYCa_CalendarMonthPosition) {
  */
 - (void)calendarCurrentPageDidChange:(TFY_Calendar *_Nullable)calendar;
 
+/**
+  更改年月头部数据。暂时不支持直接修改titleBtn的frame 位置，如果修改frame，需要配合appearance.liftrightSpacing  的值使用
+ */
+- (void)calendar:(TFY_CalendarHeaderView *_Nonnull)calendarHerderView DateButton:(UIButton *_Nonnull)titleBtn WeekButtonTitle:(NSString *_Nonnull)textString;
+
 @end
 
 /**

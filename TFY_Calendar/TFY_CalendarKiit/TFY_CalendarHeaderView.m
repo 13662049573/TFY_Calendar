@@ -151,9 +151,8 @@
     TFY_CalendarAppearance *appearance = self.calendar.appearance;
     cell.titlebtn.titleLabel.font = appearance.headerTitleFont;
     [cell.titlebtn setTitleColor:appearance.headerTitleColor forState:UIControlStateNormal];
-    cell.titlebtn.contentHorizontalAlignment = appearance.contentHorizontalAlignment;
-    
     _calendar.formatter.dateFormat = appearance.headerDateFormat;
+    
     BOOL usesUpperCase = (appearance.caseOptions & 15) == TFYCa_CalendarCaseOptionsHeaderUsesUpperCase;
     NSString *text = nil;
     switch (self.calendar.transitionCoordinator.representingScope) {
@@ -188,6 +187,9 @@
     }
     text = usesUpperCase ? text.uppercaseString : text;
     [cell.titlebtn setTitle:text forState:UIControlStateNormal];
+    if ([self.delegate respondsToSelector:@selector(calendar:DateButton:WeekButtonTitle:)]) {
+        [self.delegate calendar:self DateButton:cell.titlebtn WeekButtonTitle:text];
+    }
     [cell setNeedsLayout];
 }
 

@@ -60,16 +60,15 @@ NS_ASSUME_NONNULL_END
     calendar.delegate = self;
     calendar.placeholderType = TFYCa_CalendarPlaceholderTypeFillHeadTail;
     calendar.adjustsBoundingRectWhenChangingMonths = YES;
-    calendar.currentPage = [self.dateFormatter dateFromString:@"2020-06-01"];
     calendar.locale = [NSLocale localeWithLocaleIdentifier:@"zh-CN"];
-    calendar.firstWeekday = 1;
     calendar.scrollDirection = TFYCa_CalendarScrollDirectionVertical;
-    calendar.appearance.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     calendar.appearance.caseOptions = TFYCa_CalendarCaseOptionsWeekdayUsesSingleUpperCase;
     calendar.calendarHeaderView.backgroundColor = [UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1.0];
     calendar.appearance.weekdayTextColor = [UIColor colorWithRed:102/255.0 green:102/255.0 blue:102/255.0 alpha:1.0];
     calendar.appearance.headerTitleColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:1.0];
-    
+    calendar.appearance.headerDateFormat = @"MM";//内部特殊处理一下，必须这样传值，后期有需求可以更改
+    calendar.appearance.swapplaces = TFYCa_CalendarSwapplacesWeekTop;
+    calendar.appearance.liftrightSpacing = 15;
     [self.view addSubview:calendar];
     self.calendar = calendar;
     
@@ -150,6 +149,31 @@ NS_ASSUME_NONNULL_END
     self.bottomContainer.frame = kContainerFrame;
 }
 
+- (void)calendar:(TFY_CalendarHeaderView *)calendarHerderView DateButton:(UIButton *)titleBtn WeekButtonTitle:(NSString *)textString {
+    
+    titleBtn.backgroundColor = UIColor.yellowColor;
+    titleBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    [titleBtn setTitle:[self DatetoChinese:textString] forState:UIControlStateNormal];
+}
+
+- (NSString *)DatetoChinese:(NSString *)text {
+    NSDictionary *dateDict = @{
+        @"01":@"一",
+        @"02":@"二",
+        @"03":@"三",
+        @"04":@"四",
+        @"05":@"五",
+        @"06":@"六",
+        @"07":@"七",
+        @"08":@"八",
+        @"09":@"九",
+        @"10":@"十",
+        @"11":@"十一",
+        @"12":@"十二",
+    };
+    return [NSString stringWithFormat:@"%@月",dateDict[text]];
+}
+
 #pragma mark - Target action
 
 - (void)nextClicked:(id)sender
@@ -163,5 +187,6 @@ NS_ASSUME_NONNULL_END
     NSDate *prevMonth = [self.gregorian dateByAddingUnit:NSCalendarUnitMonth value:-1 toDate:self.calendar.currentPage options:0];
     [self.calendar setCurrentPage:prevMonth animated:YES];
 }
+
 
 @end

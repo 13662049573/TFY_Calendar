@@ -134,9 +134,6 @@ NS_ASSUME_NONNULL_BEGIN
 ///边界半径，而1表示一个圆，0表示一个矩形，中间值将为其指定拐角半径。
 @property (assign, nonatomic) CGFloat borderRadius;
 
-///日期位置
-@property (assign, nonatomic) UIControlContentHorizontalAlignment contentHorizontalAlignment;
-
 ///日期开启左右位置 如 ：UIControlContentHorizontalAlignmentLeft  时，可以设置左右间距
 @property (assign, nonatomic) CGFloat  liftrightSpacing;
 

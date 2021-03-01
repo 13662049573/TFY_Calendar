@@ -53,7 +53,7 @@ typedef NS_ENUM(NSUInteger, TFYCa_CalendarOrientation) {
 };
 
 
-@interface TFY_Calendar ()<UICollectionViewDataSource,UICollectionViewDelegate,TFYCa_CalendarCollectionViewInternalDelegate,UIGestureRecognizerDelegate>{
+@interface TFY_Calendar ()<UICollectionViewDataSource,UICollectionViewDelegate,TFYCa_CalendarCollectionViewInternalDelegate,UIGestureRecognizerDelegate,HerderViewDelegate>{
     NSMutableArray  *_selectedDates;
 }
 
@@ -1264,6 +1264,7 @@ typedef NS_ENUM(NSUInteger, TFYCa_CalendarOrientation) {
             
             TFY_CalendarHeaderView *headerView = [[TFY_CalendarHeaderView alloc] initWithFrame:CGRectZero];
             headerView.calendar = self;
+            headerView.delegate = self;
             headerView.scrollEnabled = _scrollEnabled;
             [_contentView addSubview:headerView];
             self.calendarHeaderView = headerView;
@@ -1314,6 +1315,10 @@ typedef NS_ENUM(NSUInteger, TFYCa_CalendarOrientation) {
 {
     [self.calendarHeaderView.collectionView reloadData];
     [self.visibleStickyHeaders makeObjectsPerformSelector:@selector(configureAppearance)];
+}
+
+- (void)calendar:(TFY_CalendarHeaderView *)calendarHerderView DateButton:(UIButton *)titleBtn WeekButtonTitle:(NSString *)textString {
+    [self.delegateProxy calendar:calendarHerderView DateButton:titleBtn WeekButtonTitle:textString];
 }
 
 - (void)invalidateAppearanceForCell:(TFY_CalendarCell *)cell forDate:(NSDate *)date
