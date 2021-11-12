@@ -66,7 +66,7 @@ NS_ASSUME_NONNULL_END
     calendar.calendarHeaderView.backgroundColor = [UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1.0];
     calendar.appearance.weekdayTextColor = [UIColor colorWithRed:102/255.0 green:102/255.0 blue:102/255.0 alpha:1.0];
     calendar.appearance.headerTitleColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:1.0];
-    calendar.appearance.headerDateFormat = @"MM";//内部特殊处理一下，必须这样传值，后期有需求可以更改
+    calendar.appearance.headerDateFormat = @"yyyy-MM-dd";//内部特殊处理一下，必须这样传值，后期有需求可以更改
     calendar.appearance.swapplaces = TFYCa_CalendarSwapplacesWeekTop;
     calendar.appearance.liftrightSpacing = 15;
     [self.view addSubview:calendar];
@@ -153,7 +153,7 @@ NS_ASSUME_NONNULL_END
     
     titleBtn.backgroundColor = UIColor.yellowColor;
     titleBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [titleBtn setTitle:[self DatetoChinese:textString] forState:UIControlStateNormal];
+//    [titleBtn setTitle:[self DatetoChinese:textString] forState:UIControlStateNormal];
 }
 
 - (NSString *)DatetoChinese:(NSString *)text {

@@ -17,6 +17,7 @@
 #import "TFY_Define.h"
 //添加标签红点
 #import "TFY_BadgeViewHeader.h"
-
+//内联函数
+#import "TFY_Inlinefunction.h"
 
 #endif /* TFY_CategoriesHeader_h */

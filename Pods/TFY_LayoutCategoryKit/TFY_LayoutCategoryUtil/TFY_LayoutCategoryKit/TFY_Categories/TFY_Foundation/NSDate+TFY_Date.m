@@ -780,9 +780,9 @@
     return (([comp1 day] == [comp2 day]) && ([comp1 month] == [comp2 month]) && ([comp1 year] == [comp2 year]));
 }
 /// 获取年
-+ (NSInteger)tfy_year_str:(NSString *)dateStr {
++ (NSInteger)tfy_year_str:(NSString *)dateStr Format:(NSString *)Format{
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    [dateFormatter setDateFormat:Format];
     [dateFormatter setLocale:[NSLocale currentLocale]];
     NSDate *startDate = [dateFormatter dateFromString:dateStr];
     NSDateComponents *components = [[NSCalendar currentCalendar] components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:startDate];
@@ -797,9 +797,9 @@
 }
 
 /// 获取月
-+ (NSInteger)tfy_month_str:(NSString *)dateStr {
++ (NSInteger)tfy_month_str:(NSString *)dateStr Format:(NSString *)Format{
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    [dateFormatter setDateFormat:Format];
     [dateFormatter setLocale:[NSLocale currentLocale]];
     NSDate *startDate = [dateFormatter dateFromString:dateStr];
     NSDateComponents *components = [[NSCalendar currentCalendar] components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:startDate];
@@ -835,9 +835,9 @@
 }
 
 /// 获取日
-+ (NSInteger)tfy_day_str:(NSString *)dateStr {
++ (NSInteger)tfy_day_str:(NSString *)dateStr Format:(NSString *)Format{
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    [dateFormatter setDateFormat:Format];
     [dateFormatter setLocale:[NSLocale currentLocale]];
     NSDate *startDate = [dateFormatter dateFromString:dateStr];
     NSDateComponents *components = [[NSCalendar currentCalendar] components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:startDate];
@@ -1002,7 +1002,7 @@
 + (NSString *)tfy_getDayAfterDay:(NSInteger)day {
     NSTimeInterval time = [NSDate date].timeIntervalSince1970 + 24 * 3600 * day;
     NSString *date = [NSDate tfy_timeStringWithInterval:time];
-    NSInteger dayNum = [self tfy_day_str:date];
+    NSInteger dayNum = [self tfy_day_str:date Format:NSDate.tfy_ymdFormat];
     NSString *dayStr = [NSString stringWithFormat:@"%ld",(long)dayNum];
     return dayStr;
 }
@@ -1020,5 +1020,57 @@
     NSDate *newdate = [calendar dateByAddingComponents:lastMonthComps toDate:currentDate options:0];
     NSString *dateStr = [formatter stringFromDate:newdate];
     return dateStr;
+}
+
+//时间转时间戳的方法:
++ (NSInteger)tfy_timeSwitchTimestamp:(NSString *)formatTime andFormatter:(NSString *)format {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    [formatter setDateFormat:format]; //(@"YYYY-MM-dd HH:mm:ss") ----------设置你想要的格式,hh与HH的区别:分别表示12小时制,24小时制
+    NSTimeZone* timeZone = [NSTimeZone timeZoneWithName:@"Asia/Beijing"];
+    [formatter setTimeZone:timeZone];
+    NSDate* date = [formatter dateFromString:formatTime]; //------------将字符串按formatter转成nsdate
+    //时间转时间戳的方法:
+    NSInteger timeSp = [[NSNumber numberWithDouble:[date timeIntervalSince1970]] integerValue];
+    return timeSp;
+}
+///时间戳转时间
++ (NSString *)tfy_timestampSwitchTime:(NSInteger)timestamp andFormatter:(NSString *)format {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    [formatter setDateFormat:format];
+    NSTimeZone *timeZone = [NSTimeZone timeZoneWithName:@"Asia/Beijing"];
+    [formatter setTimeZone:timeZone];
+    NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:timestamp];
+    NSString *confromTimespStr = [formatter stringFromDate:confromTimesp];
+    return confromTimespStr;
+}
+///将字符串转成NSDate类型
++ (NSDate *)tfy_dateFromString:(NSString *)dateString {
+    NSDateFormatter *inputFormatter= [[NSDateFormatter alloc] init];
+    [inputFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+    [inputFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSDate *inputDate = [inputFormatter dateFromString:dateString];
+    //inputDate或出现相差八小时问题，下面是解决相差八小时
+    NSTimeZone *zone = [NSTimeZone systemTimeZone];
+    NSInteger interval = [zone secondsFromGMTForDate: inputDate];
+    NSDate *localeDate = [inputDate dateByAddingTimeInterval:interval];
+    return localeDate;
+}
+
++ (NSInteger)tfy_getNowTimestampFormatter:(NSString *)format {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    [formatter setDateFormat:format];
+    //设置时区,这个对于时间的处理有时很重要
+    NSTimeZone* timeZone = [NSTimeZone timeZoneWithName:@"Asia/Beijing"];
+    [formatter setTimeZone:timeZone];
+    NSDate *datenow = [NSDate date];//现在时间
+    //时间转时间戳的方法:
+    NSInteger timeSp = [[NSNumber numberWithDouble:[datenow timeIntervalSince1970]] integerValue];
+    return timeSp;
 }
 @end

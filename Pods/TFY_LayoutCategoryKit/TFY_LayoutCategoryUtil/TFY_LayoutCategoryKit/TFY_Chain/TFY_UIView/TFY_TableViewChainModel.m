@@ -17,7 +17,7 @@ TFY_CATEGORY_CHAIN_TABLEVIEW_IMPLEMENTATION(dataSource, id<UITableViewDataSource
     return ^ (){
         if (@available(iOS 11.0, *)) {
             [self enumerateObjectsUsingBlock:^(UITableView * _Nonnull obj) {
-                [obj adJustedContentIOS11];
+                [obj tfy_adJustedContentIOS11];
             }];
         }
         return self;

@@ -31,11 +31,11 @@ CG_INLINE void TextView_ReplaceMethod(Class _class, SEL _originSelector, SEL _ne
 + (void)load {
    static dispatch_once_t onceToken;
    dispatch_once(&onceToken, ^{
-       TextView_ReplaceMethod([self class], @selector(layoutSubviews), @selector(tfy_layoutSubviews));
+       TextView_ReplaceMethod([self class], @selector(layoutSubviews), @selector(tfytext_layoutSubviews));
    });
 }
 
-- (void)tfy_layoutSubviews {
+- (void)tfytext_layoutSubviews {
     [self updateLabel];
 }
 

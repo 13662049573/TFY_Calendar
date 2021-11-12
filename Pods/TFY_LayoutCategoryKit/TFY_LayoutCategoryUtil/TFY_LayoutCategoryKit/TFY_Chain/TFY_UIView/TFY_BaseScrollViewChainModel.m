@@ -16,7 +16,7 @@ TFY_CATEGORY_CHAIN_SCROLLVIEW_IMPLEMENTATION(delegate, id<UIScrollViewDelegate>)
     return ^ (){
         if (@available(iOS 11.0, *)) {
             [self enumerateObjectsUsingBlock:^(UIScrollView * _Nonnull obj) {
-                [obj adJustedContentIOS11];
+                [obj tfy_adJustedContentIOS11];
             }];
         }
         return self;

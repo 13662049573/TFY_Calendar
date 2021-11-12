@@ -334,7 +334,14 @@ NS_ASSUME_NONNULL_BEGIN
  * 传入时间 2020-04-09 返回 星座
  */
 + (NSString *)tfy_getXingzuo:(NSDate *)in_date;
-
+/**
+    获取字符串行数和每行的数据
+ */
++ (NSArray *)getLinesArrayOfStringInrowsOfString:(NSString *)text withFont:(UIFont *)font withWidth:(CGFloat)width;
+/**
+ *   一个时间距现在的时间
+ */
++(NSString *)intervalSinceNow:(NSString *)theDate;
 @end
 
 NS_ASSUME_NONNULL_END

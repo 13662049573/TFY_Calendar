@@ -27,9 +27,12 @@ CG_INLINE CGFloat TFY_DegreesToRadians(CGFloat degrees) {
 }
 
 @interface UIImage (TFY_Tools)
-
+/// gif
 + (nullable UIImage *)tfy_imageWithSmallGIFData:(NSData *)data scale:(CGFloat)scale;
-
+/// gif
++ (UIImage *)tfy_animatedImageWithAnimatedGIFData:(NSData *)data;
+/// gif
++ (UIImage *)tfy_animatedImageWithAnimatedGIFURL:(NSURL *)url;
 /**
  根据当前上下文画一个图片
  */
@@ -337,6 +340,7 @@ CG_INLINE CGFloat TFY_DegreesToRadians(CGFloat degrees) {
  * 切割合适的图片
  */
 + (UIImage*)tfy_cutOutImageWithRect:(CGPoint)point image:(UIImage *)image;
+
 @end
 
 CG_INLINE UIImage *TFY_ImageNamed(NSString *imageName){

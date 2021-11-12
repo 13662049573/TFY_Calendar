@@ -4,7 +4,7 @@
 //
 //  Created by 田风有 on 2020/9/10.
 //  Copyright © 2020 田风有. All rights reserved.
-//  最新版本号：1.8.8
+//  最新版本号：2.0.4
 /**
  # 资源Bundle名称
   s.resource_bundles = {

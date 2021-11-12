@@ -57,7 +57,7 @@ NSString const *BlockKey = @"BlockKey";
     dispatch_once(&onceToken, ^{
         
         // 变化方法实现
-        [self tfy_swizzleMethod:[self class] orgSel:@selector(layoutSubviews) swizzSel:@selector(tfy_layoutSubviews)];
+        [self tfy_swizzleMethod:[self class] orgSel:@selector(layoutSubviews) swizzSel:@selector(tfySubviews_layoutSubviews)];
     });
 }
 + (void)tfy_swizzleMethod:(Class)class orgSel:(SEL)originalSelector swizzSel:(SEL)swizzledSelector {
@@ -469,10 +469,10 @@ NSString const *BlockKey = @"BlockKey";
 
 
 #pragma mark -
-- (void)tfy_layoutSubviews
+- (void)tfySubviews_layoutSubviews
 {
     // 调用本身的实现
-    [self tfy_layoutSubviews];
+    [self tfySubviews_layoutSubviews];
     BOOL isFrameChange = NO;;
     if(!CGRectEqualToRect(self.oldBounds, self.bounds)){
         isFrameChange = YES;

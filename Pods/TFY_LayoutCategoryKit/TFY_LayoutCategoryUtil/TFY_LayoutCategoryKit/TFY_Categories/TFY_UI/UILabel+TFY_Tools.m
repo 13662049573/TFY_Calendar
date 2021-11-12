@@ -91,6 +91,21 @@ CG_INLINE void ReplaceMethod(Class _class, SEL _originSelector, SEL _newSelector
     }
 }
 
+//获取斜体
+UIFont *GetVariationOfFontWithTrait(UIFont *baseFont, CTFontSymbolicTraits trait)
+{
+    CGFloat fontSize = [baseFont pointSize];
+    CFStringRef baseFontName = (__bridge CFStringRef)[baseFont fontName];
+    CTFontRef baseCTFont = CTFontCreateWithName(baseFontName, fontSize, NULL);
+    CTFontRef ctFont = CTFontCreateCopyWithSymbolicTraits(baseCTFont, 0, NULL, trait, trait);
+    NSString *variantFontName = CFBridgingRelease(CTFontCopyName(ctFont, kCTFontPostScriptNameKey));
+    
+    UIFont *variantFont = [UIFont fontWithName:variantFontName size:fontSize];
+    CFRelease(ctFont);
+    CFRelease(baseCTFont);
+    return variantFont;
+};
+
 @implementation UILabel (TFY_Tools)
 
 + (void)load {
@@ -677,5 +692,340 @@ const void *kAssociatedTfy_contentInsets;
         self.attributedText = attributes;
     }
 }
+#pragma mark - 改变字段字体
+- (void)tfy_changeFontWithTextFont:(UIFont *)textFont
+{
+    [self tfy_changeFontWithTextFont:textFont changeText:self.text];
+}
+- (void)tfy_changeFontWithTextFont:(UIFont *)textFont changeText:(NSString *)text
+{
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
+    NSRange textRange = [self.text rangeOfString:text options:NSCaseInsensitiveSearch];
+    if (textRange.location != NSNotFound) {
+        [attributedString addAttribute:NSFontAttributeName value:textFont range:textRange];
+    }
+    self.attributedText = attributedString;
+}
 
+#pragma mark - 改变字段间距
+- (void)tfy_changeSpaceWithTextSpace:(CGFloat)textSpace
+{
+    [self tfy_changeSpaceWithTextSpace:textSpace changeText:self.text];
+}
+- (void)tfy_changeSpaceWithTextSpace:(CGFloat)textSpace changeText:(NSString *)text
+{
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
+    NSRange textRange = [self.text rangeOfString:text options:NSCaseInsensitiveSearch];
+    if (textRange.location != NSNotFound) {
+        [attributedString addAttribute:(id)kCTKernAttributeName value:@(textSpace) range:textRange];
+    }
+    self.attributedText = attributedString;
+}
+
+#pragma mark - 改变行间距
+- (void)tfy_changeLineSpaceWithTextLineSpace:(CGFloat)textLineSpace
+{
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setLineSpacing:textLineSpace];
+    [self tfy_changeParagraphStyleWithTextParagraphStyle:paragraphStyle];
+}
+#pragma mark - 段落样式
+- (void)tfy_changeParagraphStyleWithTextParagraphStyle:(NSParagraphStyle *)paragraphStyle
+{
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
+    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [self.text length])];
+    [self setAttributedText:attributedString];
+}
+
+#pragma mark - 改变字段颜色
+- (void)tfy_changeColorWithTextColor:(UIColor *)textColor
+{
+    [self tfy_changeColorWithTextColor:textColor changeText:self.text];
+}
+- (void)tfy_changeColorWithTextColor:(UIColor *)textColor changeText:(NSString *)text
+{
+    [self tfy_changeColorWithTextColor:textColor changeTexts:@[text]];
+}
+
+- (void)tfy_changeColorWithTextColor:(UIColor *)textColor changeTexts:(NSArray <NSString *>*)texts
+{
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
+    for (NSString *text in texts) {
+        NSRange textRange = [self.text rangeOfString:text options:NSBackwardsSearch];
+        if (textRange.location != NSNotFound) {
+            [attributedString addAttribute:NSForegroundColorAttributeName value:textColor range:textRange];
+        }
+    }
+    self.attributedText = attributedString;
+}
+
+#pragma mark - 改变字段背景颜色
+- (void)tfy_changeBgColorWithBgTextColor:(UIColor *)bgTextColor
+{
+    [self tfy_changeBgColorWithBgTextColor:bgTextColor changeText:self.text];
+}
+- (void)tfy_changeBgColorWithBgTextColor:(UIColor *)bgTextColor changeText:(NSString *)text
+{
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
+    NSRange textRange = [self.text rangeOfString:text options:NSBackwardsSearch];
+    if (textRange.location != NSNotFound) {
+        [attributedString addAttribute:NSBackgroundColorAttributeName value:bgTextColor range:textRange];
+    }
+    self.attributedText = attributedString;
+}
+
+#pragma mark - 改变字段连笔字 value值为1或者0
+- (void)tfy_changeLigatureWithTextLigature:(NSNumber *)textLigature
+{
+    [self tfy_changeLigatureWithTextLigature:textLigature changeText:self.text];
+}
+- (void)tfy_changeLigatureWithTextLigature:(NSNumber *)textLigature changeText:(NSString *)text
+{
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
+    NSRange textRange = [self.text rangeOfString:text options:NSBackwardsSearch];
+    if (textRange.location != NSNotFound) {
+        [attributedString addAttribute:NSLigatureAttributeName value:textLigature range:textRange];
+    }
+    self.attributedText = attributedString;
+}
+
+#pragma mark - 改变字间距
+- (void)tfy_changeKernWithTextKern:(NSNumber *)textKern
+{
+    [self tfy_changeKernWithTextKern:textKern changeText:self.text];
+}
+- (void)tfy_changeKernWithTextKern:(NSNumber *)textKern changeText:(NSString *)text
+{
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
+    NSRange textRange = [self.text rangeOfString:text options:NSBackwardsSearch];
+    if (textRange.location != NSNotFound) {
+        [attributedString addAttribute:NSKernAttributeName value:textKern range:textRange];
+    }
+    self.attributedText = attributedString;
+}
+
+#pragma mark - 改变字的删除线 textStrikethroughStyle 为NSUnderlineStyle
+- (void)tfy_changeStrikethroughStyleWithTextStrikethroughStyle:(NSNumber *)textStrikethroughStyle
+{
+    [self tfy_changeStrikethroughStyleWithTextStrikethroughStyle:textStrikethroughStyle changeText:self.text];
+}
+- (void)tfy_changeStrikethroughStyleWithTextStrikethroughStyle:(NSNumber *)textStrikethroughStyle changeText:(NSString *)text
+{
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
+    NSRange textRange = [self.text rangeOfString:text options:NSBackwardsSearch];
+    if (textRange.location != NSNotFound) {
+        [attributedString addAttribute:NSStrikethroughStyleAttributeName value:textStrikethroughStyle range:textRange];
+    }
+    self.attributedText = attributedString;
+}
+
+#pragma mark - 改变字的删除线颜色
+- (void)tfy_changeStrikethroughColorWithTextStrikethroughColor:(UIColor *)textStrikethroughColor
+{
+    [self tfy_changeStrikethroughColorWithTextStrikethroughColor:textStrikethroughColor changeText:self.text];
+}
+- (void)tfy_changeStrikethroughColorWithTextStrikethroughColor:(UIColor *)textStrikethroughColor changeText:(NSString *)text
+{
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
+    NSRange textRange = [self.text rangeOfString:text options:NSBackwardsSearch];
+    if (textRange.location != NSNotFound) {
+        [attributedString addAttribute:NSStrikethroughColorAttributeName value:textStrikethroughColor range:textRange];
+    }
+    self.attributedText = attributedString;
+}
+
+#pragma mark - 改变字的下划线 textUnderlineStyle 为NSUnderlineStyle
+- (void)tfy_changeUnderlineStyleWithTextStrikethroughStyle:(NSNumber *)textUnderlineStyle
+{
+    [self tfy_changeUnderlineStyleWithTextStrikethroughStyle:textUnderlineStyle changeText:self.text];
+}
+- (void)tfy_changeUnderlineStyleWithTextStrikethroughStyle:(NSNumber *)textUnderlineStyle changeText:(NSString *)text
+{
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
+    NSRange textRange = [self.text rangeOfString:text options:NSBackwardsSearch];
+    if (textRange.location != NSNotFound) {
+        [attributedString addAttribute:NSUnderlineStyleAttributeName value:textUnderlineStyle range:textRange];
+    }
+    self.attributedText = attributedString;
+}
+
+#pragma mark - 改变字的下划线颜色
+- (void)tfy_changeUnderlineColorWithTextStrikethroughColor:(UIColor *)textUnderlineColor
+{
+    [self tfy_changeUnderlineColorWithTextStrikethroughColor:textUnderlineColor changeText:self.text];
+}
+- (void)tfy_changeUnderlineColorWithTextStrikethroughColor:(UIColor *)textUnderlineColor changeText:(NSString *)text
+{
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
+    NSRange textRange = [self.text rangeOfString:text options:NSBackwardsSearch];
+    if (textRange.location != NSNotFound) {
+        [attributedString addAttribute:NSUnderlineColorAttributeName value:textUnderlineColor range:textRange];
+    }
+    self.attributedText = attributedString;
+}
+
+#pragma mark - 改变字的颜色
+- (void)tfy_changeStrokeColorWithTextStrikethroughColor:(UIColor *)textStrokeColor
+{
+    [self tfy_changeStrokeColorWithTextStrikethroughColor:textStrokeColor changeText:self.text];
+}
+- (void)tfy_changeStrokeColorWithTextStrikethroughColor:(UIColor *)textStrokeColor changeText:(NSString *)text
+{
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
+    NSRange textRange = [self.text rangeOfString:text options:NSBackwardsSearch];
+    if (textRange.location != NSNotFound) {
+        [attributedString addAttribute:NSStrokeColorAttributeName value:textStrokeColor range:textRange];
+    }
+    self.attributedText = attributedString;
+}
+
+#pragma mark - 改变字的描边
+- (void)tfy_changeStrokeWidthWithTextStrikethroughWidth:(NSNumber *)textStrokeWidth
+{
+    [self tfy_changeStrokeWidthWithTextStrikethroughWidth:textStrokeWidth changeText:self.text];
+}
+- (void)tfy_changeStrokeWidthWithTextStrikethroughWidth:(NSNumber *)textStrokeWidth changeText:(NSString *)text
+{
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
+    NSRange textRange = [self.text rangeOfString:text options:NSBackwardsSearch];
+    if (textRange.location != NSNotFound) {
+        [attributedString addAttribute:NSStrokeWidthAttributeName value:textStrokeWidth range:textRange];
+    }
+    self.attributedText = attributedString;
+}
+
+#pragma mark - 改变字的阴影
+- (void)tfy_changeShadowWithTextShadow:(NSShadow *)textShadow
+{
+    [self tfy_changeShadowWithTextShadow:textShadow changeText:self.text];
+}
+- (void)tfy_changeShadowWithTextShadow:(NSShadow *)textShadow changeText:(NSString *)text
+{
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
+    NSRange textRange = [self.text rangeOfString:text options:NSBackwardsSearch];
+    if (textRange.location != NSNotFound) {
+        [attributedString addAttribute:NSShadowAttributeName value:textShadow range:textRange];
+    }
+    self.attributedText = attributedString;
+}
+
+#pragma mark - 改变字的特殊效果
+- (void)tfy_changeTextEffectWithTextEffect:(NSString *)textEffect
+{
+    [self tfy_changeTextEffectWithTextEffect:textEffect changeText:self.text];
+}
+- (void)tfy_changeTextEffectWithTextEffect:(NSString *)textEffect changeText:(NSString *)text
+{
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
+    NSRange textRange = [self.text rangeOfString:text options:NSBackwardsSearch];
+    if (textRange.location != NSNotFound) {
+        [attributedString addAttribute:NSTextEffectAttributeName value:textEffect range:textRange];
+    }
+    self.attributedText = attributedString;
+}
+
+#pragma mark - 改变字的文本附件
+- (void)tfy_changeAttachmentWithTextAttachment:(NSTextAttachment *)textAttachment
+{
+    [self tfy_changeAttachmentWithTextAttachment:textAttachment changeText:self.text];
+}
+- (void)tfy_changeAttachmentWithTextAttachment:(NSTextAttachment *)textAttachment changeText:(NSString *)text
+{
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
+    NSRange textRange = [self.text rangeOfString:text options:NSBackwardsSearch];
+    if (textRange.location != NSNotFound) {
+        [attributedString addAttribute:NSAttachmentAttributeName value:textAttachment range:textRange];
+    }
+    self.attributedText = attributedString;
+}
+
+#pragma mark - 改变字的链接
+- (void)tfy_changeLinkWithTextLink:(NSString *)textLink
+{
+    [self tfy_changeLinkWithTextLink:textLink changeText:self.text];
+}
+- (void)tfy_changeLinkWithTextLink:(NSString *)textLink changeText:(NSString *)text
+{
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
+    NSRange textRange = [self.text rangeOfString:text options:NSBackwardsSearch];
+    if (textRange.location != NSNotFound) {
+        [attributedString addAttribute:NSLinkAttributeName value:textLink range:textRange];
+    }
+    self.attributedText = attributedString;
+}
+
+#pragma mark - 改变字的基准线偏移 value>0坐标往上偏移 value<0坐标往下偏移
+- (void)tfy_changeBaselineOffsetWithTextBaselineOffset:(NSNumber *)textBaselineOffset
+{
+    [self tfy_changeBaselineOffsetWithTextBaselineOffset:textBaselineOffset changeText:self.text];
+}
+- (void)tfy_changeBaselineOffsetWithTextBaselineOffset:(NSNumber *)textBaselineOffset changeText:(NSString *)text
+{
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
+    NSRange textRange = [self.text rangeOfString:text options:NSBackwardsSearch];
+    if (textRange.location != NSNotFound) {
+        [attributedString addAttribute:NSBaselineOffsetAttributeName value:textBaselineOffset range:textRange];
+    }
+    self.attributedText = attributedString;
+}
+
+#pragma mark - 改变字的倾斜 value>0向右倾斜 value<0向左倾斜
+- (void)tfy_changeObliquenessWithTextObliqueness:(NSNumber *)textObliqueness
+{
+    [self tfy_changeObliquenessWithTextObliqueness:textObliqueness changeText:self.text];
+}
+- (void)tfy_changeObliquenessWithTextObliqueness:(NSNumber *)textObliqueness changeText:(NSString *)text
+{
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
+    NSRange textRange = [self.text rangeOfString:text options:NSBackwardsSearch];
+    if (textRange.location != NSNotFound) {
+        [attributedString addAttribute:NSObliquenessAttributeName value:textObliqueness range:textRange];
+    }
+    self.attributedText = attributedString;
+}
+
+#pragma mark - 改变字粗细 0就是不变 >0加粗 <0加细
+- (void)tfy_changeExpansionsWithTextExpansion:(NSNumber *)textExpansion
+{
+    [self tfy_changeExpansionsWithTextExpansion:textExpansion changeText:self.text];
+}
+- (void)tfy_changeExpansionsWithTextExpansion:(NSNumber *)textExpansion changeText:(NSString *)text
+{
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
+    NSRange textRange = [self.text rangeOfString:text options:NSBackwardsSearch];
+    if (textRange.location != NSNotFound) {
+        [attributedString addAttribute:NSExpansionAttributeName value:textExpansion range:textRange];
+    }
+    self.attributedText = attributedString;
+}
+
+#pragma mark - 改变字方向 NSWritingDirection
+- (void)tfy_changeWritingDirectionWithTextExpansion:(NSArray *)textWritingDirection changeText:(NSString *)text
+{
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
+    NSRange textRange = [self.text rangeOfString:text options:NSBackwardsSearch];
+    if (textRange.location != NSNotFound) {
+        [attributedString addAttribute:NSWritingDirectionAttributeName value:textWritingDirection range:textRange];
+    }
+    self.attributedText = attributedString;
+}
+
+#pragma mark - 改变字的水平或者竖直 1竖直 0水平
+- (void)tfy_changeVerticalGlyphFormWithTextVerticalGlyphForm:(NSNumber *)textVerticalGlyphForm changeText:(NSString *)text
+{
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
+    NSRange textRange = [self.text rangeOfString:text options:NSBackwardsSearch];
+    if (textRange.location != NSNotFound) {
+        [attributedString addAttribute:NSVerticalGlyphFormAttributeName value:textVerticalGlyphForm range:textRange];
+    }
+    self.attributedText = attributedString;
+}
+
+#pragma mark - 改变字的两端对齐
+- (void)tfy_changeCTKernWithTextCTKern:(NSNumber *)textCTKern
+{
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc]initWithAttributedString:self.attributedText];
+    [attributedString addAttribute:(id)kCTKernAttributeName value:textCTKern range:NSMakeRange(0, self.text.length-1)];
+    self.attributedText = attributedString;
+}
 @end

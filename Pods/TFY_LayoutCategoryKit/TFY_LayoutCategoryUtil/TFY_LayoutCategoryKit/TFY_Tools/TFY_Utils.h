@@ -104,24 +104,6 @@ typedef NS_ENUM(NSUInteger, Temperature) {
 /***  把多个json字符串转为一个json字符串*/
 +(NSString *)objArrayToJSON:(NSArray *)array;
 
-/***   获取当前时间*/
-+(NSString *)audioTime;
-
-/***   字符串时间——时间戳*/
-+(NSString *)cTimestampFromString:(NSString *)theTime;
-
-/***   时间戳——字符串时间*/
-+(NSString *)cStringFromTimestamp:(NSString *)timestamp;
-
-/***  两个时间之差*/
-+(NSString *)intervalFromLastDate:(NSString *)dateString1 toTheDate:(NSString *)dateString2;
-
-/***   一个时间距现在的时间*/
-+(NSString *)intervalSinceNow:(NSString *)theDate;
-
-/***  将字符串转化为中文时间*/
-+(NSString *)Formatter:(NSString *)time;
-
 /***  去掉手机号码上的+号和+86*/
 +(NSString *)formatPhoneNum:(NSString *)phone;
 
@@ -142,10 +124,6 @@ typedef NS_ENUM(NSUInteger, Temperature) {
 
 /***  国际化区域名称*/
 +(NSString *)localizedModel;
-
-/***  获取当前年份*/
-+(NSString *)setDateFormat;
-
 /***  当前使用的语言*/
 +(NSString *)defaultsTH;
 
@@ -198,15 +176,8 @@ typedef NS_ENUM(NSUInteger, Temperature) {
 /***  不需要加密的参数请求*/
 +(NSString *)requestparmereaddWithDict:(NSDictionary *)dict;
 
-/***  秒数转换成时间,时，分，秒 转换成时分秒*/
-+(NSString *)timeFormatted:(int)totalSeconds;
-
 /***  视频显示时间*/
 +(NSString *)convertSecond2Time:(int)second;
-
-/***   将时间数据（毫秒）转换为天和小时*/
-+(NSString*)getOvertime:(NSString*)mStr;
-
 /***   获取图片格式*/
 +(NSString *)typeForImageData:(NSData *)data;
 
@@ -242,9 +213,6 @@ typedef NS_ENUM(NSUInteger, Temperature) {
 
 /***  根据字节大小返回文件大小字符KB、MB*/
 + (NSString *)stringFromByteCount:(long long)byteCount;
-
-/***  获得设备型号*/
-+ (NSString *)getCurrentDeviceModel;
 
 /***  根据字节大小返回文件大小字符KB、MB GB*/
 +(NSString *)convertFileSize:(long long)size;
@@ -357,9 +325,6 @@ typedef NS_ENUM(NSUInteger, Temperature) {
 
 /*** 验证运营商:电信*/
 + (BOOL)isTelecomPperators:(NSString *)string;
-
-/***  判断数组中数字是否连续*/
-+(BOOL)suibian:(NSArray*)array;
 
 /***  判断数组中，字母是否连续*/
 +(BOOL)hasSerialSubstrWithString:(NSString*)string;
@@ -484,12 +449,6 @@ typedef NS_ENUM(NSUInteger, Temperature) {
 
 /***  清楚缓存数据*/
 +(void)clearFile;
-
-/***  打印成员变量列表*/
-+ (void)runTimeConsoleMemberListWithClassName:(Class)className;
-
-/***  打印属性列表*/
-+ (void)runTimeConsolePropertyListWithClassName:(Class)className;
 
 /***  截取控制器所生产图片*/
 + (void)screenSnapshot:(UIView *)snapshotView finishBlock:(void(^)(UIImage *snapShotImage))finishBloc;

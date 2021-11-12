@@ -10,8 +10,11 @@
 #endif
 #endif
 
+#import "TFY_PopupMenu 2.h"
 #import "TFY_PopupMenu.h"
+#import "TFY_ProgressHMB 2.h"
 #import "TFY_ProgressHMB.h"
+#import "TFY_ProgressHUD 2.h"
 #import "TFY_ProgressHUD.h"
 
 FOUNDATION_EXPORT double TFY_ProgressHUDVersionNumber;

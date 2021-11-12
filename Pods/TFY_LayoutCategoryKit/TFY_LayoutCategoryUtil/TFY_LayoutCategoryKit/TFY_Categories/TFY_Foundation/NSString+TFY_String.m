@@ -9,6 +9,7 @@
 #import "NSString+TFY_String.h"
 #import "NSNumber+TFY_Tools.h"
 #import "NSData+TFY_Data.h"
+#import <CoreText/CoreText.h>
 @implementation NSString (TFY_String)
 
 
@@ -1145,5 +1146,69 @@
     return retStr;
 }
 
++ (NSArray *)getLinesArrayOfStringInrowsOfString:(NSString *)text withFont:(UIFont *)font withWidth:(CGFloat)width {
+    CTFontRef myFont = CTFontCreateWithName((CFStringRef)([font fontName]), [font pointSize], NULL);
+    NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:text];
+    [attStr addAttribute:(NSString *)kCTFontAttributeName value:(__bridge  id)myFont range:NSMakeRange(0, attStr.length)];
+    CFRelease(myFont);
+    CTFramesetterRef frameSetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)attStr);
+    CGMutablePathRef path = CGPathCreateMutable();
+    CGPathAddRect(path, NULL, CGRectMake(0,0,width,MAXFLOAT));
+    CTFrameRef frame = CTFramesetterCreateFrame(frameSetter, CFRangeMake(0, 0), path, NULL);
+    NSArray *lines = ( NSArray *)CTFrameGetLines(frame);
+    NSMutableArray *linesArray = [[NSMutableArray alloc]init];
+    for (id line in lines) {
+        CTLineRef lineRef = (__bridge CTLineRef)line;
+        CFRange lineRange = CTLineGetStringRange(lineRef);
+        NSRange range = NSMakeRange(lineRange.location, lineRange.length);
+        NSString *lineString = [text substringWithRange:range];
+        CFAttributedStringSetAttribute((CFMutableAttributedStringRef)attStr, lineRange, kCTKernAttributeName, (CFTypeRef)([NSNumber numberWithFloat:0.0]));
+        CFAttributedStringSetAttribute((CFMutableAttributedStringRef)attStr, lineRange, kCTKernAttributeName, (CFTypeRef)([NSNumber numberWithInt:0.0]));
+        [linesArray addObject:lineString];
+    }
+    CGPathRelease(path);
+    CFRelease(frame);
+    CFRelease(frameSetter);
+    return (NSArray *)linesArray;
+}
 
+/**
+ *   一个时间距现在的时间
+ */
++(NSString *)intervalSinceNow:(NSString *)theDate {
+    NSArray *timeArray=[theDate componentsSeparatedByString:@"."];
+    theDate=[timeArray objectAtIndex:0];
+    
+    NSDateFormatter *date=[[NSDateFormatter alloc] init];
+    [date setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+    NSDate * d= [date dateFromString:theDate];
+    
+    NSTimeInterval late=[d timeIntervalSince1970]*1;
+    
+    NSDate* dat = [NSDate date];
+    NSTimeInterval now=[dat timeIntervalSince1970]*1;
+    NSString *timeString=@"";
+    
+    NSTimeInterval cha=late-now;
+    
+    if (cha/3600<1) {
+        timeString = [NSString stringWithFormat:@"%f", cha/60];
+        timeString = [timeString substringToIndex:timeString.length-7];
+        timeString=[NSString stringWithFormat:@"剩余%@分", timeString];
+        
+    }
+    if (cha/3600>1&&cha/86400<1) {
+        timeString = [NSString stringWithFormat:@"%f", cha/3600];
+        timeString = [timeString substringToIndex:timeString.length-7];
+        timeString=[NSString stringWithFormat:@"剩余%@小时", timeString];
+    }
+    if (cha/86400>1)
+    {
+        timeString = [NSString stringWithFormat:@"%f", cha/86400];
+        timeString = [timeString substringToIndex:timeString.length-7];
+        timeString=[NSString stringWithFormat:@"剩余%@天", timeString];
+        
+    }
+    return timeString;
+}
 @end

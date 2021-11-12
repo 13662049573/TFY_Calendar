@@ -247,11 +247,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)tfy_isSameDayToDate:(NSDate *)date;
 
 /// 获取年
-+ (NSInteger)tfy_year_str:(NSString *)dateStr;
++ (NSInteger)tfy_year_str:(NSString *)dateStr Format:(NSString *)Format;;
 //计算一个月的总天数
 + (NSInteger)tfy_daysInthisMonth:(NSDate *)date;
 /// 获取月
-+ (NSInteger)tfy_month_str:(NSString *)dateStr;
++ (NSInteger)tfy_month_str:(NSString *)dateStr Format:(NSString *)Format;;
 /// 获取星期
 + (NSInteger)tfy_week:(NSString *)dateStr;
 /// 获取星期 中文 日
@@ -259,7 +259,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 获取星期 中文 周日
 + (NSString *)tfy_getChineseWeekFrom:(NSString *)dateStr;
 /// 获取日
-+ (NSInteger)tfy_day_str:(NSString *)dateStr;
++ (NSInteger)tfy_day_str:(NSString *)dateStr Format:(NSString *)Format;;
 /// 获取月共有多少天
 + (NSInteger)tfy_daysInMonth_str:(NSString *)dateStr;
 
@@ -296,6 +296,19 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)tfy_getDayAfterDay:(NSInteger)day;
 /// 获取当前月的后几月
 + (NSString *)tfy_getMonthAfterMonth:(NSInteger)Month;
+
+///当前时间戳
++ (NSInteger)tfy_getNowTimestampFormatter:(NSString *)format;
+
+///将字符串转成NSDate类型
++ (NSDate *)tfy_dateFromString:(NSString *)dateString;
+
+///时间转时间戳的方法: 这里没有*1000 按照需求可以自己*
++ (NSInteger)tfy_timeSwitchTimestamp:(NSString *)formatTime andFormatter:(NSString *)format;
+
+///时间戳转时间
++(NSString *)tfy_timestampSwitchTime:(NSInteger)timestamp andFormatter:(NSString *)format;
+
 @end
 
 NS_ASSUME_NONNULL_END

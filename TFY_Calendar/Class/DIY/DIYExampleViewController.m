@@ -90,16 +90,12 @@
     self.dateFormatter = [[NSDateFormatter alloc] init];
     self.dateFormatter.dateFormat = @"yyyy-MM-dd";
     
-    self.minimumDate = [self.dateFormatter dateFromString:@"2016-02-03"];
-    self.maximumDate = [self.dateFormatter dateFromString:@"2021-04-10"];
+    self.minimumDate = [self.dateFormatter dateFromString:@"2020-02-03"];
+    self.maximumDate = NSDate.date;
 
     self.calendar.accessibilityIdentifier = @"calendar";
     
     [self loadCalendarEvents];
-    //三个默认颜色选项
-    [self.calendar selectDate:[self.gregorian dateByAddingUnit:NSCalendarUnitDay value:-1 toDate:[NSDate date] options:0] scrollToDate:NO];
-    [self.calendar selectDate:[NSDate date] scrollToDate:NO];
-    [self.calendar selectDate:[self.gregorian dateByAddingUnit:NSCalendarUnitDay value:1 toDate:[NSDate date] options:0] scrollToDate:NO];
     
     // 取消注释以执行“初始周范围”
      self.calendar.scope = TFYCa_CalendarScopeWeek;
