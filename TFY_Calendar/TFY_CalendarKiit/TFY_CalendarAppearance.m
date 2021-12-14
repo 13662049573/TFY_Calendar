@@ -16,6 +16,7 @@
 @property (strong, nonatomic) NSMutableDictionary *backgroundColors;
 @property (strong, nonatomic) NSMutableDictionary *titleColors;
 @property (strong, nonatomic) NSMutableDictionary *subtitleColors;
+@property (strong, nonatomic) NSMutableDictionary *subToptitleColors;
 @property (strong, nonatomic) NSMutableDictionary *borderColors;
 @end
 
@@ -27,6 +28,7 @@
         
         _titleFont = [UIFont systemFontOfSize:TFYCa_CalendarStandardTitleTextSize];
         _subtitleFont = [UIFont systemFontOfSize:TFYCa_CalendarStandardSubtitleTextSize];
+        _subToptitleFont = [UIFont systemFontOfSize:TFYCa_CalendarStandardSubToptitleTextSize];
         _weekdayFont = [UIFont systemFontOfSize:TFYCa_CalendarStandardWeekdayTextSize];
         _headerTitleFont = [UIFont systemFontOfSize:TFYCa_CalendarStandardHeaderTextSize];
         
@@ -56,6 +58,13 @@
         _subtitleColors[@(TFYCa_CalendarCellStateDisabled)]    = [UIColor lightGrayColor];
         _subtitleColors[@(TFYCa_CalendarCellStatePlaceholder)] = [UIColor lightGrayColor];
         _subtitleColors[@(TFYCa_CalendarCellStateToday)]       = [UIColor whiteColor];
+        
+        _subToptitleColors = [NSMutableDictionary dictionaryWithCapacity:5];
+        _subToptitleColors[@(TFYCa_CalendarCellStateNormal)]      = [UIColor darkGrayColor];
+        _subToptitleColors[@(TFYCa_CalendarCellStateSelected)]    = [UIColor whiteColor];
+        _subToptitleColors[@(TFYCa_CalendarCellStateDisabled)]    = [UIColor lightGrayColor];
+        _subToptitleColors[@(TFYCa_CalendarCellStatePlaceholder)] = [UIColor lightGrayColor];
+        _subToptitleColors[@(TFYCa_CalendarCellStateToday)]       = [UIColor whiteColor];
         
         _borderColors[@(TFYCa_CalendarCellStateSelected)] = [UIColor clearColor];
         _borderColors[@(TFYCa_CalendarCellStateNormal)] = [UIColor clearColor];
@@ -92,6 +101,14 @@
     }
 }
 
+- (void)setSubToptitleFont:(UIFont *)subToptitleFont {
+    if (![_subToptitleFont isEqual:subToptitleFont]) {
+        _subToptitleFont = subToptitleFont;
+        [self.calendar configureAppearance];
+    }
+}
+
+
 - (void)setWeekdayFont:(UIFont *)weekdayFont
 {
     if (![_weekdayFont isEqual:weekdayFont]) {
@@ -123,6 +140,14 @@
         [_calendar.visibleCells makeObjectsPerformSelector:@selector(setNeedsLayout)];
     }
 }
+
+- (void)setSubToptitleOffset:(CGPoint)subToptitleOffset {
+    if (!CGPointEqualToPoint(_subToptitleOffset, subToptitleOffset)) {
+        _subToptitleOffset = subToptitleOffset;
+        [_calendar.visibleCells makeObjectsPerformSelector:@selector(setNeedsLayout)];
+    }
+}
+
 
 - (void)setImageOffset:(CGPoint)imageOffset
 {
@@ -225,10 +250,24 @@
     [self.calendar configureAppearance];
 }
 
+- (void)setSubToptitleDefaultColor:(UIColor *)subToptitleDefaultColor {
+    if (subToptitleDefaultColor) {
+        _subToptitleColors[@(TFYCa_CalendarCellStateNormal)] = subToptitleDefaultColor;
+    } else {
+        [_subToptitleColors removeObjectForKey:@(TFYCa_CalendarCellStateNormal)];
+    }
+    [self.calendar configureAppearance];
+}
+
 -(UIColor *)subtitleDefaultColor
 {
     return _subtitleColors[@(TFYCa_CalendarCellStateNormal)];
 }
+
+- (UIColor *)subToptitleDefaultColor {
+    return _subToptitleColors[@(TFYCa_CalendarCellStateNormal)];
+}
+
 
 - (void)setSubtitleSelectionColor:(UIColor *)color
 {
@@ -240,9 +279,25 @@
     [self.calendar configureAppearance];
 }
 
+- (void)setSubToptitleSelectionColor:(UIColor *)subToptitleSelectionColor {
+    
+    if (subToptitleSelectionColor) {
+        _subToptitleColors[@(TFYCa_CalendarCellStateSelected)] = subToptitleSelectionColor;
+    } else {
+        [_subToptitleColors removeObjectForKey:@(TFYCa_CalendarCellStateSelected)];
+    }
+    [self.calendar configureAppearance];
+    
+}
+
+
 - (UIColor *)subtitleSelectionColor
 {
     return _subtitleColors[@(TFYCa_CalendarCellStateSelected)];
+}
+
+- (UIColor *)subToptitleSelectionColor {
+    return _subToptitleColors[@(TFYCa_CalendarCellStateSelected)];
 }
 
 - (void)setSubtitleTodayColor:(UIColor *)color
@@ -467,6 +522,17 @@
     return self.subtitleOffset.y;
 }
 
+- (void)setSubToptitleVerticalOffset:(CGFloat)subToptitleVerticalOffset
+{
+    self.subToptitleOffset = CGPointMake(0, subToptitleVerticalOffset);
+}
+
+- (CGFloat)subToptitleVerticalOffset
+{
+    return self.subToptitleOffset.y;
+}
+
+
 - (void)setEventColor:(UIColor *)eventColor
 {
     self.eventDefaultColor = eventColor;
@@ -481,10 +547,15 @@
 {
     self.titleFont = [self.titleFont fontWithSize:titleTextSize];
 }
-
+//
 - (void)setSubtitleTextSize:(CGFloat)subtitleTextSize
 {
     self.subtitleFont = [self.subtitleFont fontWithSize:subtitleTextSize];
+}
+
+- (void)setSubToptitleTextSize:(CGFloat)subToptitleTextSize
+{
+    self.subToptitleFont = [self.subToptitleFont fontWithSize:subToptitleTextSize];
 }
 
 - (void)setWeekdayTextSize:(CGFloat)weekdayTextSize

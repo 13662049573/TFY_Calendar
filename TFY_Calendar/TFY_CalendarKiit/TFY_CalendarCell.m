@@ -16,6 +16,7 @@
 @property (readonly, nonatomic) UIColor *colorForCellFill;
 @property (readonly, nonatomic) UIColor *colorForTitleLabel;
 @property (readonly, nonatomic) UIColor *colorForSubtitleLabel;
+@property (readonly, nonatomic) UIColor *colorForSubToptitleLabel;
 @property (readonly, nonatomic) UIColor *colorForCellBorder;
 @property (readonly, nonatomic) NSArray<UIColor *> *colorsForEvents;
 @property (readonly, nonatomic) CGFloat borderRadius;
@@ -61,6 +62,12 @@
     [self.contentView addSubview:label];
     self.subtitleLabel = label;
     
+    label = [[UILabel alloc] initWithFrame:CGRectZero];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.textColor = [UIColor lightGrayColor];
+    [self.contentView addSubview:label];
+    self.subToptitleLabel = label;
+    
     shapeLayer = [CAShapeLayer layer];
     shapeLayer.backgroundColor = [UIColor clearColor].CGColor;
     shapeLayer.borderWidth = 1.0;
@@ -100,30 +107,104 @@
         }
     }
     
-    if (_subtitle) {
+    if (_subToptitle) {
+        _subToptitleLabel.text = _subToptitle;
+    } else {
+        if (!_subToptitleLabel.hidden) {
+            _subToptitleLabel.hidden = YES;
+        }
+    }
+    
+    if (_subtitle && _subToptitle) {
+        
         CGFloat titleHeight = self.titleLabel.font.lineHeight;
         CGFloat subtitleHeight = self.subtitleLabel.font.lineHeight;
+        CGFloat subToptitleHeight = self.subToptitleLabel.font.lineHeight;
         
-        CGFloat height = titleHeight + subtitleHeight;
+        self.subtitleLabel.textColor = UIColor.redColor;
+        
+        self.subToptitleLabel.textColor = UIColor.blueColor;
+        
+        
+        _subToptitleLabel.frame = CGRectMake(
+                                             self.preferredSubToptitleOffset.x,
+                                             self.preferredSubToptitleOffset.y,
+                                          self.contentView.tfyCa_width,
+                                             subToptitleHeight);
+        
+        
         _titleLabel.frame = CGRectMake(
                                        self.preferredTitleOffset.x,
-                                       (self.contentView.tfyCa_height*5.0/6.0-height)*0.5+self.preferredTitleOffset.y,
+                                       self.subToptitleLabel.tfyCa_height,
                                        self.contentView.tfyCa_width,
                                        titleHeight
                                        );
+        
         _subtitleLabel.frame = CGRectMake(
                                           self.preferredSubtitleOffset.x,
-                                          (_titleLabel.tfyCa_bottom-self.preferredTitleOffset.y) - (_titleLabel.tfyCa_height-_titleLabel.font.pointSize)+self.preferredSubtitleOffset.y,
+                                          subToptitleHeight + titleHeight,
                                           self.contentView.tfyCa_width,
                                           subtitleHeight
                                           );
+        
+        
     } else {
-        _titleLabel.frame = CGRectMake(
-                                       self.preferredTitleOffset.x,
-                                       self.preferredTitleOffset.y,
-                                       self.contentView.tfyCa_width,
-                                       floor(self.contentView.tfyCa_height*5.0/6.0)
-                                       );
+       
+        if (_subtitle) {
+            CGFloat titleHeight = self.titleLabel.font.lineHeight;
+            CGFloat subtitleHeight = self.subtitleLabel.font.lineHeight;
+            
+            CGFloat height = titleHeight + subtitleHeight;
+            _titleLabel.frame = CGRectMake(
+                                           self.preferredTitleOffset.x,
+                                           (self.contentView.tfyCa_height*5.0/6.0-height)*0.5+self.preferredTitleOffset.y,
+                                           self.contentView.tfyCa_width,
+                                           titleHeight
+                                           );
+            _subtitleLabel.frame = CGRectMake(
+                                              self.preferredSubtitleOffset.x,
+                                              (_titleLabel.tfyCa_bottom-self.preferredTitleOffset.y) - (_titleLabel.tfyCa_height-_titleLabel.font.pointSize)+self.preferredSubtitleOffset.y,
+                                              self.contentView.tfyCa_width,
+                                              subtitleHeight
+                                              );
+        } else {
+            _titleLabel.frame = CGRectMake(
+                                           self.preferredTitleOffset.x,
+                                           self.preferredTitleOffset.y,
+                                           self.contentView.tfyCa_width,
+                                           floor(self.contentView.tfyCa_height*5.0/6.0)
+                                           );
+        }
+        
+        if (_subToptitle) {
+        
+            CGFloat titleHeight = self.titleLabel.font.lineHeight;
+            CGFloat subToptitleHeight = self.subToptitleLabel.font.lineHeight;
+            
+            _subToptitleLabel.frame = CGRectMake(
+                                                 self.preferredSubToptitleOffset.x,
+                                                 self.preferredSubToptitleOffset.y,
+                                                 self.contentView.tfyCa_width,
+                                                 subToptitleHeight);
+            
+            
+            _titleLabel.frame = CGRectMake(self.preferredTitleOffset.x,
+                                           self.subToptitleLabel.tfyCa_height,
+                                           self.contentView.tfyCa_width,
+                                           titleHeight);
+            
+            
+            
+        } else {
+            
+            _titleLabel.frame = CGRectMake(
+                                           self.preferredTitleOffset.x,
+                                           self.preferredTitleOffset.y,
+                                           self.contentView.tfyCa_width,
+                                           floor(self.contentView.tfyCa_height*5.0/6.0)
+                                           );
+        }
+        
     }
     
     _imageView.frame = CGRectMake(self.preferredImageOffset.x, self.preferredImageOffset.y, self.contentView.tfyCa_width, self.contentView.tfyCa_height);
@@ -197,6 +278,7 @@
     if (![titleFont isEqual:_titleLabel.font]) {
         _titleLabel.font = titleFont;
     }
+    
     if (_subtitle) {
         textColor = self.colorForSubtitleLabel;
         if (![textColor isEqual:_subtitleLabel.textColor]) {
@@ -205,6 +287,17 @@
         titleFont = self.calendar.appearance.subtitleFont;
         if (![titleFont isEqual:_subtitleLabel.font]) {
             _subtitleLabel.font = titleFont;
+        }
+    }
+    
+    if (_subToptitle) {
+        textColor = self.colorForSubToptitleLabel;
+        if (![textColor isEqual:_subToptitleLabel.textColor]) {
+            _subToptitleLabel.textColor = textColor;
+        }
+        titleFont = self.calendar.appearance.subToptitleFont;
+        if (![titleFont isEqual:_subToptitleLabel.font]) {
+            _subToptitleLabel.font = titleFont;
         }
     }
     
@@ -296,6 +389,14 @@
     return self.preferredSubtitleDefaultColor ?: [self colorForCurrentStateInDictionary:_appearance.subtitleColors];
 }
 
+- (UIColor *)colorForSubToptitleLabel {
+    if (self.selected) {
+        return self.preferredSubToptitleSelectionColor?: [self colorForCurrentStateInDictionary:_appearance.subToptitleColors];
+    }
+    return self.preferredSubToptitleDefaultColor ?: [self colorForCurrentStateInDictionary:_appearance.subToptitleColors];
+}
+
+
 - (UIColor *)colorForCellBorder
 {
     if (self.selected) {
@@ -337,6 +438,7 @@
 
 OFFSET_PROPERTY(preferredTitleOffset, PreferredTitleOffset, _appearance.titleOffset);
 OFFSET_PROPERTY(preferredSubtitleOffset, PreferredSubtitleOffset, _appearance.subtitleOffset);
+OFFSET_PROPERTY(preferredSubToptitleOffset, preferredSubToptitleOffset, _appearance.subToptitleOffset);
 OFFSET_PROPERTY(preferredImageOffset, PreferredImageOffset, _appearance.imageOffset);
 OFFSET_PROPERTY(preferredEventOffset, PreferredEventOffset, _appearance.eventOffset);
 
@@ -356,6 +458,17 @@ OFFSET_PROPERTY(preferredEventOffset, PreferredEventOffset, _appearance.eventOff
     if (![_subtitle isEqualToString:subtitle]) {
         BOOL diff = (subtitle.length && !_subtitle.length) || (_subtitle.length && !subtitle.length);
         _subtitle = subtitle;
+        if (diff) {
+            [self setNeedsLayout];
+        }
+    }
+}
+
+- (void)setSubToptitle:(NSString *)subToptitle {
+    
+    if (![_subToptitle isEqualToString:subToptitle]) {
+        BOOL diff = (_subToptitle.length && !_subToptitle.length) || (_subToptitle.length && !_subToptitle.length);
+        _subToptitle = subToptitle;
         if (diff) {
             [self setNeedsLayout];
         }

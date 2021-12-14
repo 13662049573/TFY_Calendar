@@ -119,6 +119,8 @@ TFY_PROPERTY_CHAIN_READONLY ObjectType (^ ios13ShadowColor) (UIColor *);
 
 TFY_PROPERTY_CHAIN_READONLY ObjectType (^ addToSuperView) (UIView *);
 
+TFY_PROPERTY_CHAIN_READONLY ObjectType (^ addToSublayer) (CALayer *);
+
 TFY_PROPERTY_CHAIN_READONLY ObjectType (^ addSubView) (UIView *);
 
 TFY_PROPERTY_CHAIN_READONLY ObjectType (^ addGesture) (UIGestureRecognizer *);

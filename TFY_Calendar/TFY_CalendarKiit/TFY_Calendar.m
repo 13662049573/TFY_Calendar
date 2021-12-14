@@ -1334,6 +1334,13 @@ typedef NS_ENUM(NSUInteger, TFYCa_CalendarOrientation) {
         TFYCa_CalendarInvalidateCellAppearance(preferredSubtitleSelectionColor,subtitleSelectionColorForDate);
         TFYCa_CalendarInvalidateCellAppearanceWithDefault(preferredSubtitleOffset,subtitleOffsetForDate,CGPointInfinity);
     }
+    
+    if (cell.subToptitle) {
+        TFYCa_CalendarInvalidateCellAppearance(preferredSubToptitleDefaultColor,subToptitleDefaultColorForDate);
+        TFYCa_CalendarInvalidateCellAppearance(preferredSubToptitleSelectionColor,subToptitleSelectionColorForDate);
+        TFYCa_CalendarInvalidateCellAppearanceWithDefault(preferredSubToptitleOffset,subToptitleOffsetForDate,CGPointInfinity);
+    }
+    
     if (cell.numberOfEvents) {
         TFYCa_CalendarInvalidateCellAppearance(preferredEventDefaultColors,eventDefaultColorsForDate);
         TFYCa_CalendarInvalidateCellAppearance(preferredEventSelectionColors,eventSelectionColorsForDate);
@@ -1360,6 +1367,7 @@ typedef NS_ENUM(NSUInteger, TFYCa_CalendarOrientation) {
     cell.numberOfEvents = [self.dataSourceProxy calendar:self numberOfEventsForDate:date];
     cell.titleLabel.text = [self.dataSourceProxy calendar:self titleForDate:date] ?: @([self.gregorian component:NSCalendarUnitDay fromDate:date]).stringValue;
     cell.subtitle  = [self.dataSourceProxy calendar:self subtitleForDate:date];
+    cell.subToptitle = [self.dataSourceProxy calendar:self subToptitleDate:date];
     cell.selected = [_selectedDates containsObject:date];
     cell.dateIsToday = self.today?[self.gregorian isDate:date inSameDayAsDate:self.today]:NO;
     cell.weekend = [self.gregorian isDateInWeekend:date];
@@ -1378,7 +1386,7 @@ typedef NS_ENUM(NSUInteger, TFYCa_CalendarOrientation) {
             break;
         }
     }
-    // Synchronize selecion state to the collection view, otherwise delegate methods would not be triggered.
+    // 将选择状态同步到集合视图，否则将不会触发委托方法。
     if (cell.selected) {
         [self.collectionView selectItemAtIndexPath:indexPath animated:NO scrollPosition:UICollectionViewScrollPositionNone];
     } else {

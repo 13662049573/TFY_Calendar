@@ -184,6 +184,20 @@ NS_ASSUME_NONNULL_END
     return nil;
 }
 
+- (NSString *)calendar:(TFY_Calendar *)calendar subToptitleDate:(NSDate *)date {
+    if (self.showsEvents) {
+        EKEvent *event = [self eventsForDate:date].firstObject;
+        if (event) {
+            return event.title;
+        }
+    }
+    if (self.showsLunar) {
+        return [self.lunarFormatter stringFromDate:date];
+    }
+    return nil;
+}
+
+
 #pragma mark - FSCalendarDelegate
 
 - (void)calendar:(TFY_Calendar *)calendar didSelectDate:(NSDate *)date atMonthPosition:(TFYCa_CalendarMonthPosition)monthPosition

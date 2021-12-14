@@ -23,7 +23,7 @@ TFY_PROPERTY_CHAIN_READONLY TFY_TableViewChainModel *(^ estimatedRowHeight)(CGFl
 TFY_PROPERTY_CHAIN_READONLY TFY_TableViewChainModel *(^ estimatedSectionHeaderHeight)(CGFloat);
 TFY_PROPERTY_CHAIN_READONLY TFY_TableViewChainModel *(^ estimatedSectionFooterHeight)(CGFloat);
 TFY_PROPERTY_CHAIN_READONLY TFY_TableViewChainModel *(^ separatorInset)(UIEdgeInsets);
-
+TFY_PROPERTY_CHAIN_READONLY TFY_TableViewChainModel *(^ sectionHeaderTopPadding)(CGFloat) API_AVAILABLE(ios(15.0));
 TFY_PROPERTY_CHAIN_READONLY TFY_TableViewChainModel *(^ editing)(BOOL);
 TFY_PROPERTY_CHAIN_READONLY TFY_TableViewChainModel *(^ allowsSelection)(BOOL);
 TFY_PROPERTY_CHAIN_READONLY TFY_TableViewChainModel *(^ allowsMultipleSelection)(BOOL);

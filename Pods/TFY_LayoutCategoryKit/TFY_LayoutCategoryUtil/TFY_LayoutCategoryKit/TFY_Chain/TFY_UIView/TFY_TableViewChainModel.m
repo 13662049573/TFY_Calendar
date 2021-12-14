@@ -42,6 +42,7 @@ TFY_CATEGORY_CHAIN_TABLEVIEW_IMPLEMENTATION(tableHeaderView, UIView *)
 TFY_CATEGORY_CHAIN_TABLEVIEW_IMPLEMENTATION(tableFooterView, UIView *)
 TFY_CATEGORY_CHAIN_TABLEVIEW_IMPLEMENTATION(sectionIndexBackgroundColor, UIColor *)
 TFY_CATEGORY_CHAIN_TABLEVIEW_IMPLEMENTATION(sectionIndexColor, UIColor *)
+TFY_CATEGORY_CHAIN_TABLEVIEW_IMPLEMENTATION(sectionHeaderTopPadding,CGFloat);
 
 - (TFY_TableViewChainModel * _Nonnull (^)(UINib * _Nonnull, NSString * _Nonnull))registerCellNib{
     return ^ (UINib *nib, NSString *identifier){

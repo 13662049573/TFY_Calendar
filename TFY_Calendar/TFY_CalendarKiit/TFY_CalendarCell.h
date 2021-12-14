@@ -24,10 +24,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /**
- 单元格的字幕标签
+ 日期下面字幕标签
  */
 @property (weak, nonatomic) UILabel  *subtitleLabel;
 
+/**
+ 日期上面的字幕标签
+ */
+@property (weak, nonatomic) UILabel  *subToptitleLabel;
 
 /**
  单元格的形状层
@@ -56,6 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) TFY_CalendarAppearance *appearance;
 
 @property (strong, nonatomic) NSString *subtitle;
+@property (strong, nonatomic) NSString *subToptitle;
 @property (strong, nonatomic) UIImage  *image;
 @property (assign, nonatomic) TFYCa_CalendarMonthPosition monthPosition;
 
@@ -69,10 +74,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) UIColor *preferredTitleSelectionColor;
 @property (strong, nonatomic) UIColor *preferredSubtitleDefaultColor;
 @property (strong, nonatomic) UIColor *preferredSubtitleSelectionColor;
+@property (strong, nonatomic) UIColor *preferredSubToptitleDefaultColor;
+@property (strong, nonatomic) UIColor *preferredSubToptitleSelectionColor;
 @property (strong, nonatomic) UIColor *preferredBorderDefaultColor;
 @property (strong, nonatomic) UIColor *preferredBorderSelectionColor;
 @property (assign, nonatomic) CGPoint preferredTitleOffset;
 @property (assign, nonatomic) CGPoint preferredSubtitleOffset;
+@property (assign, nonatomic) CGPoint preferredSubToptitleOffset;
 @property (assign, nonatomic) CGPoint preferredImageOffset;
 @property (assign, nonatomic) CGPoint preferredEventOffset;
 

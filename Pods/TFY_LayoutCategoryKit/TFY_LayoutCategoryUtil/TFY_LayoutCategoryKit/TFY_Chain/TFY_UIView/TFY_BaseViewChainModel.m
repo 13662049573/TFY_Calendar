@@ -190,6 +190,15 @@ TFY_CATEGORY_CHAIN_VIEW_IMPLEMENTATION(transform, CGAffineTransform)
     };
 }
 
+- (id  _Nonnull (^)(CALayer * _Nonnull))addToSublayer {
+    return ^(CALayer *layer){
+        [self enumerateObjectsUsingBlock:^(UIView * _Nonnull obj) {
+            [obj.layer addSublayer:layer];
+        }];
+        return self;
+    };
+}
+
 - (id  _Nonnull (^)(UIView * _Nonnull))addSubView{
     return ^(UIView *subView){
         [self.view addSubview:subView];

@@ -46,6 +46,7 @@
 @property (readonly, nonatomic) NSDictionary *backgroundColors;
 @property (readonly, nonatomic) NSDictionary *titleColors;
 @property (readonly, nonatomic) NSDictionary *subtitleColors;
+@property (readonly, nonatomic) NSDictionary *subToptitleColors;
 @property (readonly, nonatomic) NSDictionary *borderColors;
 
 @end

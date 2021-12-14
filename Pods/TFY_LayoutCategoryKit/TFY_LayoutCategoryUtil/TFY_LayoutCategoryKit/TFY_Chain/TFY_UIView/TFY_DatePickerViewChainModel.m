@@ -19,6 +19,8 @@ TFY_CATEGORY_CHAIN_DATEPICKER_IMPLEMENTATION(minimumDate, NSDate *)
 TFY_CATEGORY_CHAIN_DATEPICKER_IMPLEMENTATION(maximumDate, NSDate *)
 TFY_CATEGORY_CHAIN_DATEPICKER_IMPLEMENTATION(countDownDuration, NSTimeInterval)
 TFY_CATEGORY_CHAIN_DATEPICKER_IMPLEMENTATION(minuteInterval, NSInteger)
+TFY_CATEGORY_CHAIN_DATEPICKER_IMPLEMENTATION(preferredDatePickerStyle, UIDatePickerStyle)
+TFY_CATEGORY_CHAIN_DATEPICKER_IMPLEMENTATION(roundsToMinuteInterval, BOOL)
 
 - (TFY_DatePickerViewChainModel * _Nonnull (^)(NSDate * _Nonnull, BOOL))setDateWithAnimated{
     return ^ (NSDate *date, BOOL animated){

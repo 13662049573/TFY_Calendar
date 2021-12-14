@@ -53,9 +53,14 @@ typedef NS_ENUM(NSUInteger, TFYCa_CalendarMonthPosition) {
 - (nullable NSString *)calendar:(TFY_Calendar *_Nullable)calendar titleForDate:(NSDate *_Nonnull)date;
 
 /**
- * 向数据源询问日期文本下特定日期的字幕。
+ * 日期下面面添加文案。
  */
 - (nullable NSString *)calendar:(TFY_Calendar *_Nullable)calendar subtitleForDate:(NSDate *_Nonnull)date;
+
+/**
+ * 日期上面添加文案。
+ */
+- (nullable NSString *)calendar:(TFY_Calendar *_Nullable)calendar subToptitleDate:(NSDate *_Nonnull)date;
 
 /**
  * 向数据源询问特定日期的图像。
@@ -169,14 +174,25 @@ typedef NS_ENUM(NSUInteger, TFYCa_CalendarMonthPosition) {
 - (nullable UIColor *)calendar:(TFY_Calendar *_Nullable)calendar appearance:(TFY_CalendarAppearance *_Nullable)appearance titleSelectionColorForDate:(NSDate *_Nonnull)date;
 
 /**
- * 向代表询问代表在特定日期处于未选择状态的字幕文本颜色。
+ * 日期下面文字的默认颜色
  */
 - (nullable UIColor *)calendar:(TFY_Calendar *_Nullable)calendar appearance:(TFY_CalendarAppearance *_Nullable)appearance subtitleDefaultColorForDate:(NSDate *_Nonnull)date;
 
 /**
- * 向代表询问代表在特定日期处于选定状态的字幕文本颜色。
+ * 日期上面文字的默认颜色
+ */
+- (nullable UIColor *)calendar:(TFY_Calendar *_Nullable)calendar appearance:(TFY_CalendarAppearance *_Nullable)appearance subToptitleDefaultColorForDate:(NSDate *_Nonnull)date;
+//
+/**
+ * 日期下面文字的选中颜色
  */
 - (nullable UIColor *)calendar:(TFY_Calendar *_Nullable)calendar appearance:(TFY_CalendarAppearance *_Nullable)appearance subtitleSelectionColorForDate:(NSDate *_Nonnull)date;
+
+
+/**
+ * 日期上面文字的选中颜色
+ */
+- (nullable UIColor *)calendar:(TFY_Calendar *_Nullable)calendar appearance:(TFY_CalendarAppearance *_Nullable)appearance subToptitleSelectionColorForDate:(NSDate *_Nonnull)date;
 
 /**
  * 向代表询问特定日期的事件颜色。
@@ -204,9 +220,14 @@ typedef NS_ENUM(NSUInteger, TFYCa_CalendarMonthPosition) {
 - (CGPoint)calendar:(TFY_Calendar *_Nullable)calendar appearance:(TFY_CalendarAppearance *_Nullable)appearance titleOffsetForDate:(NSDate *_Nonnull)date;
 
 /**
- * 要求代表提供特定日期字幕的补偿。
+ * 日期下面文字偏移量
  */
 - (CGPoint)calendar:(TFY_Calendar *_Nullable)calendar appearance:(TFY_CalendarAppearance *_Nullable)appearance subtitleOffsetForDate:(NSDate *_Nonnull)date;
+
+/**
+ * 日期上面面文字偏移量
+ */
+- (CGPoint)calendar:(TFY_Calendar *_Nullable)calendar appearance:(TFY_CalendarAppearance *_Nullable)appearance subToptitleOffsetForDate:(NSDate *_Nonnull)date;
 
 /**
  * 要求代表提供特定日期的图像偏移量。

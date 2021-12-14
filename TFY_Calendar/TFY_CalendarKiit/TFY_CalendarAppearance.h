@@ -50,6 +50,9 @@ NS_ASSUME_NONNULL_BEGIN
 ///字幕文本的字体
 @property (strong, nonatomic) UIFont   *subtitleFont;
 
+///字幕文本的字体
+@property (strong, nonatomic) UIFont   *subToptitleFont;
+
 ///工作日文本的字体。
 @property (strong, nonatomic) UIFont   *weekdayFont;
 
@@ -59,8 +62,11 @@ NS_ASSUME_NONNULL_BEGIN
 ///日期文本与默认位置的偏移量。
 @property (assign, nonatomic) CGPoint  titleOffset;
 
-///日期文本与默认位置的偏移量。
+///日期文本与下默认位置的偏移量。
 @property (assign, nonatomic) CGPoint  subtitleOffset;
+
+///日期文本与上默认位置的偏移量。
+@property (assign, nonatomic) CGPoint  subToptitleOffset;
 
 ///事件点与默认位置的偏移量。
 @property (assign, nonatomic) CGPoint eventOffset;
@@ -104,8 +110,14 @@ NS_ASSUME_NONNULL_BEGIN
 ///未选择状态的字幕文本颜色。
 @property (strong, nonatomic) UIColor  *subtitleDefaultColor;
 
+///未选择状态的字幕文本颜色。
+@property (strong, nonatomic) UIColor  *subToptitleDefaultColor;
+
 ///所选状态的字幕文本颜色。
 @property (strong, nonatomic) UIColor  *subtitleSelectionColor;
+
+///所选状态的字幕文本颜色。
+@property (strong, nonatomic) UIColor  *subToptitleSelectionColor;
 
 ///日历中今天的字幕文字颜色。
 @property (strong, nonatomic) UIColor  *subtitleTodayColor;
@@ -150,6 +162,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 // 仅用于预览
 @property (assign, nonatomic) BOOL      fakeSubtitles;
+@property (assign, nonatomic) BOOL      fakeSubToptitles;
 @property (assign, nonatomic) BOOL      fakeEventDots;
 @property (assign, nonatomic) NSInteger fakedSelectedDay;
 

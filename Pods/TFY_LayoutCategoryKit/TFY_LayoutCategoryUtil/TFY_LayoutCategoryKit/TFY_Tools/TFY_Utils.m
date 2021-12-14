@@ -243,7 +243,7 @@ const char* jailbreak_tool_pathes[] = {
       
     NSArray *typeStrings4G = @[CTRadioAccessTechnologyLTE];
     NSArray *typeStrings5G;
-    if (@available(iOS 14.0, *)) {
+    if (@available(iOS 14.1, *)) {
         typeStrings5G = @[CTRadioAccessTechnologyNRNSA,
                           CTRadioAccessTechnologyNR];
     }
@@ -2370,7 +2370,8 @@ static CGRect oldframe;
         createdAssetID = [PHAssetChangeRequest creationRequestForAssetFromImage:image].placeholderForCreatedAsset.localIdentifier;
     } error:&error];
 }
-+(void)saveImage:(UIImage *)image assetCollectionName:(NSString *)collectionName{
+
++(void)saveImage:(UIImage *)image assetCollectionName:(NSString *)collectionName completionHandler:(nullable void(^)(BOOL success, NSError *__nullable error))completionHandler {
     // 1. 获取当前App的相册授权状态
     PHAuthorizationStatus authorizationStatus = [PHPhotoLibrary authorizationStatus];
     
@@ -2378,7 +2379,7 @@ static CGRect oldframe;
     if (authorizationStatus == PHAuthorizationStatusAuthorized) {
         
         // 2.1 如果已经授权, 保存图片(调用步骤2的方法)
-        [self saveImage:image toCollectionWithName:collectionName];
+        [self saveImage:image toCollectionWithName:collectionName completionHandler:completionHandler];
         
     } else if (authorizationStatus == PHAuthorizationStatusNotDetermined) { // 如果没决定, 弹出指示框, 让用户选择
         
@@ -2386,14 +2387,14 @@ static CGRect oldframe;
             
             // 如果用户选择授权, 则保存图片
             if (status == PHAuthorizationStatusAuthorized) {
-                [self saveImage:image toCollectionWithName:collectionName];
+                [self saveImage:image toCollectionWithName:collectionName completionHandler:completionHandler];
             }
         }];
         
     }
 }
 // 保存图片
-+ (void)saveImage:(UIImage *)image toCollectionWithName:(NSString *)collectionName {
++ (void)saveImage:(UIImage *)image toCollectionWithName:(NSString *)collectionName completionHandler:(nullable void(^)(BOOL success, NSError *__nullable error))completionHandler {
     
     // 1. 获取相片库对象
     PHPhotoLibrary *library = [PHPhotoLibrary sharedPhotoLibrary];
@@ -2423,15 +2424,7 @@ static CGRect oldframe;
         // 2.5 将占位对象添加到相册请求中
         [collectionRequest addAssets:@[placeholder]];
         
-    } completionHandler:^(BOOL success, NSError * _Nullable error) {
-        
-        // 3. 判断是否出错, 如果报错, 声明保存不成功
-        if (error) {
-            NSLog(@"保存相册失败");
-        } else {
-            NSLog(@"保存相册成功");
-        }
-    }];
+    } completionHandler:completionHandler];
 }
 /**
  *  改变导航栏工具条字体颜色 0 为白色 1 为黑色
@@ -2445,15 +2438,11 @@ static CGRect oldframe;
  *  按钮旋转动画
  */
 +(void)RotatinganimationView:(UIButton *)btn animateWithDuration:(NSTimeInterval)duration{
-    btn.selected?(btn.selected=YES):(btn.selected=NO);
     if (btn.selected) {
-        btn.selected = NO;
         [UIView animateWithDuration:duration animations:^{
             btn.imageView.transform = CGAffineTransformMakeRotation(0);
         } completion:^(BOOL finished) {}];
-    }
-    else{
-        btn.selected = YES;
+    } else {
         [UIView animateWithDuration:duration animations:^{
             btn.imageView.transform = CGAffineTransformMakeRotation(M_PI);
         } completion:^(BOOL finished) {}];

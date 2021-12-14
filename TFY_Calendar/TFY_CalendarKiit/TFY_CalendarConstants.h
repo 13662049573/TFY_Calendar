@@ -24,6 +24,7 @@ CG_EXTERN CGFloat const TFYCa_CalendarDefaultBounceAnimationDuration;
 CG_EXTERN CGFloat const TFYCa_CalendarStandardRowHeight;
 CG_EXTERN CGFloat const TFYCa_CalendarStandardTitleTextSize;
 CG_EXTERN CGFloat const TFYCa_CalendarStandardSubtitleTextSize;
+CG_EXTERN CGFloat const TFYCa_CalendarStandardSubToptitleTextSize;
 CG_EXTERN CGFloat const TFYCa_CalendarStandardWeekdayTextSize;
 CG_EXTERN CGFloat const TFYCa_CalendarStandardHeaderTextSize;
 CG_EXTERN CGFloat const TFYCa_CalendarMaximumEventDotDiameter;

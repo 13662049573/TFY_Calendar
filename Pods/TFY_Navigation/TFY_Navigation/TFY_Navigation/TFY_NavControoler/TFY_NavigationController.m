@@ -228,6 +228,7 @@ __attribute((overloadable)) static inline UIViewController *TFYSafeWrapViewContr
         self.contentViewController.view.frame = self.view.bounds;
         [self.view addSubview:self.contentViewController.view];
     }
+    self.containerNavigationController.view.backgroundColor = UIColor.whiteColor;
 }
 
 - (BOOL)becomeFirstResponder
@@ -370,21 +371,50 @@ __attribute((overloadable)) static inline UIViewController *TFYSafeWrapViewContr
         self.navigationBar.backIndicatorImage               = self.navigationController.navigationBar.backIndicatorImage;
         self.navigationBar.backIndicatorTransitionMaskImage = self.navigationController.navigationBar.backIndicatorTransitionMaskImage;
     }
+    
     [self setupNavigationBarTheme];
 }
 
 - (void)setupNavigationBarTheme
 {
     UINavigationBar *navBar = [UINavigationBar appearance];
-    [navBar setBackgroundImage:[self tfy_createImage:UIColor.whiteColor] forBarMetrics:UIBarMetricsDefault];
+    [navBar setBackgroundImage:[self createImage:UIColor.whiteColor] forBarMetrics:UIBarMetricsDefault];
     [navBar setShadowImage:[UIImage imageNamed:@"TFY_NavigationImage.bundle/nav_line"]];
     NSMutableDictionary *textAttrs = [NSMutableDictionary dictionary];
-    textAttrs[NSFontAttributeName] = [UIFont systemFontOfSize:16 weight:UIFontWeightBold];
+    textAttrs[NSFontAttributeName] = [UIFont systemFontOfSize:16 weight:UIFontWeightMedium];
     textAttrs[NSForegroundColorAttributeName] = UIColor.blackColor;
     [navBar setTitleTextAttributes:textAttrs];
 }
 
-- (UIImage *)tfy_createImage:(UIColor *)imageColor {
+/// 设置导航栏颜色
+-(void)setNavigationBackgroundColor:(UIColor *)color {
+    
+    NSDictionary *dic = @{NSForegroundColorAttributeName : [UIColor blackColor],
+                              NSFontAttributeName : [UIFont systemFontOfSize:16 weight:UIFontWeightMedium]};
+    
+    if (@available(iOS 15.0, *)) {
+    
+        UINavigationBarAppearance *appearance = [[UINavigationBarAppearance alloc] init];
+        
+        appearance.backgroundColor = color;// 背景色
+        appearance.backgroundEffect = nil;// 去掉半透明效果
+        appearance.titleTextAttributes = dic;// 标题字体颜色及大小
+        appearance.shadowImage = [[UIImage alloc] init];// 设置导航栏下边界分割线透明
+        appearance.shadowColor = [UIColor clearColor];// 去除导航栏阴影（如果不设置clear，导航栏底下会有一条阴影线）
+        appearance.backgroundImage = [self createImage:color];
+        
+        self.navigationBar.standardAppearance = appearance;// standardAppearance：常规状态, 标准外观，iOS15之后不设置的时候，导航栏背景透明
+        self.navigationBar.scrollEdgeAppearance = appearance;// scrollEdgeAppearance：被scrollview向下拉的状态, 滚动时外观，不设置的时候，使用标准外观
+        
+    } else {
+
+        self.navigationBar.titleTextAttributes = dic;
+        [self.navigationBar setShadowImage:[[UIImage alloc] init]];
+        [self.navigationBar setBackgroundImage:[self createImage:color] forBarMetrics:UIBarMetricsDefault];
+    }
+}
+
+- (UIImage *)createImage:(UIColor *)imageColor {
     CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
     UIGraphicsBeginImageContext(rect.size);
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -593,6 +623,7 @@ __attribute((overloadable)) static inline UIViewController *TFYSafeWrapViewContr
     }
 }
 
+
 - (UIImage *)navigationBarBackIconImage {
     CGSize const size = CGSizeMake(15.0, 21.0);
     UIGraphicsBeginImageContextWithOptions(size, NO, UIScreen.mainScreen.scale);
@@ -667,6 +698,7 @@ __attribute((overloadable)) static inline UIViewController *TFYSafeWrapViewContr
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     self.view.backgroundColor = [UIColor whiteColor];
     
     [super setDelegate:self];

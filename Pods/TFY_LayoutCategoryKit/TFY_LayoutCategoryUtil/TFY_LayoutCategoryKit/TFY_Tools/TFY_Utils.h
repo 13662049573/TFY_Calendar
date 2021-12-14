@@ -433,7 +433,7 @@ typedef NS_ENUM(NSUInteger, Temperature) {
 
 /***  保存相应viwe的图片到相册*/
 +(void)savePhoto:(UIView *)views;
-+(void)saveImage:(UIImage *)image assetCollectionName:(NSString *)collectionName;
++(void)saveImage:(UIImage *)image assetCollectionName:(NSString *)collectionName completionHandler:(nullable void(^)(BOOL success, NSError *__nullable error))completionHandler;
 
 /***  修改状态栏的颜色*/
 + (void)statusBarBackgroundColor:(UIColor *)statusBarColor;

@@ -19,6 +19,7 @@ CGFloat const TFYCa_CalendarDefaultBounceAnimationDuration = 0.15;
 CGFloat const TFYCa_CalendarStandardRowHeight = 38;
 CGFloat const TFYCa_CalendarStandardTitleTextSize = 13.5;
 CGFloat const TFYCa_CalendarStandardSubtitleTextSize = 10;
+CGFloat const TFYCa_CalendarStandardSubToptitleTextSize = 10;
 CGFloat const TFYCa_CalendarStandardWeekdayTextSize = 14;
 CGFloat const TFYCa_CalendarStandardHeaderTextSize = 16.5;
 CGFloat const TFYCa_CalendarMaximumEventDotDiameter = 4.8;

@@ -8,10 +8,16 @@
 
 #import "UIFont+TFY_Tools.h"
 #import "UIDevice+TFY_Tools.h"
+#import "NSObject+TFY_Tools.h"
 
 #define FontScale ([[UIDevice currentDevice] tfy_isPad]? 1 : [UIFont screenWidth] / 375.0)
 
 @implementation UIFont (TFY_Tools)
+
+
++ (UIFont *)tfy_systemScaleFontOfSize:(CGFloat)fontSize weight:(UIFontWeight)weight {
+    return [UIFont systemFontOfSize:fontSize * FontScale weight:weight];
+}
 
 + (CGFloat)screenWidth{
     static CGFloat width = 0;
@@ -40,7 +46,7 @@
     }
 }
 
-+ (UIFont*)tfy_fontType:(fontType)type size:(CGFloat)size{
++ (UIFont*)tfy_fontType:(fontType)type size:(CGFloat)size {
     static NSDictionary *fontNames = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{

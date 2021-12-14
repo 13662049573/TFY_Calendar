@@ -264,6 +264,7 @@ IB_DESIGNABLE
 
 @property (assign, nonatomic) IBInspectable CGFloat  titleTextSize;
 @property (assign, nonatomic) IBInspectable CGFloat  subtitleTextSize;
+@property (assign, nonatomic) IBInspectable CGFloat  subToptitleTextSize;
 @property (assign, nonatomic) IBInspectable CGFloat  weekdayTextSize;
 @property (assign, nonatomic) IBInspectable CGFloat  headerTitleTextSize;
 
@@ -283,6 +284,8 @@ IB_DESIGNABLE
 
 @property (strong, nonatomic) IBInspectable UIColor  *subtitleDefaultColor;
 @property (strong, nonatomic) IBInspectable UIColor  *subtitleSelectionColor;
+@property (strong, nonatomic) IBInspectable UIColor  *subToptitleDefaultColor;
+@property (strong, nonatomic) IBInspectable UIColor  *subToptitleSelectionColor;
 @property (strong, nonatomic) IBInspectable UIColor  *subtitleTodayColor;
 @property (strong, nonatomic) IBInspectable UIColor  *subtitlePlaceholderColor;
 @property (strong, nonatomic) IBInspectable UIColor  *subtitleWeekendColor;
