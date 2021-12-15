@@ -1329,6 +1329,7 @@ typedef NS_ENUM(NSUInteger, TFYCa_CalendarOrientation) {
     TFYCa_CalendarInvalidateCellAppearance(preferredTitleSelectionColor,titleSelectionColorForDate);
 
     TFYCa_CalendarInvalidateCellAppearanceWithDefault(preferredTitleOffset,titleOffsetForDate,CGPointInfinity);
+    
     if (cell.subtitle) {
         TFYCa_CalendarInvalidateCellAppearance(preferredSubtitleDefaultColor,subtitleDefaultColorForDate);
         TFYCa_CalendarInvalidateCellAppearance(preferredSubtitleSelectionColor,subtitleSelectionColorForDate);

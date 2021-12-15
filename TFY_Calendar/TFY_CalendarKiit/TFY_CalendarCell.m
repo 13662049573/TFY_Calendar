@@ -109,6 +109,9 @@
     
     if (_subToptitle) {
         _subToptitleLabel.text = _subToptitle;
+        if (_subToptitleLabel.hidden) {
+            _subToptitleLabel.hidden = NO;
+        }
     } else {
         if (!_subToptitleLabel.hidden) {
             _subToptitleLabel.hidden = YES;
@@ -116,6 +119,8 @@
     }
     
     if (_subtitle && _subToptitle) {
+        self.subtitleLabel.font = [UIFont systemFontOfSize:8];
+        self.subToptitleLabel.font = [UIFont systemFontOfSize:8];
         
         CGFloat titleHeight = self.titleLabel.font.lineHeight;
         CGFloat subtitleHeight = self.subtitleLabel.font.lineHeight;
@@ -155,6 +160,7 @@
             CGFloat subtitleHeight = self.subtitleLabel.font.lineHeight;
             
             CGFloat height = titleHeight + subtitleHeight;
+            
             _titleLabel.frame = CGRectMake(
                                            self.preferredTitleOffset.x,
                                            (self.contentView.tfyCa_height*5.0/6.0-height)*0.5+self.preferredTitleOffset.y,
@@ -167,17 +173,8 @@
                                               self.contentView.tfyCa_width,
                                               subtitleHeight
                                               );
-        } else {
-            _titleLabel.frame = CGRectMake(
-                                           self.preferredTitleOffset.x,
-                                           self.preferredTitleOffset.y,
-                                           self.contentView.tfyCa_width,
-                                           floor(self.contentView.tfyCa_height*5.0/6.0)
-                                           );
-        }
-        
-        if (_subToptitle) {
-        
+        } else if (_subToptitle) {
+            
             CGFloat titleHeight = self.titleLabel.font.lineHeight;
             CGFloat subToptitleHeight = self.subToptitleLabel.font.lineHeight;
             
@@ -193,9 +190,7 @@
                                            self.contentView.tfyCa_width,
                                            titleHeight);
             
-            
-            
-        } else {
+        }  else {
             
             _titleLabel.frame = CGRectMake(
                                            self.preferredTitleOffset.x,
@@ -211,6 +206,10 @@
     
     CGFloat titleHeight = self.bounds.size.height*5.0/6.0;
     CGFloat diameter = MIN(self.bounds.size.height*5.0/6.0,self.bounds.size.width);
+    if (_subtitle && _subToptitle) {
+        titleHeight = self.bounds.size.height*5.0/5.0;
+        diameter = MIN(self.bounds.size.height*5.0/5.0,self.bounds.size.width);
+    }
     diameter = diameter > TFYCa_CalendarStandardCellDiameter ? (diameter - (diameter-TFYCa_CalendarStandardCellDiameter)*0.5) : diameter;
     _shapeLayer.frame = CGRectMake((self.bounds.size.width-diameter)/2,
                                    (titleHeight-diameter)/2,
@@ -224,6 +223,9 @@
     }
     
     CGFloat eventSize = _shapeLayer.frame.size.height/6.0;
+    if (_subtitle && _subToptitle) {
+        eventSize = _shapeLayer.frame.size.height/5.0;
+    }
     _eventIndicator.frame = CGRectMake(
                                        self.preferredEventOffset.x,
                                        CGRectGetMaxY(_shapeLayer.frame)+eventSize*0.17+self.preferredEventOffset.y,
@@ -467,7 +469,7 @@ OFFSET_PROPERTY(preferredEventOffset, PreferredEventOffset, _appearance.eventOff
 - (void)setSubToptitle:(NSString *)subToptitle {
     
     if (![_subToptitle isEqualToString:subToptitle]) {
-        BOOL diff = (_subToptitle.length && !_subToptitle.length) || (_subToptitle.length && !_subToptitle.length);
+        BOOL diff = (subToptitle.length && !_subToptitle.length) || (_subToptitle.length && !subToptitle.length);
         _subToptitle = subToptitle;
         if (diff) {
             [self setNeedsLayout];
