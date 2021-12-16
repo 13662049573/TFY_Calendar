@@ -126,11 +126,6 @@
         CGFloat subtitleHeight = self.subtitleLabel.font.lineHeight;
         CGFloat subToptitleHeight = self.subToptitleLabel.font.lineHeight;
         
-        self.subtitleLabel.textColor = UIColor.redColor;
-        
-        self.subToptitleLabel.textColor = UIColor.blueColor;
-        
-        
         _subToptitleLabel.frame = CGRectMake(
                                              self.preferredSubToptitleOffset.x,
                                              self.preferredSubToptitleOffset.y,
