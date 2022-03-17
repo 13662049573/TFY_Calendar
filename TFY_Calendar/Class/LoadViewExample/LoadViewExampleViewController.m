@@ -31,10 +31,10 @@ NS_ASSUME_NONNULL_END
     if (self) {
         self.title = @"TFY_Calendar";
         
-        self.images = @{@"2019/12/01":[UIImage imageNamed:@"icon_cat"],
-                        @"2019/12/05":[UIImage imageNamed:@"icon_footprint"],
-                        @"2019/12/20":[UIImage imageNamed:@"icon_cat"],
-                        @"2019/12/07":[UIImage imageNamed:@"icon_footprint"]};
+        self.images = @{@"2022/03/11":[UIImage imageNamed:@"icon_cat"],
+                        @"2022/03/13":[UIImage imageNamed:@"icon_footprint"],
+                        @"2022/03/15":[UIImage imageNamed:@"icon_cat"],
+                        @"2022/03/17":[UIImage imageNamed:@"icon_footprint"]};
     }
     return self;
 }
@@ -130,4 +130,18 @@ NS_ASSUME_NONNULL_END
     return self.images[dateString];
 }
 
+- (UIImage *)calendar:(TFY_Calendar *)calendar imageTopForDate:(NSDate * _Nonnull)date
+{
+    NSString *dateString = [self.dateFormatter stringFromDate:date];
+    return self.images[dateString];
+}
+
+- (CGPoint)calendar:(TFY_Calendar *_Nullable)calendar appearance:(TFY_CalendarAppearance *_Nullable)appearance imageTopOffsetForDate:(NSDate *_Nonnull)date {
+    
+    NSString *key = [self.dateFormatter stringFromDate:date];
+    if ([self.images.allKeys containsObject:key]) {
+        return CGPointMake(0, -10);
+    }
+    return CGPointMake(0, 0);
+}
 @end

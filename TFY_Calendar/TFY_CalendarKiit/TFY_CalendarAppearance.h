@@ -71,8 +71,11 @@ NS_ASSUME_NONNULL_BEGIN
 ///事件点与默认位置的偏移量。
 @property (assign, nonatomic) CGPoint eventOffset;
 
-///图像与默认位置的偏移量。
+///日期下面图片位置的偏移量。
 @property (assign, nonatomic) CGPoint imageOffset;
+
+///日期上面图片位置的偏移量。
+@property (assign, nonatomic) CGPoint imageTopOffset;
 
 ///事件点的颜色。
 @property (strong, nonatomic) UIColor  *eventDefaultColor;

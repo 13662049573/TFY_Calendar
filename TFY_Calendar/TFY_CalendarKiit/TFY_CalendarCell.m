@@ -48,6 +48,7 @@
     UILabel *label;
     CAShapeLayer *shapeLayer;
     UIImageView *imageView;
+    UIImageView *topImageView;
     TFY_CalendarEventIndicator *eventIndicator;
     
     label = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -87,6 +88,11 @@
     imageView.contentMode = UIViewContentModeBottom|UIViewContentModeCenter;
     [self.contentView addSubview:imageView];
     self.imageView = imageView;
+    
+    topImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+    topImageView.contentMode = UIViewContentModeTop|UIViewContentModeCenter;
+    [self.contentView addSubview:topImageView];
+    self.topImageView = topImageView;
     
     self.clipsToBounds = NO;
     self.contentView.clipsToBounds = NO;
@@ -198,6 +204,8 @@
     }
     
     _imageView.frame = CGRectMake(self.preferredImageOffset.x, self.preferredImageOffset.y, self.contentView.tfyCa_width, self.contentView.tfyCa_height);
+    
+    _topImageView.frame = CGRectMake(self.preferredTopImageOffset.x, self.preferredTopImageOffset.y, self.contentView.tfyCa_width, self.contentView.tfyCa_height);
     
     CGFloat titleHeight = self.bounds.size.height*5.0/6.0;
     CGFloat diameter = MIN(self.bounds.size.height*5.0/6.0,self.bounds.size.width);
@@ -331,6 +339,11 @@
         _imageView.hidden = !_image;
     }
     
+    if (![_topImage isEqual:_topImageView.image]) {
+        _topImageView.image = _topImage;
+        _topImageView.highlighted = !_topImage;
+    }
+    
     if (_eventIndicator.hidden == (_numberOfEvents > 0)) {
         _eventIndicator.hidden = !_numberOfEvents;
     }
@@ -437,6 +450,7 @@ OFFSET_PROPERTY(preferredTitleOffset, PreferredTitleOffset, _appearance.titleOff
 OFFSET_PROPERTY(preferredSubtitleOffset, PreferredSubtitleOffset, _appearance.subtitleOffset);
 OFFSET_PROPERTY(preferredSubToptitleOffset, preferredSubToptitleOffset, _appearance.subToptitleOffset);
 OFFSET_PROPERTY(preferredImageOffset, PreferredImageOffset, _appearance.imageOffset);
+OFFSET_PROPERTY(preferredTopImageOffset, PreferredTopImageOffset, _appearance.imageTopOffset);
 OFFSET_PROPERTY(preferredEventOffset, PreferredEventOffset, _appearance.eventOffset);
 
 #undef OFFSET_PROPERTY

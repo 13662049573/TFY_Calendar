@@ -39,10 +39,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) CAShapeLayer *shapeLayer;
 
 /**
- 单元格形状层下方的imageView
+  日期下面标签图片
  */
 @property (weak, nonatomic) UIImageView *imageView;
 
+/**
+  日期上面标签图片
+ */
+@property (weak, nonatomic) UIImageView *topImageView;
 
 /**
  单元事件点的集合
@@ -62,6 +66,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSString *subtitle;
 @property (strong, nonatomic) NSString *subToptitle;
 @property (strong, nonatomic) UIImage  *image;
+@property (strong, nonatomic) UIImage  *topImage;
 @property (assign, nonatomic) TFYCa_CalendarMonthPosition monthPosition;
 
 @property (assign, nonatomic) NSInteger numberOfEvents;
@@ -82,6 +87,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic) CGPoint preferredSubtitleOffset;
 @property (assign, nonatomic) CGPoint preferredSubToptitleOffset;
 @property (assign, nonatomic) CGPoint preferredImageOffset;
+@property (assign, nonatomic) CGPoint preferredTopImageOffset;
 @property (assign, nonatomic) CGPoint preferredEventOffset;
 
 @property (strong, nonatomic) NSArray<UIColor *> *preferredEventDefaultColors;

@@ -1355,6 +1355,10 @@ typedef NS_ENUM(NSUInteger, TFYCa_CalendarOrientation) {
         TFYCa_CalendarInvalidateCellAppearanceWithDefault(preferredImageOffset,imageOffsetForDate,CGPointInfinity);
     }
     
+    if (cell.topImage) {
+        TFYCa_CalendarInvalidateCellAppearanceWithDefault(preferredTopImageOffset,imageTopOffsetForDate,CGPointInfinity);
+    }
+    
 #undef TFYCa_CalendarInvalidateCellAppearance
 #undef TFYCa_CalendarInvalidateCellAppearanceWithDefault
     
@@ -1365,6 +1369,7 @@ typedef NS_ENUM(NSUInteger, TFYCa_CalendarOrientation) {
     cell.calendar = self;
     NSDate *date = [self.calculator dateForIndexPath:indexPath];
     cell.image = [self.dataSourceProxy calendar:self imageForDate:date];
+    cell.topImage = [self.dataSourceProxy calendar:self imageTopForDate:date];
     cell.numberOfEvents = [self.dataSourceProxy calendar:self numberOfEventsForDate:date];
     cell.titleLabel.text = [self.dataSourceProxy calendar:self titleForDate:date] ?: @([self.gregorian component:NSCalendarUnitDay fromDate:date]).stringValue;
     cell.subtitle  = [self.dataSourceProxy calendar:self subtitleForDate:date];

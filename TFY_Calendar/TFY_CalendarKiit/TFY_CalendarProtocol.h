@@ -63,9 +63,14 @@ typedef NS_ENUM(NSUInteger, TFYCa_CalendarMonthPosition) {
 - (nullable NSString *)calendar:(TFY_Calendar *_Nullable)calendar subToptitleDate:(NSDate *_Nonnull)date;
 
 /**
- * 向数据源询问特定日期的图像。
+ * 下面日期添加对应图片
  */
 - (nullable UIImage *)calendar:(TFY_Calendar *_Nullable)calendar imageForDate:(NSDate *_Nonnull)date;
+
+/**
+ * 上面日期添加对应图片
+ */
+- (nullable UIImage *)calendar:(TFY_Calendar *_Nullable)calendar imageTopForDate:(NSDate *_Nonnull)date;
 
 /**
  * 要求dataSource显示的最小日期。
@@ -230,9 +235,14 @@ typedef NS_ENUM(NSUInteger, TFYCa_CalendarMonthPosition) {
 - (CGPoint)calendar:(TFY_Calendar *_Nullable)calendar appearance:(TFY_CalendarAppearance *_Nullable)appearance subToptitleOffsetForDate:(NSDate *_Nonnull)date;
 
 /**
- * 要求代表提供特定日期的图像偏移量。
+ * 日历下面图像偏移量。
  */
 - (CGPoint)calendar:(TFY_Calendar *_Nullable)calendar appearance:(TFY_CalendarAppearance *_Nullable)appearance imageOffsetForDate:(NSDate *_Nonnull)date;
+
+/**
+ * 日历上面图像偏移量。
+ */
+- (CGPoint)calendar:(TFY_Calendar *_Nullable)calendar appearance:(TFY_CalendarAppearance *_Nullable)appearance imageTopOffsetForDate:(NSDate *_Nonnull)date;
 
 /**
  * 要求代表提供特定日期的事件点偏移量。

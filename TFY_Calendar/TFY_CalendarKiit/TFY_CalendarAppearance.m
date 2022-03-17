@@ -157,6 +157,13 @@
     }
 }
 
+- (void)setImageTopOffset:(CGPoint)imageTopOffset {
+    if (!CGPointEqualToPoint(_imageTopOffset,imageTopOffset)) {
+        _imageTopOffset = imageTopOffset;
+        [_calendar.visibleCells makeObjectsPerformSelector:@selector(setNeedsLayout)];
+    }
+}
+
 - (void)setEventOffset:(CGPoint)eventOffset
 {
     if (!CGPointEqualToPoint(_eventOffset, eventOffset)) {
