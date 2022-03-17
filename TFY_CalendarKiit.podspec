@@ -4,7 +4,7 @@ Pod::Spec.new do |spec|
 
   spec.name         = "TFY_CalendarKiit"
 
-  spec.version      = "2.2.4"
+  spec.version      = "2.2.6"
 
   spec.summary      = "日历完美处理，适合各种场景使用.可以下载demo 学习"
 
