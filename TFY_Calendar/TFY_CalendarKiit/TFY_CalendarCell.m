@@ -219,6 +219,7 @@
     
     CGFloat titleHeight = self.bounds.size.height*5.0/6.0;
     CGFloat diameter = MIN(self.bounds.size.height*5.0/6.0,self.bounds.size.width);
+    
     if (_subtitle && _subToptitle) {
         titleHeight = self.bounds.size.height*5.0/5.0;
         diameter = MIN(self.bounds.size.height*5.0/5.0,self.bounds.size.width);
@@ -247,13 +248,11 @@
         
     } else if (self.cellFillType == TFYCa_CellfillTypeLinkage){
         
+        CGFloat diameter = MIN(self.bounds.size.height*5.0/6.0,self.bounds.size.width);
+        
         diameter = diameter > TFYCa_CalendarStandardCellDiameter ? (diameter - (diameter-TFYCa_CalendarStandardCellDiameter)*0.5) : diameter;
        
-        if (_subtitle && _subToptitle) {
-            self.shapeLayer.frame = self.contentView.bounds;
-        } else {
-            self.shapeLayer.frame = CGRectMake(0, 0, CGRectGetWidth(self.contentView.frame), diameter);
-        }
+        self.shapeLayer.frame = CGRectMake(0, 0, CGRectGetWidth(self.contentView.frame), diameter);
         
         if (self.linkageSelectionType == TFYCa_fillTypeLinkageSelectionTypeMiddle) {
             
@@ -268,6 +267,8 @@
             self.shapeLayer.path = [UIBezierPath bezierPathWithRoundedRect:self.shapeLayer.bounds byRoundingCorners:UIRectCornerTopRight|UIRectCornerBottomRight cornerRadii:CGSizeMake(self.shapeLayer.tfyCa_width/2, self.shapeLayer.tfyCa_width/2)].CGPath;
             
         } else if (self.linkageSelectionType == TFYCa_fillTypeLinkageSelectionTypeSingle) {
+            
+            CGFloat diameter = MIN(self.bounds.size.height*5.0/6.0,self.bounds.size.width);
             
             diameter = diameter > TFYCa_CalendarStandardCellDiameter ? (diameter - (diameter-TFYCa_CalendarStandardCellDiameter)*0.5) : diameter;
             self.shapeLayer.frame = CGRectMake((self.bounds.size.width-diameter)/2,

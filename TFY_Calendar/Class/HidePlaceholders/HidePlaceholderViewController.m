@@ -153,26 +153,8 @@ NS_ASSUME_NONNULL_END
     
     titleBtn.backgroundColor = UIColor.yellowColor;
     titleBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-//    [titleBtn setTitle:[self DatetoChinese:textString] forState:UIControlStateNormal];
 }
 
-- (NSString *)DatetoChinese:(NSString *)text {
-    NSDictionary *dateDict = @{
-        @"01":@"一",
-        @"02":@"二",
-        @"03":@"三",
-        @"04":@"四",
-        @"05":@"五",
-        @"06":@"六",
-        @"07":@"七",
-        @"08":@"八",
-        @"09":@"九",
-        @"10":@"十",
-        @"11":@"十一",
-        @"12":@"十二",
-    };
-    return [NSString stringWithFormat:@"%@月",dateDict[text]];
-}
 
 #pragma mark - Target action
 

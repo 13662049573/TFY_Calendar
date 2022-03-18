@@ -102,7 +102,7 @@ NS_ASSUME_NONNULL_END
     self.dateFormatter.dateFormat = @"yyyy-MM-dd";
     
     self.minimumDate = [self.dateFormatter dateFromString:@"2016-02-03"];
-    self.maximumDate = [self.dateFormatter dateFromString:@"2021-04-10"];
+    self.maximumDate = [self.dateFormatter dateFromString:@"2029-04-10"];
 
     self.calendar.accessibilityIdentifier = @"calendar";
     

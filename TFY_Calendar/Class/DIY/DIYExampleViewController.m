@@ -23,7 +23,7 @@
 @property (strong, nonatomic) NSDate *maximumDate;
 @property (strong, nonatomic) TFY_LunarFormatter *lunarFormatter;
 @property (strong, nonatomic) NSArray<EKEvent *> *events;
-@property (strong, nonatomic) NSDictionary *fillDefaultColors;
+
 @end
 
 @implementation DIYExampleViewController
@@ -66,9 +66,7 @@
     self.dateFormatter.dateFormat = @"yyyy-MM-dd";
     
     self.minimumDate = [self.dateFormatter dateFromString:@"2020-02-03"];
-    self.maximumDate = NSDate.date;
-
-    self.calendar.accessibilityIdentifier = @"calendar";
+    self.maximumDate = [self.dateFormatter dateFromString:@"2029-12-30"];
     
     [self loadCalendarEvents];
     
@@ -80,23 +78,8 @@
     UIBarButtonItem *eventItem = [[UIBarButtonItem alloc] initWithTitle:@"事件" style:UIBarButtonItemStylePlain target:self action:@selector(eventItemClicked:)];
     [eventItem setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor purpleColor]} forState:UIControlStateNormal];
     
-    UIBarButtonItem *toggle = [[UIBarButtonItem alloc] initWithTitle:@"展开/关闭" style:UIBarButtonItemStylePlain target:self action:@selector(toggleClicked:)];
-    [toggle setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor purpleColor]} forState:UIControlStateNormal];
-    
-    self.navigationItem.rightBarButtonItems = @[eventItem ,lunarItem, todayItem,toggle];
-    
-    self.fillDefaultColors = @{@"2022-03-28":[UIColor purpleColor],
-                                 @"2022-03-29":[UIColor greenColor],
-                                 @"2022-03-30":[UIColor cyanColor],
-                                 @"2022-03-27":[UIColor yellowColor],
-                                 @"2022-03-01":[UIColor purpleColor],
-                                 @"2022-03-02":[UIColor greenColor],
-                                 @"2022-03-03":[UIColor cyanColor],
-                                 @"2022-03-04":[UIColor yellowColor],
-                                 @"2022-03-05":[UIColor purpleColor],
-                                 @"2022-03-06":[UIColor greenColor],
-                                 @"2022-03-07":[UIColor cyanColor],
-                                 @"2022-03-08":[UIColor magentaColor]};
+
+    self.navigationItem.rightBarButtonItems = @[eventItem ,lunarItem, todayItem];
     
 }
 - (void)didReceiveMemoryWarning
@@ -108,14 +91,6 @@
 - (void)dealloc
 {
     NSLog(@"%s",__FUNCTION__);
-}
-- (void)toggleClicked:(id)sender
-{
-    if (self.calendar.scope == TFYCa_CalendarScopeMonth) {
-        [self.calendar setScope:TFYCa_CalendarScopeWeek animated:YES];
-    } else {
-        [self.calendar setScope:TFYCa_CalendarScopeMonth animated:YES];
-    }
 }
 
 - (void)todayItemClicked:(id)sender
@@ -177,26 +152,16 @@
     return events.count;
 }
 
-#pragma mark - FSCalendarDelegate
-
-/**
- 选择不同填充颜色类型
- */
-- (TFYCa_CellfillType)calendar:(TFY_Calendar *_Nullable)calendar appearance:(TFY_CalendarAppearance *_Nullable)appearance fillTypeForDate:(NSDate *_Nonnull)date {
-    return TFYCa_CellfillTypeLinkage;
-}
+#pragma mark - CalendarDelegate
 
 - (nullable UIColor *)calendar:(TFY_Calendar *_Nullable)calendar appearance:(TFY_CalendarAppearance *_Nullable)appearance fillSelectionColorForDate:(NSDate *_Nonnull)date {
     return UIColor.orangeColor;
 }
 
-- (nullable UIColor *)calendar:(TFY_Calendar *_Nullable)calendar appearance:(TFY_CalendarAppearance *_Nullable)appearance fillDefaultColorForDate:(NSDate *_Nonnull)date {
-    NSString *key = [self.dateFormatter stringFromDate:date];
-    if ([self.fillDefaultColors.allKeys containsObject:key]) {
-        return _fillDefaultColors[key];
-    }
-    return nil;
+- (TFYCa_CellfillType)calendar:(TFY_Calendar *_Nullable)calendar appearance:(TFY_CalendarAppearance *_Nullable)appearance fillTypeForDate:(NSDate *_Nonnull)date {
+    return TFYCa_CellfillTypeLinkage;
 }
+
 #pragma mark - Private methods
 
 - (void)loadCalendarEvents
