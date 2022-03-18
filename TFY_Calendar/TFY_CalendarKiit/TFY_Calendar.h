@@ -160,8 +160,6 @@ IB_DESIGNABLE
  代表所选日期的日期。 （只读）
  */
 @property (readonly, nonatomic) NSArray<NSDate *> *selectedDates;
-
-@property (copy, nonatomic) NSArray<NSString *> *linkageDefaultDates;
 /**
  重新加载日历的日期和外观。
  */
