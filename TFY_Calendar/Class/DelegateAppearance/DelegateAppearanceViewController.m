@@ -2,8 +2,8 @@
 //  RollViewController.m
 //  TFY_Calendar
 //
-//  Created by 田风有 on 2021/12/1.
-//  Copyright © 2021 田风有. All rights reserved.
+//  Created by 田风有 on 2022/03/1.
+//  Copyright © 2022 田风有. All rights reserved.
 //
 
 #import "DelegateAppearanceViewController.h"
@@ -37,6 +37,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSArray *datesWithEvent;
 @property (strong, nonatomic) NSArray *datesWithMultipleEvents;
 
+@property (strong, nonatomic) NSDictionary *linkageDefaultColors;
+
+@property (strong, nonatomic) NSDictionary<NSString *, UIImage *> *images;
 @end
 
 NS_ASSUME_NONNULL_END
@@ -51,147 +54,162 @@ NS_ASSUME_NONNULL_END
     if (self) {
         self.title = @"TFY_Calendar";
         //默认选择颜色
-        self.fillDefaultColors = @{@"2021/11/28":[UIColor purpleColor],
-                                     @"2021/11/29":[UIColor greenColor],
-                                     @"2021/11/30":[UIColor cyanColor],
-                                     @"2021/11/27":[UIColor yellowColor],
-                                     @"2021/10/1":[UIColor purpleColor],
-                                     @"2021/10/2":[UIColor greenColor],
-                                     @"2021/10/3":[UIColor cyanColor],
-                                     @"2021/10/4":[UIColor yellowColor],
-                                     @"2021/10/5":[UIColor purpleColor],
-                                     @"2021/10/6":[UIColor greenColor],
-                                     @"2021/10/7":[UIColor cyanColor],
-                                     @"2021/10/8":[UIColor magentaColor]};
+        self.fillDefaultColors = @{@"2022/11/06":[UIColor purpleColor],
+                                     @"2022/11/07":[UIColor greenColor],
+                                     @"2022/11/08":[UIColor cyanColor],
+                                     @"2022/11/09":[UIColor yellowColor],
+                                     @"2022/11/10":[UIColor purpleColor],
+                                     @"2022/11/11":[UIColor greenColor],
+                                     @"2022/11/12":[UIColor cyanColor],
+                                     @"2022/11/13":[UIColor yellowColor],
+                                     @"2022/11/14":[UIColor purpleColor],
+                                     @"2022/11/15":[UIColor greenColor],
+                                     @"2022/11/16":[UIColor cyanColor],
+                                     @"2022/11/17":[UIColor magentaColor]};
+        
+        
+        self.linkageDefaultColors = @{@"2022/11/06":@(TFYCa_fillTypeLinkageSelectionTypeLeftBorder),
+                                     @"2022/11/07":@(TFYCa_fillTypeLinkageSelectionTypeMiddle),
+                                     @"2022/11/08":@(TFYCa_fillTypeLinkageSelectionTypeMiddle),
+                                     @"2022/11/09":@(TFYCa_fillTypeLinkageSelectionTypeMiddle),
+                                     @"2022/11/10":@(TFYCa_fillTypeLinkageSelectionTypeMiddle),
+                                     @"2022/11/11":@(TFYCa_fillTypeLinkageSelectionTypeMiddle),
+                                     @"2022/11/12":@(TFYCa_fillTypeLinkageSelectionTypeMiddle),
+                                     @"2022/11/13":@(TFYCa_fillTypeLinkageSelectionTypeMiddle),
+                                     @"2022/11/14":@(TFYCa_fillTypeLinkageSelectionTypeMiddle),
+                                     @"2022/11/15":@(TFYCa_fillTypeLinkageSelectionTypeMiddle),
+                                     @"2022/11/16":@(TFYCa_fillTypeLinkageSelectionTypeMiddle),
+                                     @"2022/11/17":@(TFYCa_fillTypeLinkageSelectionTypeRightBorder)};
+        
         //点击效果颜色
-        self.fillSelectionColors = @{@"2021/12/08":[UIColor redColor],
-                                 @"2021/10/06":[UIColor purpleColor],
-                                 @"2021/10/17":[UIColor grayColor],
-                                 @"2021/10/21":[UIColor cyanColor],
-                                 @"2021/11/08":[UIColor greenColor],
-                                 @"2021/11/06":[UIColor purpleColor],
-                                 @"2021/11/17":[UIColor grayColor],
-                                 @"2021/11/21":[UIColor cyanColor],
-                                 @"2021/12/06":[UIColor purpleColor],
-                                 @"2021/12/17":[UIColor grayColor],
-                                 @"2021/12/21":[UIColor cyanColor]};
+        self.fillSelectionColors = @{@"2022/03/08":[UIColor redColor],
+                                 @"2022/10/06":[UIColor purpleColor],
+                                 @"2022/10/17":[UIColor grayColor],
+                                 @"2022/10/21":[UIColor cyanColor],
+                                 @"2022/11/08":[UIColor greenColor],
+                                 @"2022/11/06":[UIColor purpleColor],
+                                 @"2022/11/17":[UIColor grayColor],
+                                 @"2022/11/21":[UIColor cyanColor],
+                                 @"2022/03/06":[UIColor purpleColor],
+                                 @"2022/03/17":[UIColor grayColor],
+                                 @"2022/03/21":[UIColor cyanColor]};
         //默认圈颜色
-        self.borderDefaultColors = @{@"2021/12/10":[UIColor brownColor],
-                                     @"2021/10/17":[UIColor magentaColor],
-                                     @"2021/10/21":TFYCa_CalendarStandardSelectionColor,
-                                     @"2021/10/25":[UIColor blackColor],
-                                     @"2021/11/08":[UIColor brownColor],
-                                     @"2021/11/17":[UIColor magentaColor],
-                                     @"2021/11/21":TFYCa_CalendarStandardSelectionColor,
-                                     @"2021/11/25":[UIColor blackColor],
-                                     @"2021/12/08":[UIColor brownColor],
-                                     @"2021/12/17":[UIColor magentaColor],
-                                     @"2021/12/21":TFYCa_CalendarStandardSelectionColor,
-                                     @"2021/12/25":[UIColor blackColor]};
+        self.borderDefaultColors = @{@"2022/03/10":[UIColor brownColor],
+                                     @"2022/10/17":[UIColor magentaColor],
+                                     @"2022/10/21":TFYCa_CalendarStandardSelectionColor,
+                                     @"2022/10/25":[UIColor blackColor],
+                                     @"2022/11/08":[UIColor brownColor],
+                                     @"2022/11/17":[UIColor magentaColor],
+                                     @"2022/11/21":TFYCa_CalendarStandardSelectionColor,
+                                     @"2022/11/25":[UIColor blackColor],
+                                     @"2022/03/08":[UIColor brownColor],
+                                     @"2022/03/17":[UIColor magentaColor],
+                                     @"2022/03/21":TFYCa_CalendarStandardSelectionColor,
+                                     @"2022/03/25":[UIColor blackColor]};
         //选择颜色
-        self.borderSelectionColors = @{@"2021/12/11":[UIColor redColor],
-                                       @"2021/10/17":[UIColor purpleColor],
-                                       @"2021/10/21":TFYCa_CalendarStandardSelectionColor,
-                                       @"2021/10/25":TFYCa_CalendarStandardTodayColor,
-                                       @"2021/11/08":[UIColor redColor],
-                                       @"2021/11/17":[UIColor purpleColor],
-                                       @"2021/11/21":TFYCa_CalendarStandardSelectionColor,
-                                       @"2021/11/25":TFYCa_CalendarStandardTodayColor,
-                                       @"2021/12/08":[UIColor redColor],
-                                       @"2021/12/17":[UIColor purpleColor],
-                                       @"2021/12/21":TFYCa_CalendarStandardSelectionColor,
-                                       @"2021/12/25":TFYCa_CalendarStandardTodayColor};
+        self.borderSelectionColors = @{@"2022/03/11":[UIColor redColor],
+                                       @"2022/10/17":[UIColor purpleColor],
+                                       @"2022/10/21":TFYCa_CalendarStandardSelectionColor,
+                                       @"2022/10/25":TFYCa_CalendarStandardTodayColor,
+                                       @"2022/11/08":[UIColor redColor],
+                                       @"2022/11/17":[UIColor purpleColor],
+                                       @"2022/11/21":TFYCa_CalendarStandardSelectionColor,
+                                       @"2022/11/25":TFYCa_CalendarStandardTodayColor,
+                                       @"2022/03/08":[UIColor redColor],
+                                       @"2022/03/17":[UIColor purpleColor],
+                                       @"2022/03/21":TFYCa_CalendarStandardSelectionColor,
+                                       @"2022/03/25":TFYCa_CalendarStandardTodayColor};
         
         //日历下标一个点
-        self.datesWithEvent = @[@"2021-12-03",
-                            @"2021-12-04",
-                            @"2021-12-05",
-                            @"2021-12-06"];
+        self.datesWithEvent = @[@"2022/03/03",
+                                @"2022/03/04",
+                                @"2022/03/05",
+                                @"2022/03/06"];
         //日历下标三个个点
-        self.datesWithMultipleEvents = @[@"2021-12-26",
-                                     @"2021-12-27",
-                                     @"2021-12-28",
-                                     @"2021-12-29"];
+        self.datesWithMultipleEvents = @[@"2022/03/26",
+                                     @"2022/03/27",
+                                     @"2022/03/28",
+                                     @"2022/03/29"];
         
         
         
-        self.subtitleDefaultTexts = @{@"2021/12/08":@"上午",
-                                 @"2021/10/06":@"晚上",
-                                 @"2021/10/17":@"中午",
-                                 @"2021/10/21":@"全天",
-                                 @"2021/11/08":@"上午",
-                                 @"2021/11/06":@"上午",
-                                 @"2021/11/17":@"下午",
-                                 @"2021/11/21":@"中午",
-                                 @"2021/12/06":@"晚上",
-                                 @"2021/12/17":@"中午",
-                                 @"2021/12/21":@"下午"};
+        self.subtitleDefaultTexts = @{@"2022/03/08":@"上午",
+                                 @"2022/10/06":@"晚上",
+                                 @"2022/10/17":@"中午",
+                                 @"2022/10/21":@"全天",
+                                 @"2022/11/08":@"上午",
+                                 @"2022/11/06":@"上午",
+                                 @"2022/11/17":@"下午",
+                                 @"2022/11/21":@"中午",
+                                 @"2022/03/06":@"晚上",
+                                 @"2022/03/17":@"中午",
+                                 @"2022/03/21":@"下午"};
         
-        self.subToptitleDefaultTexts = @{@"2021/12/08":@"上午",
-                                 @"2021/10/06":@"晚上",
-                                 @"2021/10/17":@"中午",
-                                 @"2021/10/21":@"全天",
-                                 @"2021/11/08":@"上午",
-                                 @"2021/11/06":@"上午",
-                                 @"2021/11/17":@"下午",
-                                 @"2021/11/21":@"中午",
-                                 @"2021/12/06":@"晚上",
-                                 @"2021/12/17":@"中午",
-                                 @"2021/12/21":@"下午"};
+        self.subToptitleDefaultTexts = @{@"2022/03/08":@"上午",
+                                 @"2022/10/06":@"晚上",
+                                 @"2022/10/17":@"中午",
+                                 @"2022/10/21":@"全天",
+                                 @"2022/11/08":@"上午",
+                                 @"2022/11/06":@"上午",
+                                 @"2022/11/17":@"下午",
+                                 @"2022/11/21":@"中午",
+                                 @"2022/03/06":@"晚上",
+                                 @"2022/03/17":@"中午",
+                                 @"2022/03/21":@"下午"};
         
         
-        self.subtitleDefaultColors = @{@"2021/11/28":[UIColor purpleColor],
-                                     @"2021/11/29":[UIColor greenColor],
-                                     @"2021/11/30":[UIColor cyanColor],
-                                     @"2021/11/27":[UIColor yellowColor],
-                                     @"2021/10/1":[UIColor purpleColor],
-                                     @"2021/10/2":[UIColor greenColor],
-                                     @"2021/10/3":[UIColor cyanColor],
-                                     @"2021/10/4":[UIColor yellowColor],
-                                     @"2021/10/5":[UIColor purpleColor],
-                                     @"2021/10/6":[UIColor greenColor],
-                                     @"2021/10/7":[UIColor cyanColor],
-                                     @"2021/10/8":[UIColor magentaColor]};
+        self.subtitleDefaultColors = @{@"2022/11/28":[UIColor purpleColor],
+                                     @"2022/11/29":[UIColor greenColor],
+                                     @"2022/11/30":[UIColor cyanColor],
+                                     @"2022/11/27":[UIColor yellowColor],
+                                     @"2022/10/1":[UIColor purpleColor],
+                                     @"2022/10/2":[UIColor greenColor],
+                                     @"2022/10/3":[UIColor cyanColor],
+                                     @"2022/10/4":[UIColor yellowColor],
+                                     @"2022/10/5":[UIColor purpleColor],
+                                     @"2022/10/6":[UIColor greenColor],
+                                     @"2022/10/7":[UIColor cyanColor],
+                                     @"2022/10/8":[UIColor magentaColor]};
         //点击效果颜色
-        self.subToptitleDefaultColors = @{@"2021/12/08":[UIColor redColor],
-                                 @"2021/10/06":[UIColor purpleColor],
-                                 @"2021/10/17":[UIColor grayColor],
-                                 @"2021/10/21":[UIColor cyanColor],
-                                 @"2021/11/08":[UIColor greenColor],
-                                 @"2021/11/06":[UIColor purpleColor],
-                                 @"2021/11/17":[UIColor grayColor],
-                                 @"2021/11/21":[UIColor cyanColor],
-                                 @"2021/12/06":[UIColor purpleColor],
-                                 @"2021/12/17":[UIColor grayColor],
-                                 @"2021/12/21":[UIColor cyanColor]};
+        self.subToptitleDefaultColors = @{@"2022/03/08":[UIColor redColor],
+                                 @"2022/10/06":[UIColor purpleColor],
+                                 @"2022/10/17":[UIColor grayColor],
+                                 @"2022/10/21":[UIColor cyanColor],
+                                 @"2022/11/08":[UIColor greenColor],
+                                 @"2022/11/06":[UIColor purpleColor],
+                                 @"2022/11/17":[UIColor grayColor],
+                                 @"2022/11/21":[UIColor cyanColor],
+                                 @"2022/03/06":[UIColor purpleColor],
+                                 @"2022/03/17":[UIColor grayColor],
+                                 @"2022/03/21":[UIColor cyanColor]};
         
         
         //默认圈颜色
-        self.subtitleSelectionColors = @{@"2021/12/10":[UIColor brownColor],
-                                     @"2021/10/17":[UIColor magentaColor],
-                                     @"2021/10/21":TFYCa_CalendarStandardSelectionColor,
-                                     @"2021/10/25":[UIColor blackColor],
-                                     @"2021/11/08":[UIColor brownColor],
-                                     @"2021/11/17":[UIColor magentaColor],
-                                     @"2021/11/21":TFYCa_CalendarStandardSelectionColor,
-                                     @"2021/11/25":[UIColor blackColor],
-                                     @"2021/12/08":[UIColor brownColor],
-                                     @"2021/12/17":[UIColor magentaColor],
-                                     @"2021/12/21":TFYCa_CalendarStandardSelectionColor,
-                                     @"2021/12/25":[UIColor blackColor]};
+        self.subtitleSelectionColors = @{@"2022/03/10":[UIColor brownColor],
+                                     @"2022/10/17":[UIColor magentaColor],
+                                     @"2022/10/21":TFYCa_CalendarStandardSelectionColor,
+                                     @"2022/10/25":[UIColor blackColor],
+                                     @"2022/11/08":[UIColor brownColor],
+                                     @"2022/11/17":[UIColor magentaColor],
+                                     @"2022/11/21":TFYCa_CalendarStandardSelectionColor,
+                                     @"2022/11/25":[UIColor blackColor],
+                                     @"2022/03/08":[UIColor brownColor],
+                                     @"2022/03/17":[UIColor magentaColor],
+                                     @"2022/03/21":TFYCa_CalendarStandardSelectionColor,
+                                     @"2022/03/25":[UIColor blackColor]};
         //选择颜色
-        self.subToptitleSelectionColors = @{@"2021/12/11":[UIColor redColor],
-                                       @"2021/10/17":[UIColor purpleColor],
-                                       @"2021/10/21":TFYCa_CalendarStandardSelectionColor,
-                                       @"2021/10/25":TFYCa_CalendarStandardTodayColor,
-                                       @"2021/11/08":[UIColor redColor],
-                                       @"2021/11/17":[UIColor purpleColor],
-                                       @"2021/11/21":TFYCa_CalendarStandardSelectionColor,
-                                       @"2021/11/25":TFYCa_CalendarStandardTodayColor,
-                                       @"2021/12/08":[UIColor redColor],
-                                       @"2021/12/17":[UIColor purpleColor],
-                                       @"2021/12/21":TFYCa_CalendarStandardSelectionColor,
-                                       @"2021/12/25":TFYCa_CalendarStandardTodayColor};
+        self.subToptitleSelectionColors = @{@"2022/03/11":[UIColor redColor],
+                                       @"2022/10/17":[UIColor purpleColor],
+                                       @"2022/10/21":TFYCa_CalendarStandardSelectionColor,
+                                       @"2022/10/25":TFYCa_CalendarStandardTodayColor,
+                                       @"2022/11/08":[UIColor redColor],
+                                       @"2022/11/17":[UIColor purpleColor],
+                                       @"2022/11/21":TFYCa_CalendarStandardSelectionColor,
+                                       @"2022/11/25":TFYCa_CalendarStandardTodayColor,
+                                       @"2022/03/08":[UIColor redColor],
+                                       @"2022/03/17":[UIColor purpleColor],
+                                       @"2022/03/21":TFYCa_CalendarStandardSelectionColor,
+                                       @"2022/03/25":TFYCa_CalendarStandardTodayColor};
         
         
         self.gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
@@ -201,6 +219,11 @@ NS_ASSUME_NONNULL_END
         
         self.dateFormatter2 = [[NSDateFormatter alloc] init];
         self.dateFormatter2.dateFormat = @"yyyy-MM-dd";
+        
+        self.images = @{@"2022/03/11":[UIImage imageNamed:@"icon_cat"],
+                        @"2022/03/13":[UIImage imageNamed:@"icon_footprint"],
+                        @"2022/03/15":[UIImage imageNamed:@"icon_cat"],
+                        @"2022/03/17":[UIImage imageNamed:@"icon_footprint"]};
     }
     return self;
 }
@@ -215,16 +238,16 @@ NS_ASSUME_NONNULL_END
     TFY_Calendar *calendar = [[TFY_Calendar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, height)];
     calendar.dataSource = self;
     calendar.delegate = self;
-    calendar.allowsMultipleSelection = YES;
+//    calendar.allowsMultipleSelection = YES;
     calendar.swipeToChooseGesture.enabled = YES;
     calendar.backgroundColor = [UIColor whiteColor];
     calendar.locale = [NSLocale localeWithLocaleIdentifier:@"zh-CN"];
-    calendar.appearance.headerDateFormat = @"yyyy-MM-dd";
+    calendar.appearance.headerDateFormat = @"yyyy/MM/dd";
     calendar.appearance.caseOptions = TFYCa_CalendarCaseOptionsHeaderUsesUpperCase|TFYCa_CalendarCaseOptionsWeekdayUsesSingleUpperCase;
     [self.view addSubview:calendar];
     self.calendar = calendar;
     //跳转到指定w日期
-    [calendar setCurrentPage:[self.dateFormatter1 dateFromString:@"2021/12/03"] animated:NO];
+    [calendar setCurrentPage:NSDate.date animated:NO];
     
     UIBarButtonItem *todayItem = [[UIBarButtonItem alloc] initWithTitle:@"今天" style:UIBarButtonItemStylePlain target:self action:@selector(todayItemClicked:)];
     self.navigationItem.rightBarButtonItem = todayItem;
@@ -264,8 +287,9 @@ NS_ASSUME_NONNULL_END
     return 0;
 }
 
-#pragma mark - <TFYCa_CalendarDelegateAppearance> 日历下标小圆点颜色组设置
+#pragma mark - <TFYCa_CalendarDelegateAppearance>
 
+// 日历下标小圆点颜色组设置
 - (NSArray *)calendar:(TFY_Calendar *)calendar appearance:(TFY_CalendarAppearance *)appearance eventDefaultColorsForDate:(NSDate *)date
 {
     NSString *dateString = [self.dateFormatter2 stringFromDate:date];
@@ -273,12 +297,38 @@ NS_ASSUME_NONNULL_END
         return @[[UIColor magentaColor],appearance.eventDefaultColor,[UIColor blackColor]];
     }
     else if ([self.datesWithEvent containsObject:dateString]) {
-        return @[[UIColor blueColor]];
+        return @[[UIColor redColor]];
     }
     return nil;
 }
 
 
+- (TFYCa_CellfillType)calendar:(TFY_Calendar *_Nullable)calendar appearance:(TFY_CalendarAppearance *_Nullable)appearance fillTypeForDate:(NSDate *_Nonnull)date {
+    return TFYCa_CellfillTypeLinkage;
+}
+
+- (TFYCa_fillTypeLinkageSelectionType)calendar:(TFY_Calendar *_Nullable)calendar appearance:(TFY_CalendarAppearance *_Nullable)appearance LinkageDefaultForDate:(NSDate *_Nonnull)date {
+    
+    NSString *key = [self.dateFormatter1 stringFromDate:date];
+    if ([self.linkageDefaultColors.allKeys containsObject:key]) {
+        NSNumber *number= self.linkageDefaultColors[key];
+        return number.integerValue;
+    } else {
+        return TFYCa_fillTypeLinkageSelectionTypeSingle;
+    }
+}
+
+- (UIImage *)calendar:(TFY_Calendar *)calendar imageForDate:(NSDate *)date
+{
+    NSString *dateString = [self.dateFormatter1 stringFromDate:date];
+    return self.images[dateString];
+}
+
+- (UIImage *)calendar:(TFY_Calendar *)calendar imageTopForDate:(NSDate * _Nonnull)date
+{
+    NSString *dateString = [self.dateFormatter1 stringFromDate:date];
+    return self.images[dateString];
+}
 
 -  (nullable NSArray<UIColor *> *)calendar:(TFY_Calendar *)calendar appearance:(TFY_CalendarAppearance *)appearance eventSelectionColorsForDate:(NSDate *)date{
     NSString *dateString = [self.dateFormatter2 stringFromDate:date];
@@ -345,7 +395,6 @@ NS_ASSUME_NONNULL_END
     }
     return nil;
 }
-
 
 /**
  * 日期上面文字的选中颜色

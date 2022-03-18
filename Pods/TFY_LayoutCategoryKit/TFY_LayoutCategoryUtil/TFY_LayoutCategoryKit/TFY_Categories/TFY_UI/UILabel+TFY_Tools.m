@@ -751,14 +751,18 @@ const void *kAssociatedTfy_contentInsets;
 
 - (void)tfy_changeColorWithTextColor:(UIColor *)textColor changeTexts:(NSArray <NSString *>*)texts
 {
-    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
-    for (NSString *text in texts) {//
-        NSRange textRange = [self.text rangeOfString:text options:NSCaseInsensitiveSearch | NSRegularExpressionSearch];
-        if (textRange.location != NSNotFound) {
-            [attributedString addAttribute:NSForegroundColorAttributeName value:textColor range:textRange];
+    for(NSString *markContent in texts) {
+        NSMutableAttributedString *textAttrString = [self.attributedText mutableCopy];
+        //查找关键字并进行标注变色
+        NSRange range = [self.text rangeOfString: markContent options: NSCaseInsensitiveSearch | NSRegularExpressionSearch];
+        while (range.location != NSNotFound) {
+            [textAttrString addAttribute:NSForegroundColorAttributeName value:textColor range:range];
+            range = [self.text rangeOfString: markContent
+                                                options: NSCaseInsensitiveSearch | NSRegularExpressionSearch
+                                                  range: NSMakeRange(range.location + range.length, self.text.length - (range.location + range.length))];
         }
+        self.attributedText = textAttrString;
     }
-    self.attributedText = attributedString;
 }
 
 #pragma mark - 改变字段背景颜色

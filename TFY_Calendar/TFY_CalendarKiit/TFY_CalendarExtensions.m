@@ -330,6 +330,15 @@
     return newDate;
 }
 
+///将字符串转成NSDate类型
++ (NSDate *)tfyCa_dateWithString:(NSString *)string format:(NSString *)format {
+    NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
+    [inputFormatter setDateFormat:format];
+    
+    NSDate *date = [inputFormatter dateFromString:string];
+    
+    return date;
+}
 
 @end
 

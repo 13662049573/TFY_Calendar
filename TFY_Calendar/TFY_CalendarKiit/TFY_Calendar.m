@@ -469,6 +469,10 @@ typedef NS_ENUM(NSUInteger, TFYCa_CalendarOrientation) {
     [self enqueueSelectedDate:selectedDate];
     [self.delegateProxy calendar:self didSelectDate:selectedDate atMonthPosition:monthPosition];
     [self selectCounterpartDate:selectedDate];
+    
+    if (cell.cellFillType == TFYCa_CellfillTypeLinkage) {
+        [self configureVisibleCells];
+    }
 }
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldDeselectItemAtIndexPath:(NSIndexPath *)indexPath
@@ -502,6 +506,9 @@ typedef NS_ENUM(NSUInteger, TFYCa_CalendarOrientation) {
     [self.delegateProxy calendar:self didDeselectDate:selectedDate atMonthPosition:monthPosition];
     [self deselectCounterpartDate:selectedDate];
     
+    if (cell.cellFillType == TFYCa_CellfillTypeLinkage) {
+        [self configureVisibleCells];
+    }
 }
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
@@ -509,9 +516,14 @@ typedef NS_ENUM(NSUInteger, TFYCa_CalendarOrientation) {
     if (![cell isKindOfClass:[TFY_CalendarCell class]]) {
         return;
     }
+    TFY_CalendarCell *baseCell = (TFY_CalendarCell *)cell;
     NSDate *date = [self.calculator dateForIndexPath:indexPath];
     TFYCa_CalendarMonthPosition monthPosition = [self.calculator monthPositionForIndexPath:indexPath];
-    [self.delegateProxy calendar:self willDisplayCell:(TFY_CalendarCell *)cell forDate:date atMonthPosition:monthPosition];
+    [self.delegateProxy calendar:self willDisplayCell:baseCell forDate:date atMonthPosition:monthPosition];
+    
+    if (baseCell.cellFillType == TFYCa_CellfillTypeLinkage) {
+        [self configureCell:baseCell forDate:date atMonthPosition:monthPosition];
+    }
 }
 
 - (void)collectionViewDidFinishLayoutSubviews:(TFY_CalendarCollectionView *)collectionView
@@ -1327,7 +1339,7 @@ typedef NS_ENUM(NSUInteger, TFYCa_CalendarOrientation) {
     TFYCa_CalendarInvalidateCellAppearance(preferredFillSelectionColor,fillSelectionColorForDate);
     TFYCa_CalendarInvalidateCellAppearance(preferredTitleDefaultColor,titleDefaultColorForDate);
     TFYCa_CalendarInvalidateCellAppearance(preferredTitleSelectionColor,titleSelectionColorForDate);
-
+   
     TFYCa_CalendarInvalidateCellAppearanceWithDefault(preferredTitleOffset,titleOffsetForDate,CGPointInfinity);
     
     if (cell.subtitle) {
@@ -1350,13 +1362,18 @@ typedef NS_ENUM(NSUInteger, TFYCa_CalendarOrientation) {
     TFYCa_CalendarInvalidateCellAppearance(preferredBorderDefaultColor,borderDefaultColorForDate);
     TFYCa_CalendarInvalidateCellAppearance(preferredBorderSelectionColor,borderSelectionColorForDate);
     TFYCa_CalendarInvalidateCellAppearanceWithDefault(preferredBorderRadius,borderRadiusForDate,-1);
-
+    TFYCa_CalendarInvalidateCellAppearanceWithDefault(cellFillType,fillTypeForDate,0);
+    
     if (cell.image) {
         TFYCa_CalendarInvalidateCellAppearanceWithDefault(preferredImageOffset,imageOffsetForDate,CGPointInfinity);
     }
     
     if (cell.topImage) {
         TFYCa_CalendarInvalidateCellAppearanceWithDefault(preferredTopImageOffset,imageTopOffsetForDate,CGPointInfinity);
+    }
+    
+    if (cell.cellFillType == TFYCa_CellfillTypeLinkage) {
+        TFYCa_CalendarInvalidateCellAppearance(linkageSelectionType,LinkageDefaultForDate);
     }
     
 #undef TFYCa_CalendarInvalidateCellAppearance
@@ -1453,6 +1470,41 @@ typedef NS_ENUM(NSUInteger, TFYCa_CalendarOrientation) {
         }
     }
     [cell configureAppearance];
+}
+
+- (void)configureCell:(TFY_CalendarCell *)cell forDate:(NSDate *)date atMonthPosition:(TFYCa_CalendarMonthPosition)monthPosition
+{
+    if (monthPosition == TFYCa_CalendarMonthPositionCurrent) {
+        TFYCa_fillTypeLinkageSelectionType selectionType = TFYCa_fillTypeLinkageSelectionTypeNone;
+        if ([self.selectedDates containsObject:date]) {
+            NSDate *previousDate = [self.gregorian dateByAddingUnit:NSCalendarUnitDay value:-1 toDate:date options:0];
+            NSDate *nextDate = [self.gregorian dateByAddingUnit:NSCalendarUnitDay value:1 toDate:date options:0];
+            if ([self.selectedDates containsObject:date]) {
+                if ([self.selectedDates containsObject:previousDate] && [self.selectedDates containsObject:nextDate]) {
+                    selectionType = TFYCa_fillTypeLinkageSelectionTypeMiddle;
+                } else if ([self.selectedDates containsObject:previousDate] && [self.selectedDates containsObject:date]) {
+                    selectionType = TFYCa_fillTypeLinkageSelectionTypeRightBorder;
+                } else if ([self.selectedDates containsObject:nextDate]) {
+                    selectionType = TFYCa_fillTypeLinkageSelectionTypeLeftBorder;
+                } else {
+                    selectionType = TFYCa_fillTypeLinkageSelectionTypeSingle;
+                }
+            }
+        } else {
+            selectionType = [self.delegateProxy calendar:self appearance:cell.appearance LinkageDefaultForDate:date];
+        }
+        
+        cell.linkageSelectionType = selectionType;
+    }
+}
+
+- (void)configureVisibleCells
+{
+    [self.visibleCells enumerateObjectsUsingBlock:^(__kindof TFY_CalendarCell * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSDate *date = [self dateForCell:obj];
+        TFYCa_CalendarMonthPosition position = [self monthPositionForCell:obj];
+        [self configureCell:obj forDate:date atMonthPosition:position];
+    }];
 }
 
 - (void)deselectCounterpartDate:(NSDate *)date

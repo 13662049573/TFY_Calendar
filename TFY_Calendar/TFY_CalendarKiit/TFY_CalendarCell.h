@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+/// 联动填充颜色 类型判断
+typedef NS_ENUM(NSUInteger, TFYCa_fillTypeLinkageSelectionType) {
+    TFYCa_fillTypeLinkageSelectionTypeNone,  // 没有选中
+    TFYCa_fillTypeLinkageSelectionTypeSingle, // 单独点击
+    TFYCa_fillTypeLinkageSelectionTypeLeftBorder, // 最左边选中
+    TFYCa_fillTypeLinkageSelectionTypeMiddle,// 中间选中
+    TFYCa_fillTypeLinkageSelectionTypeRightBorder // 最右边选中
+};
+
 @class TFY_Calendar,TFY_CalendarAppearance,TFY_CalendarEventIndicator;
 
 typedef NS_ENUM(NSUInteger, TFYCa_CalendarMonthPosition);
@@ -17,51 +26,36 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TFY_CalendarCell : UICollectionViewCell
 #pragma mark - Public properties
 
-/**
- 单元格的日期文本标签
- */
+/** 日期文本标签*/
 @property (weak, nonatomic) UILabel  *titleLabel;
 
-
-/**
- 日期下面字幕标签
- */
+/**日期下面字幕标签*/
 @property (weak, nonatomic) UILabel  *subtitleLabel;
 
-/**
- 日期上面的字幕标签
- */
+/**日期上面的字幕标签*/
 @property (weak, nonatomic) UILabel  *subToptitleLabel;
 
-/**
- 单元格的形状层
- */
+/**单元格的形状层填充*/
 @property (weak, nonatomic) CAShapeLayer *shapeLayer;
 
-/**
-  日期下面标签图片
- */
+/**日期下面标签图片*/
 @property (weak, nonatomic) UIImageView *imageView;
 
-/**
-  日期上面标签图片
- */
+/**日期上面标签图片*/
 @property (weak, nonatomic) UIImageView *topImageView;
 
-/**
- 单元事件点的集合
- */
+/**单元事件点的集合*/
 @property (weak, nonatomic) TFY_CalendarEventIndicator *eventIndicator;
 
-/**
- 布尔值指示该单元格是否为“占位符”。默认为“否”。
- */
+/**单元格是否为“占位符”。默认为“否”。*/
 @property (assign, nonatomic, getter=isPlaceholder) BOOL placeholder;
 
 #pragma mark - Private properties
 
 @property (weak, nonatomic) TFY_Calendar *calendar;
 @property (weak, nonatomic) TFY_CalendarAppearance *appearance;
+/// 联动cell 类型
+@property (nonatomic , assign) TFYCa_fillTypeLinkageSelectionType linkageSelectionType;
 
 @property (strong, nonatomic) NSString *subtitle;
 @property (strong, nonatomic) NSString *subToptitle;
@@ -93,7 +87,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSArray<UIColor *> *preferredEventDefaultColors;
 @property (strong, nonatomic) NSArray<UIColor *> *preferredEventSelectionColors;
 @property (assign, nonatomic) CGFloat preferredBorderRadius;
-
+@property (assign, nonatomic) NSInteger cellFillType;
 /**
  *  将子视图添加到self.contentView并设置约束
  */

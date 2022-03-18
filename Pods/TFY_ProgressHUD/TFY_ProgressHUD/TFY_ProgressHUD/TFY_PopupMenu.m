@@ -185,6 +185,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         _isShowSeparator = YES;
         _separatorColor = [UIColor lightGrayColor];
         [self setNeedsDisplay];
@@ -479,10 +480,24 @@
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.backgroundColor = [UIColor clearColor];
-        _tableView.tableFooterView = [UIView new];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.estimatedSectionFooterHeight = 0.01;
+        _tableView.estimatedSectionHeaderHeight = 0.01;
+        _tableView.sectionHeaderHeight = 0.01;
+        _tableView.sectionFooterHeight = 0.01;
+        _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0.01)];
+        _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0.01)];
+        if (@available(iOS 11.0, *)) {
+            _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        }
+        if (@available(iOS 13.0, *)) {
+            _tableView.automaticallyAdjustsScrollIndicatorInsets = NO;
+        }
+        if (@available(iOS 15.0, *)) {
+            _tableView.sectionHeaderTopPadding = 0;
+        }
     }
     return _tableView;
 }
@@ -511,7 +526,7 @@
     switch (type) {
         case PopupMenuTypeDark:
         {
-            _textColor = [UIColor lightGrayColor];
+            _textColor = [UIColor whiteColor];
             _backColor = [UIColor colorWithRed:0.25 green:0.27 blue:0.29 alpha:1];
             _separatorColor = [UIColor lightGrayColor];
         }

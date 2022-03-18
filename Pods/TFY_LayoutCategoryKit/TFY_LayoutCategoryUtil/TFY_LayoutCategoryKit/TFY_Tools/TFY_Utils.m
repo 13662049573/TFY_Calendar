@@ -9,7 +9,8 @@
 #import "TFY_Utils.h"
 #import <UIKit/UIKit.h>
 #import <objc/runtime.h>
-
+#import "UIView+Toast.h"
+#import "TFY_Scene.h"
 #pragma 获取网络系统库头文件
 #import <SystemConfiguration/CaptiveNetwork.h>
 #import <SystemConfiguration/SystemConfiguration.h>
@@ -1298,22 +1299,38 @@ const char* jailbreak_tool_pathes[] = {
     }
     return NO;
 }
+
 /**
  *  验证手机号
  */
 +(BOOL)mobilePhoneNumber:(NSString *)mobile{
     BOOL  mobilebool =[self isPureNumber:mobile];
     if (mobilebool==YES) {
-        NSString *patternMobile = @"^((13[0-9])|(15[^4,\\D])|(18[0,0-9])|(17[0-9]))\\d{8}$";
-        
         if ([self judgeIsEmptyWithString:mobile]) {
             return NO;
         } else {
-            return [self regular:patternMobile withString:mobile];
+            return [self valiMobile:mobile];
         }
-    }
-    else{
+    } else {
         return NO;
+    }
+}
+
++ (BOOL)valiMobile:(NSString *)mobile {
+    if (mobile.length != 11) {
+            return NO;
+        } else {
+            BOOL isMatch2 = [self isMobilePperators:mobile];// 移动号段正则表达式
+            
+            BOOL isMatch3 = [self isUnicomPperators:mobile];// 联通号段正则表达式
+            
+            BOOL isMatch4 = [self isTelecomPperators:mobile];// 电信号段正则表达式
+            
+        if (isMatch2 || isMatch3 || isMatch4) {
+            return YES;
+        } else {
+            return NO;
+        }
     }
 }
 /**
@@ -1327,6 +1344,7 @@ const char* jailbreak_tool_pathes[] = {
         return [self regular:patternFloatNumber withString:number];
     }
 }
+
 /**
  * 判断是不是小数，如1.2这样  符合则为YES，不符合则为NO
  */
@@ -1679,59 +1697,45 @@ const char* jailbreak_tool_pathes[] = {
  */
 + (BOOL)isMobilePperators:(NSString *)string{
     if(string.length != 11) {
-           
            return NO;
        }else {
-           
-           /**
-            * 移动号段正则表达式
-            */
-           NSString *CM_NUM = @"^((13[4-9])|(147)|(15[0-2,7-9])|(178)|(18[2-4,7-8]))\\d{8}|(1705)\\d{7}$";
-           
+           NSString *CM_NUM = @"(^134[0-8]\\d{7}$)|(^1(3[5-9]|4[7]|5[0-27-9]|6[5]|7[28]|8[2-478]|9[8])\\d{8}$)|(^170[356]\\d{7})";
            return [self isValidateByRegex:CM_NUM Object:string];
        }
 }
+
 /** 验证运营商:联通 */
 + (BOOL)isUnicomPperators:(NSString *)string {
-    
     if(string.length != 11) {
-        
         return NO;
     }else {
-        
-        /**
-         * 联通号段正则表达式
-         */
-        NSString *CU_NUM = @"^((13[0-2])|(145)|(15[5-6])|(176)|(18[5,6]))\\d{8}|(1709)\\d{7}$";
-        
+        NSString *CU_NUM = @"(^1(3[0-2]|4[5]|5[56]|6[67]|7[156]|8[56])\\d{8}$)|(^170[47-9]\\d{7}$)";
         return [self isValidateByRegex:CU_NUM Object:string];
     }
 }
 
 /** 验证运营商:电信 */
 + (BOOL)isTelecomPperators:(NSString *)string {
-    
     if(string.length != 11) {
-        
         return NO;
     }else {
-        
-        /**
-         * 电信号段正则表达式
-         */
-        NSString *CT_NUM = @"(^1(33|53|77|8[019])\\d{8}$)|(^1700\\d{7}$)";
-        
+        NSString *CT_NUM = @"(^1(3[3]|4[9]|5[3]|6[2]|7[37]|8[019]|9[1-9])\\d{8}$)|(^170[0-2]\\d{7}$)";
         return [self isValidateByRegex:CT_NUM Object:string];
     }
 }
+
+//判断运营商
+
++ (NSString *)getPhoneNumType:(NSString *)phoneNum {
+    return [self isMobilePperators:phoneNum]? @"中国移动": ([self isUnicomPperators:phoneNum]? @"中国联通":([self isTelecomPperators:phoneNum]? @"中国电信": @"未知"));
+
+}
+
 //验证正则表达式
 + (BOOL)isValidateByRegex:(NSString *)regex Object:(NSString *)object {
-    
     if(object.length <= 0) {
-        
         return NO;
     }else {
-        
         NSPredicate *pre = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
         return [pre evaluateWithObject:object];
     }
@@ -2050,13 +2054,39 @@ const char* jailbreak_tool_pathes[] = {
     [ud setInteger:value forKey:key];
     [ud synchronize];
 }
+
+/**
+ *  存储当前CGFloat
+ */
++(void)saveFloatValueInUD:(CGFloat)value forKey:(NSString *)key {
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    [ud setFloat:value forKey:key];
+    [ud synchronize];
+}
+
+/**
+ *  存储当前double
+ */
++(void)saveDoubleValueInUD:(double)value forKey:(NSString *)key {
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    [ud setDouble:value forKey:key];
+    [ud synchronize];
+}
+
+/**
+ *  存储当前Double
+ */
++(void)saveUrlValueInUD:(NSURL*)value forKey:(NSString *)key {
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    [ud setURL:value forKey:key];
+    [ud synchronize];
+}
+
 /**
  *   保存模型id
  */
 +(void)saveValueInUD:(id)value forKey:(NSString *)key{
-    if(!value){
-        return;
-    }
+    if(!value){return;}
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     [ud setObject:value forKey:key];
     [ud synchronize];
@@ -2089,6 +2119,31 @@ const char* jailbreak_tool_pathes[] = {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     return [ud integerForKey:key];
 }
+
+/**
+ *  获取保存的CGFloat
+ */
++ (CGFloat)getFloatValueInUDWithKey:(NSString *)key {
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    return [ud floatForKey:key];
+}
+
+/**
+ *  获取保存的double
+ */
++ (double)getdoubleValueInUDWithKey:(NSString *)key {
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    return [ud doubleForKey:key];
+}
+
+/**
+ *  获取保存的NSURL
+ */
++ (NSURL*)getURLValueInUDWithKey:(NSString *)key {
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    return [ud URLForKey:key];
+}
+
 /**
  *  获取保存的NSDictionary
  */
@@ -2393,6 +2448,23 @@ static CGRect oldframe;
         
     }
 }
+
+/// 隐藏对应的字符串
++ (NSString *)hidePartWithStr:(NSString *)Str holderSingleStr:(NSString *)holderSingleStr location:(NSInteger)location length:(NSInteger)length
+{
+    NSString *hideNumStr = Str;
+    NSString *placeHolderStr=[NSString string];
+    if (![self judgeIsEmptyWithString:Str] && ![self judgeIsEmptyWithString:holderSingleStr])//判断非空
+    {
+        for (int i=0; i<length; i++)
+        {
+            placeHolderStr = [placeHolderStr stringByAppendingString:holderSingleStr];
+        }
+        hideNumStr =[Str stringByReplacingCharactersInRange:NSMakeRange(location, length) withString:placeHolderStr];
+    }
+    return hideNumStr;
+}
+
 // 保存图片
 + (void)saveImage:(UIImage *)image toCollectionWithName:(NSString *)collectionName completionHandler:(nullable void(^)(BOOL success, NSError *__nullable error))completionHandler {
     
@@ -2431,7 +2503,6 @@ static CGRect oldframe;
  */
 +(void)BackstatusBarStyle:(NSInteger)index{
   [UIApplication sharedApplication].statusBarStyle = index==0?(UIStatusBarStyleLightContent):(UIStatusBarStyleDefault);
-    
 }
 
 /**
@@ -2639,6 +2710,44 @@ static CGRect oldframe;
         }
     });
 }
+
+#pragma mark****************************************提示框****************************************
+
++ (void)makeToast:(NSString *)str
+{
+    [TFY_ScenePackage.keyWindow tfy_makeToast:str];
+}
+
++ (void)makeToast:(NSString *)str duration:(NSTimeInterval)duration {
+    [TFY_ScenePackage.keyWindow tfy_makeToast:str duration:duration];
+}
+
++ (void)makeToast:(NSString *)str duration:(NSTimeInterval)duration position:(CGPoint)position
+{
+    [TFY_ScenePackage.keyWindow tfy_makeToast:str duration:duration position:[NSValue valueWithCGPoint:position]];
+}
+
++ (void)makeToast:(NSString *)str duration:(NSTimeInterval)duration idposition:(id)position
+{
+    [TFY_ScenePackage.keyWindow tfy_makeToast:str duration:duration position:position];
+}
+
++ (void)hideToast {
+    [TFY_ScenePackage.keyWindow tfy_hideToast];
+}
+
++ (void)makeToastActivity
+{
+    [TFY_ScenePackage.keyWindow tfy_makeToastActivity:TFYToastPositionCenter];
+}
+
++ (void)hideToastActivity
+{
+    [TFY_ScenePackage.keyWindow tfy_hideToastActivity];
+}
+
+
+
 @end
 
 @implementation UIView (Utils_Chain)

@@ -243,6 +243,68 @@ static NSTimeInterval _CGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef sou
     return image;
 }
 
+//矫正image 位置
++ (UIImage *)tfy_fixOrientation:(UIImage *)image {
+    if (image.imageOrientation == UIImageOrientationUp)
+        return image;
+    CGAffineTransform transform = CGAffineTransformIdentity;
+    switch (image.imageOrientation) {
+        case UIImageOrientationDown:
+        case UIImageOrientationDownMirrored:
+            transform = CGAffineTransformTranslate(transform, image.size.width, image.size.height);
+            transform = CGAffineTransformRotate(transform,M_PI);
+            break;
+        case UIImageOrientationLeft:
+        case UIImageOrientationLeftMirrored:
+            transform = CGAffineTransformTranslate(transform, image.size.width,0);
+            transform = CGAffineTransformRotate(transform,M_PI_2);
+            break;
+        case UIImageOrientationRight:
+        case UIImageOrientationRightMirrored:
+            transform = CGAffineTransformTranslate(transform,0, image.size.height);
+            transform = CGAffineTransformRotate(transform, -M_PI_2);
+            break;
+        default:
+            break;
+    }
+    switch (image.imageOrientation) {
+        case UIImageOrientationUpMirrored:
+        case UIImageOrientationDownMirrored:
+            transform = CGAffineTransformTranslate(transform, image.size.width,0);
+            transform = CGAffineTransformScale(transform, -1,1);
+            break;
+        case UIImageOrientationLeftMirrored:
+        case UIImageOrientationRightMirrored:
+            transform = CGAffineTransformTranslate(transform, image.size.height,0);
+            transform = CGAffineTransformScale(transform, -1,1);
+            break;
+        default:
+            break;
+    }
+    CGContextRef ctx = CGBitmapContextCreate(NULL, image.size.width, image.size.height,
+                                             CGImageGetBitsPerComponent(image.CGImage),0,
+                                             CGImageGetColorSpace(image.CGImage),
+                                             CGImageGetBitmapInfo(image.CGImage));
+    CGContextConcatCTM(ctx, transform);
+    switch (image.imageOrientation) {
+        case UIImageOrientationLeft:
+        case UIImageOrientationLeftMirrored:
+        case UIImageOrientationRight:
+        case UIImageOrientationRightMirrored:
+            // Grr...
+            CGContextDrawImage(ctx,CGRectMake(0,0,image.size.height,image.size.width), image.CGImage);
+            break;
+        default:
+            CGContextDrawImage(ctx,CGRectMake(0,0,image.size.width,image.size.height), image.CGImage);
+            break;
+    }
+    CGImageRef cgimg = CGBitmapContextCreateImage(ctx);
+    UIImage *img = [UIImage imageWithCGImage:cgimg];
+    CGContextRelease(ctx);
+    CGImageRelease(cgimg);
+    return img;
+}
+
 + (UIImage *)tfy_imageSize:(CGSize)size withDrawContext:(void (^)(CGContextRef _Nonnull))drawContext{
     if (size.width == 0 || size.height == 0) return nil;
     UIGraphicsBeginImageContextWithOptions(size, NO, 0);
@@ -264,6 +326,58 @@ static NSTimeInterval _CGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef sou
             alpha == kCGImageAlphaPremultipliedFirst ||
             alpha == kCGImageAlphaPremultipliedLast);
 }
+
+- (CGSize)tfy_sizeWithMaxRelativeSize:(CGSize)size isMax:(BOOL) isMax{
+    CGSize imageSize = self.size;
+    CGSize resultSize = CGSizeZero;
+    if (size.width == 0&&size.height != 0) {
+        resultSize.height = size.height;
+        resultSize.width = imageSize.width/imageSize.height * resultSize.height;
+        return resultSize;
+    }else if(size.width != 0&&size.height == 0){
+        resultSize.width = size.width;
+        resultSize.height = resultSize.width * imageSize.height/imageSize.width;
+        return resultSize;
+    }else if(size.width == 0&&size.height == 0){
+        return self.size;
+    }
+    if ((imageSize.width/imageSize.height >= size.width/size.height&&isMax)||(imageSize.width/imageSize.height < size.width/size.height&&!isMax)){
+        resultSize.height = size.height;
+        resultSize.width = imageSize.width/imageSize.height * resultSize.height;
+        return resultSize;
+    }else{
+        resultSize.width = size.width;
+        resultSize.height = resultSize.width * imageSize.height/imageSize.width;
+        return resultSize;
+    }
+    return resultSize;
+}
+
+- (CGSize)tfy_sizeWithMaxRelativeSize:(CGSize)size {
+    CGSize resize = [self tfy_sizeWithMaxRelativeSize:size isMax:YES];
+    return resize;
+}
+
+- (CGSize)tfy_sizeWithMinRelativeSize:(CGSize)size{
+    CGSize resize = [self tfy_sizeWithMaxRelativeSize:size isMax:NO];
+    return resize;
+}
+
+- (BOOL)tfy_isPngImage {
+    CGImageAlphaInfo alphaInfo = CGImageGetAlphaInfo(self.CGImage);
+    BOOL isPng = !(alphaInfo==kCGImageAlphaNone||alphaInfo==kCGImageAlphaNoneSkipLast||alphaInfo==kCGImageAlphaNoneSkipFirst);
+    return isPng;
+}
+
+- (NSUInteger)tfy_lengthOfRawData{
+    CGDataProviderRef providerRef = CGImageGetDataProvider(self.CGImage);
+    CFDataRef dataRef = CGDataProviderCopyData(providerRef);
+    CFIndex len = CFDataGetLength(dataRef);
+    CFRelease(dataRef);
+    return (NSUInteger)len;
+}
+
+
 
 - (void)tfy_drawInRect:(CGRect)rect withContentMode:(UIViewContentMode)contentModel clipsToBounds:(BOOL)clips{
     CGRect drawRect = TFY_CGRectFitWithContentMode(rect, rect.size, contentModel);

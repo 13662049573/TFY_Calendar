@@ -24,7 +24,7 @@
     [TFY_ScenePackage addBeforeWindowEvent:^(TFY_Scene * _Nonnull application) {
         ViewController *vc = [ViewController new];
         TFY_NavigationController *nav = [[TFY_NavigationController alloc] initWithRootViewController:vc];
-        [UIApplication tfy_window].rootViewController = nav;
+        application.window.rootViewController = nav;
     }];
     return YES;
 }

@@ -47,6 +47,7 @@
 #import "UIColor+iOS13DarkMode.h"
 #import "UIColor+TFY_Tools.h"
 #import "UIGestureRecognizer+TFY_Tools.h"
+#import "UIImage+Addtions.h"
 #import "UIImage+iOS13DarkMode.h"
 #import "UIImage+TFY_Tools.h"
 #import "UILabel+TFY_Tools.h"
@@ -118,6 +119,7 @@
 #import "TFY_Utils.h"
 #import "TFY_Video.h"
 #import "UIApplication+TFY_Tools.h"
+#import "UIView+Toast.h"
 #import "UIWindow+TFY_Tools.h"
 
 FOUNDATION_EXPORT double TFY_LayoutCategoryKitVersionNumber;

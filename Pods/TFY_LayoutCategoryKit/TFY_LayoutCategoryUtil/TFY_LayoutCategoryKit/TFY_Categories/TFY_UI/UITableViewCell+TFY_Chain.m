@@ -74,6 +74,18 @@
     }
     return nil;
 }
+
+/// 刷新当前试图
+- (void)tfy_reloadCurrentTableViewCell {
+    UITableView *tableView = (UITableView *)self.superview;
+    if ([tableView isKindOfClass:[UITableView class]]) {
+        NSIndexPath *indexPath = [tableView indexPathForCell:self];
+        if (indexPath) {
+            [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        }
+    }
+}
+
 @end
 
 

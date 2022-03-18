@@ -15,25 +15,25 @@
 #import "TFY_CalendarHeaderView.h"
 
 typedef NS_ENUM(NSUInteger, TFYCa_CalendarScope) {
-    TFYCa_CalendarScopeMonth,
-    TFYCa_CalendarScopeWeek
+    TFYCa_CalendarScopeMonth,// 月
+    TFYCa_CalendarScopeWeek // 周
 };
 
 typedef NS_ENUM(NSUInteger, TFYCa_CalendarScrollDirection) {
-    TFYCa_CalendarScrollDirectionVertical,
-    TFYCa_CalendarScrollDirectionHorizontal
+    TFYCa_CalendarScrollDirectionVertical,//垂直
+    TFYCa_CalendarScrollDirectionHorizontal// 水平
 };
 
 typedef NS_ENUM(NSUInteger, TFYCa_CalendarPlaceholderType) {
-    TFYCa_CalendarPlaceholderTypeNone          = 0,
-    TFYCa_CalendarPlaceholderTypeFillHeadTail  = 1,
-    TFYCa_CalendarPlaceholderTypeFillSixRows   = 2
+    TFYCa_CalendarPlaceholderTypeNone          = 0,// 默认没有占位
+    TFYCa_CalendarPlaceholderTypeFillHeadTail  = 1,// 占位符类型填充头尾
+    TFYCa_CalendarPlaceholderTypeFillSixRows   = 2// 占位符类型填充六行
 };
 
 typedef NS_ENUM(NSUInteger, TFYCa_CalendarMonthPosition) {
-    TFYCa_CalendarMonthPositionPrevious,
-    TFYCa_CalendarMonthPositionCurrent,
-    TFYCa_CalendarMonthPositionNext,
+    TFYCa_CalendarMonthPositionPrevious,// 月之前的位置
+    TFYCa_CalendarMonthPositionCurrent,// 月的当前位置
+    TFYCa_CalendarMonthPositionNext,// 月下位置
     
     TFYCa_CalendarMonthPositionNotFound = NSNotFound
 };
@@ -248,11 +248,19 @@ typedef NS_ENUM(NSUInteger, TFYCa_CalendarMonthPosition) {
  * 要求代表提供特定日期的事件点偏移量。
  */
 - (CGPoint)calendar:(TFY_Calendar *_Nullable)calendar appearance:(TFY_CalendarAppearance *_Nullable)appearance eventOffsetForDate:(NSDate *_Nonnull)date;
-
-
 /**
  * 向代表询问特定日期的边界半径。
  */
 - (CGFloat)calendar:(TFY_Calendar *_Nullable)calendar appearance:(TFY_CalendarAppearance *_Nullable)appearance borderRadiusForDate:(NSDate *_Nonnull)date;
+
+/**
+ 选择不同填充颜色类型
+ */
+- (TFYCa_CellfillType)calendar:(TFY_Calendar *_Nullable)calendar appearance:(TFY_CalendarAppearance *_Nullable)appearance fillTypeForDate:(NSDate *_Nonnull)date;
+
+/**
+ 联动选中默认数组 必须在 TFYCa_CellfillTypeLinkage 情况下，需要默认选中的时候使用
+ */
+- (TFYCa_fillTypeLinkageSelectionType)calendar:(TFY_Calendar *_Nullable)calendar appearance:(TFY_CalendarAppearance *_Nullable)appearance LinkageDefaultForDate:(NSDate *_Nonnull)date;
 
 @end

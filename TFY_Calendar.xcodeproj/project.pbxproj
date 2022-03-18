@@ -26,7 +26,6 @@
 		365ED16C23938ED400981A14 /* RangePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 365ED16923938ED400981A14 /* RangePickerViewController.m */; };
 		365ED16D23938ED400981A14 /* RangePickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 365ED16A23938ED400981A14 /* RangePickerCell.m */; };
 		365ED17223938FE700981A14 /* DIYExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 365ED16E23938FE700981A14 /* DIYExampleViewController.m */; };
-		365ED17323938FE700981A14 /* DIYCalendarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 365ED17023938FE700981A14 /* DIYCalendarCell.m */; };
 		365ED1762393919B00981A14 /* DelegateAppearanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 365ED1752393919B00981A14 /* DelegateAppearanceViewController.m */; };
 		365ED1792393925700981A14 /* FullScreenExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 365ED1782393925700981A14 /* FullScreenExampleViewController.m */; };
 		365ED17C239392FD00981A14 /* HidePlaceholderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 365ED17B239392FD00981A14 /* HidePlaceholderViewController.m */; };
@@ -107,8 +106,6 @@
 		365ED16B23938ED400981A14 /* RangePickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangePickerCell.h; sourceTree = "<group>"; };
 		365ED16E23938FE700981A14 /* DIYExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIYExampleViewController.m; sourceTree = "<group>"; };
 		365ED16F23938FE700981A14 /* DIYExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIYExampleViewController.h; sourceTree = "<group>"; };
-		365ED17023938FE700981A14 /* DIYCalendarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIYCalendarCell.m; sourceTree = "<group>"; };
-		365ED17123938FE700981A14 /* DIYCalendarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIYCalendarCell.h; sourceTree = "<group>"; };
 		365ED1742393919B00981A14 /* DelegateAppearanceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelegateAppearanceViewController.h; sourceTree = "<group>"; };
 		365ED1752393919B00981A14 /* DelegateAppearanceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DelegateAppearanceViewController.m; sourceTree = "<group>"; };
 		365ED1772393925700981A14 /* FullScreenExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullScreenExampleViewController.h; sourceTree = "<group>"; };
@@ -202,8 +199,6 @@
 		365ED16323938E4B00981A14 /* DIY */ = {
 			isa = PBXGroup;
 			children = (
-				365ED17123938FE700981A14 /* DIYCalendarCell.h */,
-				365ED17023938FE700981A14 /* DIYCalendarCell.m */,
 				365ED16F23938FE700981A14 /* DIYExampleViewController.h */,
 				365ED16E23938FE700981A14 /* DIYExampleViewController.m */,
 			);
@@ -667,7 +662,6 @@
 				3656F1B725D293E90030D8CF /* TFY_CalendarConstants.m in Sources */,
 				3656F1AC25D293E90030D8CF /* TFY_CalendarCell.m in Sources */,
 				3656F1AD25D293E90030D8CF /* TFY_CalendarCollectionView.m in Sources */,
-				365ED17323938FE700981A14 /* DIYCalendarCell.m in Sources */,
 				3656F1B625D293E90030D8CF /* TFY_CalendarHeaderView.m in Sources */,
 				36629201239347D900DCFAAF /* main.m in Sources */,
 				3656F1B525D293E90030D8CF /* TFY_CalendarStickyHeader.m in Sources */,

@@ -70,11 +70,12 @@
     self.subToptitleLabel = label;
     
     shapeLayer = [CAShapeLayer layer];
-    shapeLayer.backgroundColor = [UIColor clearColor].CGColor;
     shapeLayer.borderWidth = 1.0;
     shapeLayer.lineWidth=2;
     shapeLayer.borderColor = [UIColor clearColor].CGColor;
     shapeLayer.opacity = 0;
+    shapeLayer.backgroundColor = [UIColor clearColor].CGColor;
+    shapeLayer.actions = @{@"hidden":[NSNull null]};
     [self.contentView.layer insertSublayer:shapeLayer below:_titleLabel.layer];
     self.shapeLayer = shapeLayer;
     
@@ -99,9 +100,18 @@
     
 }
 
+- (void)setLinkageSelectionType:(TFYCa_fillTypeLinkageSelectionType)linkageSelectionType {
+    if (_linkageSelectionType != linkageSelectionType) {
+        _linkageSelectionType = linkageSelectionType;
+        [self setNeedsLayout];
+    }
+}
+
+
 - (void)layoutSubviews
 {
     [super layoutSubviews];
+
     if (_subtitle) {
         _subtitleLabel.text = _subtitle;
         if (_subtitleLabel.hidden) {
@@ -213,22 +223,53 @@
         titleHeight = self.bounds.size.height*5.0/5.0;
         diameter = MIN(self.bounds.size.height*5.0/5.0,self.bounds.size.width);
     }
-    diameter = diameter > TFYCa_CalendarStandardCellDiameter ? (diameter - (diameter-TFYCa_CalendarStandardCellDiameter)*0.5) : diameter;
-    _shapeLayer.frame = CGRectMake((self.bounds.size.width-diameter)/2,
-                                   (titleHeight-diameter)/2,
-                                   diameter,
-                                   diameter);
     
-    CGPathRef path = [UIBezierPath bezierPathWithRoundedRect:_shapeLayer.bounds
-                                                cornerRadius:CGRectGetWidth(_shapeLayer.bounds)*0.5*self.borderRadius].CGPath;
-    if (!CGPathEqualToPath(_shapeLayer.path,path)) {
-        _shapeLayer.path = path;
+    CGFloat eventSize = 0;
+    if (self.cellFillType == TFYCa_CellfillTypeSeparate) {
+        
+        diameter = diameter > TFYCa_CalendarStandardCellDiameter ? (diameter - (diameter-TFYCa_CalendarStandardCellDiameter)*0.5) : diameter;
+        _shapeLayer.frame = CGRectMake((self.bounds.size.width-diameter)/2,
+                                       (titleHeight-diameter)/2,
+                                       diameter,
+                                       diameter);
+        
+        CGPathRef path = [UIBezierPath bezierPathWithRoundedRect:_shapeLayer.bounds
+                                                    cornerRadius:CGRectGetWidth(_shapeLayer.bounds)*0.5*self.borderRadius].CGPath;
+        if (!CGPathEqualToPath(_shapeLayer.path,path)) {
+            _shapeLayer.path = path;
+        }
+        
+        eventSize = _shapeLayer.frame.size.height/6.0;
+        if (_subtitle && _subToptitle) {
+            eventSize = _shapeLayer.frame.size.height/5.0;
+        }
+        
+    } else if (self.cellFillType == TFYCa_CellfillTypeLinkage){
+        
+        self.shapeLayer.frame = self.bounds;
+        
+        if (self.linkageSelectionType == TFYCa_fillTypeLinkageSelectionTypeMiddle) {
+            
+            self.shapeLayer.path = [UIBezierPath bezierPathWithRect:self.shapeLayer.bounds].CGPath;
+            
+        } else if (self.linkageSelectionType == TFYCa_fillTypeLinkageSelectionTypeLeftBorder) {
+            
+            self.shapeLayer.path = [UIBezierPath bezierPathWithRoundedRect:self.shapeLayer.bounds byRoundingCorners:UIRectCornerTopLeft|UIRectCornerBottomLeft cornerRadii:CGSizeMake(self.shapeLayer.tfyCa_width/2, self.shapeLayer.tfyCa_width/2)].CGPath;
+            
+        } else if (self.linkageSelectionType == TFYCa_fillTypeLinkageSelectionTypeRightBorder) {
+            
+            self.shapeLayer.path = [UIBezierPath bezierPathWithRoundedRect:self.shapeLayer.bounds byRoundingCorners:UIRectCornerTopRight|UIRectCornerBottomRight cornerRadii:CGSizeMake(self.shapeLayer.tfyCa_width/2, self.shapeLayer.tfyCa_width/2)].CGPath;
+            
+        } else if (self.linkageSelectionType == TFYCa_fillTypeLinkageSelectionTypeSingle) {
+            
+            CGFloat diameter = MIN(self.shapeLayer.tfyCa_height, self.shapeLayer.tfyCa_width);
+            self.shapeLayer.path = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(self.contentView.tfyCa_width/2-diameter/2, self.contentView.tfyCa_height/2-diameter/2, diameter, diameter)].CGPath;
+
+            eventSize = diameter;
+        }
+        
     }
     
-    CGFloat eventSize = _shapeLayer.frame.size.height/6.0;
-    if (_subtitle && _subToptitle) {
-        eventSize = _shapeLayer.frame.size.height/5.0;
-    }
     _eventIndicator.frame = CGRectMake(
                                        self.preferredEventOffset.x,
                                        CGRectGetMaxY(_shapeLayer.frame)+eventSize*0.17+self.preferredEventOffset.y,
@@ -326,12 +367,36 @@
             _shapeLayer.strokeColor = cellBorderColor;
         }
         
-        CGPathRef path = [UIBezierPath bezierPathWithRoundedRect:_shapeLayer.bounds
-                                                    cornerRadius:CGRectGetWidth(_shapeLayer.bounds)*0.5*self.borderRadius].CGPath;
-        if (!CGPathEqualToPath(_shapeLayer.path, path)) {
-            _shapeLayer.path = path;
+        if (self.cellFillType == TFYCa_CellfillTypeSeparate) {
+            
+            CGPathRef path = [UIBezierPath bezierPathWithRoundedRect:_shapeLayer.bounds
+                                                        cornerRadius:CGRectGetWidth(_shapeLayer.bounds)*0.5*self.borderRadius].CGPath;
+            if (!CGPathEqualToPath(_shapeLayer.path, path)) {
+                _shapeLayer.path = path;
+            }
+            
+        } else if (self.cellFillType == TFYCa_CellfillTypeLinkage) {
+            
+            if (self.linkageSelectionType == TFYCa_fillTypeLinkageSelectionTypeMiddle) {
+                
+                self.shapeLayer.path = [UIBezierPath bezierPathWithRect:self.shapeLayer.bounds].CGPath;
+                
+            } else if (self.linkageSelectionType == TFYCa_fillTypeLinkageSelectionTypeLeftBorder) {
+                
+                self.shapeLayer.path = [UIBezierPath bezierPathWithRoundedRect:self.shapeLayer.bounds byRoundingCorners:UIRectCornerTopLeft|UIRectCornerBottomLeft cornerRadii:CGSizeMake(self.shapeLayer.tfyCa_width/2, self.shapeLayer.tfyCa_width/2)].CGPath;
+                
+            } else if (self.linkageSelectionType == TFYCa_fillTypeLinkageSelectionTypeRightBorder) {
+                
+                self.shapeLayer.path = [UIBezierPath bezierPathWithRoundedRect:self.shapeLayer.bounds byRoundingCorners:UIRectCornerTopRight|UIRectCornerBottomRight cornerRadii:CGSizeMake(self.shapeLayer.tfyCa_width/2, self.shapeLayer.tfyCa_width/2)].CGPath;
+                
+            } else if (self.linkageSelectionType == TFYCa_fillTypeLinkageSelectionTypeSingle) {
+                
+                CGFloat diameter = MIN(self.shapeLayer.tfyCa_height, self.shapeLayer.tfyCa_width);
+                self.shapeLayer.path = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(self.contentView.tfyCa_width/2-diameter/2, self.contentView.tfyCa_height/2-diameter/2, diameter, diameter)].CGPath;
+                
+            }
+            
         }
-        
     }
     
     if (![_image isEqual:_imageView.image]) {

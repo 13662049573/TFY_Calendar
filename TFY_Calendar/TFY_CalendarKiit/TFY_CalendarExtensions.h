@@ -76,6 +76,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSDate *)tfyCa_dateByAddingSeconds:(NSInteger)seconds;
 /***当前日期减几秒*/
 - (NSDate *)tfyCa_dateByMinusSeconds:(NSInteger)seconds;
+/**将字符串转成NSDate类型 yyyy-MM-dd */
++ (NSDate *)tfyCa_dateWithString:(NSString *)string format:(NSString *)format;
 
 @end
 

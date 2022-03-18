@@ -64,7 +64,6 @@ typedef NS_ENUM(NSUInteger, BadgeViewFlexMode);
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UIView (Badge)<BadgeView>
-
 @end
 
 @interface UIView (Constraint)

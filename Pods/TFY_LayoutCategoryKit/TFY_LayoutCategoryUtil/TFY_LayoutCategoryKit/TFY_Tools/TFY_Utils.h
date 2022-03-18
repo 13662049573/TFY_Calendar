@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 #import <WebKit/WKWebView.h>
 
+
 static NSString * _Nonnull const AppLanguage = @"appLanguage";
 
 #define TFY_Localized(key, comment)  [[NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:AppLanguage]] ofType:@"lproj"]] localizedStringForKey:(key) value:@"" table:comment]
@@ -216,9 +217,12 @@ typedef NS_ENUM(NSUInteger, Temperature) {
 
 /***  根据字节大小返回文件大小字符KB、MB GB*/
 +(NSString *)convertFileSize:(long long)size;
-
+/*** 隐藏对应的字符串*/
++ (NSString *)hidePartWithStr:(NSString *)Str holderSingleStr:(NSString *)holderSingleStr location:(NSInteger)location length:(NSInteger)length;
 /*** 获取当前IP地址*/
 +(nullable NSString*)getCurrentWifiIP;
+/// 判断运营商
++ (NSString *)getPhoneNumType:(NSString *)phoneNum;
 
 #pragma mark****************************************判断方法****************************************
 /***  判断字符串是否是纯数字*/
@@ -367,6 +371,15 @@ typedef NS_ENUM(NSUInteger, Temperature) {
 /***  存储当前NSInteger*/
 +(void)saveIntValueInUD:(NSInteger)value forKey:(NSString *)key;
 
+/**存储当前CGFloat*/
++(void)saveFloatValueInUD:(CGFloat)value forKey:(NSString *)key;
+
+/**存储当前Double*/
++(void)saveDoubleValueInUD:(CGFloat)value forKey:(NSString *)key;
+
+/**存储当前Double*/
++(void)saveUrlValueInUD:(NSURL*)value forKey:(NSString *)key;
+
 /***   保存模型id*/
 +(void)saveValueInUD:(id)value forKey:(NSString *)key;
 
@@ -384,6 +397,15 @@ typedef NS_ENUM(NSUInteger, Temperature) {
 
 /***  获取保存的NSInteger*/
 +(NSInteger )getIntValueInUDWithKey:(NSString *)key;
+
+/**获取保存的CGFloat*/
++ (CGFloat)getFloatValueInUDWithKey:(NSString *)key;
+
+/**获取保存的double*/
++ (double)getdoubleValueInUDWithKey:(NSString *)key;
+
+/**获取保存的NSURL*/
++ (NSURL*)getURLValueInUDWithKey:(NSString *)key;
 
 /***  获取保存的NSDictionary*/
 +(NSDictionary *)getDicValueInUDWithKey:(NSString *)key;
@@ -472,6 +494,17 @@ typedef NS_ENUM(NSUInteger, Temperature) {
  *  横屏截图长度 --- 获取主图片数据所返回的总图片长度 vertical 横屏 1 竖屏 0
  */
 + (void)WKWebViewScroll:(WKWebView *)webView vertical:(NSInteger)vertical CaptureCompletionHandler:(void(^)(UIImage *capturedImage))completionHandler;
+
+#pragma mark****************************************提示框****************************************
+
++ (void)makeToast:(NSString *)str;
++ (void)makeToast:(NSString *)str duration:(NSTimeInterval)duration;
++ (void)makeToast:(NSString *)str duration:(NSTimeInterval)duration position:(CGPoint)position;
++ (void)makeToast:(NSString *)str duration:(NSTimeInterval)duration idposition:(id)position;
++ (void)hideToast;
++ (void)makeToastActivity;
++ (void)hideToastActivity;
+
 @end
 
 @interface UIView (Utils_Chain)

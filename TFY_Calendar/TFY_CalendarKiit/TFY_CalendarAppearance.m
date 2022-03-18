@@ -72,6 +72,7 @@
         _borderRadius = 1.0;
         _eventDefaultColor = TFYCa_CalendarStandardEventDotColor;
         _eventSelectionColor = TFYCa_CalendarStandardEventDotColor;
+        _cellFillType = TFYCa_CellfillTypeSeparate;
         
         _borderColors = [NSMutableDictionary dictionaryWithCapacity:2];
         
@@ -441,6 +442,13 @@
     borderRadius = MIN(1.0, borderRadius);
     if (_borderRadius != borderRadius) {
         _borderRadius = borderRadius;
+        [self.calendar configureAppearance];
+    }
+}
+
+- (void)setCellFillType:(TFYCa_CellfillType)cellFillType {
+    if (_cellFillType != cellFillType) {
+        _cellFillType = cellFillType;
         [self.calendar configureAppearance];
     }
 }

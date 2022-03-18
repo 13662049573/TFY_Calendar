@@ -12,6 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UITableViewCell (TFY_Chain)
 @property(nonatomic, strong, readonly) UITableView *tfy_parentTableView;
+
+/// 刷新当前试图
+- (void)tfy_reloadCurrentTableViewCell;
+
 #pragma mark - 用xib实例化cell
 + (instancetype)tfy_cellHeaderFromXib;
 /**

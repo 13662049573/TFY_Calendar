@@ -41,6 +41,11 @@ typedef NS_ENUM(NSUInteger, TFYCa_CalendarSwapplaces) {
     TFYCa_CalendarSwapplacesWeekTop  = 1///星期
 };
 
+typedef NS_ENUM(NSUInteger, TFYCa_CellfillType) {
+    TFYCa_CellfillTypeSeparate = 0,// 单独填充颜色
+    TFYCa_CellfillTypeLinkage = 1,// 联动填充颜色
+};
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TFY_CalendarAppearance : NSObject
@@ -151,6 +156,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 ///日期开启左右位置 如 ：UIControlContentHorizontalAlignmentLeft  时，可以设置左右间距
 @property (assign, nonatomic) CGFloat  liftrightSpacing;
+
+/// cell填充颜色类型
+@property (nonatomic , assign) TFYCa_CellfillType cellFillType;
 
 ///案例选项管理月份标签和工作日符号的大小写。
 @property (assign, nonatomic) TFYCa_CalendarCaseOptions caseOptions;

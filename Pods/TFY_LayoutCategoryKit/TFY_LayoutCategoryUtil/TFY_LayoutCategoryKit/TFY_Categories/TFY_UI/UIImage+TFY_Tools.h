@@ -49,6 +49,10 @@ CG_INLINE CGFloat TFY_DegreesToRadians(CGFloat degrees) {
 + (UIImage *)tfy_animatedGifName:(NSString *)name;
 
 + (UIImage *)tfy_animatedGifName:(NSString *)name scale:(CGFloat)scale;
+
+///矫正image 位置
++ (UIImage *)tfy_fixOrientation:(UIImage *)image;
+
 /**
  修正图片
  */
@@ -79,6 +83,28 @@ CG_INLINE CGFloat TFY_DegreesToRadians(CGFloat degrees) {
  裁剪
  */
 - (UIImage *)tfy_imageByCropToRect:(CGRect)rect;
+
+/**
+ 返回最大相对尺寸。x/y 为0时，尺寸不受约束
+ */
+- (CGSize)tfy_sizeWithMaxRelativeSize:(CGSize)size;
+
+/**
+ 返回最小相对尺寸。x/y 为0时，尺寸不受约束
+ */
+- (CGSize)tfy_sizeWithMinRelativeSize:(CGSize)size;
+
+#pragma mark -
+
+/**
+ 返回图片在内存里的像素点所占的内存大小,单位为字节(Byte) 1kb = 1024btye
+ */
+- (NSUInteger)tfy_lengthOfRawData;
+
+/**
+ 是否是png,判断依据是是否含有alpha通道
+ */
+- (BOOL)tfy_isPngImage;
 
 /**
  创建一个带边框的image

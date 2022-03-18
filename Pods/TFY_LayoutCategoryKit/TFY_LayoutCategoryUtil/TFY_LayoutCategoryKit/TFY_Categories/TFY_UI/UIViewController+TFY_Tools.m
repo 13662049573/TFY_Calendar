@@ -67,7 +67,7 @@
 }
 
 - (BOOL)prefersStatusBarHidden {
-    return YES; // your own visibility code
+    return NO; // your own visibility code
 }
 
 + (UIViewController *)currentViewController {

@@ -22,7 +22,7 @@ static NSString *const kBadgeView = @"kBadgeView";
     [self tfy_showBadge];
     self.badgeView.text = text;
     [self tfy_setBadgeFlexMode:self.badgeView.flexMode];
-    if (![self emptyWithString:text]) {
+    if (![self badgeemptyWithString:text]) {
         if (self.badgeView.widthConstraint && self.badgeView.widthConstraint.relation == NSLayoutRelationGreaterThanOrEqual) { return; }
         self.badgeView.widthConstraint.active = NO;
         NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self.badgeView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:self.badgeView attribute:NSLayoutAttributeHeight multiplier:1.0 constant:0];
@@ -35,7 +35,7 @@ static NSString *const kBadgeView = @"kBadgeView";
     }
 }
 
-- (BOOL)emptyWithString:(NSString *)string {
+- (BOOL)badgeemptyWithString:(NSString *)string {
     if (string.length == 0 || [string isEqualToString:@""] || string == nil || string == NULL || [string isEqual:[NSNull null]] || [string isEqualToString:@" "] || [string isEqualToString:@"(null)"] || [string isEqualToString:@"<null>"]) {
         return YES;
     }

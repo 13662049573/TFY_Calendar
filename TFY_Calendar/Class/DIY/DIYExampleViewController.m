@@ -7,7 +7,6 @@
 //
 
 #import "DIYExampleViewController.h"
-#import "DIYCalendarCell.h"
 #import <EventKit/EventKit.h>
 
 @interface DIYExampleViewController () <TFYCa_CalendarDataSource,TFYCa_CalendarDelegate,TFYCa_CalendarDelegateAppearance>
@@ -24,6 +23,7 @@
 @property (strong, nonatomic) NSDate *maximumDate;
 @property (strong, nonatomic) TFY_LunarFormatter *lunarFormatter;
 @property (strong, nonatomic) NSArray<EKEvent *> *events;
+@property (strong, nonatomic) NSDictionary *fillDefaultColors;
 @end
 
 @implementation DIYExampleViewController
@@ -48,39 +48,14 @@
     TFY_Calendar *calendar = [[TFY_Calendar alloc] initWithFrame:CGRectMake(0,  0, view.frame.size.width, height)];
     calendar.dataSource = self;
     calendar.delegate = self;
-//    calendar.swipeToChooseGesture.enabled = YES;
     calendar.allowsMultipleSelection = YES;
     calendar.locale = [NSLocale localeWithLocaleIdentifier:@"zh-CN"];
-    [view addSubview:calendar];
-    self.calendar = calendar;
-    
     calendar.calendarHeaderView.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.1];
     calendar.calendarWeekdayView.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:1];
     calendar.appearance.eventSelectionColor = [UIColor whiteColor];
-    calendar.appearance.eventOffset = CGPointMake(0, -7);
     calendar.today = nil; // Hide the today circle
-    [calendar registerClass:[DIYCalendarCell class] forCellReuseIdentifier:@"cell"];
-    //需要滑动开启
-//    UIPanGestureRecognizer *scopeGesture = [[UIPanGestureRecognizer alloc] initWithTarget:calendar action:@selector(handleScopeGesture:)];
-//    [calendar addGestureRecognizer:scopeGesture];
-    
-    
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.backgroundColor = [UIColor yellowColor];
-    label.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
-    [self.view addSubview:label];
-    self.eventLabel = label;
-    
-    NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:@""];
-    NSTextAttachment *attatchment = [[NSTextAttachment alloc] init];
-    attatchment.image = [UIImage imageNamed:@"icon_cat"];
-    attatchment.bounds = CGRectMake(0, -3, attatchment.image.size.width, attatchment.image.size.height);
-    [attributedText appendAttributedString:[NSAttributedString attributedStringWithAttachment:attatchment]];
-    [attributedText appendAttributedString:[[NSAttributedString alloc] initWithString:@"  嘿每日活动  "]];
-    [attributedText appendAttributedString:[NSAttributedString attributedStringWithAttachment:attatchment]];
-    self.eventLabel.attributedText = attributedText.copy;
-    
+    [view addSubview:calendar];
+    self.calendar = calendar;
 }
 
 - (void)viewDidLoad
@@ -97,10 +72,6 @@
     
     [self loadCalendarEvents];
     
-    // 取消注释以执行“初始周范围”
-     self.calendar.scope = TFYCa_CalendarScopeWeek;
-    
-   
     UIBarButtonItem *todayItem = [[UIBarButtonItem alloc] initWithTitle:@"今天" style:UIBarButtonItemStylePlain target:self action:@selector(todayItemClicked:)];
     
     UIBarButtonItem *lunarItem = [[UIBarButtonItem alloc] initWithTitle:@"农历" style:UIBarButtonItemStylePlain target:self action:@selector(lunarItemClicked:)];
@@ -113,6 +84,19 @@
     [toggle setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor purpleColor]} forState:UIControlStateNormal];
     
     self.navigationItem.rightBarButtonItems = @[eventItem ,lunarItem, todayItem,toggle];
+    
+    self.fillDefaultColors = @{@"2022-03-28":[UIColor purpleColor],
+                                 @"2022-03-29":[UIColor greenColor],
+                                 @"2022-03-30":[UIColor cyanColor],
+                                 @"2022-03-27":[UIColor yellowColor],
+                                 @"2022-03-01":[UIColor purpleColor],
+                                 @"2022-03-02":[UIColor greenColor],
+                                 @"2022-03-03":[UIColor cyanColor],
+                                 @"2022-03-04":[UIColor yellowColor],
+                                 @"2022-03-05":[UIColor purpleColor],
+                                 @"2022-03-06":[UIColor greenColor],
+                                 @"2022-03-07":[UIColor cyanColor],
+                                 @"2022-03-08":[UIColor magentaColor]};
     
 }
 - (void)didReceiveMemoryWarning
@@ -185,17 +169,6 @@
     return nil;
 }
 
-- (TFY_CalendarCell *)calendar:(TFY_Calendar *)calendar cellForDate:(NSDate *)date atMonthPosition:(TFYCa_CalendarMonthPosition)monthPosition
-{
-    DIYCalendarCell *cell = [calendar dequeueReusableCellWithIdentifier:@"cell" forDate:date atMonthPosition:monthPosition];
-    return cell;
-}
-
-- (void)calendar:(TFY_Calendar *)calendar willDisplayCell:(TFY_CalendarCell *)cell forDate:(NSDate *)date atMonthPosition: (TFYCa_CalendarMonthPosition)monthPosition
-{
-    [self configureCell:cell forDate:date atMonthPosition:monthPosition];
-}
-
 - (NSInteger)calendar:(TFY_Calendar *)calendar numberOfEventsForDate:(NSDate *)date
 {
     if (!self.showsEvents) return 0;
@@ -206,99 +179,23 @@
 
 #pragma mark - FSCalendarDelegate
 
-- (void)calendar:(TFY_Calendar *)calendar boundingRectWillChange:(CGRect)bounds animated:(BOOL)animated
-{
-    calendar.frame = (CGRect){calendar.frame.origin,bounds.size};
-    
-    self.eventLabel.frame = CGRectMake(0, CGRectGetMaxY(calendar.frame)+10, self.view.frame.size.width, 50);
-    
+/**
+ 选择不同填充颜色类型
+ */
+- (TFYCa_CellfillType)calendar:(TFY_Calendar *_Nullable)calendar appearance:(TFY_CalendarAppearance *_Nullable)appearance fillTypeForDate:(NSDate *_Nonnull)date {
+    return TFYCa_CellfillTypeLinkage;
 }
 
-- (BOOL)calendar:(TFY_Calendar *)calendar shouldSelectDate:(NSDate *)date atMonthPosition:(TFYCa_CalendarMonthPosition)monthPosition
-{
-    return monthPosition == TFYCa_CalendarMonthPositionCurrent;
+- (nullable UIColor *)calendar:(TFY_Calendar *_Nullable)calendar appearance:(TFY_CalendarAppearance *_Nullable)appearance fillSelectionColorForDate:(NSDate *_Nonnull)date {
+    return UIColor.orangeColor;
 }
 
-- (BOOL)calendar:(TFY_Calendar *)calendar shouldDeselectDate:(NSDate *)date atMonthPosition:(TFYCa_CalendarMonthPosition)monthPosition
-{
-    return monthPosition == TFYCa_CalendarMonthPositionCurrent;
-}
-
-- (void)calendar:(TFY_Calendar *)calendar didSelectDate:(NSDate *)date atMonthPosition:(TFYCa_CalendarMonthPosition)monthPosition
-{
-    NSLog(@"did select date %@",[self.dateFormatter stringFromDate:date]);
-    [self configureVisibleCells];
-}
-
-- (void)calendar:(TFY_Calendar *)calendar didDeselectDate:(NSDate *)date atMonthPosition:(TFYCa_CalendarMonthPosition)monthPosition
-{
-    NSLog(@"did deselect date %@",[self.dateFormatter stringFromDate:date]);
-    [self configureVisibleCells];
-}
-
-- (NSArray<UIColor *> *)calendar:(TFY_Calendar *)calendar appearance:(TFY_CalendarAppearance *)appearance eventDefaultColorsForDate:(NSDate *)date
-{
-    if ([self.gregorian isDateInToday:date]) {
-        return @[[UIColor orangeColor]];
+- (nullable UIColor *)calendar:(TFY_Calendar *_Nullable)calendar appearance:(TFY_CalendarAppearance *_Nullable)appearance fillDefaultColorForDate:(NSDate *_Nonnull)date {
+    NSString *key = [self.dateFormatter stringFromDate:date];
+    if ([self.fillDefaultColors.allKeys containsObject:key]) {
+        return _fillDefaultColors[key];
     }
-    return @[appearance.eventDefaultColor];
-}
-
-#pragma mark - Private methods
-
-- (void)configureVisibleCells
-{
-    [self.calendar.visibleCells enumerateObjectsUsingBlock:^(__kindof TFY_CalendarCell * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        NSDate *date = [self.calendar dateForCell:obj];
-        TFYCa_CalendarMonthPosition position = [self.calendar monthPositionForCell:obj];
-        [self configureCell:obj forDate:date atMonthPosition:position];
-    }];
-}
-
-- (void)configureCell:(TFY_CalendarCell *)cell forDate:(NSDate *)date atMonthPosition:(TFYCa_CalendarMonthPosition)monthPosition
-{
-    
-    DIYCalendarCell *diyCell = (DIYCalendarCell *)cell;
-    
-    // Custom today circle
-    diyCell.circleImageView.hidden = ![self.gregorian isDateInToday:date];
-    
-    // Configure selection layer
-    if (monthPosition == TFYCa_CalendarMonthPositionCurrent) {
-        
-        SelectionType selectionType = SelectionTypeNone;
-        if ([self.calendar.selectedDates containsObject:date]) {
-            NSDate *previousDate = [self.gregorian dateByAddingUnit:NSCalendarUnitDay value:-1 toDate:date options:0];
-            NSDate *nextDate = [self.gregorian dateByAddingUnit:NSCalendarUnitDay value:1 toDate:date options:0];
-            if ([self.calendar.selectedDates containsObject:date]) {
-                if ([self.calendar.selectedDates containsObject:previousDate] && [self.calendar.selectedDates containsObject:nextDate]) {
-                    selectionType = SelectionTypeMiddle;
-                } else if ([self.calendar.selectedDates containsObject:previousDate] && [self.calendar.selectedDates containsObject:date]) {
-                    selectionType = SelectionTypeRightBorder;
-                } else if ([self.calendar.selectedDates containsObject:nextDate]) {
-                    selectionType = SelectionTypeLeftBorder;
-                } else {
-                    selectionType = SelectionTypeSingle;
-                }
-            }
-        } else {
-            selectionType = SelectionTypeNone;
-        }
-        
-        if (selectionType == SelectionTypeNone) {
-            diyCell.selectionLayer.hidden = YES;
-            return;
-        }
-        
-        diyCell.selectionLayer.hidden = NO;
-        diyCell.selectionType = selectionType;
-        
-    } else {
-        
-        diyCell.circleImageView.hidden = YES;
-        diyCell.selectionLayer.hidden = YES;
-        
-    }
+    return nil;
 }
 #pragma mark - Private methods
 
@@ -331,10 +228,7 @@
             [self presentViewController:alertController animated:YES completion:nil];
         }
     }];
-    
 }
-
-
 
 - (NSArray<EKEvent *> *)eventsForDate:(NSDate *)date
 {
