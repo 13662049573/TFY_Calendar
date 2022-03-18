@@ -247,7 +247,13 @@
         
     } else if (self.cellFillType == TFYCa_CellfillTypeLinkage){
         
-        self.shapeLayer.frame = self.bounds;
+        diameter = diameter > TFYCa_CalendarStandardCellDiameter ? (diameter - (diameter-TFYCa_CalendarStandardCellDiameter)*0.5) : diameter;
+       
+        if (_subtitle && _subToptitle) {
+            self.shapeLayer.frame = self.contentView.bounds;
+        } else {
+            self.shapeLayer.frame = CGRectMake(0, 0, CGRectGetWidth(self.contentView.frame), diameter);
+        }
         
         if (self.linkageSelectionType == TFYCa_fillTypeLinkageSelectionTypeMiddle) {
             
