@@ -17,8 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) TFY_Calendar *calendar;
 
 @property (strong, nonatomic) NSCalendar *gregorian;
-@property (strong, nonatomic) NSDateFormatter *dateFormatter1;
-@property (strong, nonatomic) NSDateFormatter *dateFormatter2;
+@property (strong, nonatomic) NSDateFormatter *dateFormatter;
 
 @property (strong, nonatomic) NSDictionary *fillSelectionColors;
 @property (strong, nonatomic) NSDictionary *fillDefaultColors;
@@ -53,6 +52,7 @@ NS_ASSUME_NONNULL_END
     self = [super init];
     if (self) {
         self.title = @"TFY_Calendar";
+        
         //默认选择颜色
         self.fillDefaultColors = @{@"2022/11/06":[UIColor purpleColor],
                                      @"2022/11/07":[UIColor greenColor],
@@ -214,11 +214,8 @@ NS_ASSUME_NONNULL_END
         
         self.gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
         
-        self.dateFormatter1 = [[NSDateFormatter alloc] init];
-        self.dateFormatter1.dateFormat = @"yyyy/MM/dd";
-        
-        self.dateFormatter2 = [[NSDateFormatter alloc] init];
-        self.dateFormatter2.dateFormat = @"yyyy-MM-dd";
+        self.dateFormatter = [[NSDateFormatter alloc] init];
+        self.dateFormatter.dateFormat = @"yyyy/MM/dd";
         
         self.images = @{@"2022/03/11":[UIImage imageNamed:@"icon_cat"],
                         @"2022/03/13":[UIImage imageNamed:@"icon_footprint"],
@@ -277,7 +274,7 @@ NS_ASSUME_NONNULL_END
 
 - (NSInteger)calendar:(TFY_Calendar *)calendar numberOfEventsForDate:(NSDate *)date
 {
-    NSString *dateString = [self.dateFormatter2 stringFromDate:date];
+    NSString *dateString = [self.dateFormatter stringFromDate:date];
     if ([_datesWithEvent containsObject:dateString]) {
         return 1;
     }
@@ -292,7 +289,7 @@ NS_ASSUME_NONNULL_END
 // 日历下标小圆点颜色组设置
 - (NSArray *)calendar:(TFY_Calendar *)calendar appearance:(TFY_CalendarAppearance *)appearance eventDefaultColorsForDate:(NSDate *)date
 {
-    NSString *dateString = [self.dateFormatter2 stringFromDate:date];
+    NSString *dateString = [self.dateFormatter stringFromDate:date];
     if ([_datesWithMultipleEvents containsObject:dateString]) {
         return @[[UIColor magentaColor],appearance.eventDefaultColor,[UIColor blackColor]];
     }
@@ -309,7 +306,7 @@ NS_ASSUME_NONNULL_END
 
 - (TFYCa_fillTypeLinkageSelectionType)calendar:(TFY_Calendar *_Nullable)calendar appearance:(TFY_CalendarAppearance *_Nullable)appearance LinkageDefaultForDate:(NSDate *_Nonnull)date {
     
-    NSString *key = [self.dateFormatter1 stringFromDate:date];
+    NSString *key = [self.dateFormatter stringFromDate:date];
     if ([self.linkageDefaultColors.allKeys containsObject:key]) {
         NSNumber *number= self.linkageDefaultColors[key];
         return number.integerValue;
@@ -320,18 +317,18 @@ NS_ASSUME_NONNULL_END
 
 - (UIImage *)calendar:(TFY_Calendar *)calendar imageForDate:(NSDate *)date
 {
-    NSString *dateString = [self.dateFormatter1 stringFromDate:date];
+    NSString *dateString = [self.dateFormatter stringFromDate:date];
     return self.images[dateString];
 }
 
 - (UIImage *)calendar:(TFY_Calendar *)calendar imageTopForDate:(NSDate * _Nonnull)date
 {
-    NSString *dateString = [self.dateFormatter1 stringFromDate:date];
+    NSString *dateString = [self.dateFormatter stringFromDate:date];
     return self.images[dateString];
 }
 
 -  (nullable NSArray<UIColor *> *)calendar:(TFY_Calendar *)calendar appearance:(TFY_CalendarAppearance *)appearance eventSelectionColorsForDate:(NSDate *)date{
-    NSString *dateString = [self.dateFormatter2 stringFromDate:date];
+    NSString *dateString = [self.dateFormatter stringFromDate:date];
     if ([_datesWithMultipleEvents containsObject:dateString]) {
         return @[[UIColor redColor],appearance.eventDefaultColor,[UIColor purpleColor]];
     }
@@ -343,7 +340,7 @@ NS_ASSUME_NONNULL_END
 
 - (NSString *)calendar:(TFY_Calendar *)calendar subtitleForDate:(NSDate *)date
 {
-    NSString *key = [self.dateFormatter1 stringFromDate:date];
+    NSString *key = [self.dateFormatter stringFromDate:date];
     if ([self.subtitleDefaultTexts.allKeys containsObject:key]) {
         return self.subtitleDefaultTexts[key];
     }
@@ -353,7 +350,7 @@ NS_ASSUME_NONNULL_END
 /// 开启上下加文字
 - (NSString *)calendar:(TFY_Calendar *)calendar subToptitleDate:(NSDate *)date {
     
-    NSString *key = [self.dateFormatter1 stringFromDate:date];
+    NSString *key = [self.dateFormatter stringFromDate:date];
     if ([self.subToptitleDefaultTexts.allKeys containsObject:key]) {
         return self.subToptitleDefaultTexts[key];
     }
@@ -365,7 +362,7 @@ NS_ASSUME_NONNULL_END
  */
 - (nullable UIColor *)calendar:(TFY_Calendar *_Nullable)calendar appearance:(TFY_CalendarAppearance *_Nullable)appearance subtitleDefaultColorForDate:(NSDate *_Nonnull)date {
     
-    NSString *key = [self.dateFormatter1 stringFromDate:date];
+    NSString *key = [self.dateFormatter stringFromDate:date];
     if ([self.subtitleDefaultColors.allKeys containsObject:key]) {
         return self.subtitleDefaultColors[key];
     }
@@ -377,7 +374,7 @@ NS_ASSUME_NONNULL_END
  */
 - (nullable UIColor *)calendar:(TFY_Calendar *_Nullable)calendar appearance:(TFY_CalendarAppearance *_Nullable)appearance subToptitleDefaultColorForDate:(NSDate *_Nonnull)date {
     
-    NSString *key = [self.dateFormatter1 stringFromDate:date];
+    NSString *key = [self.dateFormatter stringFromDate:date];
     if ([self.subToptitleDefaultColors.allKeys containsObject:key]) {
         return self.subToptitleDefaultColors[key];
     }
@@ -389,7 +386,7 @@ NS_ASSUME_NONNULL_END
  */
 - (nullable UIColor *)calendar:(TFY_Calendar *_Nullable)calendar appearance:(TFY_CalendarAppearance *_Nullable)appearance subtitleSelectionColorForDate:(NSDate *_Nonnull)date {
     
-    NSString *key = [self.dateFormatter1 stringFromDate:date];
+    NSString *key = [self.dateFormatter stringFromDate:date];
     if ([self.subtitleSelectionColors.allKeys containsObject:key]) {
         return self.subtitleSelectionColors[key];
     }
@@ -401,7 +398,7 @@ NS_ASSUME_NONNULL_END
  */
 - (nullable UIColor *)calendar:(TFY_Calendar *_Nullable)calendar appearance:(TFY_CalendarAppearance *_Nullable)appearance subToptitleSelectionColorForDate:(NSDate *_Nonnull)date {
     
-    NSString *key = [self.dateFormatter1 stringFromDate:date];
+    NSString *key = [self.dateFormatter stringFromDate:date];
     if ([self.subToptitleSelectionColors.allKeys containsObject:key]) {
         return self.subToptitleSelectionColors[key];
     }
@@ -411,7 +408,7 @@ NS_ASSUME_NONNULL_END
 
 - (UIColor *)calendar:(TFY_Calendar *)calendar appearance:(TFY_CalendarAppearance *)appearance fillSelectionColorForDate:(NSDate *)date
 {
-    NSString *key = [self.dateFormatter1 stringFromDate:date];
+    NSString *key = [self.dateFormatter stringFromDate:date];
     if ([_fillSelectionColors.allKeys containsObject:key]) {
         return _fillSelectionColors[key];
     }
@@ -420,7 +417,7 @@ NS_ASSUME_NONNULL_END
 
 - (UIColor *)calendar:(TFY_Calendar *)calendar appearance:(TFY_CalendarAppearance *)appearance fillDefaultColorForDate:(NSDate *)date
 {
-    NSString *key = [self.dateFormatter1 stringFromDate:date];
+    NSString *key = [self.dateFormatter stringFromDate:date];
     if ([_fillDefaultColors.allKeys containsObject:key]) {
         return _fillDefaultColors[key];
     }
@@ -429,7 +426,7 @@ NS_ASSUME_NONNULL_END
 
 - (UIColor *)calendar:(TFY_Calendar *)calendar appearance:(TFY_CalendarAppearance *)appearance borderDefaultColorForDate:(NSDate *)date
 {
-    NSString *key = [self.dateFormatter1 stringFromDate:date];
+    NSString *key = [self.dateFormatter stringFromDate:date];
     if ([_borderDefaultColors.allKeys containsObject:key]) {
         return _borderDefaultColors[key];
     }
@@ -438,7 +435,7 @@ NS_ASSUME_NONNULL_END
 
 - (UIColor *)calendar:(TFY_Calendar *)calendar appearance:(TFY_CalendarAppearance *)appearance borderSelectionColorForDate:(NSDate *)date
 {
-    NSString *key = [self.dateFormatter1 stringFromDate:date];
+    NSString *key = [self.dateFormatter stringFromDate:date];
     if ([_borderSelectionColors.allKeys containsObject:key]) {
         return _borderSelectionColors[key];
     }
