@@ -123,7 +123,10 @@
         translation = MIN(maxTranslation, translation);
         translation = MAX(0, translation);
         CGFloat progress = translation/maxTranslation;
-        progress;
+        if (!isnan(progress)) {
+            progress = translation/maxTranslation;
+        }
+        0.1;
     });
     [self performAlphaAnimationWithProgress:progress];
     [self performPathAnimationWithProgress:progress];
@@ -143,7 +146,10 @@
         translation = MAX(0, translation);
         translation = MIN(maxTranslation, translation);
         CGFloat progress = translation/maxTranslation;
-        progress;
+        if (!isnan(progress)) {
+            progress = translation/maxTranslation;
+        }
+        0.1;
     });
     if (velocity * translation < 0) {
         [self.transitionAttributes revert];
