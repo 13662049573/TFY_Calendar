@@ -93,17 +93,16 @@
      [self.view layoutIfNeeded];
 }
 
-- (void)calendar:(TFY_Calendar *)calendar didDeselectDate:(NSDate *)date atMonthPosition:(TFYCa_CalendarMonthPosition)monthPosition {
+- (void)calendar:(TFY_Calendar *)calendar didSelectDate:(NSDate *)date atMonthPosition:(TFYCa_CalendarMonthPosition)monthPosition {
     NSLog(@"did select date %@",[self.dateFormatter stringFromDate:date]);
-    
     NSMutableArray *selectedDates = [NSMutableArray arrayWithCapacity:calendar.selectedDates.count];
     [calendar.selectedDates enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        [selectedDates addObject:[self.dateFormatter stringFromDate:obj]];
+        [selectedDates addObject:[NSDate tfy_stringWithDate:obj format:NSDate.tfy_ymdHmsFormat]];
     }];
-    NSLog(@"selected dates is %@",selectedDates);
     if (monthPosition == TFYCa_CalendarMonthPositionNext || monthPosition == TFYCa_CalendarMonthPositionPrevious) {
         [calendar setCurrentPage:date animated:YES];
     }
+    NSLog(@"selected dates is %@",selectedDates);
 }
 
 #pragma mark - <UITableViewDataSource>
