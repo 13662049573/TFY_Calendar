@@ -680,7 +680,7 @@ static NSHashTable *allAnimatedImagesWeak;
                     CFRelease(frameImageRef);
                 } else {
                     skippedFrameCount++;
-                    TFY_Log(TFY_LogLevelInfo, @"Dropping frame %zu because failed to `CGImageSourceCreateImageAtIndex` with image source %@", i, self->_imageSource);
+                   TFY_Log(TFY_LogLevelInfo, @"Dropping frame %zu because failed to `CGImageSourceCreateImageAtIndex` with image source %@", i, self->_imageSource);
                 }
             }
         }

@@ -337,11 +337,77 @@ NS_ASSUME_NONNULL_BEGIN
 /**
     获取字符串行数和每行的数据
  */
-+ (NSArray *)getLinesArrayOfStringInrowsOfString:(NSString *)text withFont:(UIFont *)font withWidth:(CGFloat)width;
++ (NSArray *)tfy_getLinesArrayOfStringInrowsOfString:(NSString *)text withFont:(UIFont *)font withWidth:(CGFloat)width;
 /**
  *   一个时间距现在的时间
  */
-+(NSString *)intervalSinceNow:(NSString *)theDate;
++(NSString *)tfy_intervalSinceNow:(NSString *)theDate;
+
+/**
+ 带子节的string转为NSData
+ 
+ NSData类型
+ */
+-(NSData*)tfy_convertBytesStringToData ;
+
+/**
+ 十进制转十六进制
+ 
+ 十六进制字符串
+ */
+- (NSString *)tfy_decimalToHex;
+
+/**
+ 十进制转十六进制
+ length   总长度，不足补0
+ 十六进制字符串
+ */
+- (NSString *)tfy_decimalToHexWithLength:(NSUInteger)length;
+
+/**
+ 十六进制转十进制
+ 
+ 十进制字符串
+ */
+- (NSString *)tfy_hexToDecimal;
+/*
+ 二进制转十进制
+ 
+十进制字符串
+ */
+- (NSString *)tfy_binaryToDecimal;
+
+/**
+ 十进制转二进制
+ 
+ 二进制字符串
+ */
+- (NSString *)tfy_decimalToBinary;
+/**
+ 时间戳转标准时间
+ 
+ 标准时间 YYYY-MM-dd HH:mm:ss
+ */
+- (NSString *)tfy_timestampToStandardtime;
+
+/**
+ 时间戳转标准时间
+ 
+ 标准时间数组 @[YYYY-MM-dd, HH:mm:ss]
+ */
+- (NSArray *)tfy_timestampToStandardtimes;
+
+/// double 类型转化为一位小数字符串
++ (NSString *)keeponedecimalplaceDoubleOne:(double)value;
+/// double 类型转化为二位小数字符串
++ (NSString *)keeponedecimalplaceDoubleTwo:(double)value;
+/// CGFloat 类型转化为一位小数字符串
++ (NSString *)keeponedecimalplaceFloatOne:(CGFloat)value;
+/// CGFloat 类型转化为二位小数字符串
++ (NSString *)keeponedecimalplaceFloatTwo:(CGFloat)value;
+
+///  转字符
+- (NSString *)safePathString;
 @end
 
 NS_ASSUME_NONNULL_END

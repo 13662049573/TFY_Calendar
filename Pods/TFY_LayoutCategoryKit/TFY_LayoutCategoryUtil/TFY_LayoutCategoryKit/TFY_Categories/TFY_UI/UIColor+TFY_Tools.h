@@ -167,6 +167,37 @@ typedef NS_ENUM(NSInteger, GradientChangeDirection) {
  */
 - (UIColor *)tfy_antiColor;
 
+/**
+ *  设置正常模式和深色模式 Color
+ *
+ *   light 正常模式 Color
+ *   dark 深色模式 Color
+ *   适配深色模式的 Color
+ */
++ (UIColor *)tfy_colorWithColorLight:(UIColor *)light dark:(UIColor *)dark;
+
+/**
+ *  系统灰色
+ *
+ *   适配深色模式的灰色
+ */
++ (UIColor *)tfy_systemGrayColor;
+
+/**
+ *  系统红色
+ *
+ *   适配深色模式的红色
+ */
++ (UIColor *)tfy_systemRedColor;
+
+/**
+ *  系统蓝色
+ *
+ *   适配深色模式的蓝色
+ */
++ (UIColor *)tfy_systemBlueColor;
+
+
 @end
 /**十六进制字符串获取颜色*/
 CG_INLINE UIColor *TFY_ColorHexString(NSString *hexString){

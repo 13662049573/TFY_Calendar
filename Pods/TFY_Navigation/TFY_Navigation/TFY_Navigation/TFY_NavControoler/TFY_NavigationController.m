@@ -597,12 +597,15 @@ __attribute((overloadable)) static inline UIViewController *TFYSafeWrapViewContr
 
 - (void)onBack:(id)sender
 {
+    if ([self.uiNaviDelegate respondsToSelector:@selector(navigationControllerDidClickLeftButton:)]) {
+        [self.uiNaviDelegate navigationControllerDidClickLeftButton:self];
+    }
     [self popViewControllerAnimated:YES];
 }
 
 - (void)_commonInit
 {
-    
+    self.interactivePopGestureRecognizer.delegate = self;
 }
 
 - (void)_installsLeftBarButtonItemIfNeededForViewController:(UIViewController *)viewController
@@ -715,8 +718,9 @@ __attribute((overloadable)) static inline UIViewController *TFYSafeWrapViewContr
         }
         return;
     }
-    if (self.viewControllers.count >= 1) {
+    if(self.viewControllers.count != 0){
         viewController.hidesBottomBarWhenPushed = YES;
+        self.tabBarController.tabBar.hidden = YES;
     }
     if (self.viewControllers.count > 0) {
         UIViewController *currentLast = TFYSafeUnwrapViewController(self.viewControllers.lastObject);
@@ -740,6 +744,12 @@ __attribute((overloadable)) static inline UIViewController *TFYSafeWrapViewContr
 
 - (NSArray<__kindof UIViewController *> *)popToRootViewControllerAnimated:(BOOL)animated
 {
+    if (@available(iOS 14.0, *)) {
+        for (UIViewController *vc in self.viewControllers) {
+            vc.hidesBottomBarWhenPushed = NO;
+            self.tabBarController.tabBar.hidden = NO;
+        }
+    }
     return [[super popToRootViewControllerAnimated:animated] tfy_map:^id(__kindof UIViewController *obj, NSUInteger index) {
         return TFYSafeUnwrapViewController(obj);
     }];
@@ -816,17 +826,17 @@ __attribute((overloadable)) static inline UIViewController *TFYSafeWrapViewContr
 
 #pragma mark - Public Methods
 
-- (UIViewController *)rt_topViewController
+- (UIViewController *)tfy_topViewController
 {
     return TFYSafeUnwrapViewController([super topViewController]);
 }
 
-- (UIViewController *)rt_visibleViewController
+- (UIViewController *)tfy_visibleViewController
 {
     return TFYSafeUnwrapViewController([super visibleViewController]);
 }
 
-- (NSArray <__kindof UIViewController *> *)rt_viewControllers
+- (NSArray <__kindof UIViewController *> *)tfy_viewControllers
 {
     return [[super viewControllers] tfy_map:^id(id obj, __unused NSUInteger index) {
         return TFYSafeUnwrapViewController(obj);
@@ -945,6 +955,25 @@ __attribute((overloadable)) static inline UIViewController *TFYSafeWrapViewContr
                         willShowViewController:viewController
                                       animated:animated];
     }
+    
+    /// 监听侧边滑动返回的事件
+    __weak typeof(self) weakSelf = self;
+    if (@available(iOS 10.0, *)) {
+        [viewController.transitionCoordinator notifyWhenInteractionChangesUsingBlock:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            [strongSelf handleSideSlideReturnIfNeeded:context];
+        }];
+    }
+}
+
+- (void)handleSideSlideReturnIfNeeded:(id<UIViewControllerTransitionCoordinatorContext>)context {
+    if (context.isCancelled) {
+        return;
+    }
+    UIViewController *fromVc = [context viewControllerForKey:UITransitionContextFromViewControllerKey];
+    if ([self.uiNaviDelegate respondsToSelector:@selector(navigationControllerDidSideSlideReturn:fromViewController:)]) {
+        [self.uiNaviDelegate navigationControllerDidSideSlideReturn:self fromViewController:fromVc];
+    }
 }
 
 - (void)navigationController:(UINavigationController *)navigationController
@@ -963,7 +992,7 @@ __attribute((overloadable)) static inline UIViewController *TFYSafeWrapViewContr
         self.interactivePopGestureRecognizer.delegate = self;
         self.interactivePopGestureRecognizer.enabled = !isRootVC;
     }
-    
+
     [TFY_NavigationController attemptRotationToDeviceOrientation];
 
     if ([self.tfy_delegate respondsToSelector:@selector(navigationController:didShowViewController:animated:)]) {

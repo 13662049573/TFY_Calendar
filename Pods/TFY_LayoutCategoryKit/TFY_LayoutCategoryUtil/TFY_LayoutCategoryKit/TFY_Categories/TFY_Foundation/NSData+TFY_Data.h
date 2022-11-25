@@ -217,6 +217,20 @@ NS_ASSUME_NONNULL_BEGIN
  * 获取 name 文件里的内容，返回 NSData。类似[UIImage imageNamed:]。
  */
 + (nullable NSData *)tfy_dataNamed:(NSString *)name;
+
+/**
+ NSData 转  十六进制string
+ 
+ NSString类型的十六进制string
+ */
+- (NSString *)tfy_convertDataToHexStr;
+/**
+ NSData 转 NSString
+ 
+ NSString类型的字符串
+ */
+- (NSString *)tfy_dataToString;
+
 @end
 
 NS_ASSUME_NONNULL_END

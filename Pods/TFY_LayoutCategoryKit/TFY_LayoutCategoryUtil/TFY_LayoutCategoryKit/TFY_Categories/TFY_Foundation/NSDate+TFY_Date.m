@@ -402,7 +402,6 @@
     
     return @"1小时前";
 }
-
 + (NSDate *)tfy_dateWithString:(NSString *)string format:(NSString *)format {
     NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
     [inputFormatter setDateFormat:format];

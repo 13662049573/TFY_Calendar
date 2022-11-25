@@ -713,4 +713,54 @@ static void RGBtoHSV( float r, float g, float b, float *h, float *s, float *v )
     return [NSString stringWithFormat:@"[%d,%d,%d,%f]",(int)(r*255),(int)(g*255),(int)(b*255),a];
 }
 
++ (UIColor *)tfy_colorWithColorLight:(UIColor *)light dark:(UIColor *)dark {
+    if (@available(iOS 13.0, *)) {
+        return [self colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
+            switch (traitCollection.userInterfaceStyle) {
+                case UIUserInterfaceStyleDark:
+                    return dark;
+                case UIUserInterfaceStyleLight:
+                case UIUserInterfaceStyleUnspecified:
+                default:
+                    return light;
+            }
+        }];
+    } else {
+        return light;
+    }
+}
+
+
++ (UIColor *)tfy_systemBlackColor {
+    if (@available(iOS 13.0, *)) {
+        return [self systemBackgroundColor];
+    } else {
+        return [UIColor whiteColor];
+    }
+}
+
++ (UIColor *)tfy_systemGrayColor {
+    if (@available(iOS 13.0, *)) {
+        return [self systemGrayColor];
+    } else {
+        return [UIColor grayColor];
+    }
+}
+
++ (UIColor *)tfy_systemRedColor {
+    if (@available(iOS 13.0, *)) {
+        return [self systemRedColor];
+    } else {
+        return [UIColor redColor];
+    }
+}
+
++ (UIColor *)tfy_systemBlueColor {
+    if (@available(iOS 13.0, *)) {
+        return [self systemBlueColor];
+    } else {
+        return [UIColor blueColor];
+    }
+}
+
 @end

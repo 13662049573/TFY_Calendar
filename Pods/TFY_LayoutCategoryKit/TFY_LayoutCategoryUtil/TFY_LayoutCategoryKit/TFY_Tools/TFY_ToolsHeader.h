@@ -14,5 +14,6 @@
 #import "UIWindow+TFY_Tools.h"
 #import "TFY_Timer.h"
 #import "UIView+Toast.h"
+#import "TFY_WKWebView.h"
 
 #endif /* TFY_ToolsHeader_h */

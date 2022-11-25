@@ -10,9 +10,23 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSInteger,TFYPopDirection){
+    TFYPopDirectionCenter = 0,
+    TFYPopDirectionTop,
+    TFYPopDirectionLeft,
+    TFYPopDirectionRight,
+    TFYPopDirectionBottom
+};
+
+typedef void(^PresentCompletion)(void);
+
 @interface UIViewController (TFY_Tools)
 
 + (UIViewController *)currentViewController;
+
+- (void)presentViewController:(UIViewController *)viewController inSize:(CGSize)size direction:(TFYPopDirection)direction completion:(PresentCompletion)completion;
+
+- (void)dismissViewController;
 
 @end
 

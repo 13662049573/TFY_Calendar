@@ -102,6 +102,7 @@ TFY_PROPERTY_CHAIN_READONLY ObjectType (^ endEditing) (BOOL);
 
 TFY_PROPERTY_CHAIN_READONLY ObjectType (^ contentMode) (UIViewContentMode);
 TFY_PROPERTY_CHAIN_READONLY ObjectType (^ transform) (CGAffineTransform);
+TFY_PROPERTY_CHAIN_READONLY ObjectType (^ contents) (id);
 
 TFY_PROPERTY_CHAIN_READONLY ObjectType (^ autoresizingMask) (UIViewAutoresizing);
 

@@ -54,6 +54,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)addBeforeWindowEvent:(void (^) (TFY_Scene *application))event;
 
+- (UIWindow *)appKeyWindow;
+
 @end
 
 typedef NS_ENUM(NSUInteger, ControllerShowType) {

@@ -172,6 +172,7 @@ TFY_CATEGORY_CHAIN_VIEW_IMPLEMENTATION(multipleTouchEnabled, BOOL)
 TFY_CATEGORY_CHAIN_VIEW_IMPLEMENTATION(contentMode, UIViewContentMode)
 TFY_CATEGORY_CHAIN_VIEW_IMPLEMENTATION(transform, CGAffineTransform)
 
+
 - (id  _Nonnull (^)(BOOL))endEditing{
     return ^(BOOL end){
         [self enumerateObjectsUsingBlock:^(UIView * _Nonnull obj) {
@@ -194,6 +195,15 @@ TFY_CATEGORY_CHAIN_VIEW_IMPLEMENTATION(transform, CGAffineTransform)
     return ^(CALayer *layer){
         [self enumerateObjectsUsingBlock:^(UIView * _Nonnull obj) {
             [obj.layer addSublayer:layer];
+        }];
+        return self;
+    };
+}
+
+- (id _Nonnull (^)(id))contents {
+    return ^(id contents) {
+        [self enumerateObjectsUsingBlock:^(UIView *_Nonnull obj) {
+            obj.layer.contents = contents;
         }];
         return self;
     };

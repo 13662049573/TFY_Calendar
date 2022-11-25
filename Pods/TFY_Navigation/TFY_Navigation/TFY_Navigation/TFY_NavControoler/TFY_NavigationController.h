@@ -19,8 +19,21 @@
 @end
 
 NS_ASSUME_NONNULL_BEGIN
+
+@class TFY_NavigationController;
+@protocol TFYNavigationControllerDelegate <NSObject>
+@optional
+/// 点击返回按钮调用
+- (void)navigationControllerDidClickLeftButton:(TFY_NavigationController *)controller;
+/// 侧滑划出控制器调用
+- (void)navigationControllerDidSideSlideReturn:(TFY_NavigationController *)controller
+                            fromViewController:(UIViewController *)fromViewController;
+@end
+
 IB_DESIGNABLE
 @interface TFY_NavigationController : UINavigationController
+
+@property (nonatomic, weak) id<TFYNavigationControllerDelegate> uiNaviDelegate;
 /*!
  *  使用系统原始的背栏项目或自定义背栏项目返回
  */

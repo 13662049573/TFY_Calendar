@@ -1034,4 +1034,42 @@ const void *kAssociatedTfy_contentInsets;
     [attributedString addAttribute:(id)kCTKernAttributeName value:textCTKern range:NSMakeRange(0, self.text.length-1)];
     self.attributedText = attributedString;
 }
+
+/**
+ 为UILabel首部设置图片标签
+ text 文本
+ images 标签数组
+ span 标签间距
+ */
+-(void)tfy_changeText:(NSString *)text frontImages:(NSArray<UIImage *> *)images imageSpan:(CGFloat)span
+{
+    NSMutableAttributedString *textAttrStr = [[NSMutableAttributedString alloc] init];
+    
+    for (UIImage *img in images) {//遍历添加标签
+        
+        NSTextAttachment *attach = [[NSTextAttachment alloc] init];
+        attach.image = img;
+        //计算图片大小，与文字同高，按比例设置宽度
+        CGFloat imgH = self.font.pointSize;
+        CGFloat imgW = (img.size.width / img.size.height) * imgH;
+        //计算文字padding-top ，使图片垂直居中
+        CGFloat textPaddingTop = (self.font.lineHeight - self.font.pointSize) / 2;
+        attach.bounds = CGRectMake(0, -textPaddingTop , imgW, imgH);
+        
+        NSAttributedString *imgStr = [NSAttributedString attributedStringWithAttachment:attach];
+        [textAttrStr appendAttributedString:imgStr];
+        //标签后添加空格
+        [textAttrStr appendAttributedString:[[NSAttributedString alloc] initWithString:@" "]];
+    }
+    
+    //设置显示文本
+    [textAttrStr appendAttributedString:[[NSAttributedString alloc]initWithString:text]];
+    //设置间距
+    if (span != 0) {
+        [textAttrStr addAttribute:NSKernAttributeName value:@(span) range:NSMakeRange(0, images.count * 2/*由于图片也会占用一个单位长度,所以带上空格数量，需要 *2 */)];
+    }
+    
+    self.attributedText = textAttrStr;
+}
+
 @end

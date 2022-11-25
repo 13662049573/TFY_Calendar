@@ -115,6 +115,18 @@
     return dic;
 }
 
+/** 将Dictionary转为NSData 将字典转换成json格式字符串,不含 这些符号*/
++ (NSData *)tfy_compactFormatDataForDictionary:(NSDictionary *)dicJson {
+    if (![dicJson isKindOfClass:[NSDictionary class]]) {
+        return nil;
+    }
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dicJson options:0 error:nil];
+    if (![jsonData isKindOfClass:[NSData class]]) {
+        return nil;
+    }
+    return jsonData;
+}
+
 @end
 
 

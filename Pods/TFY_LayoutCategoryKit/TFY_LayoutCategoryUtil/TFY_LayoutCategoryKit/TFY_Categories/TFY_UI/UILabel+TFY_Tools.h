@@ -398,6 +398,15 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)tfy_changeCTKernWithTextCTKern:(NSNumber *)textCTKern;
 
+#pragma mark - 首部设置图片标签
+/**
+ 为UILabel首部设置图片标签
+ text 文本
+ images 标签数组
+ span 标签间距
+ */
+-(void)tfy_changeText:(NSString *)text frontImages:(NSArray<UIImage *> *)images imageSpan:(CGFloat)span;
+
 @end
 
 NS_ASSUME_NONNULL_END

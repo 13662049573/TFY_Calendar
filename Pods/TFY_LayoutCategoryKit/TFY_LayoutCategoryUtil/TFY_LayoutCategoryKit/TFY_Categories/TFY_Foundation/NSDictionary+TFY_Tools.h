@@ -52,6 +52,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nullable NSString *)tfy_plistString;
 
+// 字符串转字典
++(NSDictionary *)tfy_dictionaryWithJsonString:(NSString *)jsonString;
+/** 将Dictionary转为NSData 将字典转换成json格式字符串,不含 这些符号*/
++ (NSData *)tfy_compactFormatDataForDictionary:(NSDictionary *)dicJson;
+
 @end
 
 @interface NSDictionary (ValueDefault)

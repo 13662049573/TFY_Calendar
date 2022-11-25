@@ -1146,7 +1146,7 @@
     return retStr;
 }
 
-+ (NSArray *)getLinesArrayOfStringInrowsOfString:(NSString *)text withFont:(UIFont *)font withWidth:(CGFloat)width {
++ (NSArray *)tfy_getLinesArrayOfStringInrowsOfString:(NSString *)text withFont:(UIFont *)font withWidth:(CGFloat)width {
     CTFontRef myFont = CTFontCreateWithName((CFStringRef)([font fontName]), [font pointSize], NULL);
     NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:text];
     [attStr addAttribute:(NSString *)kCTFontAttributeName value:(__bridge  id)myFont range:NSMakeRange(0, attStr.length)];
@@ -1175,7 +1175,7 @@
 /**
  *   一个时间距现在的时间
  */
-+(NSString *)intervalSinceNow:(NSString *)theDate {
++(NSString *)tfy_intervalSinceNow:(NSString *)theDate {
     NSArray *timeArray=[theDate componentsSeparatedByString:@"."];
     theDate=[timeArray objectAtIndex:0];
     
@@ -1211,4 +1211,197 @@
     }
     return timeString;
 }
+
+/**
+ 带子节的string转为NSData
+ 
+ @return NSData类型
+ */
+-(NSData*)tfy_convertBytesStringToData {
+    NSMutableData* data = [NSMutableData data];
+    int idx;
+    for (idx = 0; idx+2 <= self.length; idx+=2) {
+        NSRange range = NSMakeRange(idx, 2);
+        NSString* hexStr = [self substringWithRange:range];
+        NSScanner* scanner = [NSScanner scannerWithString:hexStr];
+        unsigned int intValue;
+        [scanner scanHexInt:&intValue];
+        [data appendBytes:&intValue length:1];
+    }
+    return data;
+}
+/**
+ 十进制转十六进制
+ 
+ @return 十六进制字符串
+ */
+- (NSString *)tfy_decimalToHex {
+    long long int tmpid = [self intValue];
+    NSString *nLetterValue;
+    NSString *str = @"";
+    long long int ttmpig;
+    for (int i = 0; i < 9; i++) {
+        ttmpig = tmpid % 16;
+        tmpid = tmpid / 16;
+        switch (ttmpig) {
+            case 10:
+                nLetterValue = @"A";
+                break;
+            case 11:
+                nLetterValue = @"B";
+                break;
+            case 12:
+                nLetterValue = @"C";
+                break;
+            case 13:
+                nLetterValue = @"D";
+                break;
+            case 14:
+                nLetterValue = @"E";
+                break;
+            case 15:
+                nLetterValue = @"F";
+                break;
+            default:
+                nLetterValue = [[NSString alloc]initWithFormat:@"%lli", ttmpig];
+        }
+        str = [nLetterValue stringByAppendingString:str];
+        if (tmpid == 0) {
+            break;
+        }
+    }
+    return str;
+}
+/**
+ 十进制转十六进制
+ length   总长度，不足补0
+ @return 十六进制字符串
+ */
+- (NSString *)tfy_decimalToHexWithLength:(NSUInteger)length{
+    NSString* subString = [self tfy_decimalToHex];
+    NSUInteger moreL = length - subString.length;
+    if (moreL>0) {
+        for (int i = 0; i<moreL; i++) {
+            subString = [NSString stringWithFormat:@"0%@",subString];
+        }
+    }
+    return subString;
+}
+/**
+ 十六进制转十进制
+ 
+ @return 十进制字符串
+ */
+- (NSString *)tfy_hexToDecimal {
+    return [NSString stringWithFormat:@"%lu",strtoul([self UTF8String],0,16)];
+}
+/*
+ 二进制转十进制
+ 
+ @return 十进制字符串
+ */
+- (NSString *)tfy_binaryToDecimal {
+    int ll = 0 ;
+    int  temp = 0 ;
+    for (int i = 0; i < self.length; i ++) {
+        temp = [[self substringWithRange:NSMakeRange(i, 1)] intValue];
+        temp = temp * powf(2, self.length - i - 1);
+        ll += temp;
+    }
+    NSString * result = [NSString stringWithFormat:@"%d",ll];
+    return result;
+}
+/**
+ 十进制转二进制
+ 
+ @return 二进制字符串
+ */
+- (NSString *)tfy_decimalToBinary {
+    NSInteger num = [self integerValue];
+    NSInteger remainder = 0;      //余数
+    NSInteger divisor = 0;        //除数
+    NSString * prepare = @"";
+    
+    while (true) {
+        remainder = num%2;
+        divisor = num/2;
+        num = divisor;
+        prepare = [prepare stringByAppendingFormat:@"%d",(int)remainder];
+        
+        if (divisor == 0) {
+            break;
+        }
+    }
+    NSString * result = @"";
+    for (NSInteger i = prepare.length - 1; i >= 0; i --) {
+        result = [result stringByAppendingFormat:@"%@",
+                  [prepare substringWithRange:NSMakeRange(i , 1)]];
+    }
+    return [NSString stringWithFormat:@"%08d",[result intValue]];
+}
+
+- (NSString *)tfy_timestampToStandardtime {
+    NSTimeInterval secs = self.doubleValue;
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"Asia/Shanghai"]];
+    [formatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:secs];
+    return [formatter stringFromDate:date];
+}
+
+- (NSArray *)tfy_timestampToStandardtimes {
+    NSString *standardTime = [self tfy_timestampToStandardtime];
+    return [standardTime componentsSeparatedByString:@" "];
+}
+
+/// double 类型转化为一位小数字符串
++ (NSString *)keeponedecimalplaceDoubleOne:(double)value {
+    NSNumber *number = [NSNumber numberWithDouble:value];
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    [formatter setPositiveFormat:@"###0.0"];
+    formatter.maximumFractionDigits = 1;
+    formatter.roundingMode = NSNumberFormatterRoundDown;
+    return [formatter stringFromNumber:number];
+}
+
+/// double 类型转化为二位小数字符串
++ (NSString *)keeponedecimalplaceDoubleTwo:(double)value {
+    NSNumber *number = [NSNumber numberWithDouble:value];
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    [formatter setPositiveFormat:@"###0.00"];
+    formatter.maximumFractionDigits = 2;
+    formatter.roundingMode = NSNumberFormatterRoundDown;
+    return [formatter stringFromNumber:number];
+}
+
+/// CGFloat 类型转化为一位小数字符串
++ (NSString *)keeponedecimalplaceFloatOne:(CGFloat)value {
+    NSNumber *number = [NSNumber numberWithFloat:value];
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    [formatter setPositiveFormat:@"###0.0"];
+    formatter.maximumFractionDigits = 1;
+    formatter.roundingMode = NSNumberFormatterRoundDown;
+    return [formatter stringFromNumber:number];
+}
+
+/// CGFloat 类型转化为二位小数字符串
++ (NSString *)keeponedecimalplaceFloatTwo:(CGFloat)value {
+    NSNumber *number = [NSNumber numberWithFloat:value];
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    [formatter setPositiveFormat:@"###0.00"];
+    formatter.maximumFractionDigits = 2;
+    formatter.roundingMode = NSNumberFormatterRoundDown;
+    return [formatter stringFromNumber:number];
+}
+
+- (NSString *)safePathString
+{
+    NSString *homePrefix = [NSHomeDirectory() stringByDeletingLastPathComponent];
+    if ([self hasPrefix:homePrefix]) {
+        return [NSHomeDirectory() stringByAppendingString:[self substringFromIndex:[NSHomeDirectory() length]]];
+    }
+    return self;
+}
+
+
 @end

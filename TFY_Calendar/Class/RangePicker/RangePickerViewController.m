@@ -47,7 +47,7 @@
     calendar.pagingEnabled = NO;
     calendar.allowsMultipleSelection = YES;
     calendar.rowHeight = 60;
-    calendar.placeholderType = TFYCa_CalendarPlaceholderTypeNone;
+    calendar.placeholderType = TFYCa_CalendarPlaceholderTypeFillHeadTail;
     [view addSubview:calendar];
     self.calendar = calendar;
     

@@ -65,7 +65,7 @@
 -(NSMutableArray *)dataSouce{
     if (!_dataSouce) {
         _dataSouce = [NSMutableArray arrayWithCapacity:7];
-        [_dataSouce addObjectsFromArray:@[@"RangePickerViewController",@"DIYExampleViewController",@"ButtonsViewController",@"HidePlaceholderViewController",@"DelegateAppearanceViewController",@"FullScreenExampleViewController",@"LoadViewExampleViewController",@"ScopeExampleViewController"]];
+        [_dataSouce addObjectsFromArray:@[@"RangePickerViewController",@"DIYExampleViewController",@"ButtonsViewController",@"HidePlaceholderViewController",@"DelegateAppearanceViewController",@"FullScreenExampleViewController",@"LoadViewExampleViewController",@"ScopeExampleViewController",@"CalendarTagController"]];
     }
     return _dataSouce;
 }

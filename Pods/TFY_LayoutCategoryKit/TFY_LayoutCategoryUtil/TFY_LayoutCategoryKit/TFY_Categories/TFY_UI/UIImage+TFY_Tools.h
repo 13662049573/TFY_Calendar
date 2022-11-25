@@ -367,6 +367,28 @@ CG_INLINE CGFloat TFY_DegreesToRadians(CGFloat degrees) {
  */
 + (UIImage*)tfy_cutOutImageWithRect:(CGPoint)point image:(UIImage *)image;
 
+/**
+ *  根据图片路径取 Image
+ *
+ *  path 普通图片路径（不带 @x.png 后缀），深色图片路径必须为 "普通图片路径_dark"
+ *  适配深色模式的 Image
+ */
++ (UIImage *)tfy_imagePath:(NSString *)path;
+
+/**
+ *  根据图片路径取 Image
+ *
+ *  lightImagePath 普通图片路径
+ *  darkImagePath 暗黑图片路径
+ *  适配深色模式的 Image
+ */
++ (UIImage *)tfy_imageWithImageLight:(NSString *)lightImagePath dark:(NSString *)darkImagePath;
++ (UIImage *)tfy_imageWithImageLightImg:(UIImage *)lightImage dark:(UIImage *)darkImage;
+/**
+ *  修复图片拉伸导致深色模式适配失效的问题
+ */
++ (void)tfy_fixResizableImage;
+
 @end
 
 CG_INLINE UIImage *TFY_ImageNamed(NSString *imageName){
