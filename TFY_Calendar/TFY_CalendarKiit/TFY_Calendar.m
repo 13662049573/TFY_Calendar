@@ -617,6 +617,7 @@ typedef NS_ENUM(NSUInteger, TFYCa_CalendarOrientation) {
         [self willChangeValueForKey:@"currentPage"];
         _currentPage = targetPage;
         [self.delegateProxy calendarCurrentPageDidChange:self];
+        [self.delegateProxy calendar:self scrollViewWillEndDraggingTargetDate:targetPage lastPageDate:lastPage];
         if (_placeholderType != TFYCa_CalendarPlaceholderTypeFillSixRows) {
             [self.transitionCoordinator performBoundingRectTransitionFromMonth:lastPage toMonth:_currentPage duration:0.25];
         }

@@ -147,6 +147,11 @@ typedef NS_ENUM(NSUInteger, TFYCa_CalendarMonthPosition) {
  */
 - (void)calendar:(TFY_CalendarHeaderView *_Nonnull)calendarHerderView DateButton:(UIButton *_Nonnull)titleBtn WeekButtonTitle:(NSString *_Nonnull)textString;
 
+/**
+ 滑动停止或者切换停止后调用方法 targetdate 上个月末时间 lastPageDate 显示本月月末时间
+ */
+- (void)calendar:(TFY_Calendar *_Nullable)calendar scrollViewWillEndDraggingTargetDate:(NSDate *_Nonnull)targetdate lastPageDate:(NSDate *_Nonnull)lastPageDate;
+
 @end
 
 /**
