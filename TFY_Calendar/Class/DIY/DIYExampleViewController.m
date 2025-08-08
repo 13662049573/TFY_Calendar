@@ -65,7 +65,7 @@
     self.dateFormatter = [[NSDateFormatter alloc] init];
     self.dateFormatter.dateFormat = @"yyyy-MM-dd";
     
-    self.minimumDate = [self.dateFormatter dateFromString:@"2020-02-03"];
+    self.minimumDate = [self.dateFormatter dateFromString:@"2025-02-03"];
     self.maximumDate = [self.dateFormatter dateFromString:@"2029-12-30"];
     
     [self loadCalendarEvents];

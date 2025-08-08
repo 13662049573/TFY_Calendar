@@ -128,7 +128,7 @@ NS_ASSUME_NONNULL_END
 
 - (NSDate *)minimumDateForCalendar:(TFY_Calendar *)calendar
 {
-    return [self.dateFormatter dateFromString:@"2020-01-08"];
+    return [self.dateFormatter dateFromString:@"2025-01-08"];
 }
 
 - (NSDate *)maximumDateForCalendar:(TFY_Calendar *)calendar
