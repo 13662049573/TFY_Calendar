@@ -7,12 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TFY_CalendarProtocol.h"
 
 @class TFY_Calendar,TFY_CalendarAppearance,TFY_CalendarEventIndicator;
 
 // 前向声明，实际定义在TFY_CalendarProtocol.h中
 typedef NS_ENUM(NSUInteger, TFYCa_CalendarMonthPosition);
+
+/// 联动填充颜色 类型判断
+typedef NS_ENUM(NSUInteger, TFYCa_fillTypeLinkageSelectionType) {
+    TFYCa_fillTypeLinkageSelectionTypeNone,  // 没有选中
+    TFYCa_fillTypeLinkageSelectionTypeSingle, // 单独点击
+    TFYCa_fillTypeLinkageSelectionTypeLeftBorder, // 最左边选中
+    TFYCa_fillTypeLinkageSelectionTypeMiddle,// 中间选中
+    TFYCa_fillTypeLinkageSelectionTypeRightBorder // 最右边选中
+} NS_SWIFT_NAME(FillTypeLinkageSelectionType);
 
 NS_ASSUME_NONNULL_BEGIN
 

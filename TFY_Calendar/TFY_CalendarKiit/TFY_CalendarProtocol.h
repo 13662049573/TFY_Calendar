@@ -14,7 +14,7 @@
 #define NS_SWIFT_NAME(name)
 #endif
 
-@class TFY_CalendarCell;
+#import "TFY_CalendarCell.h"
 #import "TFY_CalendarAppearance.h"
 #import "TFY_CalendarConstants.h"
 #import "TFY_CalendarWeekdayView.h"
@@ -43,14 +43,7 @@ typedef NS_ENUM(NSUInteger, TFYCa_CalendarMonthPosition) {
     TFYCa_CalendarMonthPositionNotFound = NSNotFound
 } NS_SWIFT_NAME(CalendarMonthPosition);
 
-/// 联动填充颜色 类型判断
-typedef NS_ENUM(NSUInteger, TFYCa_fillTypeLinkageSelectionType) {
-    TFYCa_fillTypeLinkageSelectionTypeNone,  // 没有选中
-    TFYCa_fillTypeLinkageSelectionTypeSingle, // 单独点击
-    TFYCa_fillTypeLinkageSelectionTypeLeftBorder, // 最左边选中
-    TFYCa_fillTypeLinkageSelectionTypeMiddle,// 中间选中
-    TFYCa_fillTypeLinkageSelectionTypeRightBorder // 最右边选中
-} NS_SWIFT_NAME(FillTypeLinkageSelectionType);
+
 
 @class TFY_Calendar;
 

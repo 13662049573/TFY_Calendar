@@ -359,7 +359,6 @@
 			children = (
 				3656F19325D293E80030D8CF /* TFY_Calendar.h */,
 				3656F18925D293E80030D8CF /* TFY_Calendar.m */,
-				3663940A25D38BE300FA603F /* TFY_CalendarProtocol.h */,
 				3656F19025D293E80030D8CF /* TFY_CalendarAppearance.h */,
 				3656F18E25D293E80030D8CF /* TFY_CalendarAppearance.m */,
 				3656F19825D293E90030D8CF /* TFY_CalendarCalculator.h */,
@@ -376,10 +375,13 @@
 				3656F19C25D293E90030D8CF /* TFY_CalendarDelegationFactory.m */,
 				3656F18F25D293E80030D8CF /* TFY_CalendarDelegationProxy.h */,
 				3656F18B25D293E80030D8CF /* TFY_CalendarDelegationProxy.m */,
+				3656F14925D284360030D8CF /* TFY_CalendarDynamic.h */,
 				3656F1A725D293E90030D8CF /* TFY_CalendarExtensions.h */,
 				3656F1A125D293E90030D8CF /* TFY_CalendarExtensions.m */,
 				3656F18D25D293E80030D8CF /* TFY_CalendarHeaderView.h */,
 				3656F1A425D293E90030D8CF /* TFY_CalendarHeaderView.m */,
+				36EE10FA250A0F5C00D24B3C /* TFY_CalendarKiit.h */,
+				3663940A25D38BE300FA603F /* TFY_CalendarProtocol.h */,
 				3656F19A25D293E90030D8CF /* TFY_CalendarSeparatorDecorationView.h */,
 				3656F19D25D293E90030D8CF /* TFY_CalendarSeparatorDecorationView.m */,
 				3656F19525D293E80030D8CF /* TFY_CalendarStickyHeader.h */,
@@ -390,8 +392,6 @@
 				3656F19E25D293E90030D8CF /* TFY_CalendarWeekdayView.m */,
 				3656F19725D293E90030D8CF /* TFY_LunarFormatter.h */,
 				3656F19B25D293E90030D8CF /* TFY_LunarFormatter.m */,
-				36EE10FA250A0F5C00D24B3C /* TFY_CalendarKiit.h */,
-				3656F14925D284360030D8CF /* TFY_CalendarDynamic.h */,
 			);
 			path = TFY_CalendarKiit;
 			sourceTree = "<group>";
