@@ -11,11 +11,15 @@
 #import "TFY_CalendarCollectionView.h"
 #import "TFY_CalendarCollectionViewLayout.h"
 
+#ifndef NS_SWIFT_NAME
+#define NS_SWIFT_NAME(name)
+#endif
+
 typedef NS_ENUM(NSUInteger, TFYCa_CalendarTransitionState) {
     TFYCa_CalendarTransitionStateIdle,
     TFYCa_CalendarTransitionStateChanging,
     TFYCa_CalendarTransitionStateFinishing,
-} TFY_CalendarSwiftName(CalendarTransitionState);
+} NS_SWIFT_NAME(CalendarTransitionState);
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -26,13 +30,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (readonly, nonatomic) TFYCa_CalendarScope representingScope;
 
-- (instancetype)initWithCalendar:(TFY_Calendar *)calendar TFY_CalendarSwiftName(init(calendar:));
+- (instancetype)initWithCalendar:(TFY_Calendar *)calendar NS_SWIFT_NAME(init(calendar:));
 
-- (void)performScopeTransitionFromScope:(TFYCa_CalendarScope)fromScope toScope:(TFYCa_CalendarScope)toScope animated:(BOOL)animated TFY_CalendarSwiftName(performScopeTransition(fromScope:toScope:animated:));
-- (void)performBoundingRectTransitionFromMonth:(NSDate *)fromMonth toMonth:(NSDate *)toMonth duration:(CGFloat)duration TFY_CalendarSwiftName(performBoundingRectTransition(fromMonth:toMonth:duration:));
-- (CGRect)boundingRectForScope:(TFYCa_CalendarScope)scope page:(NSDate *)page TFY_CalendarSwiftName(boundingRect(forScope:page:));
+- (void)performScopeTransitionFromScope:(TFYCa_CalendarScope)fromScope toScope:(TFYCa_CalendarScope)toScope animated:(BOOL)animated NS_SWIFT_NAME(performScopeTransition(fromScope:toScope:animated:));
+- (void)performBoundingRectTransitionFromMonth:(NSDate *)fromMonth toMonth:(NSDate *)toMonth duration:(CGFloat)duration NS_SWIFT_NAME(performBoundingRectTransition(fromMonth:toMonth:duration:));
+- (CGRect)boundingRectForScope:(TFYCa_CalendarScope)scope page:(NSDate *)page NS_SWIFT_NAME(boundingRect(forScope:page:));
 
-- (void)handleScopeGesture:(id)sender TFY_CalendarSwiftName(handleScopeGesture(_:));
+- (void)handleScopeGesture:(id)sender NS_SWIFT_NAME(handleScopeGesture(_:));
 
 @end
 
@@ -46,7 +50,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSDate *focusedDate;
 @property (assign, nonatomic) TFYCa_CalendarScope targetScope;
 
-- (void)revert TFY_CalendarSwiftName(revert());
+- (void)revert NS_SWIFT_NAME(revert());
     
 @end
 

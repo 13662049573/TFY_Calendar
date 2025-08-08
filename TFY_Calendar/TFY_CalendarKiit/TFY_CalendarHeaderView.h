@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+#ifndef NS_SWIFT_NAME
+#define NS_SWIFT_NAME(name)
+#endif
+
 @class TFY_Calendar,TFY_CalendarAppearance,TFY_CalendarHeaderLayout,TFY_CalendarCollectionView,TFY_CalendarHeaderView;
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
   更改年月头部数据。
  */
-- (void)calendar:(TFY_CalendarHeaderView *_Nonnull)calendarHerderView DateButton:(UIButton *_Nonnull)titleBtn WeekButtonTitle:(NSString *_Nonnull)textString TFY_CalendarSwiftName(calendar(_:dateButton:weekButtonTitle:));
+- (void)calendar:(TFY_CalendarHeaderView *_Nonnull)calendarHerderView DateButton:(UIButton *_Nonnull)titleBtn WeekButtonTitle:(NSString *_Nonnull)textString NS_SWIFT_NAME(calendar(_:dateButton:weekButtonTitle:));
 
 @end
 
@@ -28,10 +32,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic) UICollectionViewScrollDirection scrollDirection;
 @property (assign, nonatomic) BOOL scrollEnabled;
 
-- (void)setScrollOffset:(CGFloat)scrollOffset TFY_CalendarSwiftName(setScrollOffset(_:));
-- (void)setScrollOffset:(CGFloat)scrollOffset animated:(BOOL)animated TFY_CalendarSwiftName(setScrollOffset(_:animated:));
-- (void)reloadData TFY_CalendarSwiftName(reloadData());
-- (void)configureAppearance TFY_CalendarSwiftName(configureAppearance());
+- (void)setScrollOffset:(CGFloat)scrollOffset NS_SWIFT_NAME(setScrollOffset(_:));
+- (void)setScrollOffset:(CGFloat)scrollOffset animated:(BOOL)animated NS_SWIFT_NAME(setScrollOffset(_:animated:));
+- (void)reloadData NS_SWIFT_NAME(reloadData());
+- (void)configureAppearance NS_SWIFT_NAME(configureAppearance());
 
 @end
 

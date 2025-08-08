@@ -28,6 +28,13 @@ Pod::Spec.new do |spec|
 
   spec.xcconfig      = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include" }
   
+  spec.prefix_header_file = false
+  
+  spec.pod_target_xcconfig = {
+    'GCC_PREPROCESSOR_DEFINITIONS' => 'TFY_CalendarKiitRelease=0',
+    'HEADER_SEARCH_PATHS' => '$(PODS_ROOT)/TFY_CalendarKiit/TFY_Calendar/TFY_CalendarKiit'
+  }
+  
   spec.requires_arc = true
 
 end

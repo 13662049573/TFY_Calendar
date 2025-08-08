@@ -97,7 +97,6 @@ CG_EXTERN CGSize const CGSizeAutomatic;
 #pragma mark - Swift Compatibility
 
 // Swift naming conventions for better Swift interop
-#define TFY_CalendarSwiftName(name) NS_SWIFT_NAME(name)
 #define TFY_CalendarSwiftOnly __attribute__((swift_name("")))
 #define TFY_CalendarSwiftPrivate __attribute__((swift_private))
 

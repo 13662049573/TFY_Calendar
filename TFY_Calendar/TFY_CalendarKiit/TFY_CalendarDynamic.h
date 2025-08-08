@@ -8,6 +8,10 @@
 
 #import "TFY_CalendarKiit.h"
 
+#ifndef NS_SWIFT_NAME
+#define NS_SWIFT_NAME(name)
+#endif
+
 @interface TFY_Calendar (Dynamic)
 
 @property (readonly, nonatomic) TFY_CalendarCollectionView *collectionView;
@@ -28,14 +32,14 @@
 
 @property (assign, nonatomic) BOOL needsAdjustingViewFrame;
 
-- (void)invalidateHeaders TFY_CalendarSwiftName(invalidateHeaders());
-- (void)adjustMonthPosition TFY_CalendarSwiftName(adjustMonthPosition());
-- (void)configureAppearance TFY_CalendarSwiftName(configureAppearance());
+- (void)invalidateHeaders NS_SWIFT_NAME(invalidateHeaders());
+- (void)adjustMonthPosition NS_SWIFT_NAME(adjustMonthPosition());
+- (void)configureAppearance NS_SWIFT_NAME(configureAppearance());
 
-- (BOOL)isPageInRange:(NSDate *)page TFY_CalendarSwiftName(isPage(inRange:));
-- (BOOL)isDateInRange:(NSDate *)date TFY_CalendarSwiftName(isDate(inRange:));
+- (BOOL)isPageInRange:(NSDate *)page NS_SWIFT_NAME(isPage(inRange:));
+- (BOOL)isDateInRange:(NSDate *)date NS_SWIFT_NAME(isDate(inRange:));
 
-- (CGSize)sizeThatFits:(CGSize)size scope:(TFYCa_CalendarScope)scope TFY_CalendarSwiftName(sizeThatFits(_:scope:));
+- (CGSize)sizeThatFits:(CGSize)size scope:(TFYCa_CalendarScope)scope NS_SWIFT_NAME(sizeThatFits(_:scope:));
 
 @end
 

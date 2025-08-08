@@ -8,11 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+#ifndef NS_SWIFT_NAME
+#define NS_SWIFT_NAME(name)
+#endif
+
 @class TFY_CalendarCollectionView;
 
 @protocol TFYCa_CalendarCollectionViewInternalDelegate <UICollectionViewDelegate>
 @optional
-- (void)collectionViewDidFinishLayoutSubviews:(TFY_CalendarCollectionView *_Nonnull)collectionView TFY_CalendarSwiftName(collectionViewDidFinishLayoutSubviews(_:));
+- (void)collectionViewDidFinishLayoutSubviews:(TFY_CalendarCollectionView *_Nonnull)collectionView NS_SWIFT_NAME(collectionViewDidFinishLayoutSubviews(_:));
 
 @end
 

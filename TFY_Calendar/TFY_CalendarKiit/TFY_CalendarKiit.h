@@ -62,6 +62,3 @@ FOUNDATION_EXPORT const unsigned char TFY_CalendarKiitVersionString[];
 #else
     #define TFY_CalendarIOS15_AVAILABLE 0
 #endif
-
-// Swift naming conventions
-#define TFY_CalendarSwiftName(name) NS_SWIFT_NAME(name)

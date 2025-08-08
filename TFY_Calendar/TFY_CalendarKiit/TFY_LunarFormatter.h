@@ -8,10 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+#ifndef NS_SWIFT_NAME
+#define NS_SWIFT_NAME(name)
+#endif
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TFY_LunarFormatter : NSObject
-- (NSString *)stringFromDate:(NSDate *)date TFY_CalendarSwiftName(string(fromDate:));
+- (NSString *)stringFromDate:(NSDate *)date NS_SWIFT_NAME(string(fromDate:));
 @end
 
 NS_ASSUME_NONNULL_END

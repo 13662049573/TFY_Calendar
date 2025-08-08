@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+
+// Ensure NS_SWIFT_NAME is available
+#ifndef NS_SWIFT_NAME
+#define NS_SWIFT_NAME(name)
+#endif
+
 #import "TFY_Calendar.h"
 
 struct TFY_CalendarCoordinate {
@@ -24,30 +30,30 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (readonly, nonatomic) NSInteger numberOfSections;
 
-- (instancetype)initWithCalendar:(TFY_Calendar *)calendar TFY_CalendarSwiftName(init(calendar:));
+- (instancetype)initWithCalendar:(TFY_Calendar *)calendar NS_SWIFT_NAME(init(calendar:));
 
-- (NSDate *)safeDateForDate:(NSDate *)date TFY_CalendarSwiftName(safeDate(forDate:));
+- (NSDate *)safeDateForDate:(NSDate *)date NS_SWIFT_NAME(safeDate(forDate:));
 
-- (NSDate *)dateForIndexPath:(NSIndexPath *)indexPath TFY_CalendarSwiftName(date(forIndexPath:));
-- (NSDate *)dateForIndexPath:(NSIndexPath *)indexPath scope:(TFYCa_CalendarScope)scope TFY_CalendarSwiftName(date(forIndexPath:scope:));
-- (NSIndexPath *)indexPathForDate:(NSDate *)date TFY_CalendarSwiftName(indexPath(forDate:));
-- (NSIndexPath *)indexPathForDate:(NSDate *)date scope:(TFYCa_CalendarScope)scope TFY_CalendarSwiftName(indexPath(forDate:scope:));
-- (NSIndexPath *)indexPathForDate:(NSDate *)date atMonthPosition:(TFYCa_CalendarMonthPosition)position TFY_CalendarSwiftName(indexPath(forDate:atMonthPosition:));
-- (NSIndexPath *)indexPathForDate:(NSDate *)date atMonthPosition:(TFYCa_CalendarMonthPosition)position scope:(TFYCa_CalendarScope)scope TFY_CalendarSwiftName(indexPath(forDate:atMonthPosition:scope:));
+- (NSDate *)dateForIndexPath:(NSIndexPath *)indexPath NS_SWIFT_NAME(date(forIndexPath:));
+- (NSDate *)dateForIndexPath:(NSIndexPath *)indexPath scope:(TFYCa_CalendarScope)scope NS_SWIFT_NAME(date(forIndexPath:scope:));
+- (NSIndexPath *)indexPathForDate:(NSDate *)date NS_SWIFT_NAME(indexPath(forDate:));
+- (NSIndexPath *)indexPathForDate:(NSDate *)date scope:(TFYCa_CalendarScope)scope NS_SWIFT_NAME(indexPath(forDate:scope:));
+- (NSIndexPath *)indexPathForDate:(NSDate *)date atMonthPosition:(TFYCa_CalendarMonthPosition)position NS_SWIFT_NAME(indexPath(forDate:atMonthPosition:));
+- (NSIndexPath *)indexPathForDate:(NSDate *)date atMonthPosition:(TFYCa_CalendarMonthPosition)position scope:(TFYCa_CalendarScope)scope NS_SWIFT_NAME(indexPath(forDate:atMonthPosition:scope:));
 
-- (NSDate *)pageForSection:(NSInteger)section TFY_CalendarSwiftName(page(forSection:));
-- (NSDate *)weekForSection:(NSInteger)section TFY_CalendarSwiftName(week(forSection:));
-- (NSDate *)monthForSection:(NSInteger)section TFY_CalendarSwiftName(month(forSection:));
-- (NSDate *)monthHeadForSection:(NSInteger)section TFY_CalendarSwiftName(monthHead(forSection:));
+- (NSDate *)pageForSection:(NSInteger)section NS_SWIFT_NAME(page(forSection:));
+- (NSDate *)weekForSection:(NSInteger)section NS_SWIFT_NAME(week(forSection:));
+- (NSDate *)monthForSection:(NSInteger)section NS_SWIFT_NAME(month(forSection:));
+- (NSDate *)monthHeadForSection:(NSInteger)section NS_SWIFT_NAME(monthHead(forSection:));
 
-- (NSInteger)numberOfHeadPlaceholdersForMonth:(NSDate *)month TFY_CalendarSwiftName(numberOfHeadPlaceholders(forMonth:));
-- (NSInteger)numberOfRowsInMonth:(NSDate *)month TFY_CalendarSwiftName(numberOfRows(inMonth:));
-- (NSInteger)numberOfRowsInSection:(NSInteger)section TFY_CalendarSwiftName(numberOfRows(inSection:));
+- (NSInteger)numberOfHeadPlaceholdersForMonth:(NSDate *)month NS_SWIFT_NAME(numberOfHeadPlaceholders(forMonth:));
+- (NSInteger)numberOfRowsInMonth:(NSDate *)month NS_SWIFT_NAME(numberOfRows(inMonth:));
+- (NSInteger)numberOfRowsInSection:(NSInteger)section NS_SWIFT_NAME(numberOfRows(inSection:));
 
-- (TFYCa_CalendarMonthPosition)monthPositionForIndexPath:(NSIndexPath *)indexPath TFY_CalendarSwiftName(monthPosition(forIndexPath:));
-- (TFY_CalendarCoordinate)coordinateForIndexPath:(NSIndexPath *)indexPath TFY_CalendarSwiftName(coordinate(forIndexPath:));
+- (TFYCa_CalendarMonthPosition)monthPositionForIndexPath:(NSIndexPath *)indexPath NS_SWIFT_NAME(monthPosition(forIndexPath:));
+- (TFY_CalendarCoordinate)coordinateForIndexPath:(NSIndexPath *)indexPath NS_SWIFT_NAME(coordinate(forIndexPath:));
 
-- (void)reloadSections TFY_CalendarSwiftName(reloadSections());
+- (void)reloadSections NS_SWIFT_NAME(reloadSections());
 
 @end
 

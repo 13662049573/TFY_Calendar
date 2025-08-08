@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+#ifndef NS_SWIFT_NAME
+#define NS_SWIFT_NAME(name)
+#endif
+
 @class TFY_Calendar,TFY_CalendarAppearance;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -19,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) NSDate *month;
 
-- (void)configureAppearance TFY_CalendarSwiftName(configureAppearance());
+- (void)configureAppearance NS_SWIFT_NAME(configureAppearance());
 @end
 
 NS_ASSUME_NONNULL_END
