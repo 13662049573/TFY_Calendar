@@ -124,6 +124,9 @@ typedef NS_ENUM(NSInteger , PopupMenuPriorityDirection) {
 @end
 
 @interface TFY_PopupMenu : UIView
+
+@property(nonatomic , strong)id customData;
+@property(nonatomic , assign)NSInteger customIndex;
 /**
  * 标题数组 只读属性
  */
@@ -190,6 +193,10 @@ typedef NS_ENUM(NSInteger , PopupMenuPriorityDirection) {
  */
 @property (nonatomic, strong) UIColor * borderColor;
 
+/**
+ 文字位置
+ */
+@property(nonatomic , assign)NSInteger textAlignment;
 /**
  * 箭头宽度 Default is 15
  */

@@ -109,4 +109,12 @@
     return resultNum;
 }
 
++ (NSNumber *)numberDecimal:(NSNumber*)numberDecimal scale:(short)scale {
+    NSDecimalNumber *minNum = [NSDecimalNumber decimalNumberWithDecimal:numberDecimal.decimalValue];
+    NSDecimalNumber *multiNumber = [NSDecimalNumber decimalNumberWithDecimal:[NSNumber numberWithInteger:1].decimalValue];
+    NSDecimalNumberHandler *round = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundDown scale:scale raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:YES];
+    NSDecimalNumber * res = [minNum decimalNumberByMultiplyingBy:multiNumber withBehavior:round];
+    return res;
+}
+
 @end

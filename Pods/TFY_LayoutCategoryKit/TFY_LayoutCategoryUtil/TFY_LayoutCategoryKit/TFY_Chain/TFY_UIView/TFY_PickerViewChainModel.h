@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 TFY_PROPERTY_CHAIN_READONLY TFY_PickerViewChainModel * (^ dataSource) (id<UIPickerViewDataSource>);
 TFY_PROPERTY_CHAIN_READONLY TFY_PickerViewChainModel * (^ delegate) (id<UIPickerViewDelegate>);
-TFY_PROPERTY_CHAIN_READONLY TFY_PickerViewChainModel * (^ showsSelectionIndicator) (BOOL);
+TFY_PROPERTY_CHAIN_READONLY TFY_PickerViewChainModel * (^ showsSelectionIndicator) (BOOL) API_DEPRECATED("This property has no effect on iOS 7 and later.", ios(2.0, 13.0)) API_UNAVAILABLE(visionos);
 TFY_PROPERTY_CHAIN_READONLY NSInteger (^ numberOfRowsInComponent) (NSInteger);
 TFY_PROPERTY_CHAIN_READONLY CGSize (^ rowSizeForComponent) (NSInteger);
 TFY_PROPERTY_CHAIN_READONLY UIView * (^ viewForRowComponent) (NSInteger row, NSInteger component);

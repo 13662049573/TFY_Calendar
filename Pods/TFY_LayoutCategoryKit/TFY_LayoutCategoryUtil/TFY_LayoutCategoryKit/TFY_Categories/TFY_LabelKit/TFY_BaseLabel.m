@@ -15,7 +15,7 @@ static CGFloat kTFYLabelFloatMax = 10000000.0f;
 static CGFloat kTFYLabelAdjustMinFontSize = 1.0f;
 static CGFloat kTFYLabelAdjustMinScaleFactor = 0.01f;
 
-static NSArray * kTFYLabelStylePropertyNames() {
+static NSArray * kTFYLabelStylePropertyNames(void) {
     static NSArray *_stylePropertyNames = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{

@@ -156,19 +156,21 @@ CLLocationAgeFilter const kCLLocationAgeFilterNone = 0.0;
     }
 }
 
-- (void)locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region
+- (void)locationManager:(CLLocationManager *)manager
+        didRangeBeacons:(NSArray<CLBeacon *> *)beacons
 {
     DidRangeBeaconsBlock didRangeBeaconsBlock = self.didRangeBeaconsBlock;
     if (didRangeBeaconsBlock) {
-        didRangeBeaconsBlock(manager, beacons, region);
+        didRangeBeaconsBlock(manager, beacons);
     }
 }
 
-- (void)locationManager:(CLLocationManager *)manager rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region withError:(NSError *)error
+
+- (void)locationManager:(CLLocationManager *)manager didFailRangingBeaconsForConstraint:(CLBeaconIdentityConstraint *)beaconConstraint
 {
     RangingBeaconsDidFailForRegionBlock rangingBeaconsDidFailForRegionBlock = self.rangingBeaconsDidFailForRegionBlock;
     if (rangingBeaconsDidFailForRegionBlock) {
-        rangingBeaconsDidFailForRegionBlock(manager, region, error);
+        rangingBeaconsDidFailForRegionBlock(manager, beaconConstraint);
     }
 }
 

@@ -44,14 +44,11 @@ typedef NS_ENUM(NSInteger, GradientChangeDirection) {
  *  从十六进制字符串获取颜色，alpha需要自己传递 color:支持@“#123456”、 @“0X123456”、 @“123456”三种格式
  */
 + (UIColor *)tfy_colorWithHexString:(NSString *)color alpha:(CGFloat)alpha;
++ (UIColor *)tfy_colorWithHexString:(NSString *)stringToConvert withAlpha:(CGFloat)alpha;
 /**
  *  根据图片获取图片的主色调 position--范围
  */
 + (UIColor *)tfy_colorAtPosition:(CGPoint)position inImage:(UIImage *)image;
-/**
- *  颜色转换：iOS中 十六进制的颜色转换为UIColor(RGB)
- */
-+ (UIColor *)tfy_colorWithHex:(NSString *)hexString;
 /**
  *  颜色转换：将颜色换字符串
  */
@@ -96,7 +93,7 @@ typedef NS_ENUM(NSInteger, GradientChangeDirection) {
 /**
  *  创建渐变颜色 size  渐变的size direction 渐变方式 startcolor 开始颜色  endColor 结束颜色
  */
-+(UIColor *)tfy_colorGradientChangeWithSize:(CGSize)size direction:(GradientChangeDirection)direction startColor:(UIColor *)startcolor endColor:(UIColor *)endColor;
++(UIColor *)tfy_colorGradientChangeWithSize:(CGSize)size direction:(GradientChangeDirection)direction colorsArr:(NSArray<UIColor *> *)colorsArr;
 
 /**
  * 需要的 NSNumbers 数组中并配置从它的颜色。
@@ -131,6 +128,7 @@ typedef NS_ENUM(NSInteger, GradientChangeDirection) {
 -(UIColor *)tfy_mix:(UIColor *)c;
 /**适合各种颜色值*/
 +(UIColor *)tfy_colorWithHexString:(NSString *)hexString;
++(UIColor *)tfy_colorWithHex:(NSString *)stringToConvert;
 /***颜色转字符串*/
 +(NSString*)tfy_stringWithColor:(UIColor *)color;
 
@@ -138,11 +136,9 @@ typedef NS_ENUM(NSInteger, GradientChangeDirection) {
 
 + (UIColor *)tfy_r:(NSInteger)r g:(NSInteger)g b:(NSInteger)b alpha:(CGFloat)alpha;
 
-- (NSString *)tfy_hexString;
-
-- (NSString *)tfy_hexStringWithAplha;
-
 - (UIColor *)tfy_addColor:(UIColor *)acolor blendMode:(CGBlendMode)blendModel;
+
+- (NSString *)hexadecimalFromUIColor;
 
 @property (nonatomic, assign, readonly) CGFloat  tfy_red;
 
@@ -224,10 +220,6 @@ CG_INLINE UIColor *TFY_ColorRGBAlphaPercent(CGFloat r, CGFloat g, CGFloat b, CGF
 /** RGB颜色传分数 */
 CG_INLINE UIColor *TFY_ColorRGBPercent(CGFloat r, CGFloat g, CGFloat b){
     return TFY_ColorRGBAlphaPercent(r,g,b,1);
-}
-/**渐变色*/
-CG_INLINE UIColor *TFY_ColorGradient(CGSize size,GradientChangeDirection direction,UIColor *starcolor,UIColor *endcolor){
-    return [UIColor tfy_colorGradientChangeWithSize:size direction:direction startColor:starcolor endColor:endcolor];
 }
 
 #define RGBAlphaPercent(r,g,b,a) UIColorRGBAlphaPercent(r,g,b,a)

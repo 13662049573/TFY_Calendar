@@ -668,6 +668,27 @@
                                                fromDate:fromDate toDate:toDate options:0];
     return [difference month];
 }
+
++ (NSInteger)tfy_weeksBetweenDate:(NSDate*)fromDateTime andDate:(NSDate*)toDateTime
+{
+    NSDate *fromDate;
+    NSDate *toDate;
+    
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    
+    [calendar rangeOfUnit:NSCalendarUnitWeekday startDate:&fromDate
+                 interval:NULL forDate:fromDateTime];
+    [calendar rangeOfUnit:NSCalendarUnitWeekday startDate:&toDate
+                 interval:NULL forDate:toDateTime];
+    
+    NSDateComponents *difference = [calendar components:NSCalendarUnitWeekday
+                                               fromDate:fromDate toDate:toDate options:0];
+    
+    NSInteger weekday = ceil(difference.weekday/7);
+    
+    return weekday;
+}
+
 + (NSInteger)tfy_daysBetweenDate:(NSDate*)fromDateTime andDate:(NSDate*)toDateTime
 {
     NSDate *fromDate;
@@ -1073,4 +1094,127 @@
     NSInteger timeSp = [[NSNumber numberWithDouble:[datenow timeIntervalSince1970]] integerValue];
     return timeSp;
 }
+
+/// 根据出生日期返回年龄的方法
++ (int)dateToOld:(NSDate *)bornDate {
+    //获得当前系统时间
+    NSDate *currentDate = [NSDate date];
+    //获得当前系统时间与出生日期之间的时间间隔
+    NSTimeInterval time = [currentDate timeIntervalSinceDate:bornDate];
+    //时间间隔以秒作为单位,求年的话除以60*60*24*356
+    int age = ((int)time)/(3600*24*365);
+    return age;
+}
+
+/// 根据出生日期返回详细的年龄(精确到天)
++ (NSString *)dateToDetailOld:(NSDate *)bornDate {
+    //获得当前系统时间
+    NSDate *currentDate = [NSDate date];
+    //创建日历(格里高利历)
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    //设置component的组成部分
+    NSUInteger unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond ;
+    //按照组成部分格式计算出生日期与现在时间的时间间隔
+    NSDateComponents *date = [calendar components:unitFlags fromDate:bornDate toDate:currentDate options:0];
+
+    //判断年龄大小,以确定返回格式
+    if( [date year] > 0)
+    {
+        return [NSString stringWithFormat:(@"%ld岁%ld月%ld天"),(long)[date year],(long)[date month],(long)[date day]];
+        
+    }
+    else if([date month] >0)
+    {
+        return [NSString stringWithFormat:(@"%ld月%ld天"),(long)[date month],(long)[date day]];
+        
+    }
+    else if([date day]>0)
+    {
+        return [NSString stringWithFormat:(@"%ld天"),(long)[date day]];
+        
+    }
+    else {
+        return @"0天";
+    }
+}
+
+- (NSUInteger)numberOfWeeksInCurrentMonth
+{
+    NSUInteger weekday = self.tfy_weekday; // 4
+    NSUInteger days = self.tfy_daysInMonth; // 31
+    
+    NSUInteger weeks = 0;
+    
+    if (weekday > 1) {
+        (void)(weeks += 1),
+        days -= (7 - weekday + 1);
+    }
+    
+    weeks += days/7;
+    weeks += (days % 7 > 0) ? 1 : 0;
+    
+    return weeks;
+}
+
++(NSArray *)getFirstAndLastDayOfThisWeek:(NSDate *)date
+{
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *dateComponents = [calendar components:NSCalendarUnitWeekday | NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:date];
+    NSInteger weekday = [dateComponents weekday];   //第几天(从sunday开始)
+    NSInteger firstDiff,lastDiff;
+    if (weekday == 1) {
+        firstDiff = -6;
+        lastDiff = 0;
+    }else {
+        firstDiff =  - weekday + 2;
+        lastDiff = 8 - weekday;
+    }
+    NSInteger day = [dateComponents day];
+    NSDateComponents *firstComponents = [calendar components:NSCalendarUnitWeekday | NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:date];
+    [firstComponents setDay:day+firstDiff];
+    NSDate *firstDay = [calendar dateFromComponents:firstComponents];
+    
+    NSDateComponents *lastComponents = [calendar components:NSCalendarUnitWeekday | NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:date];
+    [lastComponents setDay:day+lastDiff];
+    NSDate *lastDay = [calendar dateFromComponents:lastComponents];
+    return [NSArray arrayWithObjects:firstDay,lastDay, nil];
+}
+
++(NSArray *)getFirstAndLastDayOfThisMonth:(NSDate *)date
+{
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDate *firstDay;
+    [calendar rangeOfUnit:NSCalendarUnitMonth startDate:&firstDay interval:nil forDate:date];
+    NSDateComponents *lastDateComponents = [calendar components:NSCalendarUnitMonth | NSCalendarUnitYear |NSCalendarUnitDay fromDate:firstDay];
+    NSUInteger dayNumberOfMonth = [calendar rangeOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitMonth forDate:date].length;
+    NSInteger day = [lastDateComponents day];
+    [lastDateComponents setDay:day+dayNumberOfMonth-1];
+    NSDate *lastDay = [calendar dateFromComponents:lastDateComponents];
+    return [NSArray arrayWithObjects:firstDay,lastDay, nil];
+}
+
++(NSArray *)getFirstAndLastDayOfThisYear:(NSDate *)date
+{
+    //通过2月天数的改变，来确定全年天数
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setTimeZone:[NSTimeZone systemTimeZone]];
+    [formatter setDateFormat:@"yyyy"];
+    NSString *dateStr = [formatter stringFromDate:date];
+    dateStr = [dateStr stringByAppendingString:@"-02-14"];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    NSDate *aDayOfFebruary = [formatter dateFromString:dateStr];
+    
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDate *firstDay;
+    [calendar rangeOfUnit:NSCalendarUnitYear startDate:&firstDay interval:nil forDate:date];
+    NSDateComponents *lastDateComponents = [calendar components:NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitDay fromDate:firstDay];
+    NSUInteger dayNumberOfFebruary = [calendar rangeOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitMonth forDate:aDayOfFebruary].length;
+    NSInteger day = [lastDateComponents day];
+    [lastDateComponents setDay:day+337+dayNumberOfFebruary-1];
+    NSDate *lastDay = [calendar dateFromComponents:lastDateComponents];
+    
+    return [NSArray arrayWithObjects:firstDay,lastDay, nil];
+}
+
+
 @end

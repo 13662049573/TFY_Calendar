@@ -126,7 +126,11 @@ static CGFloat const oriImageH = 200;
 
 - (void)tfy_adJustedContentIOS11{
     if (@available(iOS 11.0, *)) {
-        [self setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
+        self.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
+    
+    if (@available(iOS 13.0, *)) {
+        self.automaticallyAdjustsScrollIndicatorInsets = NO;
     }
 }
 
@@ -1115,8 +1119,7 @@ Class tfy_baseClassToSwizzleForTarget(id target)
 
 - (void)didTapButton:(id)sender
 {
-    SEL selector = NSSelectorFromString(@"dzn_didTapDataButton:");
-    
+    SEL selector = NSSelectorFromString(@"tfy_didTapDataButton:");
     if ([self.superview respondsToSelector:selector]) {
         [self.superview performSelector:selector withObject:sender afterDelay:0.0f];
     }
@@ -1244,6 +1247,22 @@ Class tfy_baseClassToSwizzleForTarget(id target)
     }
     if ([hitView isEqual:_contentView] || [hitView isEqual:_customView]) {
         return hitView;
+    }
+    if (_customView != nil) {
+        for (UIView *subView in self.subviews) {
+            if ([subView isKindOfClass:[_contentView class]]) {
+                for (UIView *customView in subView.subviews) {
+                    if ([customView isKindOfClass:[_customView class]]) {
+                        for (UIView *view in customView.subviews) {
+                            if ([view isKindOfClass:UIButton.class]) {
+                                return view;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return nil;
     }
     return nil;
 }

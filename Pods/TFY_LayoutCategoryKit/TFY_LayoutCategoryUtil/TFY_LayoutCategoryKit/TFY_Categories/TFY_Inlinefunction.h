@@ -98,29 +98,29 @@ void TFY_RemoveOneNotification(id _Nonnull observer,NSNotificationName _Nonnull 
 
 //仅仅是状态栏的高度
 CG_INLINE
-CGFloat kStatusBarHeight() {
+CGFloat kStatusBarHeight(void) {
     return (TFY_SafeArea([UIApplication tfy_window]).top);
 }
 
 CG_INLINE
-CGFloat kDefaultNavigationBarHeight() {
+CGFloat kDefaultNavigationBarHeight(void) {
     return (TFY_SafeArea([UIApplication tfy_window]).top + 44);
 }
 
 //这个高度如果有tabbar高度则包含tabbar高度，否则不包含
 CG_INLINE
-CGFloat KHomeIndicatorHeight() {
+CGFloat KHomeIndicatorHeight(void) {
     return (TFY_SafeArea([UIApplication currentTopViewController].view).bottom);
 }
 //这个高度只是tabbarHeight的高度
 CG_INLINE
-CGFloat KTabbarHeight() {
+CGFloat KTabbarHeight(void) {
     return ([UIApplication rootViewController].tabBarController.tabBar.height);
 }
 
 //当前显示的navigationbar的高度
 CG_INLINE
-CGFloat kNavigationBarHeight() {
+CGFloat kNavigationBarHeight(void) {
     UINavigationBar *bar = [UIApplication currentTopViewController].navigationController.navigationBar;
     return bar.isHidden?0:bar.height + kStatusBarHeight();
 }
@@ -133,7 +133,7 @@ UIViewController * _Nonnull TFY_getTheLatestViewController(UIViewController * _N
 }
 
 CG_INLINE
-UIWindow * _Nonnull TFY_LastWindow() {
+UIWindow * _Nonnull TFY_LastWindow(void) {
     NSEnumerator  *frontToBackWindows = [[TFY_Scene defaultPackage].windows reverseObjectEnumerator];
     for (UIWindow *window in frontToBackWindows) {
         BOOL windowOnMainScreen = window.screen == UIScreen.mainScreen;
@@ -147,14 +147,14 @@ UIWindow * _Nonnull TFY_LastWindow() {
 
 /// 最上层容器
 CG_INLINE
-UIViewController * _Nonnull TFY_RootpresentMenuView() {
+UIViewController * _Nonnull TFY_RootpresentMenuView(void) {
     UIViewController *rootVC = TFY_getTheLatestViewController(TFY_LastWindow().rootViewController);
     return rootVC;
 }
 
 /// 获取当前控制器
 CG_INLINE
-UIViewController * _Nonnull TFY_currentViewController() {
+UIViewController * _Nonnull TFY_currentViewController(void) {
     UIViewController* currentViewController = TFY_LastWindow().rootViewController;
     BOOL runLoopFind = YES;
     while (runLoopFind) {

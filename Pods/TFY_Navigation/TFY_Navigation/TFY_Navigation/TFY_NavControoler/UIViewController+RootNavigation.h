@@ -40,6 +40,17 @@ IB_DESIGNABLE
 - (Class)tfy_navigationBarClass;
 
 @property (nonatomic, readonly) id<UIViewControllerAnimatedTransitioning> tfy_animatedTransitioning;
+/// 隐藏导航栏颜色
+@property(nonatomic , assign)BOOL tfy_isHiddenNavBar;
+/// 默认白色 #ffffff
+@property(nonatomic , copy)NSString *tfy_alphaColor;
+/// 滑动渐变使用 先设置 tfy_alphaColor 颜色值
+@property(nonatomic , assign)CGFloat tfy_alphaFloat;
+/// 导航栏透明后 可以设置对应导航栏颜色，也就是控制器颜色。
+@property(nonatomic , strong)UIColor *tfy_navBackgroundColor;
+
+/// 设置导航栏颜色
+-(void)setNavigationBackgroundColor:(UIColor *)color;
 
 @end
 

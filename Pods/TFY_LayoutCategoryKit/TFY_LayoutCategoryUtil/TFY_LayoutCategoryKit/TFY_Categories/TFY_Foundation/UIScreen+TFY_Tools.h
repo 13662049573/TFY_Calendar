@@ -44,29 +44,29 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 /** 主窗口 */
-CG_INLINE UIWindow* TFY_KeyWindow() {
+CG_INLINE UIWindow* TFY_KeyWindow(void) {
     return [UIApplication sharedApplication].delegate.window;
 }
 /**主窗口*/
-CG_INLINE void TFY_MakeKeyWindow() {
+CG_INLINE void TFY_MakeKeyWindow(void) {
     return [[UIApplication sharedApplication].delegate.window makeKeyWindow];
 }
 
 /** 是否是竖屏*/
-CG_INLINE BOOL TFY_isPortrait() {
-    return  ([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortrait ||  [UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortraitUpsideDown ) ?YES:NO;
+CG_INLINE BOOL TFY_isPortrait(void) {
+    return  ([UIApplication sharedApplication].windows.firstObject.windowScene.interfaceOrientation == UIInterfaceOrientationPortrait ||  [UIApplication sharedApplication].windows.firstObject.windowScene.interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown ) ?YES:NO;
 }
 
 /**屏幕高*/
-CG_INLINE CGFloat TFY_Height_H() {
+CG_INLINE CGFloat TFY_Height_H(void) {
     return [UIScreen tfy_screenHeight];
 }
 /**屏幕宽*/
-CG_INLINE CGFloat TFY_Width_W() {
+CG_INLINE CGFloat TFY_Width_W(void) {
     return [UIScreen tfy_screenWidth];
 }
 /**是配比*/
-CG_INLINE CGFloat TFY_SCALE() {
+CG_INLINE CGFloat TFY_SCALE(void) {
     return [UIScreen tfy_screenScale];
 }
 
@@ -80,23 +80,23 @@ CG_INLINE CGFloat TFY_DEBI_height(CGFloat height) {
 }
 
 /**是否是苹果iPhoneX以上机型*/
-CG_INLINE BOOL TFY_iPhoneX() {
+CG_INLINE BOOL TFY_iPhoneX(void) {
     return ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? ((NSInteger)(([[UIScreen mainScreen] currentMode].size.height/[[UIScreen mainScreen] currentMode].size.width)*100) == 216) : NO);
 }
 /**导航栏高度*/
-CG_INLINE CGFloat TFY_kNavBarHeight() {
+CG_INLINE CGFloat TFY_kNavBarHeight(void) {
     return (TFY_iPhoneX() ? 88.0 : 64.0);
 }
 /**底部工具高度*/
-CG_INLINE CGFloat TFY_kBottomBarHeight() {
+CG_INLINE CGFloat TFY_kBottomBarHeight(void) {
     return (TFY_iPhoneX() ? 83.0 : 49.0);
 }
 /**导航栏状态栏高度*/
-CG_INLINE CGFloat TFY_kNavTimebarHeight() {
+CG_INLINE CGFloat TFY_kNavTimebarHeight(void) {
     return (TFY_iPhoneX() ? 44.0 : 20.0);
 }
 /**去除导航栏和底部工具栏剩余高度*/
-CG_INLINE CGFloat TFY_kContentHeight() {
+CG_INLINE CGFloat TFY_kContentHeight(void) {
     return (TFY_Height_H() - TFY_kNavBarHeight() - TFY_kBottomBarHeight());
 }
 

@@ -1,0 +1,1 @@
+../../../TFY_LayoutCategoryKit/TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Chain/TFY_UIGesture/TFY_TapGestureChainModel.h

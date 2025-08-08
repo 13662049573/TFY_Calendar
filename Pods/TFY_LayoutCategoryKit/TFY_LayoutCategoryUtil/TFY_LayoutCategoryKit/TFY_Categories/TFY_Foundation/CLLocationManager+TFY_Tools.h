@@ -121,12 +121,12 @@ typedef void(^DidDetermineStateBlock)(CLLocationManager *manager, CLRegionState 
 /**
  Block 用于在区域更新中通知信标
  */
-typedef void(^DidRangeBeaconsBlock)(CLLocationManager *manager, NSArray *beacons, CLBeaconRegion *region);
+typedef void(^DidRangeBeaconsBlock)(CLLocationManager *manager, NSArray *beacons);
 
 /**
  Block 用于通知信标在区域更新失败
  */
-typedef void(^RangingBeaconsDidFailForRegionBlock)(CLLocationManager *manager, CLBeaconRegion *region, NSError *error);
+typedef void(^RangingBeaconsDidFailForRegionBlock)(CLLocationManager *manager, CLBeaconIdentityConstraint *region);
 
 /**
  Block 用于通知位置更新暂停

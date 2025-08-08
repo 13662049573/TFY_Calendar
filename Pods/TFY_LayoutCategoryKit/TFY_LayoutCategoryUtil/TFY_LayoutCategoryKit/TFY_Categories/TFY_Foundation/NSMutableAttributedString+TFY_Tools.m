@@ -7,7 +7,6 @@
 //
 
 #import "NSMutableAttributedString+TFY_Tools.h"
-
 #define WSelf(weakSelf)  __weak __typeof(&*self)weakSelf = self;
 
 @implementation NSMutableAttributedString (TFY_Tools)
@@ -42,6 +41,7 @@
 @dynamic tfy_tailIndent;
 @dynamic tfy_underLineColor;
 @dynamic tfy_underLineStyle;
+
 #define tfy_setParagraphStyleProperty(_property_,_range_) \
 [self enumerateAttribute:NSParagraphStyleAttributeName inRange:_range_ options:kNilOptions usingBlock:^(NSParagraphStyle *value, NSRange subRange, BOOL *stop) {\
     NSMutableParagraphStyle *style = nil;\

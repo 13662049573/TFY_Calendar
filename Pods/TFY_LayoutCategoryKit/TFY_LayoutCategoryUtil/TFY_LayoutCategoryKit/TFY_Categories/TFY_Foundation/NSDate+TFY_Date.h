@@ -208,12 +208,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  两个日期之间相差的月数
- *  fromDateTime 开始日期
+ *  fromDateTime 开始日期x
  *  toDateTime   结束日期
  *   天数
  */
 + (NSInteger)tfy_monthsBetweenDate:(NSDate *)fromDateTime andDate:(NSDate *)toDateTime;
-
+/**
+ *  两个日期之间相差的周
+ *  fromDateTime 开始日期
+ *  toDateTime   结束日期
+ *   周数
+ */
++ (NSInteger)tfy_weeksBetweenDate:(NSDate*)fromDateTime andDate:(NSDate*)toDateTime;
 /**
  *  两个日期之间相差的天数
  *  fromDateTime 开始日期
@@ -308,6 +314,27 @@ NS_ASSUME_NONNULL_BEGIN
 
 ///时间戳转时间
 +(NSString *)tfy_timestampSwitchTime:(NSInteger)timestamp andFormatter:(NSString *)format;
+
+/// 根据出生日期返回年龄的方法
++ (int)dateToOld:(NSDate *)bornDate;
+
+/// 根据出生日期返回详细的年龄(精确到天)
++ (NSString *)dateToDetailOld:(NSDate *)bornDate;
+
+- (NSUInteger)numberOfWeeksInCurrentMonth;
+
+/**
+ *  得到这个周的第一天和最后一天
+ */
++(NSArray *)getFirstAndLastDayOfThisWeek:(NSDate *)date;
+/**
+ *  得到这个月的第一天和最后一天
+ */
++(NSArray *)getFirstAndLastDayOfThisMonth:(NSDate *)date;
+/**
+ *  得到今年的第一天和最后一天
+ */
++(NSArray *)getFirstAndLastDayOfThisYear:(NSDate *)date;
 
 @end
 

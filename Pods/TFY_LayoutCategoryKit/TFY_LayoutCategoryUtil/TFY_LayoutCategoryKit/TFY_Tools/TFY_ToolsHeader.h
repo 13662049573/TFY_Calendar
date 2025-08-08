@@ -15,5 +15,13 @@
 #import "TFY_Timer.h"
 #import "UIView+Toast.h"
 #import "TFY_WKWebView.h"
+#import "TFY_Reflection.h"
+#import "TFY_AudioPlayer.h"
+#import "TFY_AppVersion.h"
+
+#import "TFY_GCDTimer.h"
+#import "TFY_GCDSemaphore.h"
+#import "TFY_OpenShareHeader.h"
+#import "TFY_ModelSqlite.h"
 
 #endif /* TFY_ToolsHeader_h */

@@ -12,7 +12,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, ButtonImageDirection) {
-    ButtonDirectionCenterImageTop,    //内容居中>>图上文右
+    ButtonDirectionCenterImageTop = 1,    //内容居中>>图上文右
     ButtonDirectionCenterImageLeft,   //内容居中>>图左文右
     ButtonDirectionCenterImageRight,  //内容居中>>图右文左
     ButtonDirectionCenterImageBottom, //内容居中>>图下文上

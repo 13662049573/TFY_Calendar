@@ -42,7 +42,7 @@ __attribute__((objc_subclassing_restricted))
 
 @end
 
-static inline NSArray <TFYRotationModel *> * __UIViewControllerDefaultRotationClasses() {
+static inline NSArray <TFYRotationModel *> * __UIViewControllerDefaultRotationClasses(void) {
     NSArray <NSString *>*classNames = @[
     @"AVPlayerViewController",
     @"AVFullScreenViewController",

@@ -169,16 +169,6 @@ NS_ASSUME_NONNULL_BEGIN
 ///星期和年份上下位置交换 默认 年份在上。
 @property (assign, nonatomic) TFYCa_CalendarSwapplaces swapplaces;
 
-#if TARGET_INTERFACE_BUILDER
-
-// 仅用于预览
-@property (assign, nonatomic) BOOL      fakeSubtitles;
-@property (assign, nonatomic) BOOL      fakeSubToptitles;
-@property (assign, nonatomic) BOOL      fakeEventDots;
-@property (assign, nonatomic) NSInteger fakedSelectedDay;
-
-#endif
-
 @end
 
 NS_ASSUME_NONNULL_END

@@ -7,7 +7,7 @@
 //
 
 #import "TFY_TextViewChainModel.h"
-#import "UITextView+TFY_Tools.h"
+#import "UITextView+Placeholder.h"
 
 #define TFY_CATEGORY_CHAIN_TEXT_IMPLEMENTATION(TFY_Method,TFY_ParaType) TFY_CATEGORY_CHAIN_VIEWCLASS_IMPLEMENTATION(TFY_Method,TFY_ParaType, TFY_TextViewChainModel *,UITextView)
 
@@ -40,16 +40,6 @@ TFY_CATEGORY_CHAIN_TEXT_IMPLEMENTATION(enablesReturnKeyAutomatically, BOOL);
 TFY_CATEGORY_CHAIN_TEXT_IMPLEMENTATION(secureTextEntry, BOOL);
 TFY_CATEGORY_CHAIN_TEXT_IMPLEMENTATION(textContentType, UITextContentType);
 
-
-- (TFY_TextViewChainModel * _Nonnull (^)(NSInteger))limitNum {
-    return ^(NSInteger num){
-        [self enumerateObjectsUsingBlock:^(UITextView *textView) {
-            textView.tfy_limitNum = num;
-        }];
-        return self;
-    };
-}
-
 - (TFY_TextViewChainModel * _Nonnull (^)(NSString * _Nonnull))placeholder {
     return ^(NSString *string){
         [self enumerateObjectsUsingBlock:^(UITextView *textView) {
@@ -59,13 +49,20 @@ TFY_CATEGORY_CHAIN_TEXT_IMPLEMENTATION(textContentType, UITextContentType);
     };
 }
 
-- (TFY_TextViewChainModel * _Nonnull (^)(TFY_placeholderLabel _Nonnull))placeholderLabel{
-    return ^ (TFY_placeholderLabel block){
-        if (block) {
-            [self enumerateObjectsUsingBlock:^(UITextView * _Nonnull obj) {
-                block(obj.tfy_placeholderLabel);
-            }];
-        }
+- (TFY_TextViewChainModel * _Nonnull (^)(NSAttributedString * _Nonnull))attributedPlaceholder {
+    return ^(NSAttributedString *attributedPlaceholder){
+        [self enumerateObjectsUsingBlock:^(UITextView *textView) {
+            textView.tfy_attributedPlaceholder = attributedPlaceholder;
+        }];
+        return self;
+    };
+}
+
+- (TFY_TextViewChainModel * _Nonnull (^)(UIColor * _Nonnull))placeholderColor {
+    return ^(UIColor *color){
+        [self enumerateObjectsUsingBlock:^(UITextView *textView) {
+            textView.tfy_placeholderColor = color;
+        }];
         return self;
     };
 }

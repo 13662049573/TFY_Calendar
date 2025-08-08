@@ -41,7 +41,7 @@
 - (void)loadView
 {
     UIView *view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    view.backgroundColor = [UIColor systemGroupedBackgroundColor];
     self.view = view;
     
     CGFloat height = [[UIDevice currentDevice].model hasPrefix:@"iPad"] ? 450 : 300;

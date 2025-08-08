@@ -12,7 +12,8 @@
 #define kSDMaxCacheFileAmount 100
 
 @implementation NSData (TFY_Data)
-
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 - (NSString *)tfy_md2String {
     unsigned char result[CC_MD2_DIGEST_LENGTH];
     CC_MD2(self.bytes, (CC_LONG)self.length, result);
@@ -66,7 +67,7 @@
     CC_MD5(self.bytes, (CC_LONG)self.length, result);
     return [NSData dataWithBytes:result length:CC_MD5_DIGEST_LENGTH];
 }
-
+#pragma clang diagnostic pop
 - (NSString *)tfy_sha1String {
     unsigned char result[CC_SHA1_DIGEST_LENGTH];
     CC_SHA1(self.bytes, (CC_LONG)self.length, result);
@@ -464,7 +465,8 @@ static const short base64DecodingTable[256] = {
     }
     return path;
 }
-
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 + (NSString *)tfy_creatMD5StringWithString:(NSString *)string
 {
     const char *original_str = [string UTF8String];
@@ -476,6 +478,7 @@ static const short base64DecodingTable[256] = {
     [hash lowercaseString];
     return hash;
 }
+#pragma clang diagnostic pop
 
 + (NSString *)tfy_creatDataPathWithString:(NSString *)string
 {

@@ -8,16 +8,22 @@
 
 #import "TFY_TableViewChainModel.h"
 #import "UIScrollView+TFY_Tools.h"
+
 #define TFY_CATEGORY_CHAIN_TABLEVIEW_IMPLEMENTATION(TFY_Method,TFY_ParaType) TFY_CATEGORY_CHAIN_VIEWCLASS_IMPLEMENTATION(TFY_Method,TFY_ParaType, TFY_TableViewChainModel *,UITableView)
 @implementation TFY_TableViewChainModel
 
 TFY_CATEGORY_CHAIN_TABLEVIEW_IMPLEMENTATION(delegate, id<UITableViewDelegate>)
 TFY_CATEGORY_CHAIN_TABLEVIEW_IMPLEMENTATION(dataSource, id<UITableViewDataSource>)
+TFY_CATEGORY_CHAIN_TABLEVIEW_IMPLEMENTATION(dragDelegate, id<UITableViewDragDelegate>)
+TFY_CATEGORY_CHAIN_TABLEVIEW_IMPLEMENTATION(dropDelegate, id<UITableViewDropDelegate>)
 - (TFY_TableViewChainModel * _Nonnull (^)(void))adJustedContentIOS11{
     return ^ (){
         if (@available(iOS 11.0, *)) {
             [self enumerateObjectsUsingBlock:^(UITableView * _Nonnull obj) {
                 [obj tfy_adJustedContentIOS11];
+                if (@available(iOS 15.0, *)) {
+                    obj.sectionHeaderTopPadding = 0;
+                }
             }];
         }
         return self;
@@ -32,6 +38,7 @@ TFY_CATEGORY_CHAIN_TABLEVIEW_IMPLEMENTATION(estimatedSectionHeaderHeight, CGFloa
 TFY_CATEGORY_CHAIN_TABLEVIEW_IMPLEMENTATION(estimatedSectionFooterHeight, CGFloat)
 TFY_CATEGORY_CHAIN_TABLEVIEW_IMPLEMENTATION(separatorInset, UIEdgeInsets)
 TFY_CATEGORY_CHAIN_TABLEVIEW_IMPLEMENTATION(editing, BOOL)
+TFY_CATEGORY_CHAIN_TABLEVIEW_IMPLEMENTATION(dragInteractionEnabled, BOOL)
 TFY_CATEGORY_CHAIN_TABLEVIEW_IMPLEMENTATION(allowsSelection, BOOL)
 TFY_CATEGORY_CHAIN_TABLEVIEW_IMPLEMENTATION(allowsMultipleSelection, BOOL)
 TFY_CATEGORY_CHAIN_TABLEVIEW_IMPLEMENTATION(allowsSelectionDuringEditing, BOOL)

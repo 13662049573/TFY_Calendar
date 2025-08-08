@@ -110,7 +110,6 @@ TFY_PROPERTY_CHAIN_READONLY ObjectType (^ autoresizesSubviews) (BOOL);
 
 TFY_PROPERTY_CHAIN_READONLY ObjectType (^ makeTag) (NSInteger);
 
-TFY_PROPERTY_CHAIN_READONLY ObjectType (^ clipRadius) (CornerClipType,CGFloat);
 /**暗黑设置*/
 TFY_PROPERTY_CHAIN_READONLY ObjectType (^ ios13BackgroundColor) (UIColor *);
 TFY_PROPERTY_CHAIN_READONLY ObjectType (^ ios13BorderColor) (UIColor *);

@@ -40,6 +40,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// two 第二个数
 + (NSNumber *)tfy_getResult:(NSNumber *)one operators:(TFY_OPERATORS)opera num:(NSNumber *)two;
 
+/// 转化位数
++ (NSNumber *)numberDecimal:(NSNumber *)numberDecimal scale:(short)scale;
 
 @end
 

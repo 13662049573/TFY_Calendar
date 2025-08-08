@@ -76,7 +76,7 @@
  */
 #ifdef __IPHONE_OS_VERSION_MIN_REQUIRED
 - (CGRect)tfy_currentBounds {
-    return [self tfy_boundsForOrientation:[[UIApplication sharedApplication] statusBarOrientation]];
+    return [self tfy_boundsForOrientation:[[UIApplication sharedApplication].windows.firstObject.windowScene interfaceOrientation]];
 }
 #endif
 

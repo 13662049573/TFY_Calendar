@@ -23,6 +23,7 @@ typedef void(^GestureTargetAction)(id gesture);
 - (void)tfy_removeTargetBlockByTag:(NSString *)tag;
 
 - (void)tfy_removeAllTargetBlock;
+
 @end
 
 NS_ASSUME_NONNULL_END

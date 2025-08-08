@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UIView (Gradient)
+
 @property CGPoint tfy_startPoint;
 @property CGPoint tfy_endPoint;
 

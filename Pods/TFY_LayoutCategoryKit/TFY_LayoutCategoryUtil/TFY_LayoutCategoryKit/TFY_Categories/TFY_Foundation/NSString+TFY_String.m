@@ -10,6 +10,15 @@
 #import "NSNumber+TFY_Tools.h"
 #import "NSData+TFY_Data.h"
 #import <CoreText/CoreText.h>
+
+#ifndef CGFLOAT_CEIL
+#ifdef CGFLOAT_IS_DOUBLE
+#define CGFLOAT_CEIL(value) ceil(value)
+#else
+#define CGFLOAT_CEIL(value) ceilf(value)
+#endif
+#endif
+
 @implementation NSString (TFY_String)
 
 
@@ -201,7 +210,8 @@
         CGRect rect = [self boundingRectWithSize:size
                                          options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
                                       attributes:attr context:nil];
-        result = rect.size;
+        CGSize sizeCus = CGSizeMake(CGFLOAT_CEIL(rect.size.width), CGFLOAT_CEIL(rect.size.height));
+        result = sizeCus;
     } else {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"

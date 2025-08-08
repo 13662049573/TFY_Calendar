@@ -62,14 +62,37 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
     if ([keyPath isEqualToString:@"defaultPrefersStatusBarHidden"] || [keyPath isEqualToString:@"defaultPreferredStatusBarStyle"]) {
-        UIViewController * topViewController = [[[UIApplication sharedApplication] keyWindow].rootViewController rotation_findTopViewController];
+        UIViewController * topViewController = [self.appKeyWindow.rootViewController rotation_findTopViewController];
         [topViewController setNeedsStatusBarAppearanceUpdate];
     } else if ([keyPath isEqualToString:@"defaultShouldAutorotate"] || [keyPath isEqualToString:@"defaultSupportedInterfaceOrientations"] || [keyPath isEqualToString:@"defaultPreferredInterfaceOrientationForPresentation"]) {
-        UIViewController * topViewController = [[[UIApplication sharedApplication] keyWindow].rootViewController rotation_findTopViewController];
+        UIViewController * topViewController = [self.appKeyWindow.rootViewController rotation_findTopViewController];
         UIInterfaceOrientation ori = topViewController.rotation_fix_preferredInterfaceOrientationForPresentation;
         [topViewController rotation_forceToOrientation:ori];
     }
 }
+
+- (UIWindow *)appKeyWindow {
+    UIWindow *keywindow = nil;
+    if (@available(iOS 13.0, *)) {
+        for (UIWindowScene *scene in UIApplication.sharedApplication.connectedScenes) {
+            if (scene.activationState == UISceneActivationStateForegroundActive) {
+                if (@available(iOS 15.0, *)) {
+                    keywindow = scene.keyWindow;
+                }
+                if (keywindow == nil) {
+                    for (UIWindow *window in scene.windows) {
+                        if (window.windowLevel == UIWindowLevelNormal && window.hidden == NO && CGRectEqualToRect(window.bounds, UIScreen.mainScreen.bounds)) {
+                            keywindow = window;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return keywindow;
+}
+
 
 @end
 
@@ -569,13 +592,7 @@ static NSMutableDictionary <NSString *,TFYRotationModel *>* _rotation_preference
 }
 
 - (UIInterfaceOrientation)rotation_fix_preferredInterfaceOrientationForPresentation {
-    UIInterfaceOrientation currentInterface;
-    if (@available(iOS 13.0, *)) {
-        currentInterface = UIApplication.sharedApplication.windows.firstObject.windowScene.interfaceOrientation;
-    } else {
-        currentInterface = [UIApplication sharedApplication].statusBarOrientation;
-    }
-    
+    UIInterfaceOrientation currentInterface = UIApplication.sharedApplication.windows.firstObject.windowScene.interfaceOrientation;
     if (self.shouldAutorotate) {
         if (self.supportedInterfaceOrientations & (1 << currentInterface)) {
             return currentInterface;

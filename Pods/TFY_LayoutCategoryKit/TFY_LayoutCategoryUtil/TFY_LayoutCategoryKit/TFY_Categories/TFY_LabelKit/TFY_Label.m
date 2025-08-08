@@ -12,7 +12,7 @@
 
 #define REGULAREXPRESSION_OPTION(regularExpression,regex,option) \
 \
-static NSRegularExpression * k##regularExpression() { \
+static NSRegularExpression * k##regularExpression(void) { \
 static NSRegularExpression *_##regularExpression = nil; \
 static dispatch_once_t onceToken; \
 dispatch_once(&onceToken, ^{ \
@@ -215,7 +215,7 @@ REGULAREXPRESSION(HashtagRegularExpression, @"#([\\u4e00-\\u9fa5\\w\\-]+)")
 }
 
 #pragma mark - 正则匹配相关
-static NSArray * kAllRegexps() {
+static NSArray * kAllRegexps(void) {
     static NSArray *_allRegexps = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{

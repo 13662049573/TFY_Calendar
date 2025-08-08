@@ -11,6 +11,8 @@
 #import "UIViewController+RootNavigation.h"
 #import "TFYViewControllerAnimatedTransitioning.h"
 
+@class TFYContainerController;
+
 @interface TFYContainerController : UIViewController
 @property (nonatomic, readonly, strong) __kindof UIViewController * _Nullable contentViewController;
 @end
@@ -27,12 +29,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)navigationControllerDidClickLeftButton:(TFY_NavigationController *)controller;
 /// 侧滑划出控制器调用
 - (void)navigationControllerDidSideSlideReturn:(TFY_NavigationController *)controller
-                            fromViewController:(UIViewController *)fromViewController;
+                            fromViewController:(TFYContainerController *)fromViewController;
 @end
 
 IB_DESIGNABLE
 @interface TFY_NavigationController : UINavigationController
-
+@property(nonatomic,weak) UIViewController* currentShowVC;
 @property (nonatomic, weak) id<TFYNavigationControllerDelegate> uiNaviDelegate;
 /*!
  *  使用系统原始的背栏项目或自定义背栏项目返回

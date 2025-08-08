@@ -44,6 +44,7 @@ static const int block_key;
     [self addTarget:target action:@selector(sendGesture:)];
     [[self TFY_getstureTagetsArr] addObject:target];
 }
+
 - (void)tfy_addTargetBlock:(GestureTargetAction)block tag:(NSString *)tag{
     if (!block) return;
     if (!tag) {
@@ -55,6 +56,7 @@ static const int block_key;
       [[self TFY_getstureTagetsDic] setObject:target forKey:tag];
     }
 }
+
 - (void)tfy_removeTargetBlockByTag:(NSString *)tag{
     if (!tag) return;
     NSMutableDictionary *targets = [self TFY_getstureTagetsDic];
@@ -63,6 +65,7 @@ static const int block_key;
     [self removeTarget:target action:@selector(sendGesture:)];
     [targets removeObjectForKey:tag];
 }
+
 - (void)tfy_removeAllTargetBlock{
     [[self TFY_getstureTagetsDic] enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
         [self removeTarget:obj action:@selector(sendGesture:)];

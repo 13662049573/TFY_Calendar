@@ -20,7 +20,6 @@
 #import "WKWebView+TFY_Extension.h"
 #import "UITableView+TFY_LayoutCell.h"
 #import "UITableViewCell+TFY_Chain.h"
-#import "UITextView+TFY_Tools.h"
 #import "CALayer+TFY_Tools.h"
 #import "UIColor+iOS13DarkMode.h"
 #import "UIImage+iOS13DarkMode.h"
@@ -28,5 +27,7 @@
 #import "UITableView+CornerRadius.h"
 #import "UIView+Gradient.h"
 #import "UIImage+Addtions.h"
+#import "UIView+ShadowPath.h"
+#import "UITextView+Placeholder.h"
 
 #endif /* TFY_UIHeader_h */

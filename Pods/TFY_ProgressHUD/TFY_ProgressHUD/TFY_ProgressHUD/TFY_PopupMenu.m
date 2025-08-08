@@ -9,7 +9,6 @@
 #import "TFY_PopupMenu.h"
 #define ScreenWidth [UIScreen mainScreen].bounds.size.width
 #define ScreenHeight [UIScreen mainScreen].bounds.size.height
-#define MainWindow  [UIApplication sharedApplication].keyWindow
 #define TFY_SAFE_BLOCK(BlockName, ...) ({ !BlockName ? nil : BlockName(__VA_ARGS__); })
 
 @implementation PopupMenuPath
@@ -252,7 +251,7 @@
 
 + (TFY_PopupMenu *)showRelyOnView:(UIView *)view titles:(NSArray *)titles icons:(NSArray *)icons menuWidth:(CGFloat)itemWidth delegate:(id<PopupMenuDelegate>)delegate
 {
-    CGRect absoluteRect = [view convertRect:view.bounds toView:MainWindow];
+    CGRect absoluteRect = [view convertRect:view.bounds toView:TFY_PopupMenu.appKeyWindow];
     CGPoint relyPoint = CGPointMake(absoluteRect.origin.x + absoluteRect.size.width / 2, absoluteRect.origin.y + absoluteRect.size.height);
     TFY_PopupMenu *popupMenu = [[TFY_PopupMenu alloc] init];
     popupMenu.point = relyPoint;
@@ -279,7 +278,7 @@
 
 + (TFY_PopupMenu *)showRelyOnView:(UIView *)view titles:(NSArray *)titles icons:(NSArray *)icons menuWidth:(CGFloat)itemWidth otherSettings:(void (^) (TFY_PopupMenu * popupMenu))otherSetting
 {
-    CGRect absoluteRect = [view convertRect:view.bounds toView:MainWindow];
+    CGRect absoluteRect = [view convertRect:view.bounds toView:TFY_PopupMenu.appKeyWindow];
     CGPoint relyPoint = CGPointMake(absoluteRect.origin.x + absoluteRect.size.width / 2, absoluteRect.origin.y + absoluteRect.size.height);
     TFY_PopupMenu *popupMenu = [[TFY_PopupMenu alloc] init];
     popupMenu.point = relyPoint;
@@ -290,6 +289,28 @@
     TFY_SAFE_BLOCK(otherSetting,popupMenu);
     [popupMenu show];
     return popupMenu;
+}
+
++ (UIWindow *)appKeyWindow {
+    UIWindow *keywindow = nil;
+    if (@available(iOS 13.0, *)) {
+        for (UIWindowScene *scene in UIApplication.sharedApplication.connectedScenes) {
+            if (scene.activationState == UISceneActivationStateForegroundActive) {
+                if (@available(iOS 15.0, *)) {
+                    keywindow = scene.keyWindow;
+                }
+                if (keywindow == nil) {
+                    for (UIWindow *window in scene.windows) {
+                        if (window.windowLevel == UIWindowLevelNormal && window.hidden == NO && CGRectEqualToRect(window.bounds, UIScreen.mainScreen.bounds)) {
+                            keywindow = window;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return keywindow;
 }
 
 - (void)dismiss
@@ -339,6 +360,7 @@
         cell.textLabel.attributedText = self.titles[indexPath.row];
     }else if ([self.titles[indexPath.row] isKindOfClass:[NSString class]]) {
         cell.textLabel.text = self.titles[indexPath.row];
+        cell.textLabel.textAlignment = self.textAlignment;
     }else {
         cell.textLabel.text = nil;
     }
@@ -402,8 +424,8 @@
 #pragma mark - privates
 - (void)show
 {
-    [[self lastWindow] addSubview:self.menuBackView];
-    [[self lastWindow] addSubview:self];
+    [TFY_PopupMenu.appKeyWindow addSubview:self.menuBackView];
+    [TFY_PopupMenu.appKeyWindow addSubview:self];
     if ([[self getLastVisibleCell] isKindOfClass:[PopupMenuCell class]]) {
         PopupMenuCell *cell = [self getLastVisibleCell];
         cell.isShowSeparator = NO;
@@ -422,25 +444,6 @@
         }
     }];
 }
-
-- (UIWindow*)lastWindow {
-    NSEnumerator  *frontToBackWindows = [UIApplication.sharedApplication.windows reverseObjectEnumerator];
-    for (UIWindow *window in frontToBackWindows) {
-        BOOL windowOnMainScreen = window.screen == UIScreen.mainScreen;
-
-        BOOL windowIsVisible = !window.hidden&& window.alpha>0;
-
-        BOOL windowLevelSupported = (window.windowLevel >= UIWindowLevelNormal && window.windowLevel <= UIWindowLevelNormal);
-
-        BOOL windowKeyWindow = window.isKeyWindow;
-        
-        if (windowOnMainScreen && windowIsVisible && windowLevelSupported && windowKeyWindow) {
-            return window;
-        }
-    }
-    return [UIApplication sharedApplication].keyWindow;
-}
-
 
 - (void)setDefaultSettings {
     self.cornerRadius = 5.0;
@@ -600,6 +603,11 @@
 
 - (void)setMaxVisibleCount:(NSInteger)maxVisibleCount {
     _maxVisibleCount = maxVisibleCount;
+    [self updateUI];
+}
+
+- (void)setTextAlignment:(NSInteger)textAlignment {
+    _textAlignment = textAlignment;
     [self updateUI];
 }
 

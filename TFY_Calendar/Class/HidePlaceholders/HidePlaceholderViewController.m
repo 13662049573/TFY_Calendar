@@ -49,7 +49,7 @@ NS_ASSUME_NONNULL_END
     UIButton *button;
     
     view = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    view.backgroundColor = [UIColor systemGroupedBackgroundColor];
     self.view = view;
     
     // 400 for iPad and 300 for iPhone

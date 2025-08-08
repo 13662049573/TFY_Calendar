@@ -161,7 +161,7 @@ static inline NSInteger PositionOfTextLayerInY(CGFloat y, CGFloat margin, CGFloa
     if (!self.translucentForTableViewInNavigationBar) {
         currentSection = firstVisibleSection;
     } else {
-        insetHeight = UIApplication.sharedApplication.statusBarFrame.size.height + 44;
+        insetHeight = [UIApplication sharedApplication].windows.firstObject.windowScene.statusBarManager.statusBarFrame.size.height + 44;
         for (NSInteger section = firstVisibleSection; section < self.tableView.numberOfSections; section++) {
             CGRect sectionFrame = [self.tableView rectForSection:section];
             if (sectionFrame.origin.y + sectionFrame.size.height - self.tableView.contentOffset.y >= insetHeight) {
@@ -230,7 +230,7 @@ static inline NSInteger PositionOfTextLayerInY(CGFloat y, CGFloat margin, CGFloa
     }
     
     if (self.currentSection == TFY_IndexViewSearchSection) {
-        CGFloat insetHeight = self.translucentForTableViewInNavigationBar ? UIApplication.sharedApplication.statusBarFrame.size.height + 44 : 0;
+        CGFloat insetHeight = self.translucentForTableViewInNavigationBar ? [UIApplication sharedApplication].windows.firstObject.windowScene.statusBarManager.statusBarFrame.size.height + 44 : 0;
         [self.tableView setContentOffset:CGPointMake(0, -insetHeight) animated:NO];
     } else {
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:self.currentSection + self.startSection];

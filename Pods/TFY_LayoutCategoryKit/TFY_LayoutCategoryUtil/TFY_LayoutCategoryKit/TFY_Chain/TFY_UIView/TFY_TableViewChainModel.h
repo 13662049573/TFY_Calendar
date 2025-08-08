@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 TFY_PROPERTY_CHAIN_READONLY TFY_TableViewChainModel * (^ delegate) (id <UITableViewDelegate>);
 TFY_PROPERTY_CHAIN_READONLY TFY_TableViewChainModel * (^ dataSource) (id <UITableViewDataSource>);
+TFY_PROPERTY_CHAIN_READONLY TFY_TableViewChainModel * (^ dragDelegate) (id <UITableViewDragDelegate>);
+TFY_PROPERTY_CHAIN_READONLY TFY_TableViewChainModel * (^ dropDelegate) (id <UITableViewDropDelegate>);
 TFY_PROPERTY_CHAIN_READONLY TFY_TableViewChainModel * (^ adJustedContentIOS11)(void);
 
 TFY_PROPERTY_CHAIN_READONLY TFY_TableViewChainModel *(^ rowHeight)(CGFloat);
@@ -25,6 +27,7 @@ TFY_PROPERTY_CHAIN_READONLY TFY_TableViewChainModel *(^ estimatedSectionFooterHe
 TFY_PROPERTY_CHAIN_READONLY TFY_TableViewChainModel *(^ separatorInset)(UIEdgeInsets);
 TFY_PROPERTY_CHAIN_READONLY TFY_TableViewChainModel *(^ sectionHeaderTopPadding)(CGFloat) API_AVAILABLE(ios(15.0));
 TFY_PROPERTY_CHAIN_READONLY TFY_TableViewChainModel *(^ editing)(BOOL);
+TFY_PROPERTY_CHAIN_READONLY TFY_TableViewChainModel *(^ dragInteractionEnabled)(BOOL);
 TFY_PROPERTY_CHAIN_READONLY TFY_TableViewChainModel *(^ allowsSelection)(BOOL);
 TFY_PROPERTY_CHAIN_READONLY TFY_TableViewChainModel *(^ allowsMultipleSelection)(BOOL);
 TFY_PROPERTY_CHAIN_READONLY TFY_TableViewChainModel *(^ allowsSelectionDuringEditing)(BOOL);

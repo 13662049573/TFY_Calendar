@@ -270,7 +270,7 @@ typedef NS_ENUM(NSUInteger, TFYCa_CalendarOrientation) {
         CGFloat weekdayHeight = self.preferredWeekdayHeight;
         CGFloat rowHeight = self.preferredRowHeight;
         CGFloat padding = 5;
-        if (self.scrollDirection == UICollectionViewScrollDirectionHorizontal) {
+        if (self.scrollDirection == TFYCa_CalendarScrollDirectionHorizontal) {
             rowHeight = TFYCa_CalendarFloor(rowHeight*2)*0.5; // 四舍五入到0.5的整数倍。例如(16.8 - > 16.5),(16.2 - > 16.0)
         }
         

@@ -267,7 +267,7 @@
 }
 
 + (UIViewController *)currentViewController {
-    UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
+    UIWindow *keyWindow = self.appKeyWindow;
     UIViewController *vc = keyWindow.rootViewController;
     while (vc.presentedViewController) {
         vc = vc.presentedViewController;
@@ -279,6 +279,28 @@
         }
     }
     return vc;
+}
+
++ (UIWindow *)appKeyWindow {
+    UIWindow *keywindow = nil;
+    if (@available(iOS 13.0, *)) {
+        for (UIWindowScene *scene in UIApplication.sharedApplication.connectedScenes) {
+            if (scene.activationState == UISceneActivationStateForegroundActive) {
+                if (@available(iOS 15.0, *)) {
+                    keywindow = scene.keyWindow;
+                }
+                if (keywindow == nil) {
+                    for (UIWindow *window in scene.windows) {
+                        if (window.windowLevel == UIWindowLevelNormal && window.hidden == NO && CGRectEqualToRect(window.bounds, UIScreen.mainScreen.bounds)) {
+                            keywindow = window;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return keywindow;
 }
 
 - (void)presentViewController:(UIViewController *)viewController inSize:(CGSize)size direction:(TFYPopDirection)direction completion:(PresentCompletion)completion;
