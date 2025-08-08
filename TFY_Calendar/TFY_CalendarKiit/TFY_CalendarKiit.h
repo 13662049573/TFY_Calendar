@@ -46,3 +46,22 @@ FOUNDATION_EXPORT const unsigned char TFY_CalendarKiitVersionString[];
 #import "TFY_CalendarExtensions.h"
 
 #endif
+
+// Swift compatibility macros
+#if __has_feature(objc_arc)
+    #define TFY_CalendarWeakSelf __weak typeof(self) weakSelf = self;
+    #define TFY_CalendarStrongSelf __strong typeof(weakSelf) strongSelf = weakSelf;
+#else
+    #define TFY_CalendarWeakSelf __block typeof(self) weakSelf = self;
+    #define TFY_CalendarStrongSelf typeof(weakSelf) strongSelf = weakSelf;
+#endif
+
+// iOS 15+ compatibility
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_15_0
+    #define TFY_CalendarIOS15_AVAILABLE 1
+#else
+    #define TFY_CalendarIOS15_AVAILABLE 0
+#endif
+
+// Swift naming conventions
+#define TFY_CalendarSwiftName(name) NS_SWIFT_NAME(name)

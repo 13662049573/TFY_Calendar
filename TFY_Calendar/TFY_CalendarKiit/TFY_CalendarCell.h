@@ -7,18 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
-/// 联动填充颜色 类型判断
-typedef NS_ENUM(NSUInteger, TFYCa_fillTypeLinkageSelectionType) {
-    TFYCa_fillTypeLinkageSelectionTypeNone,  // 没有选中
-    TFYCa_fillTypeLinkageSelectionTypeSingle, // 单独点击
-    TFYCa_fillTypeLinkageSelectionTypeLeftBorder, // 最左边选中
-    TFYCa_fillTypeLinkageSelectionTypeMiddle,// 中间选中
-    TFYCa_fillTypeLinkageSelectionTypeRightBorder // 最右边选中
-};
+#import "TFY_CalendarProtocol.h"
 
 @class TFY_Calendar,TFY_CalendarAppearance,TFY_CalendarEventIndicator;
 
+// 前向声明，实际定义在TFY_CalendarProtocol.h中
 typedef NS_ENUM(NSUInteger, TFYCa_CalendarMonthPosition);
 
 NS_ASSUME_NONNULL_BEGIN
@@ -47,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**单元事件点的集合*/
 @property (weak, nonatomic) TFY_CalendarEventIndicator *eventIndicator;
 
-/**单元格是否为“占位符”。默认为“否”。*/
+/**单元格是否为"占位符"。默认为"否"。*/
 @property (assign, nonatomic, getter=isPlaceholder) BOOL placeholder;
 
 #pragma mark - Private properties
@@ -55,7 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) TFY_Calendar *calendar;
 @property (weak, nonatomic) TFY_CalendarAppearance *appearance;
 /// 联动cell 类型
-@property (nonatomic , assign) TFYCa_fillTypeLinkageSelectionType linkageSelectionType;
+@property (assign, nonatomic) TFYCa_fillTypeLinkageSelectionType linkageSelectionType;
 
 @property (strong, nonatomic) NSString *subtitle;
 @property (strong, nonatomic) NSString *subToptitle;

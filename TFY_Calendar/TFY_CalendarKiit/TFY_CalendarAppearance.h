@@ -19,12 +19,12 @@ typedef NS_ENUM(NSInteger, TFYCa_CalendarCellState) {
     TFYCa_CalendarCellStateToday       = 1 << 3,
     TFYCa_CalendarCellStateWeekend     = 1 << 4,
     TFYCa_CalendarCellStateTodaySelected = TFYCa_CalendarCellStateToday|TFYCa_CalendarCellStateSelected
-};
+} TFY_CalendarSwiftName(CalendarCellState);
 
 typedef NS_ENUM(NSUInteger, TFYCa_CalendarSeparators) {
     TFYCa_CalendarSeparatorNone          = 0,
     TFYCa_CalendarSeparatorInterRows     = 1
-};
+} TFY_CalendarSwiftName(CalendarSeparators);
 
 typedef NS_OPTIONS(NSUInteger, TFYCa_CalendarCaseOptions) {
     TFYCa_CalendarCaseOptionsHeaderUsesDefaultCase      = 0,
@@ -33,18 +33,18 @@ typedef NS_OPTIONS(NSUInteger, TFYCa_CalendarCaseOptions) {
     TFYCa_CalendarCaseOptionsWeekdayUsesDefaultCase     = 0 << 4,
     TFYCa_CalendarCaseOptionsWeekdayUsesUpperCase       = 1 << 4,
     TFYCa_CalendarCaseOptionsWeekdayUsesSingleUpperCase = 2 << 4,
-};
+} TFY_CalendarSwiftName(CalendarCaseOptions);
 
 ///星期和年份上下位置交换
 typedef NS_ENUM(NSUInteger, TFYCa_CalendarSwapplaces) {
     TFYCa_CalendarSwapplacesYearTop  = 0,///年份
     TFYCa_CalendarSwapplacesWeekTop  = 1///星期
-};
+} TFY_CalendarSwiftName(CalendarSwapplaces);
 
 typedef NS_ENUM(NSUInteger, TFYCa_CellfillType) {
     TFYCa_CellfillTypeSeparate = 0,// 单独填充颜色
     TFYCa_CellfillTypeLinkage = 1,// 联动填充颜色
-};
+} TFY_CalendarSwiftName(CellFillType);
 
 NS_ASSUME_NONNULL_BEGIN
 

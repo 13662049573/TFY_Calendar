@@ -28,14 +28,14 @@
 
 @property (assign, nonatomic) BOOL needsAdjustingViewFrame;
 
-- (void)invalidateHeaders;
-- (void)adjustMonthPosition;
-- (void)configureAppearance;
+- (void)invalidateHeaders TFY_CalendarSwiftName(invalidateHeaders());
+- (void)adjustMonthPosition TFY_CalendarSwiftName(adjustMonthPosition());
+- (void)configureAppearance TFY_CalendarSwiftName(configureAppearance());
 
-- (BOOL)isPageInRange:(NSDate *)page;
-- (BOOL)isDateInRange:(NSDate *)date;
+- (BOOL)isPageInRange:(NSDate *)page TFY_CalendarSwiftName(isPage(inRange:));
+- (BOOL)isDateInRange:(NSDate *)date TFY_CalendarSwiftName(isDate(inRange:));
 
-- (CGSize)sizeThatFits:(CGSize)size scope:(TFYCa_CalendarScope)scope;
+- (CGSize)sizeThatFits:(CGSize)size scope:(TFYCa_CalendarScope)scope TFY_CalendarSwiftName(sizeThatFits(_:scope:));
 
 @end
 

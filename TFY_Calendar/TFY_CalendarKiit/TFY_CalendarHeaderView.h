@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
   更改年月头部数据。
  */
-- (void)calendar:(TFY_CalendarHeaderView *_Nonnull)calendarHerderView DateButton:(UIButton *_Nonnull)titleBtn WeekButtonTitle:(NSString *_Nonnull)textString;
+- (void)calendar:(TFY_CalendarHeaderView *_Nonnull)calendarHerderView DateButton:(UIButton *_Nonnull)titleBtn WeekButtonTitle:(NSString *_Nonnull)textString TFY_CalendarSwiftName(calendar(_:dateButton:weekButtonTitle:));
 
 @end
 
@@ -28,10 +28,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic) UICollectionViewScrollDirection scrollDirection;
 @property (assign, nonatomic) BOOL scrollEnabled;
 
-- (void)setScrollOffset:(CGFloat)scrollOffset;
-- (void)setScrollOffset:(CGFloat)scrollOffset animated:(BOOL)animated;
-- (void)reloadData;
-- (void)configureAppearance;
+- (void)setScrollOffset:(CGFloat)scrollOffset TFY_CalendarSwiftName(setScrollOffset(_:));
+- (void)setScrollOffset:(CGFloat)scrollOffset animated:(BOOL)animated TFY_CalendarSwiftName(setScrollOffset(_:animated:));
+- (void)reloadData TFY_CalendarSwiftName(reloadData());
+- (void)configureAppearance TFY_CalendarSwiftName(configureAppearance());
 
 @end
 

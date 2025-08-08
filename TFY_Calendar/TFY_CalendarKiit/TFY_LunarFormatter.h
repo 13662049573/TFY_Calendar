@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TFY_LunarFormatter : NSObject
-- (NSString *)stringFromDate:(NSDate *)date;
+- (NSString *)stringFromDate:(NSDate *)date TFY_CalendarSwiftName(string(fromDate:));
 @end
 
 NS_ASSUME_NONNULL_END

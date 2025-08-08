@@ -12,7 +12,7 @@
 
 @protocol TFYCa_CalendarCollectionViewInternalDelegate <UICollectionViewDelegate>
 @optional
-- (void)collectionViewDidFinishLayoutSubviews:(TFY_CalendarCollectionView *_Nonnull)collectionView;
+- (void)collectionViewDidFinishLayoutSubviews:(TFY_CalendarCollectionView *_Nonnull)collectionView TFY_CalendarSwiftName(collectionViewDidFinishLayoutSubviews(_:));
 
 @end
 

@@ -68,7 +68,6 @@ CG_EXTERN CGSize const CGSizeAutomatic;
 #define TFYCa_CalendarUseWeakSelf __weak __typeof__(self) TFYCa_CalendarWeakSelf = self;
 #define TFYCa_CalendarUseStrongSelf __strong __typeof__(self) self = TFYCa_CalendarWeakSelf;
 
-
 #define TFYCa_WSelf(weakSelf)  __weak __typeof(&*self)weakSelf = self;
 /**需要传入的值*/
 #define TFYCa_CALENDARSTATEMENTCHAINFUNCTION(className,propertyModifier,propertyPointerType,propertyName) \
@@ -85,6 +84,22 @@ CG_EXTERN CGSize const CGSizeAutomatic;
     };\
 }
 
+#pragma mark - iOS 15+ Compatibility
+
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_15_0
+    #define TFY_CalendarIOS15_AVAILABLE 1
+    #define TFY_CalendarUseModernAPIs 1
+#else
+    #define TFY_CalendarIOS15_AVAILABLE 0
+    #define TFY_CalendarUseModernAPIs 0
+#endif
+
+#pragma mark - Swift Compatibility
+
+// Swift naming conventions for better Swift interop
+#define TFY_CalendarSwiftName(name) NS_SWIFT_NAME(name)
+#define TFY_CalendarSwiftOnly __attribute__((swift_name("")))
+#define TFY_CalendarSwiftPrivate __attribute__((swift_private))
 
 #pragma mark - Deprecated
 
@@ -100,6 +115,21 @@ static inline void TFYCa_CalendarSliceCake(CGFloat cake, NSInteger count, CGFloa
     }
 }
 
+#pragma mark - Modern Objective-C Features
+
+// Use of modern Objective-C features for better performance
+#if __has_feature(objc_arc)
+    #define TFY_CalendarWeakSelf __weak typeof(self) weakSelf = self;
+    #define TFY_CalendarStrongSelf __strong typeof(weakSelf) strongSelf = weakSelf;
+#else
+    #define TFY_CalendarWeakSelf __block typeof(self) weakSelf = self;
+    #define TFY_CalendarStrongSelf typeof(weakSelf) strongSelf = weakSelf;
+#endif
+
+// Nullability annotations for better Swift interop
+#define TFY_CalendarNonnull __nonnull
+#define TFY_CalendarNullable __nullable
+#define TFY_CalendarNull_unspecified __null_unspecified
 
 NS_ASSUME_NONNULL_END
 

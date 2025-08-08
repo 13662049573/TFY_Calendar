@@ -24,7 +24,7 @@ IB_DESIGNABLE
 @property (weak, nonatomic) IBOutlet id<TFYCa_CalendarDataSource> dataSource;
 
 /**
- * 日历的“今天”将有一个特殊标记。
+ * 日历的"今天"将有一个特殊标记。
  */
 @property (nullable, strong, nonatomic) NSDate *today;
 
@@ -57,8 +57,8 @@ IB_DESIGNABLE
 
 /**
  一个UIPanGestureRecognizer实例，它可以控制整个日区域上的范围。如果scrollDirection是垂直的，则不可用。
-  
-  @不建议使用-handleScopeGesture：
+  
+  @不建议使用-handleScopeGesture：
   UIPanGestureRecognizer *scopeGesture = [[UIPanGestureRecognizer alloc] initWithTarget:calendar action:@selector(handleScopeGesture:)];
     [calendar addGestureRecognizer:scopeGesture];
  
@@ -82,12 +82,12 @@ IB_DESIGNABLE
 @property (assign, nonatomic) TFYCa_CalendarPlaceholderType placeholderType;
 
 /**
- 日历的第一个工作日的索引。在第一栏中输入“ 2”作为星期一。
+ 日历的第一个工作日的索引。在第一栏中输入" 2"作为星期一。
  */
 @property (assign, nonatomic) IBInspectable NSUInteger firstWeekday;
 
 /**
- 日历的月标题高度。给出一个“ 0”以删除标题。
+ 日历的月标题高度。给出一个" 0"以删除标题。
  */
 @property (assign, nonatomic) IBInspectable CGFloat headerHeight;
 
@@ -163,45 +163,45 @@ IB_DESIGNABLE
 /**
  重新加载日历的日期和外观。
  */
-- (void)reloadData;
+- (void)reloadData TFY_CalendarSwiftName(reloadData());
 
 /**
  更改日历的范围。确保`-calendar：boundingRectWillChange：animated`被正确采用。
  scope要更改的目标范围。
  如果要为范围设定动画，则为YES；否，如果更改应立即生效。
  */
-- (void)setScope:(TFYCa_CalendarScope)scope animated:(BOOL)animated;
+- (void)setScope:(TFYCa_CalendarScope)scope animated:(BOOL)animated TFY_CalendarSwiftName(setScope(_:animated:));
 
 /**
  在日历中选择一个给定的日期。
  */
-- (void)selectDate:(nullable NSDate *)date;
+- (void)selectDate:(nullable NSDate *)date TFY_CalendarSwiftName(selectDate(_:));
 
 /**
  在日历中选择一个给定的日期，可以选择将日期滚动到可见区域。
  date日历中的日期。
  scrollToDate一个布尔值，它确定日历是否应滚动到可见区域的选定日期。
  */
-- (void)selectDate:(nullable NSDate *)date scrollToDate:(BOOL)scrollToDate;
+- (void)selectDate:(nullable NSDate *)date scrollToDate:(BOOL)scrollToDate TFY_CalendarSwiftName(selectDate(_:scrollToDate:));
 
 /**
  取消选择日历的给定日期。
  */
-- (void)deselectDate:(NSDate *)date;
+- (void)deselectDate:(NSDate *)date TFY_CalendarSwiftName(deselectDate(_:));
 
 /**
  更改日历的当前页面。
  currentPage在周模式下表示weekOfYear，在月模式下表示月份。
  如果要为位置变化设置动画，则为YES；否，如果应该立即执行。
  */
-- (void)setCurrentPage:(NSDate *)currentPage animated:(BOOL)animated;
+- (void)setCurrentPage:(NSDate *)currentPage animated:(BOOL)animated TFY_CalendarSwiftName(setCurrentPage(_:animated:));
 
 /**
  注册一个用于创建新日历单元格的类。
  cellClass您要在日历中使用的单元格的类。
  标识符与指定类关联的重用标识符。此参数不能为nil，也不能为空字符串。
  */
-- (void)registerClass:(Class)cellClass forCellReuseIdentifier:(NSString *)identifier;
+- (void)registerClass:(Class)cellClass forCellReuseIdentifier:(NSString *)identifier TFY_CalendarSwiftName(registerClass(_:forCellReuseIdentifier:));
 
 /**
  返回通过其标识符定位的可重用日历单元格对象。
@@ -209,15 +209,15 @@ IB_DESIGNABLE
  date单元格的特定日期。
  一个有效的FSCalendarCell对象。
  */
-- (__kindof TFY_CalendarCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier forDate:(NSDate *)date atMonthPosition:(TFYCa_CalendarMonthPosition)position;
+- (__kindof TFY_CalendarCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier forDate:(NSDate *)date atMonthPosition:(TFYCa_CalendarMonthPosition)position TFY_CalendarSwiftName(dequeueReusableCell(withIdentifier:forDate:atMonthPosition:));
 
 /**
   返回指定日期的日历单元格。
   date单元格的日期
   position单元格的月份位置
-  一个代表日历单元格的对象，如果该单元格不可见或日期超出范围，则为nil。
+  一个代表日历单元格的对象，如果该单元格不可见或日期超出范围，则为nil。
  */
-- (nullable TFY_CalendarCell *)cellForDate:(NSDate *)date atMonthPosition:(TFYCa_CalendarMonthPosition)position;
+- (nullable TFY_CalendarCell *)cellForDate:(NSDate *)date atMonthPosition:(TFYCa_CalendarMonthPosition)position TFY_CalendarSwiftName(cell(forDate:atMonthPosition:));
 
 
 /**
@@ -225,33 +225,33 @@ IB_DESIGNABLE
  cell所需日期的单元格对象。
  单元格的日期；如果指定的单元格不在日历中，则为nil。
  */
-- (nullable NSDate *)dateForCell:(TFY_CalendarCell *)cell;
+- (nullable NSDate *)dateForCell:(TFY_CalendarCell *)cell TFY_CalendarSwiftName(date(forCell:));
 
 /**
  返回指定单元格的月份位置。
  cell您想要其月份位置的单元格对象。
  如果指定的单元格不在日历中，则该单元格或FSCalendarMonthPositionNotFound的月份位置。
  */
-- (TFYCa_CalendarMonthPosition)monthPositionForCell:(TFY_CalendarCell *)cell;
+- (TFYCa_CalendarMonthPosition)monthPositionForCell:(TFY_CalendarCell *)cell TFY_CalendarSwiftName(monthPosition(forCell:));
 
 
 /**
  返回日历当前显示的可见单元格数组。
  TFYCa_CalendarCell对象的数组。如果看不到任何单元格，则此方法返回一个空数组。
  */
-- (NSArray<__kindof TFY_CalendarCell *> *)visibleCells;
+- (NSArray<__kindof TFY_CalendarCell *> *)visibleCells TFY_CalendarSwiftName(visibleCells());
 
 /**
  返回相对于日历超级视图的非占位符单元格的框架。
  date日期是日历。
  */
-- (CGRect)frameForDate:(NSDate *)date;
+- (CGRect)frameForDate:(NSDate *)date TFY_CalendarSwiftName(frame(forDate:));
 
 /**
  UIPanGestureRecognizer实例的操作选择器，用于控制范围转换
  sender一个UIPanGestureRecognizer实例，它控制日历的范围
  */
-- (void)handleScopeGesture:(UIPanGestureRecognizer *)sender;
+- (void)handleScopeGesture:(UIPanGestureRecognizer *)sender TFY_CalendarSwiftName(handleScopeGesture(_:));
 
 @end
 

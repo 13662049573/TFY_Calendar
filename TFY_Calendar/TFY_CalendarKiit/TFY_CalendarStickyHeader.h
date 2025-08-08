@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) NSDate *month;
 
-- (void)configureAppearance;
+- (void)configureAppearance TFY_CalendarSwiftName(configureAppearance());
 @end
 
 NS_ASSUME_NONNULL_END

@@ -11,8 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TFY_CalendarDelegationFactory : NSObject
-+ (TFY_CalendarDelegationProxy *)dataSourceProxy;
-+ (TFY_CalendarDelegationProxy *)delegateProxy;
++ (TFY_CalendarDelegationProxy *)dataSourceProxy TFY_CalendarSwiftName(dataSourceProxy());
++ (TFY_CalendarDelegationProxy *)delegateProxy TFY_CalendarSwiftName(delegateProxy());
 @end
 
 NS_ASSUME_NONNULL_END

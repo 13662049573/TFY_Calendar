@@ -17,8 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) Protocol *protocol;
 @property (strong, nonatomic) NSDictionary<NSString *,NSString *> *deprecations;
 
-- (instancetype)init;
-- (SEL)deprecatedSelectorOfSelector:(SEL)selector;
+- (instancetype)init TFY_CalendarSwiftName(init());
+- (SEL)deprecatedSelectorOfSelector:(SEL)selector TFY_CalendarSwiftName(deprecatedSelector(ofSelector:));
 @end
 
 NS_ASSUME_NONNULL_END

@@ -15,7 +15,7 @@ typedef NS_ENUM(NSUInteger, TFYCa_CalendarTransitionState) {
     TFYCa_CalendarTransitionStateIdle,
     TFYCa_CalendarTransitionStateChanging,
     TFYCa_CalendarTransitionStateFinishing,
-};
+} TFY_CalendarSwiftName(CalendarTransitionState);
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -26,13 +26,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (readonly, nonatomic) TFYCa_CalendarScope representingScope;
 
-- (instancetype)initWithCalendar:(TFY_Calendar *)calendar;
+- (instancetype)initWithCalendar:(TFY_Calendar *)calendar TFY_CalendarSwiftName(init(calendar:));
 
-- (void)performScopeTransitionFromScope:(TFYCa_CalendarScope)fromScope toScope:(TFYCa_CalendarScope)toScope animated:(BOOL)animated;
-- (void)performBoundingRectTransitionFromMonth:(NSDate *)fromMonth toMonth:(NSDate *)toMonth duration:(CGFloat)duration;
-- (CGRect)boundingRectForScope:(TFYCa_CalendarScope)scope page:(NSDate *)page;
+- (void)performScopeTransitionFromScope:(TFYCa_CalendarScope)fromScope toScope:(TFYCa_CalendarScope)toScope animated:(BOOL)animated TFY_CalendarSwiftName(performScopeTransition(fromScope:toScope:animated:));
+- (void)performBoundingRectTransitionFromMonth:(NSDate *)fromMonth toMonth:(NSDate *)toMonth duration:(CGFloat)duration TFY_CalendarSwiftName(performBoundingRectTransition(fromMonth:toMonth:duration:));
+- (CGRect)boundingRectForScope:(TFYCa_CalendarScope)scope page:(NSDate *)page TFY_CalendarSwiftName(boundingRect(forScope:page:));
 
-- (void)handleScopeGesture:(id)sender;
+- (void)handleScopeGesture:(id)sender TFY_CalendarSwiftName(handleScopeGesture(_:));
 
 @end
 
@@ -46,7 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSDate *focusedDate;
 @property (assign, nonatomic) TFYCa_CalendarScope targetScope;
 
-- (void)revert;
+- (void)revert TFY_CalendarSwiftName(revert());
     
 @end
 

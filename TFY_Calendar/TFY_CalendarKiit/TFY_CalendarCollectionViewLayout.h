@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (assign, nonatomic) UIEdgeInsets sectionInsets;
 @property (assign, nonatomic) UICollectionViewScrollDirection scrollDirection;
+
 @end
 
 NS_ASSUME_NONNULL_END
