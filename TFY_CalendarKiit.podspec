@@ -4,7 +4,7 @@ Pod::Spec.new do |spec|
 
   spec.name         = "TFY_CalendarKiit"
 
-  spec.version      = "2.3.5"
+  spec.version      = "2.3.6"
 
   spec.summary      = "日历完美处理，适合各种场景使用.可以下载demo 学习"
 
@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   
   spec.license      = "MIT"
   
-  spec.platform     = :ios, "12.0"
+  spec.platform     = :ios, "15.0"
 
   spec.author       = { "tfyzxc13662049573" => "420144542@qq.com" }
   
