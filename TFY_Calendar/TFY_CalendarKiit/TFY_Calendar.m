@@ -1575,12 +1575,39 @@ typedef NS_ENUM(NSUInteger, TFYCa_CalendarOrientation) {
     if (_needsRequestingBoundingDates) {
         _needsRequestingBoundingDates = NO;
         self.formatter.dateFormat = @"yyyy-MM-dd";
+        
+        // 获取最小和最大日期
         NSDate *newMin = [self.dataSourceProxy minimumDateForCalendar:self]?:[self.formatter dateFromString:@"1970-01-01"];
-        newMin = [self.gregorian dateBySettingHour:0 minute:0 second:0 ofDate:newMin options:0];
         NSDate *newMax = [self.dataSourceProxy maximumDateForCalendar:self]?:[self.formatter dateFromString:@"2099-12-31"];
+        
+        // 确保日期不为空
+        if (!newMin) {
+            newMin = [self.formatter dateFromString:@"1970-01-01"];
+        }
+        if (!newMax) {
+            newMax = [self.formatter dateFromString:@"2099-12-31"];
+        }
+        
+        // 设置时间为00:00:00
+        newMin = [self.gregorian dateBySettingHour:0 minute:0 second:0 ofDate:newMin options:0];
         newMax = [self.gregorian dateBySettingHour:0 minute:0 second:0 ofDate:newMax options:0];
         
-        NSAssert([self.gregorian compareDate:newMin toDate:newMax toUnitGranularity:NSCalendarUnitDay] != NSOrderedDescending, @"The minimum date of calendar should be earlier than the maximum.");
+        // 验证日期范围的有效性
+        NSComparisonResult comparison = [self.gregorian compareDate:newMin toDate:newMax toUnitGranularity:NSCalendarUnitDay];
+        if (comparison == NSOrderedDescending) {
+            // 如果最小日期晚于最大日期，进行修正
+            NSLog(@"Warning: Minimum date (%@) is later than maximum date (%@). Adjusting dates.", newMin, newMax);
+            // 方案1：交换日期
+            NSDate *temp = newMin;
+            newMin = newMax;
+            newMax = temp;
+        }
+        
+        // 确保日期范围至少有一天
+        if ([self.gregorian compareDate:newMin toDate:newMax toUnitGranularity:NSCalendarUnitDay] == NSOrderedSame) {
+            // 如果最小和最大日期相同，将最大日期增加一天
+            newMax = [self.gregorian dateByAddingUnit:NSCalendarUnitDay value:1 toDate:newMax options:0];
+        }
         
         BOOL res = ![self.gregorian isDate:newMin inSameDayAsDate:_minimumDate] || ![self.gregorian isDate:newMax inSameDayAsDate:_maximumDate];
         _minimumDate = newMin;
